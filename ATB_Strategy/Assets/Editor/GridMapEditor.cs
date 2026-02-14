@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using System.Collections.Generic;
 
 [CustomEditor(typeof(GridMap))]
 public class GridMapEditor : Editor
@@ -15,12 +16,6 @@ public class GridMapEditor : Editor
         _gridMap = (GridMap)target;
 
         DrawGUI();
-
-        //if (GUILayout.Button("Button Label"))
-        //{
-        //    // When the button is clicked, call the function in the target script
-        //    //scriptReference.MyFunction();
-        //}
     }
 
     private void DrawGUI()
@@ -75,15 +70,15 @@ public class GridMapEditor : Editor
             _newSizeX = Mathf.Clamp(_newSizeX, 1, 128);
             _newSizeZ = Mathf.Clamp(_newSizeZ, 1, 128);
 
-            if (GUILayout.Button("Rebuild Grid"))
+            if (GUILayout.Button("Buld Grid"))
             {
-                _gridMap.RecreateGrid(_newSizeX, _newSizeZ);
+                _gridMap.BuildGrid(_newSizeX, _newSizeZ);
             }
-            if (GUILayout.Button("Bake Grid"))
+            if (GUILayout.Button("Set Grid"))
             {
                 if (_gridMap._grid != null)
                 {
-                    _gridMap.BakeGrid();
+                    _gridMap.SetGrid();
                 }
             }
         }

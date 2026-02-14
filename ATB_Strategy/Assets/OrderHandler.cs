@@ -7,6 +7,7 @@ public class OrderHandler : MonoBehaviour
     private InputActions _inputActions;
     [SerializeField] private LayerMask _groundMasks;
     [SerializeField] private TileCursor _tileCursor;
+    [SerializeField] private GridMap _gridMap;
 
     private void Awake()
     {
@@ -32,10 +33,11 @@ public class OrderHandler : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 1000f, _groundMasks))
         {
             Vector3 realPoint = hit.point;
-            Vector3 tilePoint = new Vector3(Mathf.RoundToInt(realPoint.x), Mathf.RoundToInt(realPoint.y), Mathf.RoundToInt(realPoint.z));
-            Debug.Log(realPoint);
+            Vector3 tilePoint = _gridMap.GetTilePos(realPoint.x, realPoint.z);
 
-            _tileCursor.CursorPosition = tilePoint;
+            if (tilePoint == -Vector3.one) return;
+
+            _tileCursor.SetPosition(tilePoint);
         }
     }
 }

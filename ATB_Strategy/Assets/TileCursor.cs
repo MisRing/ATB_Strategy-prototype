@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class TileCursor : MonoBehaviour
 {
-    public Vector3 CursorPosition;
-    [SerializeField] private float _moveSpeed = 10f;
+    private Vector3 _cursorPosition;
     [SerializeField] private Vector3 _offset = new Vector3(0,0.1f, 0);
 
-    private void Update()
+    public void SetPosition(Vector3 newPosition)
     {
-        transform.position = Vector3.Slerp(transform.position, CursorPosition + _offset, Time.deltaTime * _moveSpeed);
+        if (newPosition == _cursorPosition) return;
+
+        _cursorPosition = newPosition;
+        transform.position = _cursorPosition + _offset;
     }
 }

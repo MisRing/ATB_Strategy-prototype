@@ -1,11 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
-public class GridTile : MonoBehaviour
+[Serializable]
+public struct GridTile
 {
-    public GameObject floor;
-    public List<GameObject> objects = new List<GameObject>();
+    public bool IsGround;
+    public bool IsEmpty;
 
-    public int positionX;
-    public int positionZ;
+    public int PositionX;
+    public int PositionZ;
+    public float DeltaY;
 }
