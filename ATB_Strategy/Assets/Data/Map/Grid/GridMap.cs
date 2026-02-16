@@ -17,17 +17,26 @@ public class GridMap : MonoBehaviour
     private Transform _floorCollection;
     private Transform _obstacleCollection;
 
-    public Vector3 GetTilePos(float worldX, float worldZ)
+    public bool HasTile(float worldX, float worldZ)
     {
-        int x = (int)MathF.Round(worldX);
-        int z = (int)MathF.Round(worldZ);
+        int x = (int)Math.Round(worldX);
+        int z = (int)Math.Round(worldZ);
 
-        if (x < 0 || z < 0 || x >= _sizeX || z >= _sizeZ) return -Vector3.one;
+        if (x < 0 || z < 0 || x >= _sizeX || z >= _sizeZ) return false;
 
-        GridTile tile = _grid[GridMapGenerator.GetIndex(this, x, z)];
+        return true;
+    }
 
-        Vector3 tilePos = new Vector3(tile.PositionX, tile.DeltaY, tile.PositionZ) + transform.position;
-        return tilePos;
+    public Vector3 GetTileWorldPosition(float worldX, float worldZ)
+    {
+        int x = (int)Math.Round(worldX);
+        int z = (int)Math.Round(worldZ);
+
+        GridTile tile = _grid[GridMapExtansion.GetIndex(this, x, z)];
+
+        Vector3 tileWorldPos = new Vector3(tile.PositionX, tile.DeltaY, tile.PositionZ) + transform.position;
+
+        return tileWorldPos;
     }
 
     public void BuildGrid(int sizeX, int sizeZ)
@@ -46,19 +55,23 @@ public class GridMap : MonoBehaviour
             _obstacleCollection.localPosition = Vector3.zero;
         }
 
-        GridMapGenerator.BuildGrid(this, sizeX, sizeZ);
+        GridMapExtansion.BuildGrid(this, sizeX, sizeZ);
         _sizeX = sizeX;
         _sizeZ = sizeZ;
     }
 
     public void SetGrid()
     {
-        GridMapGenerator.SetGrid(this, _floorCollection, _obstacleCollection);
+        GridMapExtansion.SetGrid(this, _floorCollection, _obstacleCollection);
     }
 }
 
-public static class GridMapGenerator
+public static class GridMapExtansion
 {
+    private static float GROUND_RAY_DISTANCE = 10f;
+    private static float FLOOR_HEIGHT = 3.5f;
+    private static Vector3 TILE_SIZE = new Vector3(0.8f, 3f, 0.8f);
+
     public static void BuildGrid(GridMap gridMap, int newX, int newZ)
     {
         gridMap._grid = new GridTile[newX * newZ];
@@ -71,6 +84,7 @@ public static class GridMapGenerator
 
                 newTile.PositionX = x;
                 newTile.PositionZ = z;
+                newTile.GridOffset = gridMap.transform.position;
 
                 gridMap._grid[GetIndex(gridMap, x, z)] = newTile;
             }
@@ -91,9 +105,9 @@ public static class GridMapGenerator
         {
             for (int z = 0; z < gridMap.SizeZ; z++)
             {
-                SetTileGround(gridMap, ref gridMap._grid[GetIndex(gridMap, x, z)], groundsTransform);
+                SetTileGround(ref gridMap._grid[GetIndex(gridMap, x, z)], groundsTransform);
 
-                SetTileObstacles(gridMap, ref gridMap._grid[GetIndex(gridMap, x, z)], obstaclesTransform);
+                SetTileObstacles(ref gridMap._grid[GetIndex(gridMap, x, z)], obstaclesTransform);
             }
         }
 
@@ -101,12 +115,12 @@ public static class GridMapGenerator
         EditorUtility.SetDirty(gridMap);
     }
 
-    private static void SetTileGround(GridMap gridMap, ref GridTile tile, Transform groundsTransform)
+    private static void SetTileGround(ref GridTile tile, Transform groundsTransform)
     {
         LayerMask layer = LayerMask.GetMask("Ground");
-        Vector3 rayOrigin = new Vector3(tile.PositionX, 3.5f, tile.PositionZ) + gridMap.transform.position;
+        Vector3 rayOrigin = new Vector3(tile.PositionX, FLOOR_HEIGHT, tile.PositionZ) + tile.GridOffset;
         RaycastHit hit;
-        if (Physics.Raycast(rayOrigin, Vector3.down, out hit, 10f, layer, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(rayOrigin, Vector3.down, out hit, GROUND_RAY_DISTANCE, layer, QueryTriggerInteraction.Ignore))
         {
             float height = hit.point.y;
             GameObject floor = hit.collider.gameObject;
@@ -114,7 +128,7 @@ public static class GridMapGenerator
             {
                 floor.transform.parent = groundsTransform;
             }
-            tile.DeltaY = height - gridMap.transform.position.y;
+            tile.DeltaY = height - tile.GridOffset.y;
 
             tile.IsGround = true;
         }
@@ -126,13 +140,13 @@ public static class GridMapGenerator
         }
     }
 
-    private static void SetTileObstacles(GridMap gridMap, ref GridTile tile, Transform obstaclesTransform)
+    private static void SetTileObstacles(ref GridTile tile, Transform obstaclesTransform)
     {
         LayerMask layer = LayerMask.GetMask("Obstacle");
 
-        Vector3 castCenter = new Vector3(tile.PositionX, tile.DeltaY + 1.5f, tile.PositionZ) + gridMap.transform.position;
+        Vector3 castCenter = new Vector3(tile.PositionX, tile.DeltaY + TILE_SIZE.y * 0.5f, tile.PositionZ) + tile.GridOffset;
 
-        Collider[] colliders = Physics.OverlapBox(castCenter, new Vector3(0.4f, 1.5f, 0.4f), Quaternion.identity, layer);
+        Collider[] colliders = Physics.OverlapBox(castCenter, TILE_SIZE * 0.5f, Quaternion.identity, layer);
 
         if(colliders.Length > 0 )
         {

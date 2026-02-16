@@ -20,7 +20,7 @@ public class GridMapDebug
         {
             for (int z = 0; z < gridMap.SizeZ; z++)
             {
-                GridTile tile = gridMap._grid[GridMapGenerator.GetIndex(gridMap, x, z)];
+                GridTile tile = gridMap._grid[GridMapExtansion.GetIndex(gridMap, x, z)];
 
                 if(!tile.IsGround)
                 {
@@ -47,9 +47,9 @@ public class GridMapDebug
                 Handles.DrawLine(point3, point4, lineThickdess);
                 Handles.DrawLine(point4, point1, lineThickdess);
 
-                if (x >= gridMap.SizeX - 1 || z >= gridMap.SizeZ - 1) continue;
+                if (x + 1 >= gridMap.SizeX || z + 1 >= gridMap.SizeZ) continue;
 
-                GridTile otherTile = gridMap._grid[GridMapGenerator.GetIndex(gridMap, x + 1, z)];
+                GridTile otherTile = gridMap._grid[GridMapExtansion.GetIndex(gridMap, x + 1, z)];
                 if (x < gridMap.SizeX - 1 && tile.IsGround && otherTile.IsGround)
                 {
                     Handles.color = Color.blue;
@@ -63,7 +63,7 @@ public class GridMapDebug
                     Handles.DrawLine(from, to, lineThickdess);
                 }
 
-                otherTile = gridMap._grid[GridMapGenerator.GetIndex(gridMap, x, z + 1)];
+                otherTile = gridMap._grid[GridMapExtansion.GetIndex(gridMap, x, z + 1)];
                 if (z < gridMap.SizeZ - 1 && tile.IsGround && otherTile.IsGround)
                 {
                     Handles.color = Color.blue;

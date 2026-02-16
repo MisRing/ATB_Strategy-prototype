@@ -11,4 +11,6 @@ public struct GridTile
     public int PositionX;
     public int PositionZ;
     public float DeltaY;
+
+    public Vector3 GridOffset;
 }
