@@ -213,14 +213,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211259977}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.23911764, y: 0.369644, z: -0.09904582, w: -0.892399}
+  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 330585546}
   m_Father: {fileID: 315196674}
-  m_LocalEulerAnglesHint: {x: 30, y: 315, z: 0}
+  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
 --- !u!1 &281188152
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,14 +283,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315196673}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.3826836, z: -0, w: -0.92387944}
   m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 211259978}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 315, z: 0}
 --- !u!114 &315196675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,13 +305,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   _baseTransform: {fileID: 211259978}
   _cameraTransform: {fileID: 330585546}
+  _moveSpeedMaxZoom: 7.5
+  _moveSpeedMinZoom: 12.5
+  _moveThreshold: 0.2
+  _smoothTimeStart: 0.1
+  _smoothTimeEnd: 0.05
   _rotationAngle: -90
   _startAngle: 315
   _rotationSpeed: 10
   _maxZoom: -3
   _minZoom: -10
-  _zoomSpeed: 100
-  _smoothTime: 0.15
+  _zoomSpeed: 0.2
+  _zoomSmoothTime: 0.15
+  _focusMaxDistance: 15
+  _focusMoveSpeed: 25
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,6 +1034,7 @@ MonoBehaviour:
   - {x: 1, y: 1}
   - {x: 3, y: 5}
   - {x: 6, y: 2}
+  _selectedUnit: {fileID: 0}
 --- !u!1 &762940337
 GameObject:
   m_ObjectHideFlags: 0

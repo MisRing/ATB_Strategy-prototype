@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private List<UnitComponent> _units = new List<UnitComponent>();
     [SerializeField] private List<Vector2Int> _positionPresset = new List<Vector2Int>();
-    [SerializeField] private Queue<UnitComponent> _unitQ = new Queue<UnitComponent>();
+    [SerializeField] private UnitComponent _selectedUnit;
 
     private void Awake()
     {
@@ -21,16 +22,14 @@ public class PlayerController : MonoBehaviour
         Init();
 
         _tileCursor.Init(_gridMap);
-        _cameraController.Init(_unitQ.Peek().transform.position);
+        _cameraController.Init(_selectedUnit.transform);
     }
 
     private void Init()
     {
-        _unitQ.Clear();
-
+        _selectedUnit = _units[0];
         for(int i = 0; i < _units.Count; i++)
         {
-            _unitQ.Enqueue(_units[i]);
             _units[i].Init(_gridMap._grid[GridMapExtansion.GetIndex(_gridMap, _positionPresset[i].x, _positionPresset[i].y)]);
         }
     }
@@ -57,13 +56,17 @@ public class PlayerController : MonoBehaviour
 
     private void SwitchTarget(InputAction.CallbackContext context)
     {
+        int newIndex = 0;
         if(_inputActions.Player.ReverseInputModifier.IsPressed())
         {
-            Debug.Log("PREV TARGET");
+            newIndex = (_units.IndexOf(_selectedUnit) - 1 + _units.Count) % _units.Count;
         }
         else
         {
-            Debug.Log("NEXT TARGET");
+            newIndex = (_units.IndexOf(_selectedUnit) + 1) % _units.Count;
         }
+
+        _selectedUnit = _units[newIndex];
+        _cameraController.EnterFocusMode(_selectedUnit.transform);
     }
 }
