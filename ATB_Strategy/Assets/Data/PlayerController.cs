@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour
     private void Init()
     {
         _selectedUnit = _units[0];
-        for(int i = 0; i < _units.Count; i++)
+        _selectedUnit.Select();
+        for (int i = 0; i < _units.Count; i++)
         {
             _units[i].Init(_gridMap._grid[GridMapExtansion.GetIndex(_gridMap, _positionPresset[i].x, _positionPresset[i].y)]);
         }
@@ -66,7 +67,9 @@ public class PlayerController : MonoBehaviour
             newIndex = (_units.IndexOf(_selectedUnit) + 1) % _units.Count;
         }
 
+        _selectedUnit.Deselect();
         _selectedUnit = _units[newIndex];
+        _selectedUnit.Select();
         _cameraController.EnterFocusMode(_selectedUnit.transform);
     }
 }
