@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GridMap : MonoBehaviour
 {
@@ -37,6 +39,22 @@ public class GridMap : MonoBehaviour
         Vector3 tileWorldPos = new Vector3(tile.PositionX, tile.DeltaY, tile.PositionZ) + transform.position;
 
         return tileWorldPos;
+    }
+
+    public Vector3[] GetPath(Vector3 start, Vector3 end)
+    {
+        NavMeshPath path = new NavMeshPath();
+
+        bool found = NavMesh.CalculatePath(
+            start,
+            end,
+            NavMesh.AllAreas,
+            path);
+
+        if (!found || path.status != NavMeshPathStatus.PathComplete)
+            return null;
+
+        return path.corners;
     }
 
     public void BuildGrid(int sizeX, int sizeZ)

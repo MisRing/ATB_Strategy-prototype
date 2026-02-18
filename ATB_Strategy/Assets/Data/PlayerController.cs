@@ -52,7 +52,14 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         Vector2 mouseScreenPosition = _inputActions.Player.MousePosition.ReadValue<Vector2>();
-        _tileCursor.GetPosition(mouseScreenPosition);
+
+        Transform selectedTransform = null;
+        if(_selectedUnit != null)
+        {
+            selectedTransform = _selectedUnit.transform;
+        }
+
+        _tileCursor.GetPosition(mouseScreenPosition, selectedTransform);
     }
 
     private void SwitchTarget(InputAction.CallbackContext context)
