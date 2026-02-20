@@ -5,23 +5,40 @@ using UnityEngine.UIElements;
 public class TileCursor : MonoBehaviour
 {
     private Vector3 _cursorPosition;
+    private InputActions _inputActions;
     [SerializeField] private LayerMask _groundMasks;
     [SerializeField] private float _rayDistance = 100f;
     [SerializeField] private Vector3 _offset = new Vector3(0,0.1f, 0);
 
     [SerializeField] private GameObject _spriteObject;
-    [SerializeField] private LineRenderer _pathRenderer;
 
     private GridMap _gridMap;
 
+    private void OnEnable()
+    {
+        _inputActions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _inputActions.Disable();
+    }
+
     public void Init(GridMap gridMap)
     {
+        _inputActions = new InputActions();
         _gridMap = gridMap;
         _spriteObject.SetActive(false);
     }
 
-    public bool GetPosition(Vector2 mousePosition, Transform fromTarget = null)
+    private void Update()
     {
+        GetPosition();
+    }
+
+    public void GetPosition()
+    {
+        Vector2 mousePosition = _inputActions.Player.MousePosition.ReadValue<Vector2>(); ;
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _rayDistance, _groundMasks))
@@ -34,22 +51,11 @@ public class TileCursor : MonoBehaviour
                 if (_cursorPosition != tileWorldPos)
                 {
                     SetTileCursor(tileWorldPos);
-
-                    if(fromTarget)
-                    {
-                        SetPathRenderer(fromTarget.position, tileWorldPos);
-                    }
-
-                    return true;
                 }
-
-                return false;
+                return;
             }
         }
-
-        UnsetPathRenderer();
         UnsetTileCursor();
-        return false;
     }
 
     private void SetTileCursor(Vector3 tileWorldPos)
@@ -62,31 +68,5 @@ public class TileCursor : MonoBehaviour
     private void UnsetTileCursor()
     {
         _spriteObject.SetActive(false);
-    }
-
-    private void SetPathRenderer(Vector3 fromPoint, Vector3 toPoint)
-    {
-        Vector3[] path = _gridMap.GetPath(fromPoint, toPoint);
-
-        if(path == null)
-        {
-            _pathRenderer.gameObject.SetActive(false);
-            return;
-        }
-
-        for(int i = 0; i < path.Length; i++)
-        {
-            path[i] += _offset;
-        }
-
-        _pathRenderer.gameObject.SetActive(true);
-
-        _pathRenderer.SetPositions(path);
-
-    }
-
-    private void UnsetPathRenderer()
-    {
-        _pathRenderer.gameObject.SetActive(false);
     }
 }

@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour
     [Header("Main")]
     [SerializeField] private Transform _baseTransform;
     [SerializeField] private Transform _cameraTransform;
+    [SerializeField] private float _cameraPitch = 40f;
 
     [Header("Move settings")]
     [SerializeField] private float _moveSpeedMaxZoom = 5f;
@@ -61,7 +62,7 @@ public class CameraController : MonoBehaviour
 
     public void Init(Transform target)
     {
-        _baseTransform.localEulerAngles = new Vector3(40f, 0, 0);
+        _baseTransform.localEulerAngles = new Vector3(_cameraPitch, 0, 0);
         transform.eulerAngles = new Vector3(0, _startAngle, 0);
         EnterFocusMode(target, true);
         _currentAngleY = _startAngle;

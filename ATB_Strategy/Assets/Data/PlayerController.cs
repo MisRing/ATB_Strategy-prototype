@@ -6,19 +6,19 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    private InputActions _inputActions;
     [SerializeField] private GridMap _gridMap;
     [SerializeField] private CameraController _cameraController;
     [SerializeField] private TileCursor _tileCursor;
+    private PlayerInputController _playerInputController;
 
     [SerializeField] private List<UnitComponent> _units = new List<UnitComponent>();
     [SerializeField] private List<Vector2Int> _positionPresset = new List<Vector2Int>();
     [SerializeField] private UnitComponent _selectedUnit;
 
+    [SerializeField] private float _selectRayDistance = 100f;
+
     private void Awake()
     {
-        _inputActions = new InputActions();
-
         Init();
 
         _tileCursor.Init(_gridMap);
@@ -27,45 +27,47 @@ public class PlayerController : MonoBehaviour
 
     private void Init()
     {
-        _selectedUnit = _units[0];
-        _selectedUnit.Select();
+        _playerInputController = GetComponent<PlayerInputController>();
+
         for (int i = 0; i < _units.Count; i++)
         {
             _units[i].Init(_gridMap._grid[GridMapExtansion.GetIndex(_gridMap, _positionPresset[i].x, _positionPresset[i].y)]);
         }
+        _selectedUnit = _units[0];
+        _selectedUnit.Select();
     }
 
     private void OnEnable()
     {
-        _inputActions.Enable();
-
-        _inputActions.Player.SwitchTarget.started += SwitchTarget;
+        _playerInputController.SwitchTarget += SwitchTarget;
+        _playerInputController.SelectObject += SelectObject;
     }
 
     private void OnDisable()
     {
-        _inputActions.Disable();
-
-        _inputActions.Player.SwitchTarget.started += SwitchTarget;
+        _playerInputController.SwitchTarget -= SwitchTarget;
+        _playerInputController.SelectObject -= SelectObject;
     }
 
-    private void Update()
+    private void SelectObject()
     {
-        Vector2 mouseScreenPosition = _inputActions.Player.MousePosition.ReadValue<Vector2>();
-
-        Transform selectedTransform = null;
-        if(_selectedUnit != null)
+        Vector2 mousePosition = _playerInputController.MouseScreenPosition;
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, _selectRayDistance))
         {
-            selectedTransform = _selectedUnit.transform;
+            UnitComponent unit = hit.collider.gameObject.GetComponent<UnitComponent>();
+            if(unit != null)
+            {
+                SelectTargetUnit(unit, false);
+            }
         }
-
-        _tileCursor.GetPosition(mouseScreenPosition, selectedTransform);
     }
 
-    private void SwitchTarget(InputAction.CallbackContext context)
+    private void SwitchTarget()
     {
         int newIndex = 0;
-        if(_inputActions.Player.ReverseInputModifier.IsPressed())
+        if(_playerInputController.IsReverseModifier)
         {
             newIndex = (_units.IndexOf(_selectedUnit) - 1 + _units.Count) % _units.Count;
         }
@@ -74,9 +76,17 @@ public class PlayerController : MonoBehaviour
             newIndex = (_units.IndexOf(_selectedUnit) + 1) % _units.Count;
         }
 
+        SelectTargetUnit(_units[newIndex]);
+    }
+
+    private void SelectTargetUnit(UnitComponent unit, bool focusView = true)
+    {
         _selectedUnit.Deselect();
-        _selectedUnit = _units[newIndex];
+        _selectedUnit = unit;
         _selectedUnit.Select();
-        _cameraController.EnterFocusMode(_selectedUnit.transform);
+        if (focusView)
+        {
+            _cameraController.EnterFocusMode(_selectedUnit.transform);
+        }
     }
 }

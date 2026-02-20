@@ -16,9 +16,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "MouseClick",
+                    "name": "SelectObject",
                     "type": "Button",
                     "id": "d7f1f6e8-4520-4ee3-8ae5-a00fef8dde19",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectPoint",
+                    "type": "Button",
+                    "id": "aa98978a-9c33-4f78-b400-c2124cb437f5",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -62,7 +71,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MouseClick",
+                    "action": "SelectObject",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -85,6 +94,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ReverseInputModifier",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "53368945-27eb-45a1-8919-233a5696da94",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectPoint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
