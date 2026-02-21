@@ -361,7 +361,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62507754}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 
@@ -382,7 +382,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 1
-  m_VoxelSize: 0.0625
+  m_VoxelSize: 0.02
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 68e8fd7b78f6aab4d845f037e1215db2, type: 2}
   m_BuildHeightMesh: 0
@@ -1425,6 +1425,7 @@ GameObject:
   - component: {fileID: 742375537}
   - component: {fileID: 742375538}
   - component: {fileID: 742375539}
+  - component: {fileID: 742375540}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -1446,6 +1447,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 874489447}
+  - {fileID: 2013059423}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &742375538
@@ -1462,7 +1464,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   _gridMap: {fileID: 1356297843}
   _cameraController: {fileID: 315196675}
-  _tileCursor: {fileID: 874489448}
   _units:
   - {fileID: 1816743775}
   - {fileID: 1675076742}
@@ -1485,6 +1486,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c7bf44be9135f48bdf30677c5d1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputController
+--- !u!114 &742375540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742375536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bc61b2eff50a374ba8d8f42676486dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CursorController
+  _tileCursor: {fileID: 874489448}
+  _pathRenderer: {fileID: 2013059422}
+  _groundMasks:
+    serializedVersion: 2
+    m_Bits: 8
+  _rayDistance: 100
+  ShowTileCursor: 1
+  ShowPathLine: 0
 --- !u!1 &744123313
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,12 +1984,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d319103017f33bb438a0961620aa3548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TileCursor
-  _groundMasks:
-    serializedVersion: 2
-    m_Bits: 8
-  _rayDistance: 100
-  _offset: {x: 0, y: 0.05, z: 0}
   _spriteObject: {fileID: 1169534846}
+  _offset: {x: 0, y: 0.05, z: 0}
 --- !u!1 &885807619
 GameObject:
   m_ObjectHideFlags: 0
@@ -9165,6 +9182,52 @@ Transform:
   - {fileID: 410087041}
   - {fileID: 832575519}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2013059421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2013059423}
+  - component: {fileID: 2013059422}
+  m_Layer: 0
+  m_Name: PathLineRenderer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2013059422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013059421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28329082f8aeaa54c94392b998dc8392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PathLineRenderer
+  _lineRenderer: {fileID: 0}
+  IsEnable: 1
+--- !u!4 &2013059423
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013059421}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 742375537}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2056268450
 GameObject:

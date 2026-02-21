@@ -41,14 +41,4 @@ public class UnitComponent : MonoBehaviour
         _isSelected = false;
         OnSelectionChanged?.Invoke(false);
     }
-
-    public void MoveToTile(ref GridTile tile, GridMap grid)
-    {
-        _positionX = tile.PositionX;
-        _positionZ = tile.PositionZ;
-
-        transform.position = new Vector3(_positionX, tile.DeltaY, _positionZ) + grid.transform.position;
-
-
-    }
 }

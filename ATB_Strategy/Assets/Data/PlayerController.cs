@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GridMap _gridMap;
     [SerializeField] private CameraController _cameraController;
-    [SerializeField] private TileCursor _tileCursor;
+    private CursorController _cursorController;
     private PlayerInputController _playerInputController;
 
     [SerializeField] private List<UnitComponent> _units = new List<UnitComponent>();
@@ -21,13 +21,14 @@ public class PlayerController : MonoBehaviour
     {
         Init();
 
-        _tileCursor.Init(_gridMap);
+        _cursorController.Init(_gridMap);
         _cameraController.Init(_selectedUnit.transform);
     }
 
     private void Init()
     {
         _playerInputController = GetComponent<PlayerInputController>();
+        _cursorController = GetComponent<CursorController>();
 
         for (int i = 0; i < _units.Count; i++)
         {
