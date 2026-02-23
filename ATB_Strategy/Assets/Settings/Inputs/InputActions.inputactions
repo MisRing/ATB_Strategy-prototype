@@ -50,6 +50,96 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "AbilitySwitch0",
+                    "type": "Button",
+                    "id": "73060ef3-0d66-413a-b4de-1d476dab8d4a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AbilitySwitch1",
+                    "type": "Button",
+                    "id": "f4076f8c-76d3-4aee-b8db-310718a6de36",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AbilitySwitch2",
+                    "type": "Button",
+                    "id": "98679f84-02b1-4e9f-bf15-8d5c13c2399d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AbilitySwitch3",
+                    "type": "Button",
+                    "id": "493bd1c6-a7ba-4b90-8a60-31f848d4956b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AbilitySwitch4",
+                    "type": "Button",
+                    "id": "40091baa-1c40-4bff-b25d-e4c3121a382b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AbilitySwitch5",
+                    "type": "Button",
+                    "id": "5bc7dca2-3841-4ae4-8a1b-effb0776d4bf",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AbilitySwitch6",
+                    "type": "Button",
+                    "id": "2c4c6c26-92ea-4612-b66a-2cff2fd66a03",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AbilitySwitch7",
+                    "type": "Button",
+                    "id": "fb06cc75-eae0-4939-892b-2789bc8e91ed",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AbilitySwitch8",
+                    "type": "Button",
+                    "id": "5ab5dd79-662d-48fb-976f-335be5518ea7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AbilitySwitch9",
+                    "type": "Button",
+                    "id": "316148b5-158f-45ec-b56a-87db5f6be84d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -105,6 +195,116 @@
                     "processors": "",
                     "groups": "",
                     "action": "SelectPoint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a02edd66-624e-492b-a855-814dc7bccb47",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AbilitySwitch0",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "87ac4830-22d7-4cf6-8b3f-52aebf8e6f20",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AbilitySwitch1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2a7dbf65-b48e-49d9-8225-f890cb91b4d4",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AbilitySwitch2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "81841a78-a5ad-40fa-9504-91f477df0fc4",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AbilitySwitch3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e01e62b7-8307-4c61-8625-b4ab36820878",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AbilitySwitch4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b925c315-0a92-4156-9dab-cf9d7fbabd80",
+                    "path": "<Keyboard>/6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AbilitySwitch5",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "48a4bb47-76ac-4396-b186-c77fe4222237",
+                    "path": "<Keyboard>/7",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AbilitySwitch6",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "75f75a34-55c1-4387-a132-9d336cf91e91",
+                    "path": "<Keyboard>/8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AbilitySwitch7",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "43801bb4-11a2-4d5d-a32e-27ba690d0298",
+                    "path": "<Keyboard>/9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AbilitySwitch8",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a88e9f76-2657-4276-82b1-46d742761f86",
+                    "path": "<Keyboard>/0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AbilitySwitch9",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

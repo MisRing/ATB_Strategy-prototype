@@ -35,4 +35,5 @@ public struct PathData
 {
     public List<Vector3> Points;
     public float Distance;
+    public bool IsReacheble;
 }

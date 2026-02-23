@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,7 +19,7 @@ public class PlayerController : MonoBehaviour
     {
         Init();
 
-        _cursorController.Init(_gridMap);
+        _cursorController.Init(_gridMap, _playerInputController);
         _cameraController.Init(_selectedUnit.transform);
     }
 
@@ -42,12 +40,14 @@ public class PlayerController : MonoBehaviour
     {
         _playerInputController.SwitchTarget += SwitchTarget;
         _playerInputController.SelectObject += SelectObject;
+        _playerInputController.SelectAbility += SelectAbility;
     }
 
     private void OnDisable()
     {
         _playerInputController.SwitchTarget -= SwitchTarget;
         _playerInputController.SelectObject -= SelectObject;
+        _playerInputController.SelectAbility -= SelectAbility;
     }
 
     private void SelectObject()
@@ -82,6 +82,8 @@ public class PlayerController : MonoBehaviour
 
     private void SelectTargetUnit(UnitComponent unit, bool focusView = true)
     {
+        if (unit == _selectedUnit) return;
+
         _selectedUnit.Deselect();
         _selectedUnit = unit;
         _selectedUnit.Select();
@@ -89,5 +91,12 @@ public class PlayerController : MonoBehaviour
         {
             _cameraController.EnterFocusMode(_selectedUnit.transform);
         }
+    }
+
+    private void SelectAbility(int index)
+    {
+        if (!_selectedUnit) return;
+
+        _selectedUnit.AbilityController.SelectAbility(index);
     }
 }
