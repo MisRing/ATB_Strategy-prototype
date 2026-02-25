@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,8 +34,7 @@ public class PlayerController : MonoBehaviour
         {
             _units[i].Init(_gridMap._grid[GridMapExtansion.GetIndex(_gridMap, _positionPresset[i].x, _positionPresset[i].y)]);
         }
-        _selectedUnit = _units[0];
-        _selectedUnit.Select();
+        SelectTargetUnit(_units[0]);
     }
 
     private void OnEnable()
@@ -62,6 +63,12 @@ public class PlayerController : MonoBehaviour
             {
                 SelectTargetUnit(unit, false);
             }
+            else
+            {
+                AbilityData data = new AbilityData();
+                data.TargetWorldPos = _cursorController.CursorPosition;
+                _selectedUnit.AbilityController.ExecuteAbility(data);
+            }
         }
     }
 
@@ -83,10 +90,14 @@ public class PlayerController : MonoBehaviour
     private void SelectTargetUnit(UnitComponent unit, bool focusView = true)
     {
         if (unit == _selectedUnit) return;
-
-        _selectedUnit.Deselect();
+        if (_selectedUnit)
+        {
+            _selectedUnit.Deselect();
+        }
         _selectedUnit = unit;
-        _selectedUnit.Select();
+        AbilityData data = new AbilityData();
+        data.TargetWorldPos = _cursorController.CursorPosition;
+        _selectedUnit.Select(data);
         if (focusView)
         {
             _cameraController.EnterFocusMode(_selectedUnit.transform);
@@ -97,6 +108,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!_selectedUnit) return;
 
-        _selectedUnit.AbilityController.SelectAbility(index);
+        AbilityData data = new AbilityData();
+        data.TargetWorldPos = _cursorController.CursorPosition;
+        _selectedUnit.AbilityController.SelectAbility(index, data);
     }
 }

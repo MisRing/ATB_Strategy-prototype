@@ -2,10 +2,10 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 
-public class UnityAbilityController : MonoBehaviour
+public class UnitAbilityController : MonoBehaviour
 {
-    private IAbility[] _abilities;
-    private IAbility _currentAbility;
+    [SerializeField] private AbilityBasic[] _abilities;
+    private AbilityBasic _currentAbility;
 
     [HideInInspector] public UnitComponent Unit;
 
@@ -13,37 +13,36 @@ public class UnityAbilityController : MonoBehaviour
     {
         Unit = unit;
 
-        _abilities = new IAbility[2];
-        _abilities[0] = new MovementAbility();
-        _abilities[1] = new EmptyAbility();
-
         foreach(var ability in _abilities)
         {
             ability.Init(this);
         }
     }
 
-    public void SelectAbility(int index)
+    public void SelectAbility(int index, AbilityData data)
     {
         if (index >= _abilities.Length) return;
         if (_currentAbility == _abilities[index]) return;
 
-        if(_currentAbility != null)
-        {
-            _currentAbility.Cancel();
-        }
+        DeselectAbility();
 
         _currentAbility = _abilities[index];
 
-        _currentAbility.EnterPrepare();
+        _currentAbility.EnterPrepare(data);
     }
 
     public void DeselectAbility()
     {
         if (_currentAbility != null)
         {
-            _currentAbility.Cancel();
+            _currentAbility.ExitPrepare();
             _currentAbility = null;
         }
+    }
+
+    public void ExecuteAbility(AbilityData data)
+    {
+        _currentAbility.UpdateData(data);
+        _currentAbility.Execute();
     }
 }

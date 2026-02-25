@@ -1106,7 +1106,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 874489447}
-  - {fileID: 2013059423}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &742375538
@@ -1156,7 +1155,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CursorController
   _tileCursor: {fileID: 874489448}
-  _pathRenderer: {fileID: 2013059422}
   _groundMasks:
     serializedVersion: 2
     m_Bits: 8
@@ -8137,6 +8135,8 @@ GameObject:
   - component: {fileID: 1816743778}
   - component: {fileID: 1816743773}
   - component: {fileID: 1816743777}
+  - component: {fileID: 1816743780}
+  - component: {fileID: 1816743779}
   m_Layer: 0
   m_Name: Unit 1
   m_TagString: Untagged
@@ -8235,7 +8235,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15e914d0fe696a4eaee655dc9fd196e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnityAbilityController
+  _abilities:
+  - {fileID: 1816743780}
+  - {fileID: 1816743779}
   Unit: {fileID: 0}
+--- !u!114 &1816743779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816743772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04d322032f568e8419fab5e252394744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AbilityBasic
+  AbilityName: Basic Ability (do nothing)
+  Status: 0
+--- !u!114 &1816743780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816743772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 056d5b3788b425b419986f29c791fabc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovementAbility
+  AbilityName: Basic Ability (do nothing)
+  Status: 0
 --- !u!1 &1894136209
 GameObject:
   m_ObjectHideFlags: 0
@@ -8316,6 +8347,54 @@ Transform:
   - {fileID: 832575519}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1978080074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1978080076}
+  - component: {fileID: 1978080075}
+  m_Layer: 0
+  m_Name: AbilityRenderController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1978080075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978080074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc554827d7172e54abf705ad5222ceca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AbilityViewRenderer
+  _pathRenderer: {fileID: 2013059422}
+  _abilities:
+  - {fileID: 1816743780}
+--- !u!4 &1978080076
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978080074}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2013059423}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2013059421
 GameObject:
   m_ObjectHideFlags: 0
@@ -8356,12 +8435,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2013059421}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 742375537}
+  m_Father: {fileID: 1978080076}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &2013059424
 LineRenderer:
@@ -8594,3 +8673,4 @@ SceneRoots:
   - {fileID: 1356297844}
   - {fileID: 742375537}
   - {fileID: 1816743776}
+  - {fileID: 1978080076}

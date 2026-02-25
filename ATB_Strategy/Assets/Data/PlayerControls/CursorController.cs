@@ -6,7 +6,6 @@ public class CursorController : MonoBehaviour
 {
     [Header("Main settings")]
     [SerializeField] private TileCursor _tileCursor;
-    [SerializeField] private PathLineRenderer _pathRenderer;
 
     [Header("Raycast Settings")]
     [SerializeField] private LayerMask _groundMasks;
@@ -23,7 +22,6 @@ public class CursorController : MonoBehaviour
         _gridMap = gridMap;
         _playerInput = playerInput;
         _tileCursor.Init();
-        _pathRenderer.Init();
     }
 
     private void Update()
@@ -68,18 +66,15 @@ public class CursorController : MonoBehaviour
 
     private void UpdateCursorPosition(Vector3 tileWorldPos)
     {
-        //if (_cursorPosition != tileWorldPos)
-        //{
-        //    _cursorPosition = tileWorldPos;
-        //        _tileCursor.SetTileCursor(_cursorPosition);
-        //    _pathRenderer.SetPathLine(_pathPoints);
-        //}
+        if (_cursorPosition != tileWorldPos)
+        {
+            _cursorPosition = tileWorldPos;
+            _tileCursor.SetTileCursor(_cursorPosition);
+        }
     }
 
     private void DisableAll()
     {
-        //_cursorPosition = Vector3.positiveInfinity;
-        //    _tileCursor.UnsetTileCursor();
-        //    _pathRenderer.UnsetPathLine();
+        _tileCursor.UnsetTileCursor();
     }
 }

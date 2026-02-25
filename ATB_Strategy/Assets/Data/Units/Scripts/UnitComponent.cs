@@ -2,12 +2,12 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(UnitStats))]
-[RequireComponent(typeof(UnityAbilityController))]
+[RequireComponent(typeof(UnitAbilityController))]
 [RequireComponent(typeof(UnitAnimator))]
 public class UnitComponent : MonoBehaviour
 {
     [HideInInspector] public UnitStats UnitStats;
-    [HideInInspector] public UnityAbilityController AbilityController;
+    [HideInInspector] public UnitAbilityController AbilityController;
     [HideInInspector] public UnitAnimator UnitAnimator;
 
     public event Action<bool> OnSelectionChanged;
@@ -20,7 +20,7 @@ public class UnitComponent : MonoBehaviour
     public void Init(GridTile tile)
     {
         UnitStats = GetComponent<UnitStats>();
-        AbilityController = GetComponent<UnityAbilityController>();
+        AbilityController = GetComponent<UnitAbilityController>();
         UnitAnimator = GetComponent<UnitAnimator>();
 
         transform.position = new Vector3(tile.PositionX, tile.DeltaY, tile.PositionZ) + tile.GridOffset;
@@ -28,14 +28,14 @@ public class UnitComponent : MonoBehaviour
         AbilityController.Init(this);
     }
 
-    public void Select()
+    public void Select(AbilityData data)
     {
         if (_isSelected) return;
 
         _isSelected = true;
         OnSelectionChanged?.Invoke(true);
 
-        AbilityController.SelectAbility(0);
+        AbilityController.SelectAbility(0, data);
     }
 
     public void Deselect()

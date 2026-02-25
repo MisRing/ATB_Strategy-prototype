@@ -1,57 +1,58 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementAbility : IAbility
+public class MovementAbility : AbilityBasic, IPathHandler
 {
-    public AbilityType Type {get;private set; }
-    public AbilityStatus Status { get; private set; }
+    private PathData _pathData;
 
-    private UnityAbilityController _abilityController;
+    public event Action<PathData> OnPathChanged;
 
-    public void Init(UnityAbilityController abilityController)
+    public override void Init(UnitAbilityController abilityController)
     {
-        Status = AbilityStatus.Idle;
-        Type = AbilityType.Targeted;
-        _abilityController = abilityController;
+        base.Init(abilityController);
+        AbilityName = "Simple movement";
     }
 
-    public void EnterPrepare()
+    public override void EnterPrepare(AbilityData abilityData)
     {
-        Status = AbilityStatus.Preparing;
-        CalculatePath();
+        base.EnterPrepare(abilityData);
 
-        Debug.Log("Movement ability on prepare");
+        UpdateData(abilityData);
     }
 
-    public void CalculatePath()
+    public override void ExitPrepare()
     {
-        //if (targetData == null) return;
-
-        //targetData.PathData = new PathData();
-        //targetData.PathData.Points = new List<Vector3>();
-        //if (targetData.TargetPoint != _abilityController.transform.position)
-        //{
-        //    targetData.PathData.IsReacheble = GridPathFinder.CalculatePath(ref targetData.PathData,
-        //        _abilityController.transform.position, targetData.TargetPoint);
-        //}
-        //else
-        //{
-        //    targetData.PathData.IsReacheble = false;
-        //}
+        base.ExitPrepare();
     }
 
-    public void Cancel()
+    public override void Execute()
     {
-        Status = AbilityStatus.Idle;
-
-        Debug.Log("Movement ability canceled");
+        if (!_pathData.IsReacheble) return;
+        base.Execute();
     }
 
-    public void Execute()
+    public override void UpdateData(AbilityData abilityData)
     {
-        Status = AbilityStatus.Executing;
+        base.UpdateData(abilityData);
+        _pathData.IsReacheble = GridPathFinder.CalculatePath(ref _pathData, transform.position, _abilityData.TargetWorldPos);
 
-        Debug.Log("Movement ability executing");
+        OnPathChanged?.Invoke(_pathData);
+    }
+
+    private void Update() //prototype
+    {
+        if (Status != AbilityStatus.Executing) return;
+
+        transform.position = Vector3.Lerp(transform.position, _pathData.Points[0], Time.deltaTime * 10f);
+
+        if(Vector3.Distance(transform.position, _pathData.Points[0]) <= 0.1f)
+        {
+            _pathData.Points.RemoveAt(0);
+        }
+
+        if(_pathData.Points.Count <= 0)
+        {
+            Status = AbilityStatus.None;
+        }
     }
 }
