@@ -31,10 +31,11 @@ public class AbilityBasic : MonoBehaviour
         _abilityData = abilityData;
     }
 
-    public virtual void Execute()
+    public virtual bool Execute()
     {
         Debug.Log("Start executing <" + AbilityName + ">");
         Status = AbilityStatus.Executing;
+        return true;
     }
 }
 

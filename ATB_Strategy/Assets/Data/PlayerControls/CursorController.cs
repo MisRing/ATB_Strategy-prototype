@@ -17,6 +17,8 @@ public class CursorController : MonoBehaviour
     private Vector3 _cursorPosition;
     public Vector3 CursorPosition { get => _cursorPosition; }
 
+    public event Action OnPositionChanged;
+
     public void Init(GridMap gridMap, PlayerInputController playerInput)
     {
         _gridMap = gridMap;
@@ -70,11 +72,14 @@ public class CursorController : MonoBehaviour
         {
             _cursorPosition = tileWorldPos;
             _tileCursor.SetTileCursor(_cursorPosition);
+            OnPositionChanged?.Invoke();
         }
     }
 
     private void DisableAll()
     {
+        _cursorPosition = Vector3.up * 999f;
         _tileCursor.UnsetTileCursor();
+        OnPositionChanged?.Invoke();
     }
 }

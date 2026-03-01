@@ -40,9 +40,14 @@ public class UnitAbilityController : MonoBehaviour
         }
     }
 
-    public void ExecuteAbility(AbilityData data)
+    public bool ExecuteAbility(AbilityData data)
     {
         _currentAbility.UpdateData(data);
-        _currentAbility.Execute();
+        return _currentAbility.Execute();
+    }
+
+    public void UpdateAbilityData(AbilityData data)
+    {
+        _currentAbility.UpdateData(data);
     }
 }

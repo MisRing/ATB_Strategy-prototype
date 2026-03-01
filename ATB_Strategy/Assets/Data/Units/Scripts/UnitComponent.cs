@@ -14,6 +14,8 @@ public class UnitComponent : MonoBehaviour
 
     private bool _isSelected;
 
+    public UnitState State;
+
     //private int _positionX = -1;
     //private int _positionZ = -1;
 
@@ -26,6 +28,7 @@ public class UnitComponent : MonoBehaviour
         transform.position = new Vector3(tile.PositionX, tile.DeltaY, tile.PositionZ) + tile.GridOffset;
 
         AbilityController.Init(this);
+        UnitAnimator.Init(this);
     }
 
     public void Select(AbilityData data)
@@ -47,4 +50,10 @@ public class UnitComponent : MonoBehaviour
 
         AbilityController.DeselectAbility();
     }
+}
+
+public enum UnitState
+{
+    WaitingForOrder,
+    Engaged
 }

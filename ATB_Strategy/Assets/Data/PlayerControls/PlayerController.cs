@@ -41,14 +41,20 @@ public class PlayerController : MonoBehaviour
     {
         _playerInputController.SwitchTarget += SwitchTarget;
         _playerInputController.SelectObject += SelectObject;
+        _playerInputController.SelectPoint += SelectPoint;
         _playerInputController.SelectAbility += SelectAbility;
+
+        _cursorController.OnPositionChanged += UpdateAbilityData;
     }
 
     private void OnDisable()
     {
         _playerInputController.SwitchTarget -= SwitchTarget;
         _playerInputController.SelectObject -= SelectObject;
+        _playerInputController.SelectPoint -= SelectPoint;
         _playerInputController.SelectAbility -= SelectAbility;
+
+        _cursorController.OnPositionChanged -= UpdateAbilityData;
     }
 
     private void SelectObject()
@@ -63,28 +69,51 @@ public class PlayerController : MonoBehaviour
             {
                 SelectTargetUnit(unit, false);
             }
-            else
-            {
-                AbilityData data = new AbilityData();
-                data.TargetWorldPos = _cursorController.CursorPosition;
-                _selectedUnit.AbilityController.ExecuteAbility(data);
-            }
         }
+    }
+
+    private void SelectPoint()
+    {
+        AbilityData data = new AbilityData();
+        data.TargetWorldPos = _cursorController.CursorPosition;
+        if(_selectedUnit.AbilityController.ExecuteAbility(data))
+        {
+            SwitchToNextWaitingTarget();
+        }
+    }
+
+    private void UpdateAbilityData()
+    {
+        AbilityData data = new AbilityData();
+        data.TargetWorldPos = _cursorController.CursorPosition;
+        _selectedUnit.AbilityController.UpdateAbilityData(data);
     }
 
     private void SwitchTarget()
     {
         int newIndex = 0;
-        if(_playerInputController.IsReverseModifier)
-        {
-            newIndex = (_units.IndexOf(_selectedUnit) - 1 + _units.Count) % _units.Count;
-        }
-        else
+        if (!_playerInputController.IsReverseModifier)
         {
             newIndex = (_units.IndexOf(_selectedUnit) + 1) % _units.Count;
         }
+        else
+        {
+            newIndex = (_units.IndexOf(_selectedUnit) - 1 + _units.Count) % _units.Count;
+        }
 
         SelectTargetUnit(_units[newIndex]);
+    }
+
+    private void SwitchToNextWaitingTarget()
+    {
+        for (int i = 1; i < _units.Count; i++)
+        {
+            int newIndex = (_units.IndexOf(_selectedUnit) + i) % _units.Count;
+            if(_units[newIndex].State == UnitState.WaitingForOrder)
+            {
+                SelectTargetUnit(_units[newIndex]);
+            }
+        }
     }
 
     private void SelectTargetUnit(UnitComponent unit, bool focusView = true)
