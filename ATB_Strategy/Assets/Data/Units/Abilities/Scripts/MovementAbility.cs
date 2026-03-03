@@ -48,7 +48,7 @@ public class MovementAbility : AbilityBasic, IPathHandler
 
         Debug.Log("Start executing <" + AbilityName + ">");
         Status = AbilityStatus.Executing;
-        _abilityController.Unit.State = UnitState.Engaged;
+        
 
         StartCoroutine(Move());
         return true;
@@ -80,6 +80,6 @@ public class MovementAbility : AbilityBasic, IPathHandler
         _abilityController.Unit.UnitAnimator.SetMovement(0f, 0f);
 
         Status = AbilityStatus.None;
-        _abilityController.Unit.State = UnitState.WaitingForOrder;
+        _abilityController.FinishExecuteAbility();
     }
 }

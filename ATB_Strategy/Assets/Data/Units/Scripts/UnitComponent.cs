@@ -21,6 +21,8 @@ public class UnitComponent : MonoBehaviour
 
     public void Init(GridTile tile)
     {
+        TurnManager.Units.Add(this);
+        
         UnitStats = GetComponent<UnitStats>();
         AbilityController = GetComponent<UnitAbilityController>();
         UnitAnimator = GetComponent<UnitAnimator>();

@@ -6,6 +6,16 @@ public class UnitAnimator : MonoBehaviour
 
     private UnitComponent _unit;
 
+    private void OnEnable()
+    {
+        TimeService.OnTimeSpeedChanged += UpdateAnimationSpeed;
+    }
+    
+    private void OnDisable()
+    {
+        TimeService.OnTimeSpeedChanged -= UpdateAnimationSpeed;
+    }
+
     public void Init(UnitComponent unit)
     {
         _unit = unit;
@@ -19,5 +29,10 @@ public class UnitAnimator : MonoBehaviour
         _animator.SetFloat("MoveX", realDirection.x);
         _animator.SetFloat("MoveZ", realDirection.z);
 
+    }
+
+    private void UpdateAnimationSpeed(float timeSpeed)
+    {
+        _animator.speed = timeSpeed;
     }
 }

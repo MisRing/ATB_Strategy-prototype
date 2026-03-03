@@ -23,6 +23,7 @@ public class UnitAbilityController : MonoBehaviour
     {
         if (index >= _abilities.Length) return;
         if (_currentAbility == _abilities[index]) return;
+        if (_currentAbility && _currentAbility.Status == AbilityStatus.Executing) return;
 
         DeselectAbility();
 
@@ -33,7 +34,7 @@ public class UnitAbilityController : MonoBehaviour
 
     public void DeselectAbility()
     {
-        if (_currentAbility != null)
+        if (_currentAbility != null && _currentAbility.Status != AbilityStatus.Executing)
         {
             _currentAbility.ExitPrepare();
             _currentAbility = null;
@@ -42,12 +43,29 @@ public class UnitAbilityController : MonoBehaviour
 
     public bool ExecuteAbility(AbilityData data)
     {
-        _currentAbility.UpdateData(data);
-        return _currentAbility.Execute();
+        if (_currentAbility.Status != AbilityStatus.Executing)
+        {
+            _currentAbility.UpdateData(data);
+            if (_currentAbility.Execute())
+            {
+                Unit.State = UnitState.Engaged;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void FinishExecuteAbility()
+    {
+        Unit.State = UnitState.WaitingForOrder;
     }
 
     public void UpdateAbilityData(AbilityData data)
     {
-        _currentAbility.UpdateData(data);
+        if (_currentAbility && _currentAbility.Status != AbilityStatus.Executing)
+        {
+            _currentAbility.UpdateData(data);
+        }
     }
 }
