@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,9 +12,9 @@ public class PlayerController : MonoBehaviour
     private CursorController _cursorController;
     private PlayerInputController _playerInputController;
 
-    [SerializeField] private List<UnitComponent> _units = new List<UnitComponent>();
+    [SerializeField] private List<UnitController> _units = new List<UnitController>();
     [SerializeField] private List<Vector2Int> _positionPresset = new List<Vector2Int>();
-    [SerializeField] private UnitComponent _selectedUnit;
+    [SerializeField] private UnitController _selectedUnit;
 
     [SerializeField] private float _selectRayDistance = 100f;
 
@@ -45,6 +46,8 @@ public class PlayerController : MonoBehaviour
         _playerInputController.SelectAbility += SelectAbility;
 
         _cursorController.OnPositionChanged += UpdateAbilityData;
+
+        TurnManager.OnUnitEnterExitQ += SelectReadyUnit;
     }
 
     private void OnDisable()
@@ -55,6 +58,8 @@ public class PlayerController : MonoBehaviour
         _playerInputController.SelectAbility -= SelectAbility;
 
         _cursorController.OnPositionChanged -= UpdateAbilityData;
+
+        TurnManager.OnUnitEnterExitQ -= SelectReadyUnit;
     }
 
     private void SelectObject()
@@ -64,8 +69,8 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _selectRayDistance))
         {
-            UnitComponent unit = hit.collider.gameObject.GetComponent<UnitComponent>();
-            if(unit != null)
+            UnitController unit = hit.collider.gameObject.GetComponent<UnitController>();
+            if(unit != null && unit.State == UnitState.WaitingForOrder)
             {
                 SelectTargetUnit(unit, false);
             }
@@ -74,16 +79,23 @@ public class PlayerController : MonoBehaviour
 
     private void SelectPoint()
     {
+        if (!_selectedUnit || _selectedUnit.State == UnitState.Engaged) return;
+
         AbilityData data = new AbilityData();
         data.TargetWorldPos = _cursorController.CursorPosition;
         if(_selectedUnit.AbilityController.ExecuteAbility(data))
         {
-            SwitchToNextWaitingTarget();
+            if(!SwitchToFreeUnit(+1))
+            {
+                DeselectCurrentUnit();
+            }
         }
     }
 
     private void UpdateAbilityData()
     {
+        if (!_selectedUnit || _selectedUnit.State == UnitState.Engaged) return;
+
         AbilityData data = new AbilityData();
         data.TargetWorldPos = _cursorController.CursorPosition;
         _selectedUnit.AbilityController.UpdateAbilityData(data);
@@ -91,38 +103,48 @@ public class PlayerController : MonoBehaviour
 
     private void SwitchTarget()
     {
-        int newIndex = 0;
+        int findStep;
         if (!_playerInputController.IsReverseModifier)
         {
-            newIndex = (_units.IndexOf(_selectedUnit) + 1) % _units.Count;
+            findStep = 1;
         }
         else
         {
-            newIndex = (_units.IndexOf(_selectedUnit) - 1 + _units.Count) % _units.Count;
+            findStep = -1;
         }
 
-        SelectTargetUnit(_units[newIndex]);
+        SwitchToFreeUnit(findStep);
     }
 
-    private void SwitchToNextWaitingTarget()
+    private bool SwitchToFreeUnit(int step)
     {
-        for (int i = 1; i < _units.Count; i++)
+        for (int i = _units.Count + step; i > 0 && i < _units.Count * 2; i+= step)
         {
-            int newIndex = (_units.IndexOf(_selectedUnit) + i) % _units.Count;
-            if(_units[newIndex].State == UnitState.WaitingForOrder)
+            int newIndex = (_units.Count + _units.IndexOf(_selectedUnit) + i) % _units.Count;
+            if (_units[newIndex].State == UnitState.WaitingForOrder)
             {
                 SelectTargetUnit(_units[newIndex]);
+                return true;
             }
         }
+
+        return false;
     }
 
-    private void SelectTargetUnit(UnitComponent unit, bool focusView = true)
+    private void SelectReadyUnit(UnitController unit)
+    {
+        if (!_units.Contains(unit)) return;
+        if (_selectedUnit) return;
+
+        SelectTargetUnit(unit);
+    }
+
+    private void SelectTargetUnit(UnitController unit, bool focusView = true)
     {
         if (unit == _selectedUnit) return;
-        if (_selectedUnit)
-        {
-            _selectedUnit.Deselect();
-        }
+
+        DeselectCurrentUnit();
+
         _selectedUnit = unit;
         AbilityData data = new AbilityData();
         data.TargetWorldPos = _cursorController.CursorPosition;
@@ -130,6 +152,15 @@ public class PlayerController : MonoBehaviour
         if (focusView)
         {
             _cameraController.EnterFocusMode(_selectedUnit.transform);
+        }
+    }
+
+    private void DeselectCurrentUnit()
+    {
+        if (_selectedUnit)
+        {
+            _selectedUnit.Deselect();
+            _selectedUnit = null;
         }
     }
 

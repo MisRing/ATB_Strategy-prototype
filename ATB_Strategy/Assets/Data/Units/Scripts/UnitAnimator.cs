@@ -4,7 +4,12 @@ public class UnitAnimator : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
 
-    private UnitComponent _unit;
+    private UnitController _unit;
+
+    private void Awake()
+    {
+        UpdateAnimationSpeed(TimeService.TimeSpeed);
+    }
 
     private void OnEnable()
     {
@@ -16,7 +21,7 @@ public class UnitAnimator : MonoBehaviour
         TimeService.OnTimeSpeedChanged -= UpdateAnimationSpeed;
     }
 
-    public void Init(UnitComponent unit)
+    public void Init(UnitController unit)
     {
         _unit = unit;
     }
@@ -28,7 +33,6 @@ public class UnitAnimator : MonoBehaviour
 
         _animator.SetFloat("MoveX", realDirection.x);
         _animator.SetFloat("MoveZ", realDirection.z);
-
     }
 
     private void UpdateAnimationSpeed(float timeSpeed)

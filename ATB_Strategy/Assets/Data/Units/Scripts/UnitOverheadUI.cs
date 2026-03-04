@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class UnitOverheadUI : MonoBehaviour
 {
-    [SerializeField] private UnitComponent _unit;
+    [SerializeField] private UnitController _unit;
     [SerializeField] private GameObject _selectionRing;
 
     private void OnEnable()

@@ -3,7 +3,8 @@ using System;
 
 public static class TimeService
 {
-    private static float _timeSpeed = 1f;
+    private static float _timeSpeed = 0f;
+    public static float TimeSpeed { get { return _timeSpeed; } }
     public static float TimeSpeedDelta { get { return _timeSpeed * Time.deltaTime; } }
     
     public static event Action<float> OnTimeSpeedChanged;

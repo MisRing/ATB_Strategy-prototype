@@ -44,14 +44,14 @@ public class MovementAbility : AbilityBasic, IPathHandler
     public override bool Execute()
     {
         if (!_pathData.IsReacheble) return false;
-        //base.Execute();
-
-        Debug.Log("Start executing <" + AbilityName + ">");
-        Status = AbilityStatus.Executing;
         
-
         StartCoroutine(Move());
-        return true;
+
+        PathData emptyPath = new PathData();
+        emptyPath.IsReacheble = false;
+        OnPathChanged?.Invoke(emptyPath);
+
+        return base.Execute();
     }
 
     private IEnumerator Move()

@@ -7,13 +7,14 @@ public class UnitAbilityController : MonoBehaviour
     [SerializeField] private AbilityBasic[] _abilities;
     private AbilityBasic _currentAbility;
 
-    [HideInInspector] public UnitComponent Unit;
+    [HideInInspector] public UnitController Unit;
 
-    public void Init(UnitComponent unit)
+    public void Init(UnitController unit)
     {
         Unit = unit;
+        TurnManager.EnterWaitingQ(Unit);
 
-        foreach(var ability in _abilities)
+        foreach (var ability in _abilities)
         {
             ability.Init(this);
         }
@@ -21,9 +22,8 @@ public class UnitAbilityController : MonoBehaviour
 
     public void SelectAbility(int index, AbilityData data)
     {
-        if (index >= _abilities.Length) return;
+        if (index >= _abilities.Length || index < 0) return;
         if (_currentAbility == _abilities[index]) return;
-        if (_currentAbility && _currentAbility.Status == AbilityStatus.Executing) return;
 
         DeselectAbility();
 
@@ -34,7 +34,7 @@ public class UnitAbilityController : MonoBehaviour
 
     public void DeselectAbility()
     {
-        if (_currentAbility != null && _currentAbility.Status != AbilityStatus.Executing)
+        if (_currentAbility != null)
         {
             _currentAbility.ExitPrepare();
             _currentAbility = null;
@@ -43,14 +43,12 @@ public class UnitAbilityController : MonoBehaviour
 
     public bool ExecuteAbility(AbilityData data)
     {
-        if (_currentAbility.Status != AbilityStatus.Executing)
+        _currentAbility.UpdateData(data);
+        if (_currentAbility.Execute())
         {
-            _currentAbility.UpdateData(data);
-            if (_currentAbility.Execute())
-            {
-                Unit.State = UnitState.Engaged;
-                return true;
-            }
+            Unit.State = UnitState.Engaged;
+            TurnManager.ExitWaitingQ(Unit);
+            return true;
         }
 
         return false;
@@ -59,13 +57,11 @@ public class UnitAbilityController : MonoBehaviour
     public void FinishExecuteAbility()
     {
         Unit.State = UnitState.WaitingForOrder;
+        TurnManager.EnterWaitingQ(Unit);
     }
 
     public void UpdateAbilityData(AbilityData data)
     {
-        if (_currentAbility && _currentAbility.Status != AbilityStatus.Executing)
-        {
-            _currentAbility.UpdateData(data);
-        }
+        _currentAbility.UpdateData(data);
     }
 }

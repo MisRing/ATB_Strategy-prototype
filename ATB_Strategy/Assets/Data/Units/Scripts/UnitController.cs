@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(UnitStats))]
 [RequireComponent(typeof(UnitAbilityController))]
 [RequireComponent(typeof(UnitAnimator))]
-public class UnitComponent : MonoBehaviour
+public class UnitController : MonoBehaviour
 {
     [HideInInspector] public UnitStats UnitStats;
     [HideInInspector] public UnitAbilityController AbilityController;
@@ -16,13 +16,8 @@ public class UnitComponent : MonoBehaviour
 
     public UnitState State;
 
-    //private int _positionX = -1;
-    //private int _positionZ = -1;
-
     public void Init(GridTile tile)
-    {
-        TurnManager.Units.Add(this);
-        
+    {        
         UnitStats = GetComponent<UnitStats>();
         AbilityController = GetComponent<UnitAbilityController>();
         UnitAnimator = GetComponent<UnitAnimator>();
@@ -50,7 +45,10 @@ public class UnitComponent : MonoBehaviour
         _isSelected = false;
         OnSelectionChanged?.Invoke(false);
 
-        AbilityController.DeselectAbility();
+        if (State != UnitState.Engaged)
+        {
+            AbilityController.DeselectAbility();
+        }
     }
 }
 

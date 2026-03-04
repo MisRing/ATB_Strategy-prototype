@@ -1,49 +1,37 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class TurnManager : MonoBehaviour
 {
-    public static readonly float TurnTime = 0.2f;
     private static float _currentTime = 0f;
-    private static float _currentTurnTime = 0f;
-    
-    public static List<UnitComponent> Units = new List<UnitComponent>();
 
-    private void Update()
+    public static event Action<UnitController> OnUnitEnterExitQ;
+    
+    private static List<UnitController> _freeUnits = new List<UnitController>();
+
+    public static void EnterWaitingQ(UnitController unit)
     {
-        if (CheckUnitsWaiting())
-        {
-            TimeService.SetTimeSpeed(0);
-        }
-        else
+        if(_freeUnits.Contains(unit)) return;
+
+        _freeUnits.Add(unit);
+        TimeService.SetTimeSpeed(0);
+        OnUnitEnterExitQ?.Invoke(unit);
+    }
+
+    public static void ExitWaitingQ(UnitController unit)
+    {
+        if (!_freeUnits.Contains(unit)) return;
+
+        _freeUnits.Remove(unit);
+        if (_freeUnits.Count == 0)
         {
             TimeService.SetTimeSpeed(1);
         }
-        
+    }
+
+    private void Update()
+    {
         _currentTime += TimeService.TimeSpeedDelta;
-        _currentTurnTime += TimeService.TimeSpeedDelta;
-
-        if(_currentTurnTime >= TurnTime)
-        {
-            _currentTurnTime %= TurnTime;
-            SetTurn();
-        }
-    }
-
-    private bool CheckUnitsWaiting()
-    {
-        foreach (UnitComponent unit in Units)
-        {
-            if (unit.State == UnitState.WaitingForOrder)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void SetTurn()
-    {
-
     }
 }
