@@ -76,7 +76,42 @@ public class GridMapDebug
 
                     Handles.DrawLine(from, to, lineThickdess);
                 }
+
+                for (int i = 0; i < 4; i++)
+                {
+                    float height = 0;
+                    if (tile.Covers[i] == TileCover.Low)
+                    {
+                        Handles.color = Color.red;
+                        height = 0.5f;
+
+                    }
+                    else if (tile.Covers[i] == TileCover.Full)
+                    {
+                        Handles.color = Color.black;
+                        height = 1f;
+                    }
+                    else continue;
+                    
+                    Vector3 cPoint1 = new Vector3(_directions[i][0], 0, _directions[i][1]) + tilePos;
+                    Vector3 cPoint2 = new Vector3(_directions[i][0], height, _directions[i][1]) + tilePos;
+                    Vector3 cPoint3 = new Vector3(_directions[i][2], height, _directions[i][3]) + tilePos;
+                    Vector3 cPoint4 = new Vector3(_directions[i][2], 0, _directions[i][3]) + tilePos;
+
+                    Handles.DrawLine(cPoint1, cPoint2, lineThickdess);
+                    Handles.DrawLine(cPoint2, cPoint3, lineThickdess);
+                    Handles.DrawLine(cPoint3, cPoint4, lineThickdess);
+                    Handles.DrawLine(cPoint4, cPoint1, lineThickdess);
+                }
             }
         }
     }
+
+    private static readonly float[][] _directions =
+    {
+        new[] { debugOffset, debugOffset, -debugOffset, debugOffset },
+        new[] { debugOffset, debugOffset, debugOffset, -debugOffset },
+        new[] { debugOffset, -debugOffset, -debugOffset, -debugOffset },
+        new[] { -debugOffset, -debugOffset, -debugOffset, debugOffset },
+    };
 }

@@ -108,6 +108,8 @@ public static class GridMapExtansion
                 SetTileGround(ref gridMap._grid[GetIndex(gridMap, x, z)], groundsTransform);
 
                 SetTileObstacles(ref gridMap._grid[GetIndex(gridMap, x, z)], obstaclesTransform);
+                
+                SetTileCovers(ref gridMap._grid[GetIndex(gridMap, x, z)], obstaclesTransform);
             }
         }
 
@@ -166,4 +168,32 @@ public static class GridMapExtansion
             tile.IsEmpty = true;
         }
     }
+    
+    private static void SetTileCovers(ref GridTile tile, Transform obstaclesTransform)
+    {
+        tile.Covers = new TileCover[4];
+        
+        if (!tile.IsEmpty || !tile.IsGround) return;
+        
+        Vector3 position = new Vector3(tile.PositionX, tile.DeltaY, tile.PositionZ) + tile.GridOffset;
+
+        for (int i = 0; i < 4; i++)
+        {
+
+            if (Physics.Raycast(position + Vector3.up * 0.75f, _directions[i], 0.75f))
+            {
+
+                if (Physics.Raycast(position + Vector3.up * 1.5f, _directions[i], 0.75f))
+                {
+                    tile.Covers[i] = TileCover.Full;
+                }
+                else
+                {
+                    tile.Covers[i] = TileCover.Low;
+                }
+            }
+        }
+    }
+
+    private static Vector3[] _directions = { Vector3.forward, Vector3.right, -Vector3.forward, -Vector3.right };
 }
