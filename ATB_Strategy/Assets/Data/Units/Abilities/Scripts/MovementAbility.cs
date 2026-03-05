@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MovementAbility : AbilityBasic, IPathHandler
 {
     private PathData _pathData;
-
+    [SerializeField] private float _accelerationDistance = 0.5f;
+    [SerializeField] private float _minVelocity = 0.1f;
+        
     public event Action<PathData> OnPathChanged;
 
     private void Awake()
@@ -53,27 +56,39 @@ public class MovementAbility : AbilityBasic, IPathHandler
 
         return base.Execute();
     }
-
+    
     private IEnumerator Move()
     {
-        while (_pathData.Points.Count > 0)
+        float currentPassedDistance = 0f;
+        int nextPointIndex = 1;
+        float nextPointDistance = Vector3.Distance(_pathData.Points[0], _pathData.Points[1]);
+
+        while (currentPassedDistance < _pathData.Distance)
         {
-            Vector3 direction = (_pathData.Points[0] - transform.position).normalized;
-            transform.position += direction * TimeService.TimeSpeedDelta * _abilityController.Unit.UnitStats.Speed;
+            float velocity = GetVelocity(currentPassedDistance, _pathData.Distance);
+            
+            Vector3 direction = (_pathData.Points[nextPointIndex] - transform.position).normalized * velocity;
 
-            _abilityController.Unit.UnitAnimator.SetMovement(direction.x, direction.z);
+            float step = _abilityController.Unit.UnitStats.Speed * TimeService.TimeSpeedDelta;
+            
+            currentPassedDistance += step * velocity;
+            
+            MoveToDirection(direction, step);
+            
+            RotateToDirection(direction);
 
-            if (direction != Vector3.zero)
+            if (currentPassedDistance >= nextPointDistance)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
-
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5f * TimeService.TimeSpeedDelta);
+                if(nextPointIndex + 1 >= _pathData.Points.Count) break;
+                
+                nextPointDistance += Vector3.Distance(
+                    _pathData.Points[nextPointIndex],
+                    _pathData.Points[nextPointIndex + 1]
+                    );
+                
+                nextPointIndex++;
             }
-
-            if (Vector3.Distance(transform.position, _pathData.Points[0]) <= 0.1f)
-            {
-                _pathData.Points.RemoveAt(0);
-            }
+            
             yield return null;
         }
 
@@ -81,5 +96,33 @@ public class MovementAbility : AbilityBasic, IPathHandler
 
         Status = AbilityStatus.None;
         _abilityController.FinishExecuteAbility();
+    }
+
+    private void MoveToDirection(Vector3 direction, float step)
+    {
+        transform.position += direction * step;
+            
+        _abilityController.Unit.UnitAnimator.SetMovement(direction.x, direction.z);
+    }
+
+    private void RotateToDirection(Vector3 direction)
+    {
+        if (direction != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5f * TimeService.TimeSpeedDelta);
+        }
+    }
+
+    private float GetVelocity(float passedDistance, float fullDistance)
+    {
+        float startVelocity = passedDistance / _accelerationDistance;
+
+        float endVelocity = (fullDistance - passedDistance) / _accelerationDistance;
+        
+        float velocity = Mathf.Clamp01(Mathf.Min(startVelocity, endVelocity));
+
+        return Mathf.Max(velocity, _minVelocity);
     }
 }
