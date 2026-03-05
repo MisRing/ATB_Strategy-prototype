@@ -8,6 +8,7 @@ public class MovementAbility : AbilityBasic, IPathHandler
     private PathData _pathData;
     [SerializeField] private float _accelerationDistance = 0.5f;
     [SerializeField] private float _minVelocity = 0.1f;
+    [SerializeField] private float _rotationSpeed = 5f;
         
     public event Action<PathData> OnPathChanged;
 
@@ -39,7 +40,7 @@ public class MovementAbility : AbilityBasic, IPathHandler
         if (Status == AbilityStatus.Executing) return;
 
         base.UpdateData(abilityData);
-        _pathData.IsReacheble = GridPathFinder.CalculatePath(ref _pathData, transform.position, _abilityData.TargetWorldPos);
+        _pathData.IsReacheble = GridPathFinder.CalculatePath(ref _pathData, transform.position, _abilityData.TargetWorldPos, _abilityController.Unit.GridMap);
 
         OnPathChanged?.Invoke(_pathData);
     }
@@ -62,10 +63,18 @@ public class MovementAbility : AbilityBasic, IPathHandler
         float currentPassedDistance = 0f;
         int nextPointIndex = 1;
         float nextPointDistance = Vector3.Distance(_pathData.Points[0], _pathData.Points[1]);
+        bool moveEnds = false;
+        
+        _abilityController.Unit.UnitAnimator.SetCover(_pathData.Cover != TileCover.None);
 
         while (currentPassedDistance < _pathData.Distance)
         {
             float velocity = GetVelocity(currentPassedDistance, _pathData.Distance);
+            
+            if (nextPointIndex == _pathData.Points.Count - 1 && !moveEnds && velocity < 1f)
+            {
+                moveEnds = true;
+            }
             
             Vector3 direction = (_pathData.Points[nextPointIndex] - transform.position).normalized * velocity;
 
@@ -74,9 +83,15 @@ public class MovementAbility : AbilityBasic, IPathHandler
             currentPassedDistance += step * velocity;
             
             MoveToDirection(direction, step);
+            if (_pathData.Cover != TileCover.None && moveEnds)
+            {
+                RotateToDirection(_pathData.finalDirection);
+            }
+            else
+            {
+                RotateToDirection(direction);
+            }
             
-            RotateToDirection(direction);
-
             if (currentPassedDistance >= nextPointDistance)
             {
                 if(nextPointIndex + 1 >= _pathData.Points.Count) break;
@@ -111,7 +126,7 @@ public class MovementAbility : AbilityBasic, IPathHandler
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5f * TimeService.TimeSpeedDelta);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * TimeService.TimeSpeedDelta);
         }
     }
 

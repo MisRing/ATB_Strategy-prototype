@@ -9,6 +9,7 @@ public class UnitController : MonoBehaviour
     [HideInInspector] public UnitStats UnitStats;
     [HideInInspector] public UnitAbilityController AbilityController;
     [HideInInspector] public UnitAnimator UnitAnimator;
+    [HideInInspector] public GridMap GridMap;
 
     public event Action<bool> OnSelectionChanged;
 
@@ -16,11 +17,12 @@ public class UnitController : MonoBehaviour
 
     public UnitState State;
 
-    public void Init(GridTile tile)
+    public void Init(GridTile tile, GridMap gridMap)
     {        
         UnitStats = GetComponent<UnitStats>();
         AbilityController = GetComponent<UnitAbilityController>();
         UnitAnimator = GetComponent<UnitAnimator>();
+        GridMap = gridMap;
 
         transform.position = new Vector3(tile.PositionX, tile.DeltaY, tile.PositionZ) + tile.GridOffset;
 

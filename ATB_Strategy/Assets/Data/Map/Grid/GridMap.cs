@@ -38,6 +38,16 @@ public class GridMap : MonoBehaviour
 
         return tileWorldPos;
     }
+    
+    public GridTile GetTileByWorldPosition(float worldX, float worldZ)
+    {
+        int x = (int)Math.Round(worldX);
+        int z = (int)Math.Round(worldZ);
+
+        GridTile tile = _grid[GridMapExtansion.GetIndex(this, x, z)];
+
+        return tile;
+    }
 
     public void BuildGrid(int sizeX, int sizeZ)
     {
@@ -195,5 +205,5 @@ public static class GridMapExtansion
         }
     }
 
-    private static Vector3[] _directions = { Vector3.forward, Vector3.right, -Vector3.forward, -Vector3.right };
+    public static readonly Vector3[] _directions = { Vector3.forward, Vector3.right, -Vector3.forward, -Vector3.right };
 }

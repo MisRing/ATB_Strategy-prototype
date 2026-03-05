@@ -1439,7 +1439,6 @@ MonoBehaviour:
   _cameraController: {fileID: 315196675}
   _units:
   - {fileID: 1816743775}
-  - {fileID: 1491048957}
   _positionPresset:
   - {x: 1, y: 1}
   - {x: 3, y: 5}
@@ -9210,7 +9209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1491048951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9277,6 +9276,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitAnimator
   _animator: {fileID: 888280905}
+  _coverAnimationSpeed: 1
+  _coverVelocity: 0
 --- !u!114 &1491048955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9711,6 +9712,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitAnimator
   _animator: {fileID: 1087539341}
+  _coverAnimationSpeed: 1.25
+  _coverVelocity: 0
 --- !u!114 &1816743774
 MonoBehaviour:
   m_ObjectHideFlags: 0

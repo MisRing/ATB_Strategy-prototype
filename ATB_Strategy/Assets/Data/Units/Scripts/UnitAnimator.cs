@@ -6,6 +6,10 @@ public class UnitAnimator : MonoBehaviour
 
     private UnitController _unit;
 
+    [SerializeField] private float _coverAnimationSpeed = 1f;
+    private bool _cover;
+    [SerializeField] private float _coverVelocity = 0;
+
     private void Awake()
     {
         UpdateAnimationSpeed(TimeService.TimeSpeed);
@@ -33,6 +37,28 @@ public class UnitAnimator : MonoBehaviour
 
         _animator.SetFloat("MoveX", realDirection.x);
         _animator.SetFloat("MoveZ", realDirection.z);
+    }
+
+    public void SetCover(bool cover)
+    {
+        _cover = cover;
+        Debug.Log(_cover);
+    }
+
+    private void Update()
+    {
+        if (_cover && _coverVelocity < 1)
+        {
+            _coverVelocity += TimeService.TimeSpeedDelta * _coverAnimationSpeed;
+            _coverVelocity = Mathf.Clamp01(_coverVelocity);
+        }
+        else if (!_cover && _coverVelocity > 0)
+        {
+            _coverVelocity -= TimeService.TimeSpeedDelta * _coverAnimationSpeed;
+            _coverVelocity = Mathf.Clamp01(_coverVelocity);
+        }
+        
+        _animator.SetFloat("Cover", _coverVelocity);
     }
 
     private void UpdateAnimationSpeed(float timeSpeed)

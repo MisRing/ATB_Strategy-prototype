@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < _units.Count; i++)
         {
-            _units[i].Init(_gridMap._grid[GridMapExtansion.GetIndex(_gridMap, _positionPresset[i].x, _positionPresset[i].y)]);
+            _units[i].Init(_gridMap._grid[GridMapExtansion.GetIndex(_gridMap, _positionPresset[i].x, _positionPresset[i].y)], _gridMap);
         }
         SelectTargetUnit(_units[0]);
     }
