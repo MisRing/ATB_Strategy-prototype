@@ -42,7 +42,6 @@ public class UnitAnimator : MonoBehaviour
     public void SetCover(bool cover)
     {
         _cover = cover;
-        Debug.Log(_cover);
     }
 
     private void Update()

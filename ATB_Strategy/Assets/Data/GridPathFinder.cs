@@ -28,7 +28,7 @@ public static class GridPathFinder
                 pathData.Cover = TileCover.Full;
                 break;
             }
-            else if (tile.Covers[i] == TileCover.Low && pathData.Cover == TileCover.None)
+            if (tile.Covers[i] == TileCover.Low && pathData.Cover == TileCover.None)
             {
                 pathData.finalDirection = GridMapExtansion._directions[i];
                 pathData.Cover = TileCover.Low;
