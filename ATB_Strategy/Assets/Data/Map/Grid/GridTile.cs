@@ -11,14 +11,6 @@ public struct GridTile
 
     public int PositionX;
     public int PositionZ;
+    public int Floor;
     public float DeltaY;
-
-    public Vector3 GridOffset;
-}
-
-public enum TileCover
-{
-    None,
-    Low,
-    Full,
 }

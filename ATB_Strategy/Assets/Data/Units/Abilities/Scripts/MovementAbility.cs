@@ -40,7 +40,7 @@ public class MovementAbility : AbilityBasic, IPathHandler
         if (Status == AbilityStatus.Executing) return;
 
         base.UpdateData(abilityData);
-        _pathData.IsReacheble = GridPathFinder.CalculatePath(ref _pathData, transform.position, _abilityData.TargetWorldPos, _abilityController.Unit.GridMap);
+        _pathData.IsReacheble = GridPathFinder.CalculatePath(ref _pathData, transform.position, _abilityData.TargetWorldPos);
 
         OnPathChanged?.Invoke(_pathData);
     }

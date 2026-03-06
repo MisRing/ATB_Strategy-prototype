@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class CursorController : MonoBehaviour
 {
@@ -12,16 +13,14 @@ public class CursorController : MonoBehaviour
     [SerializeField] private float _rayDistance = 100f;
 
     private PlayerInputController _playerInput;
-    private GridMap _gridMap;
 
     private Vector3 _cursorPosition;
     public Vector3 CursorPosition { get => _cursorPosition; }
 
     public event Action OnPositionChanged;
 
-    public void Init(GridMap gridMap, PlayerInputController playerInput)
+    public void Init(PlayerInputController playerInput)
     {
-        _gridMap = gridMap;
         _playerInput = playerInput;
         _tileCursor.Init();
     }
@@ -38,9 +37,9 @@ public class CursorController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         RaycastHit hit;
 
-        Vector3 tileWorldPos = Vector3.zero;
-
         bool cursorOnTile = false;
+
+        GridTile tile = new GridTile();
 
         if (Physics.Raycast(ray, out hit, _rayDistance))
         {
@@ -48,9 +47,8 @@ public class CursorController : MonoBehaviour
             {
                 Vector3 realPoint = hit.point;
 
-                if (_gridMap.HasTile(realPoint.x, realPoint.z))
+                if (GridParameters.LevelGrid.GetTileByWorldPos(ref tile, realPoint))
                 {
-                    tileWorldPos = _gridMap.GetTileWorldPosition(realPoint.x, realPoint.z);
                     cursorOnTile = true;
                 }
             }
@@ -58,6 +56,7 @@ public class CursorController : MonoBehaviour
 
         if(cursorOnTile)
         {
+            Vector3 tileWorldPos = GridParameters.LevelGrid.GetTileWorldPos(tile);
             UpdateCursorPosition(tileWorldPos);
         }
         else

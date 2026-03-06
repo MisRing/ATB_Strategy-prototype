@@ -7,7 +7,6 @@ using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GridMap _gridMap;
     [SerializeField] private CameraController _cameraController;
     private CursorController _cursorController;
     private PlayerInputController _playerInputController;
@@ -20,20 +19,23 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        _playerInputController = GetComponent<PlayerInputController>();
+        _cursorController = GetComponent<CursorController>();
+    }
+
+    private void Start()
+    {
         Init();
 
-        _cursorController.Init(_gridMap, _playerInputController);
+        _cursorController.Init(_playerInputController);
         _cameraController.Init(_selectedUnit.transform);
     }
 
     private void Init()
     {
-        _playerInputController = GetComponent<PlayerInputController>();
-        _cursorController = GetComponent<CursorController>();
-
         for (int i = 0; i < _units.Count; i++)
         {
-            _units[i].Init(_gridMap._grid[GridMapExtansion.GetIndex(_gridMap, _positionPresset[i].x, _positionPresset[i].y)], _gridMap);
+            _units[i].Init(GridParameters.LevelGrid.GetTile(_positionPresset[i].x, _positionPresset[i].y));
         }
         SelectTargetUnit(_units[0]);
     }

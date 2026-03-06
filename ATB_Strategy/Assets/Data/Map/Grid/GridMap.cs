@@ -4,88 +4,75 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GridMap : MonoBehaviour
 {
-    [SerializeField] public GridTile[] _grid;
+    [SerializeField] private TArray<GridTile> _grid;
 
-    [SerializeField] private int _sizeX;
-    [SerializeField] private int _sizeZ;
+    public int SizeX { get { return _grid.Size.x; } }
+    public int SizeZ { get { return _grid.Size.y; } }
 
-    public int SizeX { get { return _sizeX; } }
-    public int SizeZ { get { return _sizeZ; } }
-
-    private Transform _floorCollection;
-    private Transform _obstacleCollection;
-
-    public bool HasTile(float worldX, float worldZ)
+    private void Awake()
     {
-        int x = (int)Math.Round(worldX);
-        int z = (int)Math.Round(worldZ);
-
-        if (x < 0 || z < 0 || x >= _sizeX || z >= _sizeZ) return false;
-
-        return true;
-    }
-
-    public Vector3 GetTileWorldPosition(float worldX, float worldZ)
-    {
-        int x = (int)Math.Round(worldX);
-        int z = (int)Math.Round(worldZ);
-
-        GridTile tile = _grid[GridMapExtansion.GetIndex(this, x, z)];
-
-        Vector3 tileWorldPos = new Vector3(tile.PositionX, tile.DeltaY, tile.PositionZ) + transform.position;
-
-        return tileWorldPos;
-    }
-    
-    public GridTile GetTileByWorldPosition(float worldX, float worldZ)
-    {
-        int x = (int)Math.Round(worldX);
-        int z = (int)Math.Round(worldZ);
-
-        GridTile tile = _grid[GridMapExtansion.GetIndex(this, x, z)];
-
-        return tile;
+        GridParameters.LevelGrid = this;
     }
 
     public void BuildGrid(int sizeX, int sizeZ)
     {
-        if (!_floorCollection)
-        {
-            _floorCollection = new GameObject("Floors").transform;
-            _floorCollection.parent = transform;
-            _floorCollection.localPosition = Vector3.zero;
-        }
-
-        if (!_obstacleCollection)
-        {
-            _obstacleCollection = new GameObject("Obstacles").transform;
-            _obstacleCollection.parent = transform;
-            _obstacleCollection.localPosition = Vector3.zero;
-        }
-
-        GridMapExtansion.BuildGrid(this, sizeX, sizeZ);
-        _sizeX = sizeX;
-        _sizeZ = sizeZ;
+        GridMapExtansion.BuildGrid(ref _grid, sizeX, sizeZ, transform.position, this);
+        GridParameters.LevelGrid = this;
     }
 
-    public void SetGrid()
+    public GridTile GetTile(int x, int z)
     {
-        GridMapExtansion.SetGrid(this, _floorCollection, _obstacleCollection);
+        return _grid[x, z];
+    }
+
+    public bool GetTileByWorldPos(ref GridTile tile, Vector3 worldPos)
+    {
+        worldPos -= transform.position;
+
+        int x = Mathf.FloorToInt(worldPos.x / GridParameters.TILE_SIZE);
+        int z = Mathf.FloorToInt(worldPos.z / GridParameters.TILE_SIZE);
+
+        if (x < 0 || z < 0 || x >= SizeX || z >= SizeZ) return false;
+
+        tile = _grid[x, z];
+
+        return true;
+    }
+
+    public Vector3 GetTileWorldPos(GridTile tile)
+    {
+        Vector3 worldPos = new Vector3(tile.PositionX * GridParameters.TILE_SIZE,
+            tile.DeltaY,
+            tile.PositionZ * GridParameters.TILE_SIZE);
+
+        worldPos += transform.position;
+
+        return worldPos;
+    }
+
+    public Vector3 GetTileWorldPos(int x, int z)
+    {
+        GridTile tile = _grid[x, z];
+
+        Vector3 worldPos = new Vector3(tile.PositionX * GridParameters.TILE_SIZE,
+            tile.DeltaY,
+            tile.PositionZ * GridParameters.TILE_SIZE);
+
+        worldPos += transform.position;
+
+        return worldPos;
     }
 }
 
 public static class GridMapExtansion
 {
-    private static float GROUND_RAY_DISTANCE = 10f;
-    private static float FLOOR_HEIGHT = 3.5f;
-    private static Vector3 TILE_SIZE = new Vector3(0.8f, 3f, 0.8f);
-
-    public static void BuildGrid(GridMap gridMap, int newX, int newZ)
+    public static void BuildGrid(ref TArray<GridTile> grid, int newX, int newZ, Vector3 gridOffset, GridMap gridMapObject)
     {
-        gridMap._grid = new GridTile[newX * newZ];
+        grid = new GridTile[newX, newZ];
 
         for (int x = 0; x < newX; x++)
         {
@@ -93,86 +80,78 @@ public static class GridMapExtansion
             {
                 GridTile newTile = new GridTile();
 
+                newTile.Floor = 0;
+
                 newTile.PositionX = x;
                 newTile.PositionZ = z;
-                newTile.GridOffset = gridMap.transform.position;
 
-                gridMap._grid[GetIndex(gridMap, x, z)] = newTile;
+                SetTileGround(ref newTile, gridOffset);
+
+                SetTileObstacles(ref newTile, gridOffset);
+
+                SetTileCovers(ref  newTile, gridOffset);
+
+                grid[x,z] = newTile;
             }
         }
 
         EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
-        EditorUtility.SetDirty(gridMap);
+        EditorUtility.SetDirty(gridMapObject);
     }
 
-    public static int GetIndex(GridMap gridMap, int x, int z)
+    private static void SetTileGround(ref GridTile tile, Vector3 gridOffset)
     {
-        return x + z * gridMap.SizeX;
-    }
-
-    public static void SetGrid(GridMap gridMap, Transform groundsTransform, Transform obstaclesTransform)
-    {
-        for (int x = 0; x < gridMap.SizeX; x++)
-        {
-            for (int z = 0; z < gridMap.SizeZ; z++)
-            {
-                SetTileGround(ref gridMap._grid[GetIndex(gridMap, x, z)], groundsTransform);
-
-                SetTileObstacles(ref gridMap._grid[GetIndex(gridMap, x, z)], obstaclesTransform);
-                
-                SetTileCovers(ref gridMap._grid[GetIndex(gridMap, x, z)], obstaclesTransform);
-            }
-        }
-
-        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
-        EditorUtility.SetDirty(gridMap);
-    }
-
-    private static void SetTileGround(ref GridTile tile, Transform groundsTransform)
-    {
-        LayerMask layer = LayerMask.GetMask("Ground");
-        Vector3 rayOrigin = new Vector3(tile.PositionX, FLOOR_HEIGHT, tile.PositionZ) + tile.GridOffset;
+        Vector3 rayOrigin = new Vector3(tile.PositionX, GridParameters.LEVEL_HEIGHT, tile.PositionZ) + gridOffset;
         RaycastHit hit;
-        if (Physics.Raycast(rayOrigin, Vector3.down, out hit, GROUND_RAY_DISTANCE, layer, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(rayOrigin,
+            Vector3.down,
+            out hit,
+            GridParameters.LEVEL_HEIGHT,
+            GridParameters.ENVIRONMENT_MASK,
+            QueryTriggerInteraction.Ignore))
         {
             float height = hit.point.y;
-            GameObject floor = hit.collider.gameObject;
-            if (!floor.transform.parent)
+
+            for (int i = 0; i < 4; i++)
             {
-                floor.transform.parent = groundsTransform;
+                rayOrigin = new Vector3(tile.PositionX, GridParameters.LEVEL_HEIGHT, tile.PositionZ) + gridOffset;
+                rayOrigin = rayOrigin + (GridParameters.COVER_DIRECTIONS[i] + GridParameters.COVER_DIRECTIONS[(i + 1) % 4]) * GridParameters.TILE_SIZE * 0.45f;
+
+                if (Physics.Raycast(rayOrigin,
+                    Vector3.down,
+                    out hit,
+                    GridParameters.LEVEL_HEIGHT,
+                    GridParameters.ENVIRONMENT_MASK,
+                    QueryTriggerInteraction.Ignore))
+                {
+                    if(hit.point.y > height)
+                    {
+                        height = hit.point.y;
+                    }
+                }
             }
-            tile.DeltaY = height - tile.GridOffset.y;
+
+            tile.DeltaY = height - gridOffset.y;
 
             tile.IsGround = true;
         }
         else
         {
-            tile.DeltaY = 0;
+            tile.DeltaY = 0f;
 
             tile.IsGround = false;
         }
     }
 
-    private static void SetTileObstacles(ref GridTile tile, Transform obstaclesTransform)
+    private static void SetTileObstacles(ref GridTile tile, Vector3 gridOffset)
     {
-        LayerMask layer = LayerMask.GetMask("Obstacle");
+        Vector3 tileSize = new Vector3(GridParameters.TILE_SIZE, GridParameters.LEVEL_HEIGHT, GridParameters.TILE_SIZE) * 0.8f;
 
-        Vector3 castCenter = new Vector3(tile.PositionX, tile.DeltaY + TILE_SIZE.y * 0.5f, tile.PositionZ) + tile.GridOffset;
+        Vector3 castCenter = new Vector3(tile.PositionX, tile.DeltaY + tileSize.y * 0.5f + 0.1f, tile.PositionZ) + gridOffset;
 
-        Collider[] colliders = Physics.OverlapBox(castCenter, TILE_SIZE * 0.5f, Quaternion.identity, layer);
-
-        if(colliders.Length > 0 )
+        if (Physics.CheckBox(castCenter, tileSize * 0.5f, Quaternion.identity, GridParameters.ENVIRONMENT_MASK))
         {
             tile.IsEmpty = false;
-
-            for(int i = 0; i < colliders.Length; i++)
-            {
-                Transform obstacle = colliders[i].transform;
-                if(!obstacle.parent)
-                {
-                    obstacle.parent = obstaclesTransform;
-                }
-            }
         }
         else
         {
@@ -180,21 +159,20 @@ public static class GridMapExtansion
         }
     }
     
-    private static void SetTileCovers(ref GridTile tile, Transform obstaclesTransform)
+    private static void SetTileCovers(ref GridTile tile, Vector3 gridOffset)
     {
         tile.Covers = new TileCover[4];
         
         if (!tile.IsEmpty || !tile.IsGround) return;
         
-        Vector3 position = new Vector3(tile.PositionX, tile.DeltaY, tile.PositionZ) + tile.GridOffset;
+        Vector3 position = new Vector3(tile.PositionX, tile.DeltaY, tile.PositionZ) + gridOffset;
 
         for (int i = 0; i < 4; i++)
         {
-
-            if (Physics.Raycast(position + Vector3.up * 0.75f, _directions[i], 0.75f))
+            if (Physics.Raycast(position + Vector3.up * GridParameters.LOW_COVER_HEIGHT, GridParameters.COVER_DIRECTIONS[i], GridParameters.TILE_SIZE * 0.55f))
             {
 
-                if (Physics.Raycast(position + Vector3.up * 1.5f, _directions[i], 0.75f))
+                if (Physics.Raycast(position + Vector3.up * GridParameters.FULL_COVER_HEIGHT, GridParameters.COVER_DIRECTIONS[i], GridParameters.TILE_SIZE * 0.55f))
                 {
                     tile.Covers[i] = TileCover.Full;
                 }
@@ -205,6 +183,4 @@ public static class GridMapExtansion
             }
         }
     }
-
-    public static readonly Vector3[] _directions = { Vector3.forward, Vector3.right, -Vector3.forward, -Vector3.right };
 }

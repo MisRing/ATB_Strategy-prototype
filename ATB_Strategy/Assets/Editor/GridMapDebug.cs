@@ -12,7 +12,6 @@ public class GridMapDebug
     public static void OnDrawGizmo(GridMap gridMap, GizmoType gizmoType)
     {
         if (!GridMapEditor.DrawDebug) return;
-        if (gridMap._grid == null) return;
 
         Handles.zTest = UnityEngine.Rendering.CompareFunction.LessEqual;
 
@@ -20,7 +19,7 @@ public class GridMapDebug
         {
             for (int z = 0; z < gridMap.SizeZ; z++)
             {
-                GridTile tile = gridMap._grid[GridMapExtansion.GetIndex(gridMap, x, z)];
+                GridTile tile = gridMap.GetTile(x, z);
 
                 if(!tile.IsGround)
                 {
@@ -46,36 +45,6 @@ public class GridMapDebug
                 Handles.DrawLine(point2, point3, lineThickdess);
                 Handles.DrawLine(point3, point4, lineThickdess);
                 Handles.DrawLine(point4, point1, lineThickdess);
-
-                if (x + 1 >= gridMap.SizeX || z + 1 >= gridMap.SizeZ) continue;
-
-                GridTile otherTile = gridMap._grid[GridMapExtansion.GetIndex(gridMap, x + 1, z)];
-                if (x < gridMap.SizeX - 1 && tile.IsGround && otherTile.IsGround)
-                {
-                    Handles.color = Color.blue;
-
-                    Vector3 tilePos1 = new Vector3(tile.PositionX, tile.DeltaY, tile.PositionZ) + gridMap.transform.position;
-                    Vector3 tilePos2 = new Vector3(otherTile.PositionX, otherTile.DeltaY, otherTile.PositionZ) + gridMap.transform.position;
-
-                    Vector3 from = (tilePos2 - tilePos1) * 0.3f + tilePos1;
-                    Vector3 to = (tilePos2 - tilePos1) * 0.7f + tilePos1;
-
-                    Handles.DrawLine(from, to, lineThickdess);
-                }
-
-                otherTile = gridMap._grid[GridMapExtansion.GetIndex(gridMap, x, z + 1)];
-                if (z < gridMap.SizeZ - 1 && tile.IsGround && otherTile.IsGround)
-                {
-                    Handles.color = Color.blue;
-
-                    Vector3 tilePos1 = new Vector3(tile.PositionX, tile.DeltaY, tile.PositionZ) + gridMap.transform.position;
-                    Vector3 tilePos2 = new Vector3(otherTile.PositionX, otherTile.DeltaY, otherTile.PositionZ) + gridMap.transform.position;
-
-                    Vector3 from = (tilePos2 - tilePos1) * 0.3f + tilePos1;
-                    Vector3 to = (tilePos2 - tilePos1) * 0.7f + tilePos1;
-
-                    Handles.DrawLine(from, to, lineThickdess);
-                }
 
                 for (int i = 0; i < 4; i++)
                 {

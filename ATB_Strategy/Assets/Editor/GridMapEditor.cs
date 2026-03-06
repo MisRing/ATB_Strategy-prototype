@@ -74,13 +74,6 @@ public class GridMapEditor : Editor
             {
                 _gridMap.BuildGrid(_newSizeX, _newSizeZ);
             }
-            if (GUILayout.Button("Set Grid"))
-            {
-                if (_gridMap._grid != null)
-                {
-                    _gridMap.SetGrid();
-                }
-            }
         }
 
         EditorGUILayout.EndFoldoutHeaderGroup();
