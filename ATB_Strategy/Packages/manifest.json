@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.ovsky.tarray": "file:C:/Users/Hobby_Games_citymall/Downloads/TArray-main/Assets/Lab7",
     "com.unity.ai.navigation": "2.0.10",
     "com.unity.collab-proxy": "2.11.3",
     "com.unity.ide.rider": "3.0.39",

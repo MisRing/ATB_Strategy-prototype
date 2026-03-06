@@ -2605,6 +2605,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5dd4ac0f5ca45a4b85548a8bc442452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridMap
+  fff:
+    size: {x: 3, y: 3}
+    data:
+    - IsGround: 0
+      IsEmpty: 0
+      Covers: 
+      PositionX: 0
+      PositionZ: 0
+      DeltaY: 0
+      GridOffset: {x: 0, y: 0, z: 0}
+    - IsGround: 1
+      IsEmpty: 0
+      Covers: 
+      PositionX: 0
+      PositionZ: 0
+      DeltaY: 0
+      GridOffset: {x: 0, y: 0, z: 0}
+    - IsGround: 1
+      IsEmpty: 0
+      Covers: 
+      PositionX: 0
+      PositionZ: 0
+      DeltaY: 0
+      GridOffset: {x: 0, y: 0, z: 0}
+    - IsGround: 0
+      IsEmpty: 0
+      Covers: 
+      PositionX: 0
+      PositionZ: 0
+      DeltaY: 0
+      GridOffset: {x: 0, y: 0, z: 0}
+    - IsGround: 0
+      IsEmpty: 0
+      Covers: 
+      PositionX: 0
+      PositionZ: 0
+      DeltaY: 0
+      GridOffset: {x: 0, y: 0, z: 0}
+    - IsGround: 0
+      IsEmpty: 0
+      Covers: 
+      PositionX: 0
+      PositionZ: 0
+      DeltaY: 0
+      GridOffset: {x: 0, y: 0, z: 0}
+    - IsGround: 1
+      IsEmpty: 0
+      Covers: 
+      PositionX: 0
+      PositionZ: 0
+      DeltaY: 0
+      GridOffset: {x: 0, y: 0, z: 0}
+    - IsGround: 1
+      IsEmpty: 0
+      Covers: 
+      PositionX: 0
+      PositionZ: 0
+      DeltaY: 0
+      GridOffset: {x: 0, y: 0, z: 0}
+    - IsGround: 0
+      IsEmpty: 0
+      Covers: 
+      PositionX: 0
+      PositionZ: 0
+      DeltaY: 0
+      GridOffset: {x: 0, y: 0, z: 0}
   _grid:
   - IsGround: 1
     IsEmpty: 1
@@ -9240,6 +9306,7 @@ MonoBehaviour:
   Status: 0
   _accelerationDistance: 0.5
   _minVelocity: 0.1
+  _rotationSpeed: 5
 --- !u!136 &1491048953
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9322,6 +9389,7 @@ MonoBehaviour:
   UnitStats: {fileID: 0}
   AbilityController: {fileID: 0}
   UnitAnimator: {fileID: 0}
+  GridMap: {fileID: 0}
   State: 0
 --- !u!4 &1491048958
 Transform:
@@ -9742,6 +9810,7 @@ MonoBehaviour:
   UnitStats: {fileID: 0}
   AbilityController: {fileID: 0}
   UnitAnimator: {fileID: 0}
+  GridMap: {fileID: 0}
   State: 0
 --- !u!4 &1816743776
 Transform:
@@ -9829,6 +9898,7 @@ MonoBehaviour:
   Status: 0
   _accelerationDistance: 0.5
   _minVelocity: 0.1
+  _rotationSpeed: 5
 --- !u!1 &1834191085
 GameObject:
   m_ObjectHideFlags: 0
