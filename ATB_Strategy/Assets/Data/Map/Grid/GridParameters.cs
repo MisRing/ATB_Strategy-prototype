@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public static class GridParameters
@@ -6,7 +7,6 @@ public static class GridParameters
 
     public static readonly float TILE_SIZE = 1f;
     public static readonly float LEVEL_HEIGHT = 2f;
-    //public static readonly float LEVEL_MARGIN = 1f;
 
     public static readonly LayerMask ENVIRONMENT_MASK = LayerMask.GetMask("Grid Environment");
 

@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         for (int i = 0; i < _units.Count; i++)
         {
-            _units[i].Init(GridParameters.LevelGrid.GetTile(_positionPresset[i].x, _positionPresset[i].y, _positionPresset[i].z));
+            _units[i].Init(GridParameters.LevelGrid.GetTile(_positionPresset[i].x, _positionPresset[i].z, _positionPresset[i].y));
         }
         SelectTargetUnit(_units[0]);
     }
@@ -177,6 +177,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if(GridParameters.LevelGrid == null)
+        {
+            GridParameters.LevelGrid = FindFirstObjectByType(typeof(GridMap)) as GridMap;
+        }
+
         foreach(Vector3Int point in _positionPresset)
         {
             if(GridParameters.LevelGrid.CheckTile(point.x, point.z, point.y))
