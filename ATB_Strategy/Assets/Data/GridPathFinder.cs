@@ -20,7 +20,7 @@ public static class GridPathFinder
 
         pathData.Cover = TileCover.None;
         GridTile tile = new GridTile();
-        GridParameters.LevelGrid.GetTileByWorldPos(ref tile, toPos);
+        if (!GridParameters.LevelGrid.GetTileByWorldPos(ref tile, toPos)) return false;
         for (int i = 0; i < 4; i++)
         {
             if (tile.Covers[i] == TileCover.Full)

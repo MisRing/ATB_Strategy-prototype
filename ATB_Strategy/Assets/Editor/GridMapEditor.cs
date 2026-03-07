@@ -7,6 +7,7 @@ public class GridMapEditor : Editor
 {
     private static int _newSizeX = 1;
     private static int _newSizeZ = 1;
+    private static int _newFloorCount = 1;
     private GridMap _gridMap;
 
     public override void OnInspectorGUI()
@@ -55,6 +56,8 @@ public class GridMapEditor : Editor
         if (_rebuildMenuFoldout)
         {
 
+            _newFloorCount = EditorGUILayout.IntField("Floors", (int)_newFloorCount);
+
             float oldLabelWidth = EditorGUIUtility.labelWidth;
             EditorGUILayout.BeginHorizontal();
 
@@ -67,12 +70,14 @@ public class GridMapEditor : Editor
 
             EditorGUIUtility.labelWidth = oldLabelWidth;
 
+            _newFloorCount = Mathf.Clamp(_newFloorCount, 1, 16);
+
             _newSizeX = Mathf.Clamp(_newSizeX, 1, 128);
             _newSizeZ = Mathf.Clamp(_newSizeZ, 1, 128);
 
             if (GUILayout.Button("Buld Grid"))
             {
-                _gridMap.BuildGrid(_newSizeX, _newSizeZ);
+                _gridMap.BuildGrid(_newSizeX, _newSizeZ, _newFloorCount);
             }
         }
 

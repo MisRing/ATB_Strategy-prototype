@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         for (int i = 0; i < _units.Count; i++)
         {
-            _units[i].Init(GridParameters.LevelGrid.GetTile(_positionPresset[i].x, _positionPresset[i].y));
+            _units[i].Init(GridParameters.LevelGrid.GetTile(_positionPresset[i].x, _positionPresset[i].y, 0));
         }
         SelectTargetUnit(_units[0]);
     }
