@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInputController _playerInputController;
 
     [SerializeField] private List<UnitController> _units = new List<UnitController>();
-    [SerializeField] private List<Vector2Int> _positionPresset = new List<Vector2Int>();
+    [SerializeField] private List<Vector3Int> _positionPresset = new List<Vector3Int>();
     [SerializeField] private UnitController _selectedUnit;
 
     [SerializeField] private float _selectRayDistance = 100f;
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         for (int i = 0; i < _units.Count; i++)
         {
-            _units[i].Init(GridParameters.LevelGrid.GetTile(_positionPresset[i].x, _positionPresset[i].y, 0));
+            _units[i].Init(GridParameters.LevelGrid.GetTile(_positionPresset[i].x, _positionPresset[i].y, _positionPresset[i].z));
         }
         SelectTargetUnit(_units[0]);
     }
@@ -173,5 +173,17 @@ public class PlayerController : MonoBehaviour
         AbilityData data = new AbilityData();
         data.TargetWorldPos = _cursorController.CursorPosition;
         _selectedUnit.AbilityController.SelectAbility(index, data);
+    }
+
+    private void OnDrawGizmos()
+    {
+        foreach(Vector3Int point in _positionPresset)
+        {
+            if(GridParameters.LevelGrid.CheckTile(point.x, point.z, point.y))
+            {
+                Gizmos.color = Color.darkGreen;
+                Gizmos.DrawSphere(GridParameters.LevelGrid.GetTileWorldPos(point.x, point.z, point.y), 0.3f);
+            }
+        }
     }
 }

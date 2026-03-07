@@ -1412,9 +1412,9 @@ MonoBehaviour:
   _units:
   - {fileID: 1816743775}
   _positionPresset:
-  - {x: 1, y: 1}
-  - {x: 3, y: 5}
-  - {x: 6, y: 2}
+  - {x: 2, y: 0, z: 2}
+  - {x: 2, y: 0, z: 4}
+  - {x: 3, y: 0, z: 3}
   _selectedUnit: {fileID: 0}
   _selectRayDistance: 100
 --- !u!114 &742375539

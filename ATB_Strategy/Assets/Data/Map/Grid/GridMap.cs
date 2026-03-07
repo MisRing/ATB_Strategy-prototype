@@ -31,6 +31,15 @@ public class GridMap : MonoBehaviour
         return _grid[floor][x, z];
     }
 
+    public bool CheckTile(int x, int z, int floor)
+    {
+        if (x < 0 || z < 0 || x >= SizeX || z >= SizeZ || floor < 0 || floor >= _grid.Count) return false;
+
+        if (!_grid[floor][x, z].IsGround || !_grid[floor][x, z].IsEmpty) return false;
+
+        return true;
+    }
+
     public bool GetTileByWorldPos(ref GridTile tile, Vector3 worldPos)
     {
         worldPos -= transform.position;
