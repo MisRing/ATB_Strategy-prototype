@@ -38,6 +38,17 @@ public static class GridPathFinder
 
         pathData.Points = path.corners.ToList();
 
+        float lastDist = Vector3.Distance(pathData.Points[pathData.Points.Count - 2], pathData.Points[pathData.Points.Count - 1]);
+        if (lastDist >= 3f)
+        {
+            Vector3 additionalPoint;
+            float additionalPointDistPercent = (lastDist - 3) / lastDist;
+            additionalPoint = (pathData.Points[pathData.Points.Count - 1] - pathData.Points[pathData.Points.Count - 2])
+                * additionalPointDistPercent + pathData.Points[pathData.Points.Count - 2];
+
+            pathData.Points.Insert(pathData.Points.Count - 1, additionalPoint);
+        }
+
         pathData.Distance = 0;
 
         for(int i = 0; i < pathData.Points.Count - 1; i++)

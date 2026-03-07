@@ -132,11 +132,13 @@ public class MovementAbility : AbilityBasic, IPathHandler
 
     private float GetVelocity(float passedDistance, float fullDistance)
     {
-        float startVelocity = passedDistance / _accelerationDistance;
+        float startVelocity = Mathf.Clamp01(passedDistance / _accelerationDistance);
+        startVelocity = 1f - MathF.Pow(1f - startVelocity, 2);
 
-        float endVelocity = (fullDistance - passedDistance) / _accelerationDistance;
-        
-        float velocity = Mathf.Clamp01(Mathf.Min(startVelocity, endVelocity));
+        float endVelocity = Mathf.Clamp01((fullDistance - passedDistance) / _accelerationDistance);
+        endVelocity = 1f - MathF.Pow(1f - endVelocity, 2);
+
+        float velocity = Mathf.Min(startVelocity, endVelocity);
 
         return Mathf.Max(velocity, _minVelocity);
     }
