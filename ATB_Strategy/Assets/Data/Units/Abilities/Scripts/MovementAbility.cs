@@ -37,7 +37,7 @@ public class MovementAbility : AbilityBasic, IPathHandler
 
     public override void UpdateData(AbilityData abilityData)
     {
-        if (Status == AbilityStatus.Executing) return;
+        if (_abilityController.Unit.State != UnitState.WaitingForOrder) return;
 
         base.UpdateData(abilityData);
         _pathData.IsReacheble = GridPathFinder.CalculatePath(ref _pathData, transform.position, _abilityData.TargetWorldPos);
@@ -48,8 +48,9 @@ public class MovementAbility : AbilityBasic, IPathHandler
     public override bool Execute()
     {
         if (!_pathData.IsReacheble) return false;
-        
-        StartCoroutine(Move());
+
+        _abilityController.Unit.UnitAgent.SetDestination(_pathData.Points[_pathData.Points.Count - 1]);
+        //StartCoroutine(Move());
 
         PathData emptyPath = new PathData();
         emptyPath.IsReacheble = false;
@@ -109,7 +110,6 @@ public class MovementAbility : AbilityBasic, IPathHandler
 
         _abilityController.Unit.UnitAnimator.SetMovement(0f, 0f);
 
-        Status = AbilityStatus.None;
         _abilityController.FinishExecuteAbility();
     }
 

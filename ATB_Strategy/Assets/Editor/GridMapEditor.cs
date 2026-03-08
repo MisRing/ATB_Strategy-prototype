@@ -28,7 +28,7 @@ public class GridMapEditor : Editor
     public static Color EmptyColor = Color.purple;
     public static Color DefaultColor = Color.green;
     public static Color NotEmptyColor = Color.red;
-    public static bool DrawDebug = true;
+    public static bool DrawDebug = false;
 
     private static bool _debugMenuFoldout = true;
 

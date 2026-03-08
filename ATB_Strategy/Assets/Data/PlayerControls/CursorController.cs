@@ -14,6 +14,9 @@ public class CursorController : MonoBehaviour
 
     private PlayerInputController _playerInput;
 
+    private GridTile _cursorTile;
+    public GridTile CursorTile { get => _cursorTile; }
+
     private Vector3 _cursorPosition;
     public Vector3 CursorPosition { get => _cursorPosition; }
 
@@ -56,6 +59,7 @@ public class CursorController : MonoBehaviour
 
         if(cursorOnTile)
         {
+            _cursorTile = tile;
             Vector3 tileWorldPos = GridParameters.LevelGrid.GetTileWorldPos(tile);
             UpdateCursorPosition(tileWorldPos);
         }

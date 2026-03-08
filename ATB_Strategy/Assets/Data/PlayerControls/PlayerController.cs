@@ -21,10 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         _playerInputController = GetComponent<PlayerInputController>();
         _cursorController = GetComponent<CursorController>();
-    }
 
-    private void Start()
-    {
         Init();
 
         _cursorController.Init(_playerInputController);
@@ -33,6 +30,11 @@ public class PlayerController : MonoBehaviour
 
     private void Init()
     {
+        if (GridParameters.LevelGrid == null)
+        {
+            GridParameters.LevelGrid = FindFirstObjectByType(typeof(GridMap)) as GridMap;
+        }
+
         for (int i = 0; i < _units.Count; i++)
         {
             _units[i].Init(GridParameters.LevelGrid.GetTile(_positionPresset[i].x, _positionPresset[i].z, _positionPresset[i].y));
@@ -85,7 +87,9 @@ public class PlayerController : MonoBehaviour
 
         AbilityData data = new AbilityData();
         data.TargetWorldPos = _cursorController.CursorPosition;
-        if(_selectedUnit.AbilityController.ExecuteAbility(data))
+        data.TargetTile = _cursorController.CursorTile;
+
+        if (_selectedUnit.AbilityController.ExecuteAbility(data))
         {
             if(!SwitchToFreeUnit(+1))
             {
