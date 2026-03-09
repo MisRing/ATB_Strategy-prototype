@@ -5,13 +5,13 @@ using UnityEngine.AI;
 [RequireComponent(typeof(UnitStats))]
 [RequireComponent(typeof(UnitAbilityController))]
 [RequireComponent(typeof(UnitAnimator))]
-[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(UnitAgentController))]
 public class UnitController : MonoBehaviour
 {
     [HideInInspector] public UnitStats UnitStats;
     [HideInInspector] public UnitAbilityController AbilityController;
     [HideInInspector] public UnitAnimator UnitAnimator;
-    [HideInInspector] public NavMeshAgent UnitAgent;
+    [HideInInspector] public UnitAgentController AgentController;
 
     public event Action<bool> OnSelectionChanged;
 
@@ -24,12 +24,11 @@ public class UnitController : MonoBehaviour
         UnitStats = GetComponent<UnitStats>();
         AbilityController = GetComponent<UnitAbilityController>();
         UnitAnimator = GetComponent<UnitAnimator>();
-        UnitAgent = GetComponent<NavMeshAgent>();
+        AgentController = GetComponent<UnitAgentController>();
 
-        transform.position = GridParameters.LevelGrid.GetTileWorldPos(tile);
-        UnitAgent.enabled = true;
         AbilityController.Init(this);
         UnitAnimator.Init(this);
+        AgentController.Init(this, tile);
     }
 
     public void Select(AbilityData data)
