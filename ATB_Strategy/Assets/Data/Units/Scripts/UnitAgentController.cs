@@ -12,6 +12,9 @@ public class UnitAgentController : MonoBehaviour
     [SerializeField] private float _minVelocity = 0.1f;
     [SerializeField] private float _rotationSpeed = 5f;
 
+    private Vector3 _velocity;
+    public Vector3 Velocity { get { return _velocity; } }
+
     private NavMeshAgent _agent;
     private UnitController _unit;
 
@@ -87,20 +90,20 @@ public class UnitAgentController : MonoBehaviour
                 moveEnds = true;
             }
 
-            Vector3 direction = (pathData.Points[nextPointIndex] - transform.position).normalized * velocity;
+            _velocity = (pathData.Points[nextPointIndex] - transform.position).normalized * velocity;
 
             float step = _unit.UnitStats.Speed * TimeService.TimeSpeedDelta;
 
             currentPassedDistance += step * velocity;
 
-            MoveToDirection(direction, step);
+            MoveToDirection(_velocity, step);
             //if (pathData.Cover != TileCover.None && moveEnds)
             //{
             //    RotateToDirection(pathData.finalDirection);
             //}
             //else
             //{
-                RotateToDirection(direction);
+                RotateToDirection(_velocity);
             //}
 
             if (currentPassedDistance >= nextPointDistance)
@@ -118,7 +121,7 @@ public class UnitAgentController : MonoBehaviour
             yield return null;
         }
 
-        //_abilityController.Unit.UnitAnimator.SetMovement(0f, 0f);
+        _velocity = Vector3.zero;
 
         OnMoveComplete?.Invoke();
     }
@@ -126,8 +129,6 @@ public class UnitAgentController : MonoBehaviour
     private void MoveToDirection(Vector3 direction, float step)
     {
         transform.position += direction * step;
-
-        //_abilityController.Unit.UnitAnimator.SetMovement(direction.x, direction.z);
     }
 
     private void RotateToDirection(Vector3 direction)

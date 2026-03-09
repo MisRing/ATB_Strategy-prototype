@@ -30,7 +30,13 @@ public class UnitAnimator : MonoBehaviour
         _unit = unit;
     }
 
-    public void SetMovement(float directionX, float directionZ)
+    private void Update()
+    {
+        Vector3 movementDirection = _unit.AgentController.Velocity;
+        SetMovement(movementDirection.x, movementDirection.z);
+    }
+
+    private void SetMovement(float directionX, float directionZ)
     {
         Vector3 direction = new Vector3(directionX, 0f, directionZ);
         Vector3 realDirection = transform.InverseTransformDirection(direction);
@@ -44,21 +50,21 @@ public class UnitAnimator : MonoBehaviour
         _cover = cover;
     }
 
-    private void Update()
-    {
-        if (_cover && _coverVelocity < 1)
-        {
-            _coverVelocity += TimeService.TimeSpeedDelta * _coverAnimationSpeed;
-            _coverVelocity = Mathf.Clamp01(_coverVelocity);
-        }
-        else if (!_cover && _coverVelocity > 0)
-        {
-            _coverVelocity -= TimeService.TimeSpeedDelta * _coverAnimationSpeed;
-            _coverVelocity = Mathf.Clamp01(_coverVelocity);
-        }
+    //private void Update()
+    //{
+    //    if (_cover && _coverVelocity < 1)
+    //    {
+    //        _coverVelocity += TimeService.TimeSpeedDelta * _coverAnimationSpeed;
+    //        _coverVelocity = Mathf.Clamp01(_coverVelocity);
+    //    }
+    //    else if (!_cover && _coverVelocity > 0)
+    //    {
+    //        _coverVelocity -= TimeService.TimeSpeedDelta * _coverAnimationSpeed;
+    //        _coverVelocity = Mathf.Clamp01(_coverVelocity);
+    //    }
         
-        _animator.SetFloat("Cover", _coverVelocity);
-    }
+    //    _animator.SetFloat("Cover", _coverVelocity);
+    //}
 
     private void UpdateAnimationSpeed(float timeSpeed)
     {
