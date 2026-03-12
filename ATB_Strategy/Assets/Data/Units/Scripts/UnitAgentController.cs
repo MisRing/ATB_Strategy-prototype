@@ -20,14 +20,13 @@ public class UnitAgentController : MonoBehaviour
 
     public event Action OnMoveComplete;
 
-    private void Awake()
+    public void Init(UnitController unit, GridTile startTile)
     {
         _agent = GetComponent<NavMeshAgent>();
         _agent.autoRepath = false;
-    }
+        //_agent.updatePosition = false;
+        //_agent.updateRotation = false;
 
-    public void Init(UnitController unit, GridTile startTile)
-    {
         _unit = unit;
         _agent.Warp(GridParameters.LevelGrid.GetTileWorldPos(startTile));
 
@@ -72,8 +71,10 @@ public class UnitAgentController : MonoBehaviour
         StartCoroutine(Move(pathData));
     }
 
+    private float _timeDebug = 0f;
     private IEnumerator Move(PathData pathData)
     {
+        _timeDebug = 0f;
         float currentPassedDistance = 0f;
         int nextPointIndex = 1;
         float nextPointDistance = Vector3.Distance(pathData.Points[0], pathData.Points[1]);
@@ -83,6 +84,7 @@ public class UnitAgentController : MonoBehaviour
 
         while (currentPassedDistance < pathData.Distance)
         {
+            Debug.Log(_agent.isOnOffMeshLink);
             float velocity = GetVelocity(currentPassedDistance, pathData.Distance);
 
             if (nextPointIndex == pathData.Points.Count - 1 && !moveEnds && velocity < 1f)
@@ -119,16 +121,20 @@ public class UnitAgentController : MonoBehaviour
             }
 
             yield return null;
-        }
 
+            _timeDebug += TimeService.TimeSpeedDelta;
+        }
         _velocity = Vector3.zero;
 
         OnMoveComplete?.Invoke();
+
+        Debug.Log("Move time: " + _timeDebug);
     }
 
     private void MoveToDirection(Vector3 direction, float step)
     {
         transform.position += direction * step;
+        _agent.nextPosition = transform.position;
     }
 
     private void RotateToDirection(Vector3 direction)

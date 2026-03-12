@@ -55268,6 +55268,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c649f6e0c33f8c543b5faaca9832ac80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitAgentController
+  _accelerationDistance: 0.5
+  _minVelocity: 0.1
+  _rotationSpeed: 5
 --- !u!1 &1498376695
 GameObject:
   m_ObjectHideFlags: 0
@@ -58294,6 +58297,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c649f6e0c33f8c543b5faaca9832ac80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitAgentController
+  _accelerationDistance: 0.5
+  _minVelocity: 0.1
+  _rotationSpeed: 5
 --- !u!1 &1825537674
 GameObject:
   m_ObjectHideFlags: 0
