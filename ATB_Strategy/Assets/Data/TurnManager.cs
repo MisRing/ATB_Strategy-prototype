@@ -26,7 +26,7 @@ public class TurnManager : MonoBehaviour
         _freeUnits.Remove(unit);
         if (_freeUnits.Count == 0)
         {
-            TimeService.SetTimeSpeed(1);
+            TimeService.SetTimeSpeed(1f);
         }
     }
 

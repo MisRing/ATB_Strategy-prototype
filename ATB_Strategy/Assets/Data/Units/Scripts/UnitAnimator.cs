@@ -33,12 +33,11 @@ public class UnitAnimator : MonoBehaviour
     private void Update()
     {
         Vector3 movementDirection = _unit.AgentController.Velocity;
-        SetMovement(movementDirection.x, movementDirection.z);
+        SetMovement(movementDirection);
     }
 
-    private void SetMovement(float directionX, float directionZ)
+    private void SetMovement(Vector3 direction)
     {
-        Vector3 direction = new Vector3(directionX, 0f, directionZ);
         Vector3 realDirection = transform.InverseTransformDirection(direction);
 
         _animator.SetFloat("MoveX", realDirection.x);

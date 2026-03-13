@@ -8,12 +8,9 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class UnitAgentController : MonoBehaviour
 {
-    [SerializeField] private float _accelerationDistance = 0.5f;
-    [SerializeField] private float _minVelocity = 0.1f;
-    [SerializeField] private float _rotationSpeed = 5f;
-
-    private Vector3 _velocity;
-    public Vector3 Velocity { get { return _velocity; } }
+    [SerializeField] private float _pathEndThreshold = 0.05f;
+    [SerializeField] private float _aceleration = 1f;
+    public Vector3 Velocity { get { return _agent.velocity / _agent.speed; } }
 
     private NavMeshAgent _agent;
     private UnitController _unit;
@@ -23,14 +20,32 @@ public class UnitAgentController : MonoBehaviour
     public void Init(UnitController unit, GridTile startTile)
     {
         _agent = GetComponent<NavMeshAgent>();
-        _agent.autoRepath = false;
+        //_agent.autoRepath = false;
         //_agent.updatePosition = false;
         //_agent.updateRotation = false;
+        _agent.acceleration = 100000f;
 
         _unit = unit;
         _agent.Warp(GridParameters.LevelGrid.GetTileWorldPos(startTile));
 
-        _agent.speed = _unit.UnitStats.Speed;
+        _agent.speed = _unit.UnitStats.Speed * TimeService.TimeSpeed;
+
+        TimeService.OnTimeSpeedChanged += SetAgentSpeed;//
+    }
+
+    //private void OnEnable()
+    //{
+    //    TimeService.OnTimeSpeedChanged += SetAgentSpeed;
+    //}
+
+    private void OnDisable()
+    {
+        TimeService.OnTimeSpeedChanged -= SetAgentSpeed;
+    }
+
+    private void SetAgentSpeed(float timeSpeed)
+    {
+        _agent.speed = _unit.UnitStats.Speed * timeSpeed;
     }
 
     public bool CalculatePath(ref PathData pathData, Vector3 targetPoint)
@@ -39,24 +54,13 @@ public class UnitAgentController : MonoBehaviour
         if(_agent.CalculatePath(targetPoint, path))
         {
             pathData.IsReacheble = true;
-            pathData.Points = path.corners.ToList();
-
-            float lastDist = Vector3.Distance(pathData.Points[pathData.Points.Count - 2], pathData.Points[pathData.Points.Count - 1]);
-            if (lastDist >= 3f)
-            {
-                Vector3 additionalPoint;
-                float additionalPointDistPercent = (lastDist - 3) / lastDist;
-                additionalPoint = (pathData.Points[pathData.Points.Count - 1] - pathData.Points[pathData.Points.Count - 2])
-                    * additionalPointDistPercent + pathData.Points[pathData.Points.Count - 2];
-
-                pathData.Points.Insert(pathData.Points.Count - 1, additionalPoint);
-            }
+            pathData.Path = path;
 
             pathData.Distance = 0;
 
-            for (int i = 0; i < pathData.Points.Count - 1; i++)
+            for (int i = 0; i < pathData.Path.corners.Length - 1; i++)
             {
-                pathData.Distance += Vector3.Distance(pathData.Points[i], pathData.Points[i + 1]);
+                pathData.Distance += Vector3.Distance(pathData.Path.corners[i], pathData.Path.corners[i + 1]);
             }
 
             return true;
@@ -66,104 +70,34 @@ public class UnitAgentController : MonoBehaviour
         return false;
     }
 
+    bool moving = false;
     public void StartMove(PathData pathData)
     {
-        StartCoroutine(Move(pathData));
+        _agent.SetPath(pathData.Path);
+        moving = true;
     }
 
-    private float _timeDebug = 0f;
-    private IEnumerator Move(PathData pathData)
+    private void Update()
     {
-        _timeDebug = 0f;
-        float currentPassedDistance = 0f;
-        int nextPointIndex = 1;
-        float nextPointDistance = Vector3.Distance(pathData.Points[0], pathData.Points[1]);
-        bool moveEnds = false;
 
-        //_abilityController.Unit.UnitAnimator.SetCover(_pathData.Cover != TileCover.None);
-
-        while (currentPassedDistance < pathData.Distance)
+        if (moving && _agent.remainingDistance <= _agent.stoppingDistance + _pathEndThreshold)
         {
-            Debug.Log(_agent.isOnOffMeshLink);
-            float velocity = GetVelocity(currentPassedDistance, pathData.Distance);
-
-            if (nextPointIndex == pathData.Points.Count - 1 && !moveEnds && velocity < 1f)
-            {
-                moveEnds = true;
-            }
-
-            _velocity = (pathData.Points[nextPointIndex] - transform.position).normalized * velocity;
-
-            float step = _unit.UnitStats.Speed * TimeService.TimeSpeedDelta;
-
-            currentPassedDistance += step * velocity;
-
-            MoveToDirection(_velocity, step);
-            //if (pathData.Cover != TileCover.None && moveEnds)
-            //{
-            //    RotateToDirection(pathData.finalDirection);
-            //}
-            //else
-            //{
-                RotateToDirection(_velocity);
-            //}
-
-            if (currentPassedDistance >= nextPointDistance)
-            {
-                if (nextPointIndex + 1 >= pathData.Points.Count) break;
-
-                nextPointDistance += Vector3.Distance(
-                    pathData.Points[nextPointIndex],
-                    pathData.Points[nextPointIndex + 1]
-                    );
-
-                nextPointIndex++;
-            }
-
-            yield return null;
-
-            _timeDebug += TimeService.TimeSpeedDelta;
+            moving = false;
+            OnMoveComplete?.Invoke();
         }
-        _velocity = Vector3.zero;
-
-        OnMoveComplete?.Invoke();
-
-        Debug.Log("Move time: " + _timeDebug);
-    }
-
-    private void MoveToDirection(Vector3 direction, float step)
-    {
-        transform.position += direction * step;
-        _agent.nextPosition = transform.position;
-    }
-
-    private void RotateToDirection(Vector3 direction)
-    {
-        if (direction != Vector3.zero)
+        
+        if(moving)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
-
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * TimeService.TimeSpeedDelta);
+            Debug.Log(Velocity.magnitude);
         }
-    }
 
-    private float GetVelocity(float passedDistance, float fullDistance)
-    {
-        float startVelocity = Mathf.Clamp01(passedDistance / _accelerationDistance);
-        startVelocity = 1f - MathF.Pow(1f - startVelocity, 2);
-
-        float endVelocity = Mathf.Clamp01((fullDistance - passedDistance) / _accelerationDistance);
-        endVelocity = 1f - MathF.Pow(1f - endVelocity, 2);
-
-        float velocity = Mathf.Min(startVelocity, endVelocity);
-
-        return Mathf.Max(velocity, _minVelocity);
+        if (_agent.isOnOffMeshLink) Debug.Log("On link!");
     }
 }
 
 public struct PathData
 {
-    public List<Vector3> Points;
+    public NavMeshPath Path;
     public float Distance;
     public bool IsReacheble;
     //public TileCover Cover;

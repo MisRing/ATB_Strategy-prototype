@@ -22,8 +22,9 @@ public class PlayerController : MonoBehaviour
         _playerInputController = GetComponent<PlayerInputController>();
         _cursorController = GetComponent<CursorController>();
 
-        _cursorController.Init(_playerInputController);
         Init();
+
+        _cursorController.Init(_playerInputController);
         _cameraController.Init(_selectedUnit.transform);
     }
 
