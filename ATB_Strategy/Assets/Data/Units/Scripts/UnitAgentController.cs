@@ -15,6 +15,9 @@ public class UnitAgentController : MonoBehaviour
     public Vector3 Velocity { get { return _velocity; } }
     Vector3 _velocity = Vector3.zero;
 
+    public MovementState MovementState { get { return _movementState; } }
+    public MovementState _movementState;
+
     public PathData PathData { get { return _pathData; } }
     private PathData _pathData;
 
@@ -73,7 +76,10 @@ public class UnitAgentController : MonoBehaviour
             Move();
         }
 
-        if (_agent.isOnOffMeshLink) Debug.Log("On link!");
+        if (_agent.isOnOffMeshLink)
+        {
+            //_agent.currentOffMeshLinkData.linkType == on
+        }
     }
 
     private void Move()
@@ -90,6 +96,11 @@ public class UnitAgentController : MonoBehaviour
     {
         float acceleration = GetVelocity(Vector3.Distance(_pathData.Path.corners[0], transform.position), _agent.remainingDistance);
         float currentSpeed = _unit.UnitStats.Speed * acceleration * TimeService.TimeSpeed;
+        if(MovementState == MovementState.Climbing)
+        {
+            Debug.Log("climbing");
+            currentSpeed /= 2f;
+        }    
         _agent.speed = currentSpeed;
 
         if (_agent.velocity != Vector3.zero)
@@ -121,6 +132,12 @@ public class UnitAgentController : MonoBehaviour
     }
 }
 
+public enum MovementState
+{
+    Walking,
+    Jumping,
+    Climbing,
+}
 public struct PathData
 {
     public NavMeshPath Path;

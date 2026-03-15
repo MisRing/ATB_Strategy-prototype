@@ -42,6 +42,8 @@ public class UnitAnimator : MonoBehaviour
 
         _animator.SetFloat("MoveX", realDirection.x);
         _animator.SetFloat("MoveZ", realDirection.z);
+
+        _animator.SetFloat("MoveVertical", realDirection.y);
     }
 
     public void SetCover(bool cover)
