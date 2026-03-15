@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class MovementAbility : AbilityBasic, IPathHandler
 {
-    private PathData _pathData;
+    private PathData _pathData { get { return _abilityController.Unit.AgentController.PathData; } }
         
     public event Action<PathData> OnPathChanged;
 
@@ -37,7 +37,7 @@ public class MovementAbility : AbilityBasic, IPathHandler
         if (_abilityController.Unit.State != UnitState.WaitingForOrder) return;
 
         base.UpdateData(abilityData);
-        _pathData.IsReacheble = _abilityController.Unit.AgentController.CalculatePath(ref _pathData, _abilityData.TargetWorldPos);
+        _abilityController.Unit.AgentController.CalculatePath(_abilityData.TargetWorldPos);
 
         OnPathChanged?.Invoke(_pathData);
     }
@@ -47,7 +47,7 @@ public class MovementAbility : AbilityBasic, IPathHandler
         if (!_pathData.IsReacheble) return false;
 
         _abilityController.Unit.AgentController.OnMoveComplete += FinishExecute;
-        _abilityController.Unit.AgentController.StartMove(_pathData);
+        _abilityController.Unit.AgentController.StartMove();
 
         PathData emptyPath = new PathData();
         emptyPath.IsReacheble = false;
