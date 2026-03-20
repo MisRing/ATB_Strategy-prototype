@@ -9,6 +9,8 @@ public struct GridTile
     public bool IsEmpty;
     public TileCover[] Covers;
 
+    public UnitController Owner;
+
     public int PositionX;
     public int PositionZ;
     public int Floor;

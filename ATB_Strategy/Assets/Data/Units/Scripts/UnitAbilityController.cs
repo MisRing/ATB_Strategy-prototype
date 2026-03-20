@@ -47,7 +47,6 @@ public class UnitAbilityController : MonoBehaviour
         if (_currentAbility.Execute())
         {
             Unit.State = UnitState.Engaged;
-            TurnManager.ExitWaitingQ(Unit);
             return true;
         }
 
@@ -57,7 +56,6 @@ public class UnitAbilityController : MonoBehaviour
     public void FinishExecuteAbility()
     {
         Unit.State = UnitState.WaitingForOrder;
-        TurnManager.EnterWaitingQ(Unit);
     }
 
     public void UpdateAbilityData(AbilityData data)

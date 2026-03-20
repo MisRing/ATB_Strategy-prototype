@@ -46,19 +46,24 @@ public class MovementAbility : AbilityBasic, IPathHandler
     {
         if (!_pathData.IsReacheble) return false;
 
-        _abilityController.Unit.AgentController.OnMoveComplete += FinishExecute;
+        //_abilityController.Unit.AgentController.OnMoveComplete += FinishExecute;
         _abilityController.Unit.AgentController.StartMove();
 
         PathData emptyPath = new PathData();
         emptyPath.IsReacheble = false;
         OnPathChanged?.Invoke(emptyPath);
+        
+        Debug.Log("Start executing <" + AbilityName + "> | Cost: " + _pathData.TurnsCost);
 
-        return base.Execute();
+        TurnManager.EnterBusyQ(this, _pathData.TurnsCost);
+
+        return true;
     }
 
-    private void FinishExecute()
+    public override void FinishExecute()
     {
-        _abilityController.Unit.AgentController.OnMoveComplete -= FinishExecute;
-        _abilityController.FinishExecuteAbility();
+        //_abilityController.Unit.AgentController.OnMoveComplete -= FinishExecute;
+        //_abilityController.FinishExecuteAbility();
+        base.FinishExecute();
     }
 }

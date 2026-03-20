@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,17 +13,16 @@ public class UnitAgentController : MonoBehaviour
     [SerializeField] private float _accelerationDistance = 0.5f;
     [SerializeField] private float _minVelocity = 0.1f;
 
+    public int CurrentTileX;
+    public int CurrentTileZ;
+    public int CurrentTileFloor;
+
     public Vector3 Velocity { get { return _velocity; } }
     Vector3 _velocity = Vector3.zero;
 
-    public MovementState MovementState { get { return _movementState; } }
-    public MovementState _movementState;
-
     public PathData PathData { get { return _pathData; } }
     private PathData _pathData;
-
-    private bool _isMoving = false;
-
+    
     private NavMeshAgent _agent;
     private UnitController _unit;
 
@@ -34,9 +34,30 @@ public class UnitAgentController : MonoBehaviour
         _agent.acceleration = 100000f;
 
         _unit = unit;
-        _agent.Warp(GridParameters.LevelGrid.GetTileWorldPos(startTile));
+        WarpAgentToTile(startTile);
 
         _agent.speed = 0;
+    }
+
+    private void WarpAgentToTile(GridTile tile)
+    {
+        CurrentTileX = tile.PositionX;
+        CurrentTileZ = tile.PositionZ;
+        CurrentTileFloor = tile.Floor;
+        
+        _agent.Warp(GridParameters.LevelGrid.GetTileWorldPos(tile));
+        GridParameters.LevelGrid.SetTileOwner(CurrentTileX, CurrentTileZ, CurrentTileFloor, _unit);
+    }
+    
+    private void SetAgentTile(GridTile tile)
+    {
+        GridParameters.LevelGrid.SetTileOwner(CurrentTileX, CurrentTileZ, CurrentTileFloor, null);
+
+        CurrentTileX = tile.PositionX;
+        CurrentTileZ = tile.PositionZ;
+        CurrentTileFloor = tile.Floor;
+        
+        GridParameters.LevelGrid.SetTileOwner(CurrentTileX, CurrentTileZ, CurrentTileFloor, _unit);
     }
 
     public void CalculatePath(Vector3 targetPoint)
@@ -55,52 +76,72 @@ public class UnitAgentController : MonoBehaviour
                 _pathData.Distance += Vector3.Distance(_pathData.Path.corners[i], _pathData.Path.corners[i + 1]);
             }
 
+            float duration = CalculateDuration(_pathData.Distance) / _unit.UnitStats.Speed;
+
+            int turns = Mathf.CeilToInt(duration / TurnManager.TurnTime);
+
+            _pathData.Duration = duration;
+            _pathData.TurnsCost = turns;
+
             return;
         }
 
         _pathData.IsReacheble = false;
     }
+    
+    float CalculateDuration(float fullDistance, float step = 0.05f)
+    {
+        float time = 0f;
+        float passed = 0f;
 
-    float time = 0f;
+        while (passed < fullDistance)
+        {
+            float remaining = fullDistance - passed;
+
+            float velocity = GetVelocity(passed, remaining);
+
+            // distance = speed * time → time = distance / speed
+            float deltaTime = step / velocity;
+
+            time += deltaTime;
+            passed += step;
+        }
+
+        return time;
+    }
+
     public void StartMove()
     {
         _agent.SetPath(_pathData.Path);
-        _isMoving = true;
-        time = Time.time;
+        GridTile finalTile = new GridTile();
+        GridParameters.LevelGrid.GetTileByWorldPos(ref finalTile,_pathData.Path.corners[_pathData.Path.corners.Length - 1]);
+        SetAgentTile(finalTile);
+
+        StartCoroutine(Move());
     }
 
-    private void Update()
+    private IEnumerator Move()
     {
-        if (_isMoving)
+        while (true)
         {
-            Move();
-        }
+            SetAgentSpeed();
 
-        if (_agent.isOnOffMeshLink)
-        {
-            //_agent.currentOffMeshLinkData.linkType == on
+            if (_agent.remainingDistance <= _agent.stoppingDistance + _pathEndThreshold)
+            {
+                break;
+            }
+            yield return null;
         }
-    }
-
-    private void Move()
-    {
-        SetAgentSpeed();
-
-        if (_agent.remainingDistance <= _agent.stoppingDistance + _pathEndThreshold)
-        {
-            EndMove();
-        }
+        
+        EndMove();
     }
 
     private void SetAgentSpeed()
     {
-        float acceleration = GetVelocity(Vector3.Distance(_pathData.Path.corners[0], transform.position), _agent.remainingDistance);
+        float passedDistance = _pathData.Distance - _agent.remainingDistance;
+        float acceleration = GetVelocity(passedDistance, _agent.remainingDistance);
         float currentSpeed = _unit.UnitStats.Speed * acceleration * TimeService.TimeSpeed;
-        if(MovementState == MovementState.Climbing)
-        {
-            Debug.Log("climbing");
-            currentSpeed /= 2f;
-        }    
+        
         _agent.speed = currentSpeed;
 
         if (_agent.velocity != Vector3.zero)
@@ -125,22 +166,16 @@ public class UnitAgentController : MonoBehaviour
     private void EndMove()
     {
         _velocity = Vector3.zero;
-        _isMoving = false;
-        _agent.Warp(_agent.pathEndPosition);
+        _agent.ResetPath();
+        transform.position = _agent.pathEndPosition;
         OnMoveComplete?.Invoke();
-        //Debug.Log(Time.time - time);
     }
-}
-
-public enum MovementState
-{
-    Walking,
-    Jumping,
-    Climbing,
 }
 public struct PathData
 {
     public NavMeshPath Path;
+    public int TurnsCost;
+    public float Duration;
     public float Distance;
     public bool IsReacheble;
     //public TileCover Cover;

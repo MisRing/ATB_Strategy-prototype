@@ -38,6 +38,15 @@ public class GridMap : MonoBehaviour
 
         return true;
     }
+    
+    public void SetTileOwner(int x, int z, int floor, UnitController newOwner)
+    {
+        TArray<GridTile> floorGrid = _grid[floor];
+        GridTile tile = _grid[floor][x, z];
+        tile.Owner = newOwner;
+        floorGrid[x, z] = tile;
+        _grid[floor] = floorGrid;
+    }
 
     public bool GetTileByWorldPos(ref GridTile tile, Vector3 worldPos)
     {

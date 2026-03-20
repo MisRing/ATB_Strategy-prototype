@@ -6,6 +6,8 @@ public class AbilityBasic : MonoBehaviour
     private protected UnitAbilityController _abilityController;
     private protected AbilityData _abilityData;
     public bool OnPrepare = false;
+    
+    public  UnitController Unit => _abilityController.Unit;
 
     public virtual void Init(UnitAbilityController abilityController)
     {
@@ -34,7 +36,14 @@ public class AbilityBasic : MonoBehaviour
     public virtual bool Execute()
     {
         Debug.Log("Start executing <" + AbilityName + ">");
+        TurnManager.EnterBusyQ(this, 1);
         return true;
+    }
+    
+    public virtual void FinishExecute()
+    {
+        Debug.Log(_abilityController.Unit.name + " end <" + AbilityName + ">");
+        _abilityController.FinishExecuteAbility();
     }
 }
 

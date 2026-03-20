@@ -52,7 +52,10 @@ public class CursorController : MonoBehaviour
 
                 if (GridParameters.LevelGrid.GetTileByWorldPos(ref tile, realPoint))
                 {
-                    cursorOnTile = true;
+                    if (tile.Owner == null)
+                    {
+                        cursorOnTile = true;
+                    }
                 }
             }
         }

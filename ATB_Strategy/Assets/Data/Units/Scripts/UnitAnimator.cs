@@ -34,6 +34,8 @@ public class UnitAnimator : MonoBehaviour
     {
         Vector3 movementDirection = _unit.AgentController.Velocity;
         SetMovement(movementDirection);
+        
+        /*_animator.SetBool("Climbing", _unit.AgentController.MovementState == MovementState.Climbing);*/
     }
 
     private void SetMovement(Vector3 direction)
