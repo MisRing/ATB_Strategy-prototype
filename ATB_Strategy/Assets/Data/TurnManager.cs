@@ -9,7 +9,9 @@ public class TurnManager : MonoBehaviour
     private static float _currentTurnTime = 0f;
     private static int _currentTurn = 0;
 
-    private static float _minTimeSpeed = 0.1f;
+    private static float _minTimeSpeed = 0.05f;
+    private static float _timeStopDuration = 0.3f;
+
 
     public static readonly float TurnTime = 0.15f;
 
@@ -56,27 +58,14 @@ public class TurnManager : MonoBehaviour
         
         RemoveFromWaitingQ(abilityBasic.Unit);
     }
+    private bool _lastTurnPause = true;
 
     private IEnumerator TurnTick()
     {
         while (true)
         {
-            float deltaTime = TimeService.TimeSpeed * Time.deltaTime;
-            _currentTime += deltaTime;
-            _currentTurnTime += deltaTime;
-
-            if (TimeService.TimeSpeed != 0f)
-            {
-                if (_currentTurnTime < TurnTime / 2f)
-                {
-                    TimeService.SetTimeSpeed(Mathf.Lerp(TimeService.TimeSpeed, 1f, _currentTurnTime / (TurnTime / 2f)));
-                }
-                else if (_currentTurnTime > TurnTime / 2f && _abilitiesOnAction.ContainsKey(_currentTurn + 1))
-                {
-                    float t = (_currentTurnTime - (TurnTime / 2f)) / (TurnTime / 2f);
-                    TimeService.SetTimeSpeed(Mathf.Lerp(TimeService.TimeSpeed, _minTimeSpeed, t));
-                }
-            }
+            _currentTime += TimeService.TimeSpeedDelta;
+            _currentTurnTime += TimeService.TimeSpeedDelta;
 
             if (_currentTurnTime >= TurnTime)
             {
@@ -85,6 +74,8 @@ public class TurnManager : MonoBehaviour
 
                 if (_abilitiesOnAction.ContainsKey(_currentTurn))
                 {
+                    _lastTurnPause = true;
+
                     OnUnitEnterExitQ?.Invoke(_abilitiesOnAction[_currentTurn][0].Unit);
                     foreach (AbilityBasic ability in _abilitiesOnAction[_currentTurn])
                     {
@@ -93,13 +84,49 @@ public class TurnManager : MonoBehaviour
                     }
                     _abilitiesOnAction.Remove(_currentTurn);
                 }
+                else
+                {
+                    _lastTurnPause = false;
+                }
             }
-            
+
+            SetTimeSlowdown();
+
             yield return null;
         }
     }
-    
-    void OnGUI() {
+
+
+    private void SetTimeSlowdown()
+    {
+        if (TimeService.TimeSpeed == 0f) return;
+
+        float passedTime = _currentTurnTime;
+        float remainingTime = TurnTime - _currentTurnTime;
+
+        float startSlowdown = 1f;
+        float endSlowdown = 1f;
+
+        if (_lastTurnPause)
+        {
+            startSlowdown = Mathf.Clamp01(passedTime / _timeStopDuration);
+            startSlowdown = 1f - MathF.Pow(1f - startSlowdown, 3);
+        }
+
+        if (_abilitiesOnAction.ContainsKey(_currentTurn + 1))
+        {
+            endSlowdown = Mathf.Clamp01(remainingTime / _timeStopDuration);
+            endSlowdown = 1f - MathF.Pow(1f - endSlowdown, 3);
+        }
+
+        float slowdown = Mathf.Min(startSlowdown, endSlowdown);
+        slowdown *= TimeService.DefaultTimeSpeed;
+
+        TimeService.SetTimeSpeed(Mathf.Max(slowdown, _minTimeSpeed));
+    }
+
+    void OnGUI()
+    {
         GUILayout.BeginArea(new Rect(Screen.width - 400, 0, 400, Screen.height));
         GUILayout.Label("Current Time: " + _currentTime + "\n Current Turn: " + _currentTurn + "\n Current Time Speed: " + TimeService.TimeSpeed);
         GUILayout.EndArea();

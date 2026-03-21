@@ -9,6 +9,7 @@ public class TimeStopVolumeEffect : MonoBehaviour
     private void Awake()
     {
         _volume = GetComponent<Volume>();
+        SetVolumeWeight(TimeService.TimeSpeed);
     }
 
     private void OnEnable()
