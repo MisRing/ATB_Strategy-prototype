@@ -26,8 +26,6 @@ public class UnitAgentController : MonoBehaviour
     private NavMeshAgent _agent;
     private UnitController _unit;
 
-    public event Action OnMoveComplete;
-
     public void Init(UnitController unit, GridTile startTile)
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -76,7 +74,7 @@ public class UnitAgentController : MonoBehaviour
                 _pathData.Distance += Vector3.Distance(_pathData.Path.corners[i], _pathData.Path.corners[i + 1]);
             }
 
-            float duration = CalculateDuration(_pathData.Distance) / _unit.UnitStats.Speed;
+            float duration = CalculateDuration(_pathData.Distance, _unit.UnitStats.Speed);
 
             int turns = Mathf.CeilToInt(duration / TurnManager.TurnTime);
 
@@ -89,7 +87,7 @@ public class UnitAgentController : MonoBehaviour
         _pathData.IsReacheble = false;
     }
     
-    float CalculateDuration(float fullDistance, float step = 0.05f)
+    float CalculateDuration(float fullDistance, float normalSpeed, float timeStep = 0.05f)
     {
         float time = 0f;
         float passed = 0f;
@@ -101,10 +99,11 @@ public class UnitAgentController : MonoBehaviour
             float velocity = GetVelocity(passed, remaining);
 
             // distance = speed * time → time = distance / speed
-            float deltaTime = step / velocity;
+            float deltaTime = timeStep / velocity;
+            float passedByStep = velocity * normalSpeed * timeStep;
 
-            time += deltaTime;
-            passed += step;
+            time += timeStep;
+            passed += passedByStep;
         }
 
         return time;
@@ -139,6 +138,10 @@ public class UnitAgentController : MonoBehaviour
     private void SetAgentSpeed()
     {
         float passedDistance = _pathData.Distance - _agent.remainingDistance;
+        if (_agent.remainingDistance == float.PositiveInfinity)
+        {
+            passedDistance = Vector3.Distance(_pathData.Path.corners[0], transform.position);
+        }
         float acceleration = GetVelocity(passedDistance, _agent.remainingDistance);
         float currentSpeed = _unit.UnitStats.Speed * acceleration * TimeService.TimeSpeed;
         
@@ -159,16 +162,16 @@ public class UnitAgentController : MonoBehaviour
         endVelocity = 1f - MathF.Pow(1f - endVelocity, 2);
 
         float velocity = Mathf.Min(startVelocity, endVelocity);
-
+        //if(velocity < _minVelocity) Debug.Log(startVelocity + " | " + endVelocity + " | " + velocity);
         return Mathf.Max(velocity, _minVelocity);
     }
 
     private void EndMove()
     {
         _velocity = Vector3.zero;
-        _agent.ResetPath();
-        transform.position = _agent.pathEndPosition;
-        OnMoveComplete?.Invoke();
+        _agent.speed = 0f;
+        _agent.Warp(_agent.pathEndPosition);
+        _agent.ResetPath();;
     }
 }
 public struct PathData

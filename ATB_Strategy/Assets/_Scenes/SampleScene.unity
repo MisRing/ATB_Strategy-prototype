@@ -6540,7 +6540,6 @@ MonoBehaviour:
   _cameraController: {fileID: 315196675}
   _units:
   - {fileID: 1816743775}
-  - {fileID: 1285737560}
   _positionPresset:
   - {x: 4, y: 1, z: 32}
   - {x: 3, y: 1, z: 32}
@@ -11358,7 +11357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1285737552
 MonoBehaviour:
   m_ObjectHideFlags: 0
