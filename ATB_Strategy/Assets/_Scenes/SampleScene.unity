@@ -65368,6 +65368,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PathLineRenderer
   _lineRenderer: {fileID: 2013059424}
+  _lineCutStep: 0.25
+  _raycastHeight: 0.3
   _offset: {x: 0, y: 0.05, z: 0}
 --- !u!4 &2013059423
 Transform:

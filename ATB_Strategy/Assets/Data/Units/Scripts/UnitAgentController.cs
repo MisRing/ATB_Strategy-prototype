@@ -62,6 +62,7 @@ public class UnitAgentController : MonoBehaviour
     {
         _pathData = new PathData();
         NavMeshPath path = new NavMeshPath();
+
         if(_agent.CalculatePath(targetPoint, path))
         {
             _pathData.IsReacheble = true;
