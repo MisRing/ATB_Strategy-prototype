@@ -6,10 +6,6 @@ public class UnitAnimator : MonoBehaviour
 
     private UnitController _unit;
 
-    [SerializeField] private float _coverAnimationSpeed = 1f;
-    private bool _cover;
-    [SerializeField] private float _coverVelocity = 0;
-
     private void Awake()
     {
         UpdateAnimationSpeed(TimeService.TimeSpeed);
@@ -33,42 +29,23 @@ public class UnitAnimator : MonoBehaviour
     private void Update()
     {
         Vector3 movementDirection = _unit.AgentController.Velocity;
-        SetMovement(movementDirection);
+
+        Vector3 directionXZ = Vector3.ProjectOnPlane(movementDirection, Vector3.up).normalized * movementDirection.magnitude;
+
+        SetMovement(directionXZ, movementDirection.y);
         
         /*_animator.SetBool("Climbing", _unit.AgentController.MovementState == MovementState.Climbing);*/
     }
 
-    private void SetMovement(Vector3 direction)
+    private void SetMovement(Vector3 directionXZ, float vertacalDirection)
     {
-        Vector3 realDirection = transform.InverseTransformDirection(direction);
+        Vector3 realDirection = transform.InverseTransformDirection(directionXZ);
 
         _animator.SetFloat("MoveX", realDirection.x);
         _animator.SetFloat("MoveZ", realDirection.z);
 
-        _animator.SetFloat("MoveVertical", realDirection.y);
+        _animator.SetFloat("MoveVertical", vertacalDirection);
     }
-
-    public void SetCover(bool cover)
-    {
-        _cover = cover;
-    }
-
-    //private void Update()
-    //{
-    //    if (_cover && _coverVelocity < 1)
-    //    {
-    //        _coverVelocity += TimeService.TimeSpeedDelta * _coverAnimationSpeed;
-    //        _coverVelocity = Mathf.Clamp01(_coverVelocity);
-    //    }
-    //    else if (!_cover && _coverVelocity > 0)
-    //    {
-    //        _coverVelocity -= TimeService.TimeSpeedDelta * _coverAnimationSpeed;
-    //        _coverVelocity = Mathf.Clamp01(_coverVelocity);
-    //    }
-        
-    //    _animator.SetFloat("Cover", _coverVelocity);
-    //}
-
     private void UpdateAnimationSpeed(float timeSpeed)
     {
         _animator.speed = timeSpeed;

@@ -1,0 +1,168 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class UnitAgent : MonoBehaviour
+{
+    [SerializeField] private float _accelerationDistance = 0.5f;
+    [SerializeField] private float _minAcceleration = 0.1f;
+    [SerializeField] private float _rotationSpeed = 36f;
+
+    public Vector3Int CurrentTile = new Vector3Int();
+
+    public Vector3 Velocity { get { return _velocity; } }
+    Vector3 _velocity = Vector3.zero;
+
+    public PathData PathData { get { return _pathData; } }
+    private PathData _pathData;
+    private UnitController _unit;
+
+    public void Init(UnitController unit, GridTile startTile)
+    {
+        _unit = unit;
+        WarpAgentToTile(startTile);
+    }
+
+    private void WarpAgentToTile(GridTile tile)
+    {
+        CurrentTile = new Vector3Int(tile.PositionX, tile.Floor, tile.PositionZ);
+        
+        transform.position = GridParameters.LevelGrid.GetTileWorldPos(tile);
+        GridParameters.LevelGrid.SetTileOwner(CurrentTile.x, CurrentTile.z, CurrentTile.y, _unit);
+    }
+    
+    private void SetAgentTile(GridTile tile)
+    {
+        GridParameters.LevelGrid.SetTileOwner(CurrentTile.x, CurrentTile.z, CurrentTile.y, null);
+
+        CurrentTile = new Vector3Int(tile.PositionX, tile.Floor, tile.PositionZ);
+
+        GridParameters.LevelGrid.SetTileOwner(CurrentTile.x, CurrentTile.z, CurrentTile.y, _unit);
+    }
+
+    public void CalculatePath(Vector3 targetPosition)
+    {
+        if(GridPathFinder.CalculatePath(ref _pathData, transform.position, targetPosition))
+        {
+            _pathData.Duration = CalculateDuration(_pathData.Distance, _unit.UnitStats.Speed);
+
+            _pathData.TurnsCost = Mathf.CeilToInt(_pathData.Duration / TurnManager.TurnTime);
+        }
+    }
+
+    private float CalculateDuration(float fullDistance, float normalSpeed, float timeStep = 0.05f)
+    {
+        float time = 0f;
+        float passed = 0f;
+
+        while (passed < fullDistance)
+        {
+            float remaining = fullDistance - passed;
+
+            float acceleration = GetAcceleration(passed, remaining);
+
+            float deltaTime = timeStep / acceleration;
+            float passedByStep = acceleration * normalSpeed * timeStep;
+
+            time += timeStep;
+            passed += passedByStep;
+        }
+
+        return time;
+    }
+
+    public void StartMove()
+    {
+        GridTile finalTile = new GridTile();
+        GridParameters.LevelGrid.GetTileByWorldPos(ref finalTile,_pathData.Points[_pathData.Points.Count - 1]);
+        SetAgentTile(finalTile);
+
+        StartCoroutine(Move());
+    }
+
+    private IEnumerator Move()
+    {
+        float currentPassedDistance = 0f;
+        int nextPointIndex = 1;
+        float nextPointDistance = Vector3.Distance(_pathData.Points[0], _pathData.Points[1]);
+
+        while (currentPassedDistance < _pathData.Distance)
+        {
+            float velocity = GetAcceleration(currentPassedDistance, _pathData.Distance);
+
+            Vector3 direction = (_pathData.Points[nextPointIndex] - transform.position).normalized * velocity;
+
+            float step = _unit.UnitStats.Speed * TimeService.TimeSpeedDelta;
+
+            currentPassedDistance += step * velocity;
+
+            MoveToDirection(direction, step);
+            RotateToDirection(direction, velocity);
+
+            if (currentPassedDistance >= nextPointDistance)
+            {
+                if (nextPointIndex + 1 >= _pathData.Points.Count) break;
+
+                nextPointDistance += Vector3.Distance(
+                    _pathData.Points[nextPointIndex],
+                    _pathData.Points[nextPointIndex + 1]
+                    );
+
+                nextPointIndex++;
+            }
+
+            yield return null;
+        }
+
+        EndMove();
+    }
+
+    private float GetAcceleration(float passedDistance, float remainingDistance)
+    {
+        float startVelocity = Mathf.Clamp01(passedDistance / _accelerationDistance);
+        startVelocity = 1f - MathF.Pow(1f - startVelocity, 2);
+
+        float endVelocity = Mathf.Clamp01(remainingDistance / _accelerationDistance);
+        endVelocity = 1f - MathF.Pow(1f - endVelocity, 2);
+
+        float velocity = Mathf.Min(startVelocity, endVelocity);
+        
+        return Mathf.Max(velocity, _minAcceleration);
+    }
+
+    private void MoveToDirection(Vector3 direction, float step)
+    {
+        transform.position += direction * step;
+
+        _velocity = direction;
+    }
+
+    private void RotateToDirection(Vector3 direction, float velocity)
+    {
+        if (direction != Vector3.zero)
+        {
+            direction.y = 0;
+            direction = direction.normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * velocity * TimeService.TimeSpeedDelta);
+        }
+    }
+
+    private void EndMove()
+    {
+        _velocity = Vector3.zero;
+        transform.position = _pathData.Points[_pathData.Points.Count - 1];
+    }
+}
+public struct PathData
+{
+    public List<Vector3> Points;
+    public int TurnsCost;
+    public float Duration;
+    public float Distance;
+    public bool IsReacheble;
+    //public TileCover Cover;
+    //public Vector3 finalDirection;
+}

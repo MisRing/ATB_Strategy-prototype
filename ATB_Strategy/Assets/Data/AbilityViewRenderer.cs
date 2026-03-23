@@ -44,6 +44,6 @@ public class AbilityViewRenderer : MonoBehaviour
             return;
         }
 
-        _pathRenderer.SetPathLine(data.Path.corners.ToList());
+        _pathRenderer.SetPathLine(data.Points);
     }
 }

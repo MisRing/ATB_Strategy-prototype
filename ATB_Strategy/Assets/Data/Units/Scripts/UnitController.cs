@@ -5,13 +5,13 @@ using UnityEngine.AI;
 [RequireComponent(typeof(UnitStats))]
 [RequireComponent(typeof(UnitAbilityController))]
 [RequireComponent(typeof(UnitAnimator))]
-[RequireComponent(typeof(UnitAgentController))]
+[RequireComponent(typeof(UnitAgent))]
 public class UnitController : MonoBehaviour
 {
     [HideInInspector] public UnitStats UnitStats;
     [HideInInspector] public UnitAbilityController AbilityController;
     [HideInInspector] public UnitAnimator UnitAnimator;
-    [HideInInspector] public UnitAgentController AgentController;
+    [HideInInspector] public UnitAgent AgentController;
 
     public event Action<bool> OnSelectionChanged;
 
@@ -24,7 +24,7 @@ public class UnitController : MonoBehaviour
         UnitStats = GetComponent<UnitStats>();
         AbilityController = GetComponent<UnitAbilityController>();
         UnitAnimator = GetComponent<UnitAnimator>();
-        AgentController = GetComponent<UnitAgentController>();
+        AgentController = GetComponent<UnitAgent>();
 
         AbilityController.Init(this);
         UnitAnimator.Init(this);
