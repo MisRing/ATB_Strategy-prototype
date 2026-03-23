@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class AbilityViewRenderer : MonoBehaviour
 {
+    [SerializeField] private CursorCostDisplay _costDisplay;
     [SerializeField] private PathLineRenderer _pathRenderer;
     public static List<IPathHandler> PathHandlers = new List<IPathHandler>();
 
     private void Awake()
     {
         _pathRenderer.Init();
+        _costDisplay.Init();
     }
 
     private void OnEnable()
@@ -41,9 +43,11 @@ public class AbilityViewRenderer : MonoBehaviour
         if (!data.IsReacheble)
         {
             _pathRenderer.UnsetPathLine();
+            _costDisplay.UnsetCost();
             return;
         }
 
         _pathRenderer.SetPathLine(data.Points);
+        _costDisplay.SetCost(data.TurnsCost);
     }
 }
