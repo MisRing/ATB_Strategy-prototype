@@ -7023,7 +7023,7 @@ MonoBehaviour:
   - {fileID: 1066432006}
   _positionPresset:
   - {x: 4, y: 1, z: 32}
-  - {x: 3, y: 1, z: 32}
+  - {x: 3, y: 1, z: 31}
   - {x: 3, y: 1, z: 33}
   _selectedUnit: {fileID: 0}
   _selectRayDistance: 100
