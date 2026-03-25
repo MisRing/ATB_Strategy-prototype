@@ -3308,7 +3308,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7334d5ada1f1dfa449d01fe3307abdc0, type: 3}
-  m_Color: {r: 1, g: 0.12549019, b: 0.5636633, a: 1}
+  m_Color: {r: 0.2035889, g: 0.15307939, b: 0.754717, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -6377,7 +6377,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &723904378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8553,7 +8553,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &935260117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8662,7 +8662,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e791c8f3a1c4e5a43bf90f242ccc5243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
-  Speed: 8
+  Speed:
+    _value: 8
+  Health:
+    _value: 5
+  MaxHealth:
+    _value: 5
+  Armor:
+    _value: 3
+  MaxArmor:
+    _value: 3
 --- !u!114 &935260124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9940,6 +9949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitOverheadUI
   _unit: {fileID: 935260124}
   _selectionRing: {fileID: 739366548}
+  _healthGUI: {fileID: 0}
 --- !u!1 &1072403813
 GameObject:
   m_ObjectHideFlags: 0
@@ -10139,7 +10149,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7334d5ada1f1dfa449d01fe3307abdc0, type: 3}
-  m_Color: {r: 1, g: 0.12549019, b: 0.5636633, a: 1}
+  m_Color: {r: 0.2035889, g: 0.15307939, b: 0.754717, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -10645,7 +10655,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7334d5ada1f1dfa449d01fe3307abdc0, type: 3}
-  m_Color: {r: 1, g: 0.12549019, b: 0.5636633, a: 1}
+  m_Color: {r: 0.2035889, g: 0.15307939, b: 0.754717, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -10654,6 +10664,53 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1135809501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1135809502}
+  - component: {fileID: 1135809503}
+  m_Layer: 0
+  m_Name: Overhead
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1135809502
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135809501}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1894136210}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1135809503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135809501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b627ea132344f44b0b9f6344cc12b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthGUI
+  _healthPointPref: {fileID: 751394945365520679, guid: 624b37c0171061a45b0a4be721859869, type: 3}
+  _startOffset: {x: 0.6, y: 0, z: 0}
+  _offset: {x: 0.45, y: 0, z: 0}
 --- !u!1 &1144643947
 GameObject:
   m_ObjectHideFlags: 0
@@ -65093,7 +65150,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e791c8f3a1c4e5a43bf90f242ccc5243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
-  Speed: 8
+  Speed:
+    _value: 8
+  Health:
+    _value: 5
+  MaxHealth:
+    _value: 5
+  Armor:
+    _value: 3
+  MaxArmor:
+    _value: 3
 --- !u!114 &1816743775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65576,7 +65642,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7334d5ada1f1dfa449d01fe3307abdc0, type: 3}
-  m_Color: {r: 1, g: 0.12549019, b: 0.5636633, a: 1}
+  m_Color: {r: 0.2035889, g: 0.15307939, b: 0.754717, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -65728,6 +65794,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 42302048}
+  - {fileID: 1135809502}
   m_Father: {fileID: 1816743776}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1894136211
@@ -65744,6 +65811,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitOverheadUI
   _unit: {fileID: 1816743775}
   _selectionRing: {fileID: 42302047}
+  _healthGUI: {fileID: 1135809503}
 --- !u!1 &1894499989
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,14 @@
 using UnityEngine;
+using System;
 
 public class UnitStats : MonoBehaviour
 {
-    public float Speed = 8f;
+    [Header("Movement")]
+    public FloatStat Speed = new FloatStat(8f);
+    
+    [Header("Health")]
+    public IntStat Health = new IntStat(5);
+    public IntStat MaxHealth = new IntStat(5);
+    public IntStat Armor = new IntStat(3);
+    public IntStat MaxArmor = new IntStat(3);
 }
