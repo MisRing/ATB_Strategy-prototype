@@ -6,13 +6,16 @@ public class UnitOverheadUI : MonoBehaviour
     [SerializeField] private GameObject _selectionRing;
     [SerializeField] private HealthGUI _healthGUI;
 
+    private void Start()
+    {
+        _healthGUI.SetHealth(_unit);
+        _unit.UnitStats.Health.OnValueChanged += HealthChanged; //!
+        _unit.UnitStats.Armor.OnValueChanged += HealthChanged;  //!
+    }
     private void OnEnable()
     {
         _unit.OnSelectionChanged += HandleSelectionChanged;
         _healthGUI.gameObject.SetActive(true);
-        _healthGUI.SetHealth(_unit);
-        _unit.UnitStats.Health.OnValueChanged += HealthChanged;
-        _unit.UnitStats.Armor.OnValueChanged += HealthChanged;
     }
 
     private void OnDisable()

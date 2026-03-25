@@ -34,14 +34,18 @@ public class EnemyController : MonoBehaviour
         {
             AbilityData data = new AbilityData();
             Vector3 randomTarget = new Vector3(
-                Random.Range(2f, 5f) * (Random.Range(0, 2) * 2 - 1),
+                Random.Range(5f, 15f) * (Random.Range(0, 2) * 2 - 1),
                 0f,
-                Random.Range(2f, 5f) * (Random.Range(0, 2) * 2 - 1)
+                Random.Range(5f, 15f) * (Random.Range(0, 2) * 2 - 1)
                 );
             randomTarget += unit.transform.position;
             data.TargetWorldPos = randomTarget;
             GridTile tile = new GridTile();
             if (!GridParameters.LevelGrid.GetTileByWorldPos(ref tile, randomTarget))
+            {
+                continue;
+            }
+            if (tile.Owner != null)
             {
                 continue;
             }
