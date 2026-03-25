@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private CameraController _cameraController;
     private CursorController _cursorController;
-    private PlayerInputController _playerInputController;
 
     [SerializeField] private List<UnitController> _units = new List<UnitController>();
     [SerializeField] private List<Vector3Int> _positionPresset = new List<Vector3Int>();
@@ -19,12 +18,11 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        _playerInputController = GetComponent<PlayerInputController>();
         _cursorController = GetComponent<CursorController>();
 
         Init();
 
-        _cursorController.Init(_playerInputController);
+        _cursorController.Init();
         _cameraController.Init(_selectedUnit.transform);
     }
 
@@ -44,10 +42,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        _playerInputController.SwitchTarget += SwitchTarget;
-        _playerInputController.SelectObject += SelectObject;
-        _playerInputController.SelectPoint += SelectPoint;
-        _playerInputController.SelectAbility += SelectAbility;
+        PlayerInputController.SwitchTarget += SwitchTarget;
+        PlayerInputController.SelectObject += SelectObject;
+        PlayerInputController.SelectPoint += SelectPoint;
+        PlayerInputController.SelectAbility += SelectAbility;
 
         _cursorController.OnPositionChanged += UpdateAbilityData;
 
@@ -56,10 +54,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        _playerInputController.SwitchTarget -= SwitchTarget;
-        _playerInputController.SelectObject -= SelectObject;
-        _playerInputController.SelectPoint -= SelectPoint;
-        _playerInputController.SelectAbility -= SelectAbility;
+        PlayerInputController.SwitchTarget -= SwitchTarget;
+        PlayerInputController.SelectObject -= SelectObject;
+        PlayerInputController.SelectPoint -= SelectPoint;
+        PlayerInputController.SelectAbility -= SelectAbility;
 
         _cursorController.OnPositionChanged -= UpdateAbilityData;
 
@@ -68,7 +66,7 @@ public class PlayerController : MonoBehaviour
 
     private void SelectObject()
     {
-        Vector2 mousePosition = _playerInputController.MouseScreenPosition;
+        Vector2 mousePosition = PlayerInputController.MouseScreenPosition;
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _selectRayDistance))
@@ -110,7 +108,7 @@ public class PlayerController : MonoBehaviour
     private void SwitchTarget()
     {
         int findStep;
-        if (!_playerInputController.IsReverseModifier)
+        if (!PlayerInputController.IsReverseModifier)
         {
             findStep = 1;
         }

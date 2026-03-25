@@ -7279,7 +7279,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 90}
+  m_SizeDelta: {x: 320, y: 90}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &874787689
 MonoBehaviour:
@@ -64496,7 +64496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c649f6e0c33f8c543b5faaca9832ac80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitAgentController
-  _accelerationDistance: 0.75
+  _accelerationDistance: 0.25
   _minAcceleration: 0.1
   _rotationSpeed: 36
   CurrentTile: {x: 0, y: 0, z: 0}

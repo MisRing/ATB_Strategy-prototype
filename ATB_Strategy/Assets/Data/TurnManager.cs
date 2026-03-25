@@ -13,7 +13,7 @@ public class TurnManager : MonoBehaviour
     private static float _timeStopDuration = 0.3f;
 
 
-    public static readonly float TurnTime = 0.15f;
+    public static readonly float TurnTime = 0.125f;
 
     public static event Action<UnitController> OnUnitEnterExitQ;
     

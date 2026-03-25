@@ -4,18 +4,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputController : MonoBehaviour
 {
-    private InputActions _inputActions;
+    private static InputActions _inputActions;
 
-    public bool IsReverseModifier { get => _inputActions.Player.ReverseInputModifier.IsPressed(); }
+    public static bool IsReverseModifier { get => _inputActions.Player.ReverseInputModifier.IsPressed(); }
 
-    public Vector2 MouseScreenPosition { get => _inputActions.Player.MousePosition.ReadValue<Vector2>(); }
+    public static Vector2 MouseScreenPosition { get => _inputActions.Player.MousePosition.ReadValue<Vector2>(); }
 
 
-    public event Action SelectObject;
-    public event Action SelectPoint;
-    public event Action SwitchTarget;
+    public static event Action SelectObject;
+    public static event Action SelectPoint;
+    public static event Action SwitchTarget;
 
-    public event Action<int> SelectAbility;
+    public static event Action<int> SelectAbility;
 
 
     private void Awake()

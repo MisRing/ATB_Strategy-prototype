@@ -12,8 +12,6 @@ public class CursorController : MonoBehaviour
     [SerializeField] private LayerMask _groundMasks;
     [SerializeField] private float _rayDistance = 100f;
 
-    private PlayerInputController _playerInput;
-
     private GridTile _cursorTile;
     public GridTile CursorTile { get => _cursorTile; }
 
@@ -22,9 +20,8 @@ public class CursorController : MonoBehaviour
 
     public event Action OnPositionChanged;
 
-    public void Init(PlayerInputController playerInput)
+    public void Init()
     {
-        _playerInput = playerInput;
         _tileCursor.Init();
     }
 
@@ -35,7 +32,7 @@ public class CursorController : MonoBehaviour
 
     private void CalculatePosition()
     {
-        Vector2 mousePosition = _playerInput.MouseScreenPosition;
+        Vector2 mousePosition = PlayerInputController.MouseScreenPosition;
 
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         RaycastHit hit;

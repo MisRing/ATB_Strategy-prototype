@@ -47,7 +47,10 @@ public class UnitAgent : MonoBehaviour
         {
             _pathData.Duration = CalculateDuration(_pathData.Distance, _unit.UnitStats.Speed);
 
-            _pathData.TurnsCost = Mathf.CeilToInt(_pathData.Duration / TurnManager.TurnTime);
+            float realTurnsCost = Mathf.Round((_pathData.Duration / TurnManager.TurnTime) * 100f) / 100f;
+            
+            _pathData.TurnsCost = Mathf.CeilToInt(realTurnsCost);
+
         }
     }
 
@@ -62,7 +65,6 @@ public class UnitAgent : MonoBehaviour
 
             float acceleration = GetAcceleration(passed, remaining);
 
-            float deltaTime = timeStep / acceleration;
             float passedByStep = acceleration * normalSpeed * timeStep;
 
             time += timeStep;

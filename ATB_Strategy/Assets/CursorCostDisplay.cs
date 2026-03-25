@@ -9,12 +9,10 @@ public class CursorCostDisplay : MonoBehaviour
     [SerializeField] private Vector2 _offset = new Vector2(20, 20);
 
     private RectTransform _rectTransform;
-    private PlayerInputController _inputController;
 
-    public void Init(/*PlayerInputController inputController*/)
+    public void Init()
     {
         _rectTransform = GetComponent<RectTransform>();
-        //_inputController = inputController;
         _text.enabled = false;
     }
 
@@ -27,7 +25,7 @@ public class CursorCostDisplay : MonoBehaviour
     private void Update()
     {
         if (!_text.enabled) return;
-        //_rectTransform.position = _inputController.MouseScreenPosition + _offset;
+        _rectTransform.position = PlayerInputController.MouseScreenPosition + _offset;
     }
 
     public void UnsetCost()
