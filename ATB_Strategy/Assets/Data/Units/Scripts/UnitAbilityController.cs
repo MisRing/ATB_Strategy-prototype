@@ -9,6 +9,8 @@ public class UnitAbilityController : MonoBehaviour
 
     [HideInInspector] public UnitController Unit;
 
+    public event Action<UnitController> OnAbilityFinished;
+
     public void Init(UnitController unit)
     {
         Unit = unit;
@@ -56,6 +58,7 @@ public class UnitAbilityController : MonoBehaviour
     public void FinishExecuteAbility()
     {
         Unit.State = UnitState.WaitingForOrder;
+        OnAbilityFinished?.Invoke(Unit);
     }
 
     public void UpdateAbilityData(AbilityData data)

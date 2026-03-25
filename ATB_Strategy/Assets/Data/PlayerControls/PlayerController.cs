@@ -146,6 +146,7 @@ public class PlayerController : MonoBehaviour
     private void SelectTargetUnit(UnitController unit, bool focusView = true)
     {
         if (unit == _selectedUnit) return;
+        if (unit.Owner != UnitOwner.Player) return;
 
         DeselectCurrentUnit();
 

@@ -4,8 +4,8 @@ using UnityEngine.AI;
 
 public static class GridPathFinder
 {
-    private static float _lineCutStep = 0.5f;
-    private static float _raycastHeight = 0.4f;
+    private static readonly float _lineCutStep = 0.5f;
+    private static readonly float _raycastHeight = 0.4f;
 
     public static bool CalculatePath(ref PathData pathData, Vector3 agentPoisition, Vector3 targetPosition)
     {

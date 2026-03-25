@@ -18,6 +18,7 @@ public class UnitController : MonoBehaviour
     private bool _isSelected;
 
     public UnitState State;
+    public UnitOwner Owner;
 
     public void Init(GridTile tile)
     {        
@@ -59,4 +60,10 @@ public enum UnitState
 {
     WaitingForOrder,
     Engaged
+}
+
+public enum UnitOwner
+{
+    Player,
+    Enemy
 }

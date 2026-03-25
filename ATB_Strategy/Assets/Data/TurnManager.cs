@@ -76,11 +76,18 @@ public class TurnManager : MonoBehaviour
                 {
                     _lastTurnPause = true;
 
-                    OnUnitEnterExitQ?.Invoke(_abilitiesOnAction[_currentTurn][0].Unit);
                     foreach (AbilityBasic ability in _abilitiesOnAction[_currentTurn])
                     {
-                        ability.FinishExecute();
+                        if (ability.Unit.Owner == UnitOwner.Player)
+                        {
+                            OnUnitEnterExitQ?.Invoke(ability.Unit);
+                            break;
+                        }
+                    }
+                    foreach (AbilityBasic ability in _abilitiesOnAction[_currentTurn])
+                    {
                         EnterWaitingQ(ability.Unit);
+                        ability.FinishExecute();
                     }
                     _abilitiesOnAction.Remove(_currentTurn);
                 }
