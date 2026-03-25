@@ -130,7 +130,12 @@ Material:
     - _ZWrite: 1
     - _fallout: 8
     - _frequency: 0.1
+    - _impulsSpeed: 1
+    - _impulsWidth: 0.2
     - _impulseSpeed: 0.1
+    - _mainWidth: 2
+    - _middleWidth: 8
+    - _secondImpulceDelay: 0.1
     - _size: 100
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
@@ -138,6 +143,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _baseColor: {r: 0, g: 0.44672155, b: 1, a: 1}
+    - _impulsColor: {r: 0.1917772, g: 0.033018887, b: 1, a: 1}
     - _impulseColor: {r: 1, g: 1, b: 1, a: 1}
     - _middleColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
