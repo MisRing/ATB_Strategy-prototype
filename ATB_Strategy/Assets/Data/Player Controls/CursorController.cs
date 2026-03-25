@@ -74,7 +74,7 @@ public class CursorController : MonoBehaviour
         if (_cursorPosition != tileWorldPos)
         {
             _cursorPosition = tileWorldPos;
-            _tileCursor.SetTileCursor(_cursorPosition);
+            _tileCursor.SetTileCursor(_cursorPosition, _cursorTile);
             OnPositionChanged?.Invoke();
         }
     }
