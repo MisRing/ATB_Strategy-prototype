@@ -32,7 +32,6 @@ public class PlayerSelectionManager : MonoBehaviour
     {
         PlayerInputController.SwitchTarget += SwitchTarget;
         PlayerInputController.SelectObject += SelectObject;
-        PlayerInputController.SelectPoint += SelectPoint;
         TurnManager.OnUnitEnterExitQ += SelectReadyUnit;
     }
 
@@ -40,7 +39,6 @@ public class PlayerSelectionManager : MonoBehaviour
     {
         PlayerInputController.SwitchTarget -= SwitchTarget;
         PlayerInputController.SelectObject -= SelectObject;
-        PlayerInputController.SelectPoint -= SelectPoint;
         TurnManager.OnUnitEnterExitQ -= SelectReadyUnit;
     }
 
@@ -55,24 +53,6 @@ public class PlayerSelectionManager : MonoBehaviour
             if(unit != null && unit.State == UnitState.WaitingForOrder)
             {
                 SelectUnit(unit, false);
-            }
-        }
-    }
-
-    private void SelectPoint()
-    {
-        if (!_selectedUnit || _selectedUnit.State == UnitState.Engaged) return;
-
-        AbilityData data = new AbilityData();
-        data.TargetWorldPos = _playerController.CursorController.CursorPosition;
-        data.TargetTile = _playerController.CursorController.CursorTile;
-
-        if (_selectedUnit.AbilityController.ExecuteAbility(data))
-        {
-            if(!SwitchToFreeUnit(+1))
-            {
-                DeselectCurrentUnit();
-                OnSelectionChanged?.Invoke(null);
             }
         }
     }
@@ -92,7 +72,7 @@ public class PlayerSelectionManager : MonoBehaviour
         SwitchToFreeUnit(findStep);
     }
 
-    private bool SwitchToFreeUnit(int step)
+    public void SwitchToFreeUnit(int step)
     {
         for (int i = _units.Count + step; i > 0 && i < _units.Count * 2; i+= step)
         {
@@ -100,11 +80,12 @@ public class PlayerSelectionManager : MonoBehaviour
             if (_units[newIndex].State == UnitState.WaitingForOrder)
             {
                 SelectUnit(_units[newIndex]);
-                return true;
+                return;
             }
         }
 
-        return false;
+        DeselectCurrentUnit();
+        OnSelectionChanged?.Invoke(null);
     }
     
     private void SelectReadyUnit(UnitController unit)
@@ -132,9 +113,7 @@ public class PlayerSelectionManager : MonoBehaviour
         DeselectCurrentUnit();
 
         _selectedUnit = unit;
-        AbilityData data = new AbilityData();
-        data.TargetWorldPos = _playerController.CursorController.CursorPosition;
-        _selectedUnit.Select(data);
+        _selectedUnit.Select();
         
         OnSelectionChanged?.Invoke(_selectedUnit);
         if (focusView)

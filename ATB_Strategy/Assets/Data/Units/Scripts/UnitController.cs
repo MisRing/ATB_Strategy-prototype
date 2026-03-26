@@ -32,14 +32,12 @@ public class UnitController : MonoBehaviour
         AgentController.Init(this, tile);
     }
 
-    public void Select(AbilityData data)
+    public void Select()
     {
         if (_isSelected) return;
 
         _isSelected = true;
         OnSelectionChanged?.Invoke(true);
-
-        AbilityController.SelectAbility(0, data);
     }
 
     public void Deselect()

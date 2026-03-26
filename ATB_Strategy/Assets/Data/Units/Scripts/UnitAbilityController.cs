@@ -46,6 +46,8 @@ public class UnitAbilityController : MonoBehaviour
 
     public bool ExecuteAbility(AbilityData data)
     {
+        if (_currentAbility == null) return false;
+        
         _currentAbility.UpdateData(data);
         if (_currentAbility.Execute())
         {
@@ -64,6 +66,7 @@ public class UnitAbilityController : MonoBehaviour
 
     public void UpdateAbilityData(AbilityData data)
     {
+        if (_currentAbility == null) return;
         _currentAbility.UpdateData(data);
     }
 }

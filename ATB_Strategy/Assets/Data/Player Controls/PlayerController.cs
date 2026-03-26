@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         PlayerInputController.SelectAbility += SelectAbility;
+        PlayerInputController.SelectPoint += SelectPoint;
 
         CursorController.OnPositionChanged += UpdateAbilityData;
     }
@@ -40,8 +41,23 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         PlayerInputController.SelectAbility -= SelectAbility;
+        PlayerInputController.SelectPoint -= SelectPoint;
 
         CursorController.OnPositionChanged -= UpdateAbilityData;
+    }
+    
+    private void SelectPoint()
+    {
+        if (!PlayerSelectionManager.SelectedUnit || PlayerSelectionManager.SelectedUnit.State == UnitState.Engaged) return;
+
+        AbilityData data = new AbilityData();
+        data.TargetWorldPos = CursorController.CursorPosition;
+        data.TargetTile = CursorController.CursorTile;
+
+        if (PlayerSelectionManager.SelectedUnit.AbilityController.ExecuteAbility(data))
+        {
+            PlayerSelectionManager.SwitchToFreeUnit(+1);
+        }
     }
 
     private void UpdateAbilityData()
