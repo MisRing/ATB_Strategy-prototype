@@ -16,8 +16,9 @@ public class PlayerInputController : MonoBehaviour
     public static event Action SwitchTarget;
 
     public static event Action<int> SelectAbility;
-
-
+    
+    public static event Action CancelESC;
+    
     private void Awake()
     {
         _inputActions = new InputActions();
@@ -41,6 +42,8 @@ public class PlayerInputController : MonoBehaviour
         _inputActions.Player.AbilitySwitch7.started += SelectAbilityInput7;
         _inputActions.Player.AbilitySwitch8.started += SelectAbilityInput8;
         _inputActions.Player.AbilitySwitch9.started += SelectAbilityInput9;
+        
+        _inputActions.Player.Escape.started += CancelEscInput;
     }
 
     private void OnDisable()
@@ -61,6 +64,8 @@ public class PlayerInputController : MonoBehaviour
         _inputActions.Player.AbilitySwitch7.started -= SelectAbilityInput7;
         _inputActions.Player.AbilitySwitch8.started -= SelectAbilityInput8;
         _inputActions.Player.AbilitySwitch9.started -= SelectAbilityInput9;
+        
+        _inputActions.Player.Escape.started += CancelEscInput;
     }
 
     private void SelectObjectInput(InputAction.CallbackContext context) => SelectObject?.Invoke();
@@ -79,4 +84,6 @@ public class PlayerInputController : MonoBehaviour
     private void SelectAbilityInput7(InputAction.CallbackContext context) => SelectAbility?.Invoke(7);
     private void SelectAbilityInput8(InputAction.CallbackContext context) => SelectAbility?.Invoke(8);
     private void SelectAbilityInput9(InputAction.CallbackContext context) => SelectAbility?.Invoke(9);
+    
+    private void CancelEscInput(InputAction.CallbackContext context) => CancelESC?.Invoke();
 }

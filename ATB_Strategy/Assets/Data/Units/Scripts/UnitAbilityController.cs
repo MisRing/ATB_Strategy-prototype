@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class UnitAbilityController : MonoBehaviour
 {
+    public AbilityBasic DefaultAbility;
     public AbilityBasic[] Abilities;
     private AbilityBasic _currentAbility;
 
@@ -22,7 +23,7 @@ public class UnitAbilityController : MonoBehaviour
         }
     }
 
-    public void SelectAbility(int index, AbilityData data)
+    public void SelectAbility(int index, AbilityData data) //
     {
         if (index >= Abilities.Length || index < 0) return;
         if (_currentAbility == Abilities[index]) return;
@@ -34,7 +35,7 @@ public class UnitAbilityController : MonoBehaviour
         _currentAbility.EnterPrepare(data);
     }
 
-    public void DeselectAbility()
+    public void DeselectAbility() //
     {
         if (_currentAbility != null)
         {

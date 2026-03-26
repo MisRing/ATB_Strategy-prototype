@@ -6793,7 +6793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &723904378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7241,6 +7241,7 @@ GameObject:
   - component: {fileID: 742375537}
   - component: {fileID: 742375538}
   - component: {fileID: 742375539}
+  - component: {fileID: 742375541}
   - component: {fileID: 742375540}
   m_Layer: 0
   m_Name: PlayerController
@@ -7277,16 +7278,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed2e816511eca349918fa22deaebf19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  _cameraController: {fileID: 315196675}
-  _units:
-  - {fileID: 1816743775}
-  - {fileID: 1066432006}
+  CameraController: {fileID: 315196675}
+  CursorController: {fileID: 0}
+  PlayerSelectionManager: {fileID: 0}
   _positionPreset:
   - {x: 2, y: 1, z: 30}
   - {x: 4, y: 1, z: 28}
   - {x: 5, y: 1, z: 31}
-  _selectedUnit: {fileID: 0}
-  _selectRayDistance: 100
 --- !u!114 &742375539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7316,6 +7314,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _rayDistance: 100
+--- !u!114 &742375541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742375536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ad6455bdb52334b910f7b5a0a992c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSelectionManager
+  _units:
+  - {fileID: 1816743775}
+  _selectedUnit: {fileID: 0}
+  _selectRayDistance: 100
 --- !u!1 &747864328
 GameObject:
   m_ObjectHideFlags: 0
@@ -7339,7 +7353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &747864329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7434,6 +7448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15e914d0fe696a4eaee655dc9fd196e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnityAbilityController
+  DefaultAbility: {fileID: 0}
   Abilities:
   - {fileID: 747864330}
   - {fileID: 747864329}
@@ -9330,7 +9345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &935260117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9425,6 +9440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15e914d0fe696a4eaee655dc9fd196e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnityAbilityController
+  DefaultAbility: {fileID: 0}
   Abilities:
   - {fileID: 935260118}
   - {fileID: 935260117}
@@ -10775,7 +10791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1066431999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10870,6 +10886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15e914d0fe696a4eaee655dc9fd196e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnityAbilityController
+  DefaultAbility: {fileID: 0}
   Abilities:
   - {fileID: 1066432000}
   - {fileID: 1066431999}
@@ -62230,7 +62247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1365402964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62325,6 +62342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15e914d0fe696a4eaee655dc9fd196e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnityAbilityController
+  DefaultAbility: {fileID: 0}
   Abilities:
   - {fileID: 1365402965}
   - {fileID: 1365402964}
@@ -66622,6 +66640,7 @@ GameObject:
   - component: {fileID: 1816743773}
   - component: {fileID: 1816743777}
   - component: {fileID: 1816743780}
+  - component: {fileID: 1816743783}
   - component: {fileID: 1816743779}
   m_Layer: 0
   m_Name: Unit 1
@@ -66735,8 +66754,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15e914d0fe696a4eaee655dc9fd196e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnityAbilityController
+  DefaultAbility: {fileID: 0}
   Abilities:
   - {fileID: 1816743780}
+  - {fileID: 1816743783}
   - {fileID: 1816743779}
   Unit: {fileID: 0}
 --- !u!114 &1816743779
@@ -66785,6 +66806,22 @@ MonoBehaviour:
   _minAcceleration: 0.1
   _rotationSpeed: 36
   CurrentTile: {x: 0, y: 0, z: 0}
+--- !u!114 &1816743783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816743772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4331a00c171815f44b9a48441ed6f4a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkipTurnAbility
+  AbilityName: Basic Ability (do nothing)
+  AbilityIcon: {fileID: 21300000, guid: ec76bfedcf8e8304290a653aad76d755, type: 3}
+  OnPrepare: 0
+  _skipTurnCount: 2
 --- !u!1 &1825537674
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,15 +8,15 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
-        _uiAbilityController.SetAbilityButtons(_playerController.SelectedUnit);
+        _uiAbilityController.SetAbilityButtons(_playerController.PlayerSelectionManager.SelectedUnit);
     }
     private void OnEnable()
     {
-        _playerController.OnSelectionChanged += _uiAbilityController.SetAbilityButtons;
+        _playerController.PlayerSelectionManager.OnSelectionChanged += _uiAbilityController.SetAbilityButtons;
     }
 
     private void OnDisable()
     {
-        _playerController.OnSelectionChanged -= _uiAbilityController.SetAbilityButtons;
+        _playerController.PlayerSelectionManager.OnSelectionChanged -= _uiAbilityController.SetAbilityButtons;
     }
 }
