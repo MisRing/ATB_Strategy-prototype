@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
+using System;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
@@ -11,10 +12,13 @@ public class PlayerController : MonoBehaviour
     private CursorController _cursorController;
 
     [SerializeField] private List<UnitController> _units = new List<UnitController>();
-    [SerializeField] private List<Vector3Int> _positionPresset = new List<Vector3Int>();
+    [SerializeField] private List<Vector3Int> _positionPreset = new List<Vector3Int>();
+    public UnitController SelectedUnit {get => _selectedUnit; }
     [SerializeField] private UnitController _selectedUnit;
 
     [SerializeField] private float _selectRayDistance = 100f;
+    
+    public event Action<UnitController> OnSelectionChanged;
 
     private void Awake()
     {
@@ -35,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < _units.Count; i++)
         {
-            _units[i].Init(GridParameters.LevelGrid.GetTile(_positionPresset[i].x, _positionPresset[i].z, _positionPresset[i].y));
+            _units[i].Init(GridParameters.LevelGrid.GetTile(_positionPreset[i].x, _positionPreset[i].z, _positionPreset[i].y));
         }
         SelectTargetUnit(_units[0]);
     }
@@ -92,6 +96,7 @@ public class PlayerController : MonoBehaviour
             if(!SwitchToFreeUnit(+1))
             {
                 DeselectCurrentUnit();
+                OnSelectionChanged?.Invoke(null);
             }
         }
     }
@@ -154,6 +159,8 @@ public class PlayerController : MonoBehaviour
         AbilityData data = new AbilityData();
         data.TargetWorldPos = _cursorController.CursorPosition;
         _selectedUnit.Select(data);
+        
+        OnSelectionChanged?.Invoke(_selectedUnit);
         if (focusView)
         {
             _cameraController.EnterFocusMode(_selectedUnit.transform);
@@ -185,7 +192,7 @@ public class PlayerController : MonoBehaviour
             GridParameters.LevelGrid = FindFirstObjectByType(typeof(GridMap)) as GridMap;
         }
 
-        foreach(Vector3Int point in _positionPresset)
+        foreach(Vector3Int point in _positionPreset)
         {
             if(GridParameters.LevelGrid.CheckTile(point.x, point.z, point.y))
             {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class UnitAbilityController : MonoBehaviour
 {
-    [SerializeField] private AbilityBasic[] _abilities;
+    public AbilityBasic[] Abilities;
     private AbilityBasic _currentAbility;
 
     [HideInInspector] public UnitController Unit;
@@ -16,7 +16,7 @@ public class UnitAbilityController : MonoBehaviour
         Unit = unit;
         TurnManager.EnterWaitingQ(Unit);
 
-        foreach (var ability in _abilities)
+        foreach (var ability in Abilities)
         {
             ability.Init(this);
         }
@@ -24,12 +24,12 @@ public class UnitAbilityController : MonoBehaviour
 
     public void SelectAbility(int index, AbilityData data)
     {
-        if (index >= _abilities.Length || index < 0) return;
-        if (_currentAbility == _abilities[index]) return;
+        if (index >= Abilities.Length || index < 0) return;
+        if (_currentAbility == Abilities[index]) return;
 
         DeselectAbility();
 
-        _currentAbility = _abilities[index];
+        _currentAbility = Abilities[index];
 
         _currentAbility.EnterPrepare(data);
     }

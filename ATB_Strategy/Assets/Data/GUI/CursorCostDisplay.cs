@@ -25,7 +25,7 @@ public class CursorCostDisplay : MonoBehaviour
     private void Update()
     {
         if (!_text.enabled) return;
-        _rectTransform.position = PlayerInputController.MouseScreenPosition + _offset;
+        _rectTransform.localPosition = PlayerInputController.MouseScreenPosition - new Vector2(Screen.width / 2f, Screen.height / 2f) + _offset;
     }
 
     public void UnsetCost()

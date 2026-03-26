@@ -3,6 +3,7 @@ using UnityEngine;
 public class AbilityBasic : MonoBehaviour
 {
     public string AbilityName = "Basic Ability (do nothing)";
+    public Sprite AbilityIcon;
     private protected UnitAbilityController _abilityController;
     private protected AbilityData _abilityData;
     public bool OnPrepare = false;
