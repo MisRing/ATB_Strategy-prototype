@@ -50,8 +50,6 @@ public class EnemyController : MonoBehaviour
                 continue;
             }
             data.TargetTile = tile;
-            
-            unit.AbilityController.SelectAbility(0);
 
             if (unit.AbilityController.ForceExecuteAbility(data))
             {
