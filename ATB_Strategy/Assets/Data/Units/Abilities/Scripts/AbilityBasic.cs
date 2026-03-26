@@ -16,10 +16,9 @@ public class AbilityBasic : MonoBehaviour
         OnPrepare = false;
     }
 
-    public virtual void EnterPrepare(AbilityData abilityData)
+    public virtual void EnterPrepare()
     {
         Debug.Log("Enter prepare <" + AbilityName + ">");
-        _abilityData = abilityData;
         OnPrepare = true;
     }
 

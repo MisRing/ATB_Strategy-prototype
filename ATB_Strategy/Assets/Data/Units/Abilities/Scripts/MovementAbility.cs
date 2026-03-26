@@ -20,11 +20,9 @@ public class MovementAbility : AbilityBasic, IPathHandler
         AbilityName = "Simple movement";
     }
 
-    public override void EnterPrepare(AbilityData abilityData)
+    public override void EnterPrepare()
     {
-        base.EnterPrepare(abilityData);
-
-        UpdateData(abilityData);
+        base.EnterPrepare();
     }
 
     public override void ExitPrepare()

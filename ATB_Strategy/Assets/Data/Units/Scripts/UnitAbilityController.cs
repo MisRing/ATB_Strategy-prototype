@@ -17,45 +17,61 @@ public class UnitAbilityController : MonoBehaviour
         Unit = unit;
         TurnManager.EnterWaitingQ(Unit);
 
+        DefaultAbility.Init(this);
         foreach (var ability in Abilities)
         {
             ability.Init(this);
         }
+        _currentAbility = DefaultAbility;
+        _currentAbility.EnterPrepare();
     }
 
-    public void SelectAbility(int index, AbilityData data) //
+    public void SelectAbility(int index) //
     {
+        if (index == -1)
+        {
+            _currentAbility.ExitPrepare();
+            _currentAbility = DefaultAbility;
+            _currentAbility.EnterPrepare();
+            return;
+        }
+        
         if (index >= Abilities.Length || index < 0) return;
-        if (_currentAbility == Abilities[index]) return;
+        if (_currentAbility == Abilities[index])
+        {
+            ExecuteAbility();
 
-        DeselectAbility();
+            return;
+        }
+
+        _currentAbility.ExitPrepare();
 
         _currentAbility = Abilities[index];
 
-        _currentAbility.EnterPrepare(data);
+        _currentAbility.EnterPrepare();
     }
 
-    public void DeselectAbility() //
-    {
-        if (_currentAbility != null)
-        {
-            _currentAbility.ExitPrepare();
-            _currentAbility = null;
-        }
-    }
-
-    public bool ExecuteAbility(AbilityData data)
+    public bool ExecuteAbility()
     {
         if (_currentAbility == null) return false;
         
-        _currentAbility.UpdateData(data);
         if (_currentAbility.Execute())
         {
             Unit.State = UnitState.Engaged;
+            _currentAbility.ExitPrepare();
             return true;
         }
 
         return false;
+    }
+    
+    public bool ForceExecuteAbility(AbilityData data)
+    {
+        if (_currentAbility == null) return false;
+        
+        _currentAbility.UpdateData(data);
+
+        return ExecuteAbility();
     }
 
     public void FinishExecuteAbility()

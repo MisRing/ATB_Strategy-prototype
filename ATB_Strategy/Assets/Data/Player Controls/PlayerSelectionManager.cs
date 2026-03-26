@@ -6,7 +6,7 @@ public class PlayerSelectionManager : MonoBehaviour
 {
     private PlayerController _playerController;
     [SerializeField] private List<UnitController> _units = new List<UnitController>();
-    public UnitController SelectedUnit {get => _selectedUnit; }
+    public UnitController SelectedUnit { get => _selectedUnit; }
     [SerializeField] private UnitController _selectedUnit;
 
     [SerializeField] private float _selectRayDistance = 100f;
@@ -57,23 +57,11 @@ public class PlayerSelectionManager : MonoBehaviour
         }
     }
     
-    private void SwitchTarget()
-    {
-        int findStep;
-        if (!PlayerInputController.IsReverseModifier)
-        {
-            findStep = 1;
-        }
-        else
-        {
-            findStep = -1;
-        }
+    private void SwitchTarget() => SwitchToFreeUnit(!PlayerInputController.IsReverseModifier);
 
-        SwitchToFreeUnit(findStep);
-    }
-
-    public void SwitchToFreeUnit(int step)
+    public void SwitchToFreeUnit(bool next = true)
     {
+        int step = next ? 1 : -1;
         for (int i = _units.Count + step; i > 0 && i < _units.Count * 2; i+= step)
         {
             int newIndex = (_units.Count + _units.IndexOf(_selectedUnit) + i) % _units.Count;
@@ -88,13 +76,7 @@ public class PlayerSelectionManager : MonoBehaviour
         OnSelectionChanged?.Invoke(null);
     }
     
-    private void SelectReadyUnit(UnitController unit)
-    {
-        if (!_units.Contains(unit)) return;
-        if (_selectedUnit) return;
-
-        SelectUnit(unit);
-    }
+    private void SelectReadyUnit(UnitController unit) => SelectUnit(unit);
 
     private void DeselectCurrentUnit()
     {
@@ -107,6 +89,7 @@ public class PlayerSelectionManager : MonoBehaviour
     
     public void SelectUnit(UnitController unit, bool focusView = true)
     {
+        if (!_units.Contains(unit)) return;
         if (unit == _selectedUnit) return;
         if (unit.Owner != UnitOwner.Player) return;
 
@@ -120,10 +103,5 @@ public class PlayerSelectionManager : MonoBehaviour
         {
             _playerController.CameraController.EnterFocusMode(_selectedUnit.transform);
         }
-    }
-    
-    public void DeselectUnit(UnitController unit)
-    {
-        
     }
 }

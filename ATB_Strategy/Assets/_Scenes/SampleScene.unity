@@ -6342,9 +6342,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15e914d0fe696a4eaee655dc9fd196e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnityAbilityController
-  DefaultAbility: {fileID: 0}
+  DefaultAbility: {fileID: 669000081}
   Abilities:
-  - {fileID: 669000081}
   - {fileID: 669000080}
   - {fileID: 669000079}
   Unit: {fileID: 0}
@@ -66773,9 +66772,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15e914d0fe696a4eaee655dc9fd196e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnityAbilityController
-  DefaultAbility: {fileID: 0}
+  DefaultAbility: {fileID: 1816743780}
   Abilities:
-  - {fileID: 1816743780}
   - {fileID: 1816743783}
   - {fileID: 1816743779}
   Unit: {fileID: 0}

@@ -49,7 +49,7 @@ public class UnitController : MonoBehaviour
 
         if (State != UnitState.Engaged)
         {
-            AbilityController.DeselectAbility();
+            AbilityController.SelectAbility(-1);
         }
     }
 }
