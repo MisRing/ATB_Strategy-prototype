@@ -51,5 +51,9 @@ public class TileCursor : MonoBehaviour
     public void UnsetTileCursor()
     {
         _spriteObject.SetActive(false);
+        for (int i = 0; i < 4; i++)
+        {
+            _covers[i].gameObject.SetActive(false);
+        }
     }
 }

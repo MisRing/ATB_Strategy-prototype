@@ -57,9 +57,9 @@ public class PlayerSelectionManager : MonoBehaviour
         }
     }
     
-    private void SwitchTarget() => SwitchToFreeUnit(!PlayerInputController.IsReverseModifier);
+    private void SwitchTarget() => SwitchToFreeUnit(!PlayerInputController.IsReverseModifier, true);
 
-    public void SwitchToFreeUnit(bool next = true)
+    public void SwitchToFreeUnit(bool next = true, bool leaveCurrentIfCant = false)
     {
         int step = next ? 1 : -1;
         for (int i = _units.Count + step; i > 0 && i < _units.Count * 2; i+= step)
@@ -72,8 +72,11 @@ public class PlayerSelectionManager : MonoBehaviour
             }
         }
 
-        DeselectCurrentUnit();
-        OnSelectionChanged?.Invoke(null);
+        if (!leaveCurrentIfCant)
+        {
+            DeselectCurrentUnit();
+            OnSelectionChanged?.Invoke(null);
+        }
     }
     
     private void SelectReadyUnit(UnitController unit) => SelectUnit(unit);

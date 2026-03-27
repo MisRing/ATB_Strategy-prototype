@@ -11,6 +11,7 @@ public class CursorController : MonoBehaviour
     [Header("Raycast Settings")]
     [SerializeField] private LayerMask _groundMasks;
     [SerializeField] private float _rayDistance = 100f;
+    [SerializeField] private float _maxRayNormalAngle = 60f;
 
     private GridTile _cursorTile;
     public GridTile CursorTile { get => _cursorTile; }
@@ -46,12 +47,15 @@ public class CursorController : MonoBehaviour
             if (((1 << hit.collider.gameObject.layer) & _groundMasks.value) != 0)
             {
                 Vector3 realPoint = hit.point;
-
-                if (GridParameters.LevelGrid.GetTileByWorldPos(ref tile, realPoint))
+                float normalAngle = Vector3.Angle(hit.normal, Vector3.up);
+                if (normalAngle <= _maxRayNormalAngle)
                 {
-                    if (tile.Owner == null)
+                    if (GridParameters.LevelGrid.GetTileByWorldPos(ref tile, realPoint))
                     {
-                        cursorOnTile = true;
+                        if (tile.Owner == null)
+                        {
+                            cursorOnTile = true;
+                        }
                     }
                 }
             }
