@@ -1,10 +1,6 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using System;
-using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -73,7 +69,12 @@ public class PlayerController : MonoBehaviour
     {
         if (!PlayerSelectionManager.SelectedUnit) return;
 
-        PlayerSelectionManager.SelectedUnit.AbilityController.SelectAbility(index);
+        if(PlayerSelectionManager.SelectedUnit.AbilityController.SelectAbility(index))
+        {
+            SelectPoint();
+            return;
+        }
+
         UpdateAbilityData();
     }
 

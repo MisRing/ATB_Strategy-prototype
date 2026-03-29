@@ -40,7 +40,7 @@ public class AbilityViewRenderer : MonoBehaviour
 
     private void DrawPath(PathData data)
     {
-        if (!data.IsReacheble)
+        if (data == null)
         {
             _pathRenderer.UnsetPathLine();
             _costDisplay.UnsetCost();

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitAgent : MonoBehaviour
+public class UnitAgent : MonoBehaviour, IPathHandler
 {
     [SerializeField] private float _accelerationDistance = 0.5f;
     [SerializeField] private float _minAcceleration = 0.1f;
@@ -16,7 +16,15 @@ public class UnitAgent : MonoBehaviour
 
     public PathData PathData { get { return _pathData; } }
     private PathData _pathData;
+    private bool _showPath;
     private UnitController _unit;
+
+    public event Action<PathData> OnPathChanged;
+
+    private void Awake()
+    {
+        AbilityViewRenderer.PathHandlers.Add(this);
+    }
 
     public void Init(UnitController unit, GridTile startTile)
     {
@@ -41,16 +49,42 @@ public class UnitAgent : MonoBehaviour
         GridParameters.LevelGrid.SetTileOwner(CurrentTile.x, CurrentTile.z, CurrentTile.y, _unit);
     }
 
+    public void ShowPath(bool show)
+    {
+        _showPath = show;
+        if (_showPath)
+        {
+            OnPathChanged?.Invoke(_pathData);
+        }
+        else
+        {
+            OnPathChanged?.Invoke(null);
+        }
+    }
+
     public void CalculatePath(Vector3 targetPosition)
     {
-        if(GridPathFinder.CalculatePath(ref _pathData, transform.position, targetPosition))
+        _pathData = new PathData();
+        if (GridPathFinder.CalculatePath(ref _pathData, transform.position, targetPosition))
         {
             _pathData.Duration = CalculateDuration(_pathData.Distance, _unit.UnitStats.Speed);
 
             float realTurnsCost = Mathf.Round((_pathData.Duration / TurnManager.TurnTime) * 100f) / 100f;
             
             _pathData.TurnsCost = Mathf.CeilToInt(realTurnsCost);
+        }
+        else
+        {
+            _pathData = null;
+        }
 
+        if (_showPath)
+        {
+            OnPathChanged?.Invoke(_pathData);
+        }
+        else
+        {
+            OnPathChanged?.Invoke(null);
         }
     }
 
@@ -74,13 +108,16 @@ public class UnitAgent : MonoBehaviour
         return time;
     }
 
-    public void StartMove()
+    public bool StartMove()
     {
+        if (_pathData == null) return false;
+
         GridTile finalTile = new GridTile();
         GridParameters.LevelGrid.GetTileByWorldPos(ref finalTile,_pathData.Points[_pathData.Points.Count - 1]);
         SetAgentTile(finalTile);
 
         StartCoroutine(Move());
+        return true;
     }
 
     private IEnumerator Move()
@@ -158,13 +195,12 @@ public class UnitAgent : MonoBehaviour
         transform.position = _pathData.Points[_pathData.Points.Count - 1];
     }
 }
-public struct PathData
+public class PathData
 {
     public List<Vector3> Points;
     public int TurnsCost;
     public float Duration;
     public float Distance;
-    public bool IsReacheble;
     //public TileCover Cover;
     //public Vector3 finalDirection;
 }

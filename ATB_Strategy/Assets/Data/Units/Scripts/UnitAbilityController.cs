@@ -26,29 +26,26 @@ public class UnitAbilityController : MonoBehaviour
         _currentAbility.EnterPrepare();
     }
 
-    public void SelectAbility(int index) //
+    public bool SelectAbility(int index) //
     {
         if (index == -1)
         {
             _currentAbility.ExitPrepare();
             _currentAbility = DefaultAbility;
             _currentAbility.EnterPrepare();
-            return;
+            return false;
         }
         
-        if (index >= Abilities.Length || index < 0) return;
-        if (_currentAbility == Abilities[index])
-        {
-            ExecuteAbility();
+        if (index >= Abilities.Length || index < 0) return false;
 
-            return;
-        }
+        if (_currentAbility == Abilities[index]) return true;
 
         _currentAbility.ExitPrepare();
 
         _currentAbility = Abilities[index];
 
         _currentAbility.EnterPrepare();
+        return false;
     }
 
     public bool ExecuteAbility()

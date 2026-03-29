@@ -14,7 +14,6 @@ public static class GridPathFinder
 
         if (NavMesh.CalculatePath(agentPoisition, targetPosition, NavMesh.AllAreas, path))
         {
-            pathData.IsReacheble = true;
             pathData.Points = new List<Vector3>();
             pathData.Points.AddRange(path.corners);
 
@@ -31,7 +30,7 @@ public static class GridPathFinder
             return true;
         }
 
-        pathData.IsReacheble = false;
+        pathData = null;
         return false;
     }
 
