@@ -16,4 +16,23 @@ public static class TimeService
         _timeSpeed = timeSpeed;
         OnTimeSpeedChanged?.Invoke(_timeSpeed);
     }
+
+    private static bool _isPaused = false;
+    private static float _savedTimeSpeed;
+    public static void GamePause(bool pause)
+    {
+        if(_isPaused == pause) return;
+
+        _isPaused = pause;
+
+        if(_isPaused)
+        {
+            _savedTimeSpeed = _timeSpeed;
+            SetTimeSpeed(0f);
+        }
+        else
+        {
+            SetTimeSpeed(_savedTimeSpeed);
+        }
+    }
 }

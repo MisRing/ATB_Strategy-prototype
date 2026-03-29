@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,7 +18,7 @@ public class PlayerInputController : MonoBehaviour
 
     public static event Action<int> SelectAbility;
     
-    public static event Action CancelESC;
+    public static StackAction CancelESC = new StackAction();
     
     private void Awake()
     {
@@ -86,4 +87,49 @@ public class PlayerInputController : MonoBehaviour
     private void SelectAbilityInput9(InputAction.CallbackContext context) => SelectAbility?.Invoke(9);
     
     private void CancelEscInput(InputAction.CallbackContext context) => CancelESC?.Invoke();
+}
+
+public class StackAction
+{
+    public event Action DefaultAction;
+    private readonly List<Action> _actionsQ = new List<Action>();
+
+    public void Invoke()
+    {
+        var snapshot = _actionsQ.ToArray();
+
+        for (int i = 0; i < snapshot.Length; i++)
+        {
+            if(snapshot[i] != null)
+            {
+                snapshot[i].Invoke();
+                Remove(_actionsQ[i]);
+                return;
+            }
+        }
+
+        DefaultAction?.Invoke();
+    }
+
+    public void Add(Action a)
+    {
+        _actionsQ.Insert(0, a);
+    }
+
+    public void Remove(Action a)
+    {
+        _actionsQ.Remove(a);
+    }
+
+    public static StackAction operator +(StackAction q, Action a)
+    {
+        q.Add(a);
+        return q;
+    }
+
+    public static StackAction operator -(StackAction q, Action a)
+    {
+        q.Remove(a);
+        return q;
+    }
 }
