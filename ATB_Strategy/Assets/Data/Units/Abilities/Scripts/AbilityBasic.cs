@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
 public class AbilityBasic : MonoBehaviour
 {
-    public string AbilityName = "Basic Ability (do nothing)";
+    public string AbilityName = "Basic Ability";
+    public string AbilityDescription = "This ability did nothing";
     public Sprite AbilityIcon;
     private protected UnitAbilityController _abilityController;
     private protected AbilityData _abilityData;

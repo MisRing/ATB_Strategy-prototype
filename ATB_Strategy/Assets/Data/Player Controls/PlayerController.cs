@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
         PlayerSelectionManager.OnSelectionChanged -= UnitSelected;
     }
     
+    //---------------------------------------------------
     private void SelectPoint()
     {
         if (!PlayerSelectionManager.SelectedUnit || PlayerSelectionManager.SelectedUnit.State == UnitState.Engaged) return;
@@ -76,9 +77,19 @@ public class PlayerController : MonoBehaviour
         }
         else if (result == AbilitySelectResult.Changed)
         {
-            PlayerInputController.CancelESC += PlayerSelectionManager.SelectedUnit.AbilityController.SelectDefaultAbility;
-
             UpdateAbilityData();
+        }
+    }
+
+    public void AbilitySelected(int index)
+    {
+        if(index == -1)
+        {
+            PlayerInputController.CancelESC -= PlayerSelectionManager.SelectedUnit.AbilityController.SelectDefaultAbility;
+        }
+        else
+        {
+            PlayerInputController.CancelESC += PlayerSelectionManager.SelectedUnit.AbilityController.SelectDefaultAbility;
         }
     }
 
@@ -86,6 +97,8 @@ public class PlayerController : MonoBehaviour
     {
         UpdateAbilityData();
     }
+    
+    //---------------------------------------------------
 
     
     //---------------------------------------------DEBUG-GUI--------------------------------------------

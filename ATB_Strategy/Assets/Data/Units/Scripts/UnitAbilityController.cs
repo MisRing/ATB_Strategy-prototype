@@ -10,6 +10,7 @@ public class UnitAbilityController : MonoBehaviour
 
     [HideInInspector] public UnitController Unit;
 
+    public event Action<int> OnAbilitySelected;
     public event Action<UnitController> OnAbilityFinished;
 
     public void Init(UnitController unit)
@@ -21,10 +22,14 @@ public class UnitAbilityController : MonoBehaviour
         {
             ability.Init(this);
         }
-        ChangeAbility(DefaultAbility);
+        ChangeAbility(DefaultAbility, false);
     }
-    
-    public void SelectDefaultAbility() => ChangeAbility(DefaultAbility);
+
+    public void SelectDefaultAbility()
+    {
+        ChangeAbility(DefaultAbility);
+        OnAbilitySelected?.Invoke(-1);
+    }
 
     public AbilitySelectResult SelectAbility(int index)
     {
@@ -33,6 +38,7 @@ public class UnitAbilityController : MonoBehaviour
         if (_currentAbility == Abilities[index]) return AbilitySelectResult.Same;
         
         ChangeAbility(Abilities[index]);
+        OnAbilitySelected?.Invoke(index);
 
         return AbilitySelectResult.Changed;
     }
@@ -45,6 +51,7 @@ public class UnitAbilityController : MonoBehaviour
         {
             Unit.State = UnitState.Engaged;
             _currentAbility.ExitPrepare();
+            OnAbilitySelected?.Invoke(-1);
             return true;
         }
 
@@ -73,7 +80,7 @@ public class UnitAbilityController : MonoBehaviour
         _currentAbility?.UpdateData(data);
     }
     
-    private void ChangeAbility(AbilityBasic ability)
+    private void ChangeAbility(AbilityBasic ability, bool notDefault = true)
     {
         _currentAbility?.ExitPrepare();
         _currentAbility = ability;

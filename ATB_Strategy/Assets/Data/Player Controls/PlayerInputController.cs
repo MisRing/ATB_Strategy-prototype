@@ -96,14 +96,11 @@ public class StackAction
 
     public void Invoke()
     {
-        var snapshot = _actionsQ.ToArray();
-
-        for (int i = 0; i < snapshot.Length; i++)
+        for (int i = 0; i < _actionsQ.Count; i++)
         {
-            if(snapshot[i] != null)
+            if(_actionsQ[i] != null)
             {
-                snapshot[i].Invoke();
-                Remove(_actionsQ[i]);
+                _actionsQ[i].Invoke();
                 return;
             }
         }
@@ -113,12 +110,17 @@ public class StackAction
 
     public void Add(Action a)
     {
+        if (_actionsQ.Contains(a))
+        {
+            Remove(a);
+        }
         _actionsQ.Insert(0, a);
     }
 
     public void Remove(Action a)
     {
-        _actionsQ.Remove(a);
+        if (!_actionsQ.Contains(a)) return;
+        _actionsQ.RemoveAll(x => x == a);
     }
 
     public static StackAction operator +(StackAction q, Action a)

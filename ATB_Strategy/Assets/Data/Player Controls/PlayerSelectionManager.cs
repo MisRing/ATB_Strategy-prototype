@@ -6,8 +6,7 @@ public class PlayerSelectionManager : MonoBehaviour
 {
     private PlayerController _playerController;
     [SerializeField] private List<UnitController> _units = new List<UnitController>();
-    public UnitController SelectedUnit { get => _selectedUnit; }
-    [SerializeField] private UnitController _selectedUnit;
+    public UnitController SelectedUnit;
 
     [SerializeField] private float _selectRayDistance = 100f;
     
@@ -64,7 +63,7 @@ public class PlayerSelectionManager : MonoBehaviour
         int step = next ? 1 : -1;
         for (int i = _units.Count + step; i > 0 && i < _units.Count * 2; i+= step)
         {
-            int newIndex = (_units.Count + _units.IndexOf(_selectedUnit) + i) % _units.Count;
+            int newIndex = (_units.Count + _units.IndexOf(SelectedUnit) + i) % _units.Count;
             if (_units[newIndex].State == UnitState.WaitingForOrder)
             {
                 SelectUnit(_units[newIndex]);
@@ -83,28 +82,30 @@ public class PlayerSelectionManager : MonoBehaviour
 
     private void DeselectCurrentUnit()
     {
-        if (_selectedUnit)
+        if (SelectedUnit)
         {
-            _selectedUnit.Deselect();
-            _selectedUnit = null;
+            SelectedUnit.Deselect();
+            SelectedUnit.AbilityController.OnAbilitySelected -= _playerController.AbilitySelected;
+            SelectedUnit = null;
         }
     }
     
     public void SelectUnit(UnitController unit, bool focusView = true)
     {
         if (!_units.Contains(unit)) return;
-        if (unit == _selectedUnit) return;
+        if (unit == SelectedUnit) return;
         if (unit.Owner != UnitOwner.Player) return;
 
         DeselectCurrentUnit();
 
-        _selectedUnit = unit;
-        _selectedUnit.Select();
+        SelectedUnit = unit;
+        SelectedUnit.Select();
+        SelectedUnit.AbilityController.OnAbilitySelected += _playerController.AbilitySelected;
         
-        OnSelectionChanged?.Invoke(_selectedUnit);
+        OnSelectionChanged?.Invoke(SelectedUnit);
         if (focusView)
         {
-            _playerController.CameraController.EnterFocusMode(_selectedUnit.transform);
+            _playerController.CameraController.EnterFocusMode(SelectedUnit.transform);
         }
     }
 }
