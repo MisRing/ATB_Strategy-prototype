@@ -69,13 +69,17 @@ public class PlayerController : MonoBehaviour
     {
         if (!PlayerSelectionManager.SelectedUnit) return;
 
-        if(PlayerSelectionManager.SelectedUnit.AbilityController.SelectAbility(index))
+        AbilitySelectResult result = PlayerSelectionManager.SelectedUnit.AbilityController.SelectAbility(index);
+        if(result == AbilitySelectResult.Same)
         {
             SelectPoint();
-            return;
         }
+        else if (result == AbilitySelectResult.Changed)
+        {
+            PlayerInputController.CancelESC += PlayerSelectionManager.SelectedUnit.AbilityController.SelectDefaultAbility;
 
-        UpdateAbilityData();
+            UpdateAbilityData();
+        }
     }
 
     private void UnitSelected(UnitController unit)

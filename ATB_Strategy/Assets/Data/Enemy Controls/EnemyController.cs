@@ -51,7 +51,7 @@ public class EnemyController : MonoBehaviour
             }
             data.TargetTile = tile;
 
-            if (unit.AbilityController.ForceExecuteAbility(data))
+            if (unit.AbilityController.ForceExecuteAbility(-1, data))
             {
                 break;
             }

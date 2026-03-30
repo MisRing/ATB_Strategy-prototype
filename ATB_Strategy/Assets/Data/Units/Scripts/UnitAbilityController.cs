@@ -15,42 +15,31 @@ public class UnitAbilityController : MonoBehaviour
     public void Init(UnitController unit)
     {
         Unit = unit;
-        TurnManager.EnterWaitingQ(Unit);
 
         DefaultAbility.Init(this);
         foreach (var ability in Abilities)
         {
             ability.Init(this);
         }
-        _currentAbility = DefaultAbility;
-        _currentAbility.EnterPrepare();
+        ChangeAbility(DefaultAbility);
     }
+    
+    public void SelectDefaultAbility() => ChangeAbility(DefaultAbility);
 
-    public bool SelectAbility(int index) //
+    public AbilitySelectResult SelectAbility(int index)
     {
-        if (index == -1)
-        {
-            _currentAbility.ExitPrepare();
-            _currentAbility = DefaultAbility;
-            _currentAbility.EnterPrepare();
-            return false;
-        }
+        if (!Abilities.IsValidIndex(index)) return AbilitySelectResult.Invalid;
+
+        if (_currentAbility == Abilities[index]) return AbilitySelectResult.Same;
         
-        if (index >= Abilities.Length || index < 0) return false;
+        ChangeAbility(Abilities[index]);
 
-        if (_currentAbility == Abilities[index]) return true;
-
-        _currentAbility.ExitPrepare();
-
-        _currentAbility = Abilities[index];
-
-        _currentAbility.EnterPrepare();
-        return false;
+        return AbilitySelectResult.Changed;
     }
 
     public bool ExecuteAbility()
     {
-        if (_currentAbility == null) return false;
+        if (!_currentAbility) return false;
         
         if (_currentAbility.Execute())
         {
@@ -62,24 +51,59 @@ public class UnitAbilityController : MonoBehaviour
         return false;
     }
     
-    public bool ForceExecuteAbility(AbilityData data)
+    public bool ForceExecuteAbility(int index, AbilityData data)
     {
-        if (_currentAbility == null) return false;
+        if (!Abilities.IsValidIndex(index) && index != -1) return false;
         
-        _currentAbility.UpdateData(data);
+        AbilityBasic ability = index == -1 ? DefaultAbility : Abilities[index];
+        
+        ability.UpdateData(data);
 
-        return ExecuteAbility();
+        if (ability.Execute())
+        {
+            Unit.State = UnitState.Engaged;
+            return true;
+        }
+
+        return false;
     }
 
+    public void UpdateAbilityData(AbilityData data)
+    {
+        _currentAbility?.UpdateData(data);
+    }
+    
+    private void ChangeAbility(AbilityBasic ability)
+    {
+        _currentAbility?.ExitPrepare();
+        _currentAbility = ability;
+        _currentAbility.EnterPrepare();
+    }
+    
     public void FinishExecuteAbility()
     {
         Unit.State = UnitState.WaitingForOrder;
         OnAbilityFinished?.Invoke(Unit);
     }
 
-    public void UpdateAbilityData(AbilityData data)
+}
+
+public enum AbilitySelectResult
+{
+    Changed,
+    Same,
+    Invalid
+}
+
+public static class CollectionExtensions
+{
+    public static bool IsValidIndex<T>(this IList<T> collection, int index)
     {
-        if (_currentAbility == null) return;
-        _currentAbility.UpdateData(data);
+        return index >= 0 && index < collection.Count;
+    }
+    
+    public static bool IsValidIndex<T>(this T[] array, int index)
+    {
+        return index >= 0 && index < array.Length;
     }
 }

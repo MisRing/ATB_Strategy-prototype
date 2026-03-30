@@ -30,6 +30,8 @@ public class UnitController : MonoBehaviour
         AbilityController.Init(this);
         UnitAnimator.Init(this);
         AgentController.Init(this, tile);
+        
+        TurnManager.EnterWaitingQ(this);
     }
 
     public void Select()
@@ -37,7 +39,8 @@ public class UnitController : MonoBehaviour
         if (_isSelected) return;
 
         _isSelected = true;
-        OnSelectionChanged?.Invoke(true);
+        OnSelectionChanged?.Invoke(_isSelected);
+        AbilityController.SelectDefaultAbility();
     }
 
     public void Deselect()
@@ -45,11 +48,11 @@ public class UnitController : MonoBehaviour
         if (!_isSelected) return;
 
         _isSelected = false;
-        OnSelectionChanged?.Invoke(false);
+        OnSelectionChanged?.Invoke(_isSelected);
 
         if (State != UnitState.Engaged)
         {
-            AbilityController.SelectAbility(-1);
+            AbilityController.SelectDefaultAbility();
         }
     }
 }
