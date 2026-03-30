@@ -962,7 +962,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 60}
-  m_SizeDelta: {x: 20, y: 100}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &117857838
 MonoBehaviour:
@@ -7474,7 +7474,7 @@ MonoBehaviour:
   _units:
   - {fileID: 1816743775}
   - {fileID: 669000087}
-  _selectedUnit: {fileID: 0}
+  SelectedUnit: {fileID: 0}
   _selectRayDistance: 100
 --- !u!1 &755900415
 GameObject:
@@ -62600,7 +62600,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1361905027
 Transform:
   m_ObjectHideFlags: 0
@@ -64963,6 +64963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIAbilityController
   _abilityButtonPrefab: {fileID: 7060541985027699139, guid: b6e923817c4109c49a4efa507085076d, type: 3}
   _rectTransform: {fileID: 117857837}
+  _preparePanel: {fileID: 984470538}
 --- !u!1 &1602364269
 GameObject:
   m_ObjectHideFlags: 0
