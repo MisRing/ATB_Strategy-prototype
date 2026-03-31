@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour
     {
         if (GridParameters.LevelGrid == null)
         {
-            GridParameters.LevelGrid = FindFirstObjectByType(typeof(GridMap)) as GridMap;
+            // TODO: DELETE THIS
+            GridParameters.LevelGrid = FindFirstObjectByType(typeof(GridMap)) as GridMap; 
         }
 
         CursorController = GetComponent<CursorController>();
