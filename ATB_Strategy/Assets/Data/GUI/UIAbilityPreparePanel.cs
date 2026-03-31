@@ -8,11 +8,11 @@ public class UIAbilityPreparePanel : MonoBehaviour
     [SerializeField] private Text _abilityNameText;
     [SerializeField] private Text _abilityDescriptionText;
     
-    private UnitAbilityController _abilityController;
+    private PlayerController _playerController;
 
-    public void SetAbility(AbilityBasic ability)
+    public void SetAbility(AbilityBasic ability, PlayerController playerController)
     {
-        _abilityController = ability.Unit.AbilityController;
+        _playerController = playerController;
         
         _executeButton.onClick.RemoveAllListeners();
         _cancelButton.onClick.RemoveAllListeners();
@@ -26,11 +26,11 @@ public class UIAbilityPreparePanel : MonoBehaviour
     
     public void Execute()
     {
-        _abilityController.ExecuteAbility();
+        _playerController.ExecuteAbility();
     }
     
     public void Close()
     {
-        //_abilityController.SelectDefaultAbility();
+        _playerController.SelectAbility(-1);
     }
 }

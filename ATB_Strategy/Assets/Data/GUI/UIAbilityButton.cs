@@ -7,18 +7,18 @@ public class UIAbilityButton : MonoBehaviour
     [SerializeField] private Image _buttonImage;
 
     private int _abilityIndex = -1;
-    private UnitAbilityController _abilityController;
+    private PlayerController _playerController;
 
-    public void SetButton(AbilityBasic ability, int index)
+    public void SetButton(PlayerController playerController, AbilityBasic ability, int index)
     {
         _abilityIndex = index;
-        _abilityController = ability.Unit.AbilityController;
+        _playerController = playerController;
         _buttonImage.sprite = ability.AbilityIcon;
         _button.onClick.AddListener(SetAbility);
     }
 
     public void SetAbility()
     {
-        _abilityController.SelectAbility(_abilityIndex);
+        _playerController.SelectAbility(_abilityIndex);
     }
 }

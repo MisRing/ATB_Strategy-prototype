@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public PlayerSelectionManager PlayerSelectionManager;
 
     [SerializeField] private List<Vector3Int> _positionPreset = new List<Vector3Int>();
+    
+    public event Action<int> OnAbilitySelected;
 
     private void Awake()
     {
@@ -39,7 +41,7 @@ public class PlayerController : MonoBehaviour
         PlayerSelectionManager.OnSelectionChanged -= UnitSelected;
     }
 
-    private void SelectAbility(int index)
+    public void SelectAbility(int index)
     {
         AbilityBasic oldAbility = PlayerSelectionManager.SelectedUnit.AbilityController.CurrentAbility;
         if (PlayerSelectionManager.SelectedUnit.AbilityController.SelectAbility(index))
@@ -57,6 +59,7 @@ public class PlayerController : MonoBehaviour
                 return;
             }
             BindAbility(newAbility, true, index != -1);
+            OnAbilitySelected?.Invoke(index);
         }
     }
 
@@ -74,10 +77,11 @@ public class PlayerController : MonoBehaviour
         PlayerSelectionManager.SelectedUnit.AbilityController.UpdateAbilityData(data);
     }
 
-    private void ExecuteAbility()
+    public void ExecuteAbility()
     {
         if (PlayerSelectionManager.SelectedUnit.AbilityController.ExecuteAbility())
         {
+            OnAbilitySelected?.Invoke(-1);
             PlayerSelectionManager.SwitchToFreeUnit(true);
         }
     }

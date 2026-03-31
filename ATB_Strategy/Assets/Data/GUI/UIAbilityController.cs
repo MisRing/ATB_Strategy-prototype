@@ -9,8 +9,15 @@ public class UIAbilityController : MonoBehaviour
     
     private List<UIAbilityButton> _buttons;
     private UnitController _unit;
+    
+    private PlayerController _playerController;
 
-    public void SetAbilityButtons(UnitController unit)
+    public void Init(PlayerController playerController)
+    {
+        _playerController = playerController;
+    }
+
+    public void SetAbilityButtons(UnitController oldUnit, UnitController unit)
     {
         if (_buttons != null)
         {
@@ -22,12 +29,7 @@ public class UIAbilityController : MonoBehaviour
         }
 
         if (!unit) return;
-        /*if (_unit)
-        {
-            _unit.AbilityController.OnAbilitySelected -= SetAbilityPreparePanel;
-        }
         _unit = unit;
-        _unit.AbilityController.OnAbilitySelected += SetAbilityPreparePanel;
 
         _buttons = new List<UIAbilityButton>();
         for(int i = 0; i < unit.AbilityController.Abilities.Length; i++)
@@ -35,11 +37,11 @@ public class UIAbilityController : MonoBehaviour
             GameObject button = Instantiate(_abilityButtonPrefab, _rectTransform);
             UIAbilityButton uiButton = button.GetComponent<UIAbilityButton>();
             _buttons.Add(uiButton);
-            uiButton.SetButton(unit.AbilityController.Abilities[i], i);
-        }*/
+            uiButton.SetButton(_playerController, unit.AbilityController.Abilities[i], i);
+        }
     }
 
-    private void SetAbilityPreparePanel(int index)
+    public void SetAbilityPreparePanel(int index)
     {
         if(index == -1)
         {
@@ -48,7 +50,7 @@ public class UIAbilityController : MonoBehaviour
         else
         {
             _preparePanel.gameObject.SetActive(true);
-            _preparePanel.SetAbility(_unit.AbilityController.Abilities[index]);
+            _preparePanel.SetAbility(_unit.AbilityController.Abilities[index], _playerController);
         }
     }
 }

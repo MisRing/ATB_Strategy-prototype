@@ -8,20 +8,24 @@ public class UIController : MonoBehaviour
 
     [SerializeField] private GameObject _pauseCanvas;
 
-    private void Start()
+    private void Awake()
     {
-        //_uiAbilityController.SetAbilityButtons(_playerController.PlayerSelectionManager.SelectedUnit);
+        _uiAbilityController.Init(_playerController);
     }
+    
     private void OnEnable()
     {
-        //_playerController.PlayerSelectionManager.OnSelectionChanged += _uiAbilityController.SetAbilityButtons;
+        _playerController.PlayerSelectionManager.OnSelectionChanged += _uiAbilityController.SetAbilityButtons;
+        _playerController.OnAbilitySelected += _uiAbilityController.SetAbilityPreparePanel;
+
 
         PlayerInputController.Cancel.DefaultAction += OpenPauseMenu;
     }
 
     private void OnDisable()
     {
-        //_playerController.PlayerSelectionManager.OnSelectionChanged -= _uiAbilityController.SetAbilityButtons;
+        _playerController.PlayerSelectionManager.OnSelectionChanged -= _uiAbilityController.SetAbilityButtons;
+        _playerController.OnAbilitySelected += _uiAbilityController.SetAbilityPreparePanel;
 
         PlayerInputController.Cancel.DefaultAction -= OpenPauseMenu;
     }
