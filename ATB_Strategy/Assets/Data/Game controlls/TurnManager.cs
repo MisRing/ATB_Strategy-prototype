@@ -13,18 +13,21 @@ public class TurnManager : MonoBehaviour
     private static float _currentTurnTime = 0f;
     private static int _currentTurn = 0;
 
-    private static float _minTimeSpeed = 0.05f;
-    private static float _timeStopDuration = 0.3f;
+    private static readonly float _minTimeSpeed = 0.05f;
+    private static readonly float _timeStopDuration = 0.3f;
 
 
     public static readonly float TurnTime = 0.125f;
 
     public static event Action<UnitController> OnUnitEnterExitQ;
     
-    private static List<UnitController> _freeUnits = new List<UnitController>();
+    private static readonly List<UnitController> _freeUnits = new List<UnitController>();
     
-    private static Dictionary<int, List<AbilityBasic>> _playerAbilitiesOnAction = new Dictionary<int, List<AbilityBasic>>();
-    private static Dictionary<int, List<AbilityBasic>> _enemyAbilitiesOnAction = new Dictionary<int, List<AbilityBasic>>();
+    private static readonly Dictionary<int, List<AbilityBasic>> _playerAbilitiesOnAction = new Dictionary<int, List<AbilityBasic>>();
+    private static readonly Dictionary<int, List<AbilityBasic>> _enemyAbilitiesOnAction = new Dictionary<int, List<AbilityBasic>>();
+    
+    public static event Action<AbilityBasic, int> OnAbilityScheduled;
+    public static event Action<int> OnAbilityResolved;
 
     private void Start()
     {
@@ -73,7 +76,7 @@ public class TurnManager : MonoBehaviour
 
             _enemyAbilitiesOnAction[turnKey].Add(abilityBasic);
         }
-
+        OnAbilityScheduled?.Invoke(abilityBasic, turnKey);
         RemoveFromWaitingQ(abilityBasic.Unit);
     }
     private bool _lastTurnPause = true;
@@ -90,34 +93,40 @@ public class TurnManager : MonoBehaviour
                 _currentTurnTime -= TurnTime;
                 _currentTurn++;
 
-                if (_playerAbilitiesOnAction.ContainsKey(_currentTurn))
+                if (_playerAbilitiesOnAction.ContainsKey(_currentTurn) || _enemyAbilitiesOnAction.ContainsKey(_currentTurn))
                 {
-                    _lastTurnPause = true;
-
-                    foreach (AbilityBasic ability in _playerAbilitiesOnAction[_currentTurn])
+                    if (_enemyAbilitiesOnAction.ContainsKey(_currentTurn))
                     {
-                        if (ability.Unit.Owner == UnitOwner.Player)
+                        _lastTurnPause = false;
+                        foreach (AbilityBasic ability in _enemyAbilitiesOnAction[_currentTurn])
                         {
-                            OnUnitEnterExitQ?.Invoke(ability.Unit);
-                            break;
+                            EnterWaitingQ(ability.Unit);
+                            ability.FinishExecute();
                         }
+                        OnAbilityResolved?.Invoke(_currentTurn);
+                        _enemyAbilitiesOnAction.Remove(_currentTurn);
                     }
-                    foreach (AbilityBasic ability in _playerAbilitiesOnAction[_currentTurn])
+                    if (_playerAbilitiesOnAction.ContainsKey(_currentTurn))
                     {
-                        EnterWaitingQ(ability.Unit);
-                        ability.FinishExecute();
+                        _lastTurnPause = true;
+
+                        foreach (AbilityBasic ability in _playerAbilitiesOnAction[_currentTurn])
+                        {
+                            if (ability.Unit.Owner == UnitOwner.Player)
+                            {
+                                OnUnitEnterExitQ?.Invoke(ability.Unit);
+
+                                break;
+                            }
+                        }
+                        foreach (AbilityBasic ability in _playerAbilitiesOnAction[_currentTurn])
+                        {
+                            EnterWaitingQ(ability.Unit);
+                            ability.FinishExecute();
+                        }
+                        OnAbilityResolved?.Invoke(_currentTurn);
+                        _playerAbilitiesOnAction.Remove(_currentTurn);
                     }
-                    _playerAbilitiesOnAction.Remove(_currentTurn);
-                }
-                else if (_enemyAbilitiesOnAction.ContainsKey(_currentTurn))
-                {
-                    _lastTurnPause = false;
-                    foreach (AbilityBasic ability in _enemyAbilitiesOnAction[_currentTurn])
-                    {
-                        EnterWaitingQ(ability.Unit);
-                        ability.FinishExecute();
-                    }
-                    _enemyAbilitiesOnAction.Remove(_currentTurn);
                 }
                 else
                 {

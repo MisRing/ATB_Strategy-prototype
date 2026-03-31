@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
 
     public void SelectAbility(int index)
     {
+        if (!PlayerSelectionManager.SelectedUnit) return;
+        
         AbilityBasic oldAbility = PlayerSelectionManager.SelectedUnit.AbilityController.CurrentAbility;
         if (PlayerSelectionManager.SelectedUnit.AbilityController.SelectAbility(index))
         {
