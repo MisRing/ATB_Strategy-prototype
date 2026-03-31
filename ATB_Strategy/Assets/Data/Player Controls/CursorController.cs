@@ -14,8 +14,6 @@ public class CursorController : MonoBehaviour
     [SerializeField] private float _maxRayNormalAngle = 60f;
 
     private GridTile _cursorTile;
-    public GridTile CursorTile { get => _cursorTile; }
-
     private Vector3 _cursorPosition;
     public Vector3 CursorPosition { get => _cursorPosition; }
 

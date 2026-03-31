@@ -4,11 +4,14 @@ using System;
 
 public class PlayerSelectionManager : MonoBehaviour
 {
-    private PlayerController _playerController;
+    [Header("Main Settings")]
     [SerializeField] private List<UnitController> _units = new List<UnitController>();
     public UnitController SelectedUnit;
 
+    [Header("Raycast Settings")]
     [SerializeField] private float _selectRayDistance = 100f;
+    
+    private PlayerController _playerController;
     
     public event Action<UnitController, UnitController> OnSelectionChanged;
 
@@ -21,6 +24,20 @@ public class PlayerSelectionManager : MonoBehaviour
             _units[i].Init(GridParameters.LevelGrid.GetTile(positionPreset[i].x, positionPreset[i].z, positionPreset[i].y));
         }
     }
+    
+    private void OnEnable()
+    {
+        PlayerInputController.SwitchTarget += SwitchTarget;
+        PlayerInputController.PointLClicl += PointLeftClick;
+        TurnManager.OnUnitEnterExitQ += SelectReadyUnit;
+    }
+
+    private void OnDisable()
+    {
+        PlayerInputController.SwitchTarget -= SwitchTarget;
+        PlayerInputController.PointLClicl -= PointLeftClick;
+        TurnManager.OnUnitEnterExitQ -= SelectReadyUnit;
+    }
 
     private void Start()
     {
@@ -31,21 +48,7 @@ public class PlayerSelectionManager : MonoBehaviour
         _playerController.CameraController.Init(SelectedUnit.transform);
     }
 
-    private void OnEnable()
-    {
-        PlayerInputController.SwitchTarget += SwitchTarget;
-        PlayerInputController.PointLClicl += PointLClicl;
-        TurnManager.OnUnitEnterExitQ += SelectReadyUnit;
-    }
-
-    private void OnDisable()
-    {
-        PlayerInputController.SwitchTarget -= SwitchTarget;
-        PlayerInputController.PointLClicl -= PointLClicl;
-        TurnManager.OnUnitEnterExitQ -= SelectReadyUnit;
-    }
-
-    private void PointLClicl()
+    private void PointLeftClick()
     {
         Vector2 mousePosition = PlayerInputController.MouseScreenPosition;
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
@@ -84,7 +87,25 @@ public class PlayerSelectionManager : MonoBehaviour
     }
     
     private void SelectReadyUnit(UnitController unit) => SelectUnit(unit);
+    
+    public void SelectUnit(UnitController unit, bool focusView = true)
+    {
+        if (!_units.Contains(unit)) return;
+        if (unit == SelectedUnit) return;
+        if (unit.Owner != UnitOwner.Player) return;
 
+        UnitController oldUnit = SelectedUnit;
+        
+        DeselectCurrentUnit();
+        SelectCurrentUnit(unit);
+        
+        OnSelectionChanged?.Invoke(oldUnit, SelectedUnit);
+        if (focusView)
+        {
+            _playerController.CameraController.EnterFocusMode(SelectedUnit.transform);
+        }
+    }
+    
     private void DeselectCurrentUnit()
     {
         if (SelectedUnit)
@@ -94,22 +115,9 @@ public class PlayerSelectionManager : MonoBehaviour
         }
     }
     
-    public void SelectUnit(UnitController unit, bool focusView = true)
+    private void SelectCurrentUnit(UnitController unit)
     {
-        if (!_units.Contains(unit)) return;
-        if (unit == SelectedUnit) return;
-        if (unit.Owner != UnitOwner.Player) return;
-
-        UnitController oldUnit = SelectedUnit;
-        DeselectCurrentUnit();
-
         SelectedUnit = unit;
         SelectedUnit.Select();
-        
-        OnSelectionChanged?.Invoke(oldUnit, SelectedUnit);
-        if (focusView)
-        {
-            _playerController.CameraController.EnterFocusMode(SelectedUnit.transform);
-        }
     }
 }
