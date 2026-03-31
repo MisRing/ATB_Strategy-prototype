@@ -22,7 +22,7 @@ public class UIAbilityController : MonoBehaviour
         }
 
         if (!unit) return;
-        if (_unit)
+        /*if (_unit)
         {
             _unit.AbilityController.OnAbilitySelected -= SetAbilityPreparePanel;
         }
@@ -36,7 +36,7 @@ public class UIAbilityController : MonoBehaviour
             UIAbilityButton uiButton = button.GetComponent<UIAbilityButton>();
             _buttons.Add(uiButton);
             uiButton.SetButton(unit.AbilityController.Abilities[i], i);
-        }
+        }*/
     }
 
     private void SetAbilityPreparePanel(int index)

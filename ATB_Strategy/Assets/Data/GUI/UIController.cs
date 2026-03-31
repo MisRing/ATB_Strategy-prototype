@@ -10,20 +10,20 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
-        _uiAbilityController.SetAbilityButtons(_playerController.PlayerSelectionManager.SelectedUnit);
+        //_uiAbilityController.SetAbilityButtons(_playerController.PlayerSelectionManager.SelectedUnit);
     }
     private void OnEnable()
     {
-        _playerController.PlayerSelectionManager.OnSelectionChanged += _uiAbilityController.SetAbilityButtons;
+        //_playerController.PlayerSelectionManager.OnSelectionChanged += _uiAbilityController.SetAbilityButtons;
 
-        PlayerInputController.CancelESC.DefaultAction += OpenPauseMenu;
+        PlayerInputController.Cancel.DefaultAction += OpenPauseMenu;
     }
 
     private void OnDisable()
     {
-        _playerController.PlayerSelectionManager.OnSelectionChanged -= _uiAbilityController.SetAbilityButtons;
+        //_playerController.PlayerSelectionManager.OnSelectionChanged -= _uiAbilityController.SetAbilityButtons;
 
-        PlayerInputController.CancelESC.DefaultAction -= OpenPauseMenu;
+        PlayerInputController.Cancel.DefaultAction -= OpenPauseMenu;
     }
 
     private bool _pauseOpened = false;

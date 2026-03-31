@@ -23,15 +23,11 @@ public class PlayerController : MonoBehaviour
         PlayerSelectionManager.Init(this, _positionPreset);
 
         CursorController.Init();
-        CameraController.Init(PlayerSelectionManager.SelectedUnit.transform);
     }
 
     private void OnEnable()
     {
         PlayerInputController.SelectAbility += SelectAbility;
-        PlayerInputController.SelectPoint += SelectPoint;
-
-        CursorController.OnPositionChanged += UpdateAbilityData;
 
         PlayerSelectionManager.OnSelectionChanged += UnitSelected;
     }
@@ -39,66 +35,92 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         PlayerInputController.SelectAbility -= SelectAbility;
-        PlayerInputController.SelectPoint -= SelectPoint;
-
-        CursorController.OnPositionChanged -= UpdateAbilityData;
         
         PlayerSelectionManager.OnSelectionChanged -= UnitSelected;
-    }
-    
-    //---------------------------------------------------
-    private void SelectPoint()
-    {
-        if (!PlayerSelectionManager.SelectedUnit || PlayerSelectionManager.SelectedUnit.State == UnitState.Engaged) return;
-
-        if (PlayerSelectionManager.SelectedUnit.AbilityController.ExecuteAbility())
-        {
-            PlayerSelectionManager.SwitchToFreeUnit();
-        }
-    }
-
-    private void UpdateAbilityData()
-    {
-        if (!PlayerSelectionManager.SelectedUnit || PlayerSelectionManager.SelectedUnit.State == UnitState.Engaged) return;
-
-        AbilityData data = new AbilityData();
-        data.TargetWorldPos = CursorController.CursorPosition;
-        PlayerSelectionManager.SelectedUnit.AbilityController.UpdateAbilityData(data);
     }
 
     private void SelectAbility(int index)
     {
-        if (!PlayerSelectionManager.SelectedUnit) return;
+        AbilityBasic oldAbility = PlayerSelectionManager.SelectedUnit.AbilityController.CurrentAbility;
+        if (PlayerSelectionManager.SelectedUnit.AbilityController.SelectAbility(index))
+        {
+            BindAbility(oldAbility, false);
+            
+            AbilityBasic newAbility = PlayerSelectionManager.SelectedUnit.AbilityController.CurrentAbility;
+            
+            bool isSameAbility = oldAbility == newAbility;
+            bool isInstant = newAbility.RequiredDataType == null;
 
-        AbilitySelectResult result = PlayerSelectionManager.SelectedUnit.AbilityController.SelectAbility(index);
-        if(result == AbilitySelectResult.Same)
-        {
-            SelectPoint();
-        }
-        else if (result == AbilitySelectResult.Changed)
-        {
-            UpdateAbilityData();
+            if (isSameAbility && isInstant)
+            {
+                ExecuteAbility();
+                return;
+            }
+            BindAbility(newAbility, true, index != -1);
         }
     }
 
-    public void AbilitySelected(int index)
+    private void CancelAbility()
     {
-        if(index == -1)
+        SelectAbility(-1);
+    }
+
+    private void UpdateAbilityPointData()
+    {
+        if (!PlayerSelectionManager.SelectedUnit || PlayerSelectionManager.SelectedUnit.State == UnitState.Engaged) return;
+
+        PointData data = new PointData();
+        data.Position = CursorController.CursorPosition;
+        PlayerSelectionManager.SelectedUnit.AbilityController.UpdateAbilityData(data);
+    }
+
+    private void ExecuteAbility()
+    {
+        if (PlayerSelectionManager.SelectedUnit.AbilityController.ExecuteAbility())
         {
-            PlayerInputController.CancelESC -= PlayerSelectionManager.SelectedUnit.AbilityController.SelectDefaultAbility;
+            PlayerSelectionManager.SwitchToFreeUnit(true);
         }
+    }
+
+
+    private void BindAbility(AbilityBasic ability, bool bind, bool bindCancel = true)
+    {
+        if (!ability) return;
+
+        Type type = ability.RequiredDataType;
+
+        if (type == typeof(PointData))
+        {
+            if (bind)
+            {
+                CursorController.OnPositionChanged += UpdateAbilityPointData;
+                PlayerInputController.PointRClick += ExecuteAbility;
+                UpdateAbilityPointData();
+            }
+            else
+            {
+                CursorController.OnPositionChanged -= UpdateAbilityPointData;
+                PlayerInputController.PointRClick -= ExecuteAbility;
+            }
+        }
+
+        if (bind && bindCancel)
+            PlayerInputController.Cancel += CancelAbility;
         else
-        {
-            PlayerInputController.CancelESC += PlayerSelectionManager.SelectedUnit.AbilityController.SelectDefaultAbility;
-        }
-    }
-
-    private void UnitSelected(UnitController unit)
-    {
-        UpdateAbilityData();
+            PlayerInputController.Cancel -= CancelAbility;
     }
     
-    //---------------------------------------------------
+    private void UnitSelected(UnitController oldUnit, UnitController unit)
+    {
+        if (oldUnit)
+        {
+            BindAbility(oldUnit.AbilityController.CurrentAbility, false);
+        }
+        if (unit)
+        {
+            SelectAbility(-1);
+        }
+    }
 
     
     //---------------------------------------------DEBUG-GUI--------------------------------------------

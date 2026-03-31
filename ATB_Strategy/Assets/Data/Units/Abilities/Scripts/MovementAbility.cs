@@ -10,6 +10,7 @@ public class MovementAbility : AbilityBasic
     {
         base.Init(abilityController);
         AbilityName = "Simple movement";
+        RequiredDataType = typeof(PointData);
         _agent = Unit.AgentController;
     }
 
@@ -30,7 +31,7 @@ public class MovementAbility : AbilityBasic
         if (_abilityController.Unit.State != UnitState.WaitingForOrder) return;
 
         base.UpdateData(abilityData);
-        _agent.CalculatePath(_abilityData.TargetWorldPos);
+        _agent.CalculatePath((_abilityData as PointData).Position);
     }
 
     public override bool Execute()
@@ -48,4 +49,5 @@ public class MovementAbility : AbilityBasic
     {
         base.FinishExecute();
     }
+    
 }

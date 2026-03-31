@@ -6415,6 +6415,7 @@ MonoBehaviour:
   Abilities:
   - {fileID: 669000080}
   - {fileID: 669000079}
+  CurrentAbility: {fileID: 0}
   Unit: {fileID: 0}
 --- !u!114 &669000086
 MonoBehaviour:
@@ -6937,7 +6938,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &723904378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7384,6 +7385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 742375537}
   - component: {fileID: 742375538}
+  - component: {fileID: 742375542}
   - component: {fileID: 742375539}
   - component: {fileID: 742375541}
   - component: {fileID: 742375540}
@@ -7476,6 +7478,18 @@ MonoBehaviour:
   - {fileID: 669000087}
   SelectedUnit: {fileID: 0}
   _selectRayDistance: 100
+--- !u!114 &742375542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742375536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e8b94351e40e547899f3abc07bfbf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAbilityController
 --- !u!1 &755900415
 GameObject:
   m_ObjectHideFlags: 0
@@ -9311,7 +9325,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &935260117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9409,6 +9423,7 @@ MonoBehaviour:
   DefaultAbility: {fileID: 935260118}
   Abilities:
   - {fileID: 935260117}
+  CurrentAbility: {fileID: 0}
   Unit: {fileID: 0}
 --- !u!114 &935260123
 MonoBehaviour:
@@ -13780,7 +13795,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1306086769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13878,6 +13893,7 @@ MonoBehaviour:
   DefaultAbility: {fileID: 1306086770}
   Abilities:
   - {fileID: 1306086769}
+  CurrentAbility: {fileID: 0}
   Unit: {fileID: 0}
 --- !u!114 &1306086775
 MonoBehaviour:
@@ -67441,6 +67457,7 @@ MonoBehaviour:
   Abilities:
   - {fileID: 1816743783}
   - {fileID: 1816743779}
+  CurrentAbility: {fileID: 0}
   Unit: {fileID: 0}
 --- !u!114 &1816743779
 MonoBehaviour:
@@ -68509,7 +68526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1979210993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68607,6 +68624,7 @@ MonoBehaviour:
   DefaultAbility: {fileID: 1979210994}
   Abilities:
   - {fileID: 1979210993}
+  CurrentAbility: {fileID: 0}
   Unit: {fileID: 0}
 --- !u!114 &1979210999
 MonoBehaviour:

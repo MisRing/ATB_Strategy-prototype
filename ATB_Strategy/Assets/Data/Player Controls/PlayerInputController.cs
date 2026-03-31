@@ -12,13 +12,13 @@ public class PlayerInputController : MonoBehaviour
     public static Vector2 MouseScreenPosition { get => _inputActions.Player.MousePosition.ReadValue<Vector2>(); }
 
 
-    public static event Action SelectObject;
-    public static event Action SelectPoint;
+    public static event Action PointLClicl;
+    public static event Action PointRClick;
     public static event Action SwitchTarget;
 
     public static event Action<int> SelectAbility;
     
-    public static StackAction CancelESC = new StackAction();
+    public static StackAction Cancel = new StackAction();
     
     private void Awake()
     {
@@ -29,8 +29,8 @@ public class PlayerInputController : MonoBehaviour
     {
         _inputActions.Enable();
 
-        _inputActions.Player.SelectObject.started += SelectObjectInput;
-        _inputActions.Player.SelectPoint.started += SelectPointInput;
+        _inputActions.Player.PointLeftClick.started += SelectObjectInput;
+        _inputActions.Player.PointRightClick.started += SelectPointInput;
         _inputActions.Player.SwitchTarget.started += SwitchTargetInput;
 
         _inputActions.Player.AbilitySwitch0.started += SelectAbilityInput0;
@@ -51,8 +51,8 @@ public class PlayerInputController : MonoBehaviour
     {
         _inputActions.Disable();
 
-        _inputActions.Player.SelectObject.started -= SelectObjectInput;
-        _inputActions.Player.SelectPoint.started -= SelectPointInput;
+        _inputActions.Player.PointLeftClick.started -= SelectObjectInput;
+        _inputActions.Player.PointRightClick.started -= SelectPointInput;
         _inputActions.Player.SwitchTarget.started -= SwitchTargetInput;
 
         _inputActions.Player.AbilitySwitch0.started -= SelectAbilityInput0;
@@ -69,9 +69,9 @@ public class PlayerInputController : MonoBehaviour
         _inputActions.Player.Escape.started += CancelEscInput;
     }
 
-    private void SelectObjectInput(InputAction.CallbackContext context) => SelectObject?.Invoke();
+    private void SelectObjectInput(InputAction.CallbackContext context) => PointLClicl?.Invoke();
 
-    private void SelectPointInput(InputAction.CallbackContext context) => SelectPoint?.Invoke();
+    private void SelectPointInput(InputAction.CallbackContext context) => PointRClick?.Invoke();
 
     private void SwitchTargetInput(InputAction.CallbackContext context) => SwitchTarget?.Invoke();
 
@@ -86,7 +86,7 @@ public class PlayerInputController : MonoBehaviour
     private void SelectAbilityInput8(InputAction.CallbackContext context) => SelectAbility?.Invoke(8);
     private void SelectAbilityInput9(InputAction.CallbackContext context) => SelectAbility?.Invoke(9);
     
-    private void CancelEscInput(InputAction.CallbackContext context) => CancelESC?.Invoke();
+    private void CancelEscInput(InputAction.CallbackContext context) => Cancel?.Invoke();
 }
 
 public class StackAction

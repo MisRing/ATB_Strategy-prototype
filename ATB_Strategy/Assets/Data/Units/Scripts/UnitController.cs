@@ -40,7 +40,6 @@ public class UnitController : MonoBehaviour
 
         _isSelected = true;
         OnSelectionChanged?.Invoke(_isSelected);
-        AbilityController.SelectDefaultAbility();
     }
 
     public void Deselect()
@@ -49,11 +48,6 @@ public class UnitController : MonoBehaviour
 
         _isSelected = false;
         OnSelectionChanged?.Invoke(_isSelected);
-
-        if (State != UnitState.Engaged)
-        {
-            AbilityController.SelectDefaultAbility();
-        }
     }
 }
 

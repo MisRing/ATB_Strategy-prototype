@@ -10,7 +10,7 @@ public class PlayerSelectionManager : MonoBehaviour
 
     [SerializeField] private float _selectRayDistance = 100f;
     
-    public event Action<UnitController> OnSelectionChanged;
+    public event Action<UnitController, UnitController> OnSelectionChanged;
 
     public void Init(PlayerController playerController, List<Vector3Int> positionPreset)
     {
@@ -20,28 +20,32 @@ public class PlayerSelectionManager : MonoBehaviour
         {
             _units[i].Init(GridParameters.LevelGrid.GetTile(positionPreset[i].x, positionPreset[i].z, positionPreset[i].y));
         }
+    }
 
+    private void Start()
+    {
         if (_units.Count >= 1)
         {
             SelectUnit(_units[0]);
         }
+        _playerController.CameraController.Init(SelectedUnit.transform);
     }
 
     private void OnEnable()
     {
         PlayerInputController.SwitchTarget += SwitchTarget;
-        PlayerInputController.SelectObject += SelectObject;
+        PlayerInputController.PointLClicl += PointLClicl;
         TurnManager.OnUnitEnterExitQ += SelectReadyUnit;
     }
 
     private void OnDisable()
     {
         PlayerInputController.SwitchTarget -= SwitchTarget;
-        PlayerInputController.SelectObject -= SelectObject;
+        PlayerInputController.PointLClicl -= PointLClicl;
         TurnManager.OnUnitEnterExitQ -= SelectReadyUnit;
     }
 
-    private void SelectObject()
+    private void PointLClicl()
     {
         Vector2 mousePosition = PlayerInputController.MouseScreenPosition;
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
@@ -73,8 +77,9 @@ public class PlayerSelectionManager : MonoBehaviour
 
         if (!leaveCurrentIfCant)
         {
+            UnitController oldUnit = SelectedUnit;
             DeselectCurrentUnit();
-            OnSelectionChanged?.Invoke(null);
+            OnSelectionChanged?.Invoke(oldUnit, null);
         }
     }
     
@@ -85,7 +90,6 @@ public class PlayerSelectionManager : MonoBehaviour
         if (SelectedUnit)
         {
             SelectedUnit.Deselect();
-            SelectedUnit.AbilityController.OnAbilitySelected -= _playerController.AbilitySelected;
             SelectedUnit = null;
         }
     }
@@ -96,13 +100,13 @@ public class PlayerSelectionManager : MonoBehaviour
         if (unit == SelectedUnit) return;
         if (unit.Owner != UnitOwner.Player) return;
 
+        UnitController oldUnit = SelectedUnit;
         DeselectCurrentUnit();
 
         SelectedUnit = unit;
         SelectedUnit.Select();
-        SelectedUnit.AbilityController.OnAbilitySelected += _playerController.AbilitySelected;
         
-        OnSelectionChanged?.Invoke(SelectedUnit);
+        OnSelectionChanged?.Invoke(oldUnit, SelectedUnit);
         if (focusView)
         {
             _playerController.CameraController.EnterFocusMode(SelectedUnit.transform);

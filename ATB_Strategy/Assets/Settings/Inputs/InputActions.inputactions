@@ -16,7 +16,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "SelectObject",
+                    "name": "PointLeftClick",
                     "type": "Button",
                     "id": "d7f1f6e8-4520-4ee3-8ae5-a00fef8dde19",
                     "expectedControlType": "",
@@ -25,7 +25,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SelectPoint",
+                    "name": "PointRightClick",
                     "type": "Button",
                     "id": "aa98978a-9c33-4f78-b400-c2124cb437f5",
                     "expectedControlType": "",
@@ -170,7 +170,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SelectObject",
+                    "action": "PointLeftClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -203,7 +203,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SelectPoint",
+                    "action": "PointRightClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

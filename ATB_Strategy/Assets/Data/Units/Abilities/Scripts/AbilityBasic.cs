@@ -3,11 +3,18 @@ using UnityEngine;
 
 public class AbilityBasic : MonoBehaviour
 {
+    [Header("Info parameters")]
     public string AbilityName = "Basic Ability";
     public string AbilityDescription = "This ability did nothing";
     public Sprite AbilityIcon;
+
+    [Header("Ability parameters")]
+    public Type RequiredDataType = null;
+    
     private protected UnitAbilityController _abilityController;
     private protected AbilityData _abilityData;
+    
+    public event Action<AbilityBasic> OnAbilityFinished;
     
     public  UnitController Unit => _abilityController.Unit;
 
@@ -40,13 +47,19 @@ public class AbilityBasic : MonoBehaviour
     
     public virtual void FinishExecute()
     {
-        Debug.Log(_abilityController.Unit.name + " end <" + AbilityName + ">");
-        _abilityController.FinishExecuteAbility();
+        Debug.Log(Unit.name + " end <" + AbilityName + ">");
+        OnAbilityFinished?.Invoke(this);
     }
 }
 
-public class AbilityData
+public abstract class AbilityData { }
+
+public class TargetData : AbilityData
 {
-    public Vector3 TargetWorldPos;
-    public GridTile TargetTile;
+    public GameObject Target;
+}
+
+public class PointData : AbilityData
+{
+    public Vector3 Position;
 }

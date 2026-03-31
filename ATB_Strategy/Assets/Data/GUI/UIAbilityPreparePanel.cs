@@ -31,6 +31,6 @@ public class UIAbilityPreparePanel : MonoBehaviour
     
     public void Close()
     {
-        _abilityController.SelectDefaultAbility();
+        //_abilityController.SelectDefaultAbility();
     }
 }

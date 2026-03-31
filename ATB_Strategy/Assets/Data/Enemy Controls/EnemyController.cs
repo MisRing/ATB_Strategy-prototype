@@ -32,24 +32,23 @@ public class EnemyController : MonoBehaviour
     {
         while (true)
         {
-            AbilityData data = new AbilityData();
+            PointData data = new PointData();
             Vector3 randomTarget = new Vector3(
                 Random.Range(5f, 15f) * (Random.Range(0, 2) * 2 - 1),
                 0f,
                 Random.Range(5f, 15f) * (Random.Range(0, 2) * 2 - 1)
                 );
             randomTarget += unit.transform.position;
-            data.TargetWorldPos = randomTarget;
+            data.Position = randomTarget;
             GridTile tile = new GridTile();
             if (!GridParameters.LevelGrid.GetTileByWorldPos(ref tile, randomTarget))
             {
                 continue;
             }
-            if (tile.Owner != null)
+            if (tile.Owner)
             {
                 continue;
             }
-            data.TargetTile = tile;
 
             if (unit.AbilityController.ForceExecuteAbility(-1, data))
             {

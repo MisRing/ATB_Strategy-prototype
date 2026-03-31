@@ -102,7 +102,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""SelectObject"",
+                    ""name"": ""PointLeftClick"",
                     ""type"": ""Button"",
                     ""id"": ""d7f1f6e8-4520-4ee3-8ae5-a00fef8dde19"",
                     ""expectedControlType"": """",
@@ -111,7 +111,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SelectPoint"",
+                    ""name"": ""PointRightClick"",
                     ""type"": ""Button"",
                     ""id"": ""aa98978a-9c33-4f78-b400-c2124cb437f5"",
                     ""expectedControlType"": """",
@@ -256,7 +256,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SelectObject"",
+                    ""action"": ""PointLeftClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -289,7 +289,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SelectPoint"",
+                    ""action"": ""PointRightClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -639,8 +639,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_MousePosition = m_Player.FindAction("MousePosition", throwIfNotFound: true);
-        m_Player_SelectObject = m_Player.FindAction("SelectObject", throwIfNotFound: true);
-        m_Player_SelectPoint = m_Player.FindAction("SelectPoint", throwIfNotFound: true);
+        m_Player_PointLeftClick = m_Player.FindAction("PointLeftClick", throwIfNotFound: true);
+        m_Player_PointRightClick = m_Player.FindAction("PointRightClick", throwIfNotFound: true);
         m_Player_SwitchTarget = m_Player.FindAction("SwitchTarget", throwIfNotFound: true);
         m_Player_ReverseInputModifier = m_Player.FindAction("ReverseInputModifier", throwIfNotFound: true);
         m_Player_AbilitySwitch0 = m_Player.FindAction("AbilitySwitch0", throwIfNotFound: true);
@@ -741,8 +741,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_MousePosition;
-    private readonly InputAction m_Player_SelectObject;
-    private readonly InputAction m_Player_SelectPoint;
+    private readonly InputAction m_Player_PointLeftClick;
+    private readonly InputAction m_Player_PointRightClick;
     private readonly InputAction m_Player_SwitchTarget;
     private readonly InputAction m_Player_ReverseInputModifier;
     private readonly InputAction m_Player_AbilitySwitch0;
@@ -772,13 +772,13 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @MousePosition => m_Wrapper.m_Player_MousePosition;
         /// <summary>
-        /// Provides access to the underlying input action "Player/SelectObject".
+        /// Provides access to the underlying input action "Player/PointLeftClick".
         /// </summary>
-        public InputAction @SelectObject => m_Wrapper.m_Player_SelectObject;
+        public InputAction @PointLeftClick => m_Wrapper.m_Player_PointLeftClick;
         /// <summary>
-        /// Provides access to the underlying input action "Player/SelectPoint".
+        /// Provides access to the underlying input action "Player/PointRightClick".
         /// </summary>
-        public InputAction @SelectPoint => m_Wrapper.m_Player_SelectPoint;
+        public InputAction @PointRightClick => m_Wrapper.m_Player_PointRightClick;
         /// <summary>
         /// Provides access to the underlying input action "Player/SwitchTarget".
         /// </summary>
@@ -860,12 +860,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @MousePosition.started += instance.OnMousePosition;
             @MousePosition.performed += instance.OnMousePosition;
             @MousePosition.canceled += instance.OnMousePosition;
-            @SelectObject.started += instance.OnSelectObject;
-            @SelectObject.performed += instance.OnSelectObject;
-            @SelectObject.canceled += instance.OnSelectObject;
-            @SelectPoint.started += instance.OnSelectPoint;
-            @SelectPoint.performed += instance.OnSelectPoint;
-            @SelectPoint.canceled += instance.OnSelectPoint;
+            @PointLeftClick.started += instance.OnPointLeftClick;
+            @PointLeftClick.performed += instance.OnPointLeftClick;
+            @PointLeftClick.canceled += instance.OnPointLeftClick;
+            @PointRightClick.started += instance.OnPointRightClick;
+            @PointRightClick.performed += instance.OnPointRightClick;
+            @PointRightClick.canceled += instance.OnPointRightClick;
             @SwitchTarget.started += instance.OnSwitchTarget;
             @SwitchTarget.performed += instance.OnSwitchTarget;
             @SwitchTarget.canceled += instance.OnSwitchTarget;
@@ -919,12 +919,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @MousePosition.started -= instance.OnMousePosition;
             @MousePosition.performed -= instance.OnMousePosition;
             @MousePosition.canceled -= instance.OnMousePosition;
-            @SelectObject.started -= instance.OnSelectObject;
-            @SelectObject.performed -= instance.OnSelectObject;
-            @SelectObject.canceled -= instance.OnSelectObject;
-            @SelectPoint.started -= instance.OnSelectPoint;
-            @SelectPoint.performed -= instance.OnSelectPoint;
-            @SelectPoint.canceled -= instance.OnSelectPoint;
+            @PointLeftClick.started -= instance.OnPointLeftClick;
+            @PointLeftClick.performed -= instance.OnPointLeftClick;
+            @PointLeftClick.canceled -= instance.OnPointLeftClick;
+            @PointRightClick.started -= instance.OnPointRightClick;
+            @PointRightClick.performed -= instance.OnPointRightClick;
+            @PointRightClick.canceled -= instance.OnPointRightClick;
             @SwitchTarget.started -= instance.OnSwitchTarget;
             @SwitchTarget.performed -= instance.OnSwitchTarget;
             @SwitchTarget.canceled -= instance.OnSwitchTarget;
@@ -1195,19 +1195,19 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMousePosition(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "SelectObject" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "PointLeftClick" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSelectObject(InputAction.CallbackContext context);
+        void OnPointLeftClick(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "SelectPoint" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "PointRightClick" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSelectPoint(InputAction.CallbackContext context);
+        void OnPointRightClick(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "SwitchTarget" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

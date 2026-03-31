@@ -6,11 +6,10 @@ public class UnitAbilityController : MonoBehaviour
 {
     public AbilityBasic DefaultAbility;
     public AbilityBasic[] Abilities;
-    private AbilityBasic _currentAbility;
+    public AbilityBasic CurrentAbility;
 
     [HideInInspector] public UnitController Unit;
 
-    public event Action<int> OnAbilitySelected;
     public event Action<UnitController> OnAbilityFinished;
 
     public void Init(UnitController unit)
@@ -22,36 +21,44 @@ public class UnitAbilityController : MonoBehaviour
         {
             ability.Init(this);
         }
-        ChangeAbility(DefaultAbility, false);
     }
 
-    public void SelectDefaultAbility()
+    public bool SelectAbility(int index)
     {
-        ChangeAbility(DefaultAbility);
-        OnAbilitySelected?.Invoke(-1);
-    }
+        if (index == -1)
+        {
+            ChangeAbility(DefaultAbility);
 
-    public AbilitySelectResult SelectAbility(int index)
-    {
-        if (!Abilities.IsValidIndex(index)) return AbilitySelectResult.Invalid;
-
-        if (_currentAbility == Abilities[index]) return AbilitySelectResult.Same;
+            return true;
+        }
+        if (!Abilities.IsValidIndex(index)) return false;
         
         ChangeAbility(Abilities[index]);
-        OnAbilitySelected?.Invoke(index);
 
-        return AbilitySelectResult.Changed;
+        return true;
+    }
+    
+    private void ChangeAbility(AbilityBasic ability)
+    {
+        CurrentAbility?.ExitPrepare();
+        CurrentAbility = ability;
+        CurrentAbility.EnterPrepare();
     }
 
+    public void UpdateAbilityData(AbilityData data)
+    {
+        CurrentAbility?.UpdateData(data);
+    }
+    
     public bool ExecuteAbility()
     {
-        if (!_currentAbility) return false;
+        if (!CurrentAbility) return false;
         
-        if (_currentAbility.Execute())
+        if (CurrentAbility.Execute())
         {
+            CurrentAbility.OnAbilityFinished += AbilityFinished;
             Unit.State = UnitState.Engaged;
-            _currentAbility.ExitPrepare();
-            OnAbilitySelected?.Invoke(-1);
+            CurrentAbility.ExitPrepare();
             return true;
         }
 
@@ -75,31 +82,14 @@ public class UnitAbilityController : MonoBehaviour
         return false;
     }
 
-    public void UpdateAbilityData(AbilityData data)
+    private void AbilityFinished(AbilityBasic ability)
     {
-        _currentAbility?.UpdateData(data);
-    }
-    
-    private void ChangeAbility(AbilityBasic ability, bool notDefault = true)
-    {
-        _currentAbility?.ExitPrepare();
-        _currentAbility = ability;
-        _currentAbility.EnterPrepare();
-    }
-    
-    public void FinishExecuteAbility()
-    {
+        ability.OnAbilityFinished -= AbilityFinished;
+
         Unit.State = UnitState.WaitingForOrder;
         OnAbilityFinished?.Invoke(Unit);
     }
 
-}
-
-public enum AbilitySelectResult
-{
-    Changed,
-    Same,
-    Invalid
 }
 
 public static class CollectionExtensions
