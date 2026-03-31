@@ -5,6 +5,10 @@ using System.Collections;
 
 public class TurnManager : MonoBehaviour
 {
+    public static float CurrentTime { get => _currentTime; }
+    public static float CurrentTurnTime { get => _currentTurnTime; }
+    public static int CurrentTurn { get => _currentTurn; }
+    
     private static float _currentTime = 0f;
     private static float _currentTurnTime = 0f;
     private static int _currentTurn = 0;
@@ -19,7 +23,8 @@ public class TurnManager : MonoBehaviour
     
     private static List<UnitController> _freeUnits = new List<UnitController>();
     
-    private static Dictionary<int, List<AbilityBasic>> _abilitiesOnAction = new Dictionary<int, List<AbilityBasic>>();
+    private static Dictionary<int, List<AbilityBasic>> _playerAbilitiesOnAction = new Dictionary<int, List<AbilityBasic>>();
+    private static Dictionary<int, List<AbilityBasic>> _enemyAbilitiesOnAction = new Dictionary<int, List<AbilityBasic>>();
 
     private void Start()
     {
@@ -49,13 +54,26 @@ public class TurnManager : MonoBehaviour
     {
         int turnKey = _currentTurn + turnCost;
 
-        if (!_abilitiesOnAction.ContainsKey(turnKey))
+        if (abilityBasic.Unit.Owner == UnitOwner.Player)
         {
-            _abilitiesOnAction.Add(turnKey, new List<AbilityBasic>());
+
+            if (!_playerAbilitiesOnAction.ContainsKey(turnKey))
+            {
+                _playerAbilitiesOnAction.Add(turnKey, new List<AbilityBasic>());
+            }
+
+            _playerAbilitiesOnAction[turnKey].Add(abilityBasic);
         }
-        
-        _abilitiesOnAction[turnKey].Add(abilityBasic);
-        
+        else
+        {
+            if (!_enemyAbilitiesOnAction.ContainsKey(turnKey))
+            {
+                _enemyAbilitiesOnAction.Add(turnKey, new List<AbilityBasic>());
+            }
+
+            _enemyAbilitiesOnAction[turnKey].Add(abilityBasic);
+        }
+
         RemoveFromWaitingQ(abilityBasic.Unit);
     }
     private bool _lastTurnPause = true;
@@ -72,11 +90,11 @@ public class TurnManager : MonoBehaviour
                 _currentTurnTime -= TurnTime;
                 _currentTurn++;
 
-                if (_abilitiesOnAction.ContainsKey(_currentTurn))
+                if (_playerAbilitiesOnAction.ContainsKey(_currentTurn))
                 {
                     _lastTurnPause = true;
 
-                    foreach (AbilityBasic ability in _abilitiesOnAction[_currentTurn])
+                    foreach (AbilityBasic ability in _playerAbilitiesOnAction[_currentTurn])
                     {
                         if (ability.Unit.Owner == UnitOwner.Player)
                         {
@@ -84,12 +102,22 @@ public class TurnManager : MonoBehaviour
                             break;
                         }
                     }
-                    foreach (AbilityBasic ability in _abilitiesOnAction[_currentTurn])
+                    foreach (AbilityBasic ability in _playerAbilitiesOnAction[_currentTurn])
                     {
                         EnterWaitingQ(ability.Unit);
                         ability.FinishExecute();
                     }
-                    _abilitiesOnAction.Remove(_currentTurn);
+                    _playerAbilitiesOnAction.Remove(_currentTurn);
+                }
+                else if (_enemyAbilitiesOnAction.ContainsKey(_currentTurn))
+                {
+                    _lastTurnPause = false;
+                    foreach (AbilityBasic ability in _enemyAbilitiesOnAction[_currentTurn])
+                    {
+                        EnterWaitingQ(ability.Unit);
+                        ability.FinishExecute();
+                    }
+                    _enemyAbilitiesOnAction.Remove(_currentTurn);
                 }
                 else
                 {
@@ -120,7 +148,7 @@ public class TurnManager : MonoBehaviour
             startSlowdown = 1f - MathF.Pow(1f - startSlowdown, 3);
         }
 
-        if (_abilitiesOnAction.ContainsKey(_currentTurn + 1))
+        if (_playerAbilitiesOnAction.ContainsKey(_currentTurn + 1))
         {
             endSlowdown = Mathf.Clamp01(remainingTime / _timeStopDuration);
             endSlowdown = 1f - MathF.Pow(1f - endSlowdown, 3);

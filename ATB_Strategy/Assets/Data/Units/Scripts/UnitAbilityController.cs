@@ -75,6 +75,7 @@ public class UnitAbilityController : MonoBehaviour
 
         if (ability.Execute())
         {
+            ability.OnAbilityFinished += AbilityFinished;
             Unit.State = UnitState.Engaged;
             return true;
         }
