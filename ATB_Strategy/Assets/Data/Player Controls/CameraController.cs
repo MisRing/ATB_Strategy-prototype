@@ -39,25 +39,14 @@ public class CameraController : MonoBehaviour
     private Vector3 _focusVelocity;
     private Transform _focusTarget;
 
-    private InputActions _inputActions;
-
-    private void Awake()
-    {
-        _inputActions = new InputActions();
-    }
-
     private void OnEnable()
     {
-        _inputActions.Enable();
-
-        _inputActions.Camera.Rotate.started += RotateToAngle;
+        PlayerInputController.RotateCamera += RotateToAngle;
     }
 
     private void OnDisable()
     {
-        _inputActions.Disable();
-
-        _inputActions.Camera.Rotate.started -= RotateToAngle;
+        PlayerInputController.RotateCamera -= RotateToAngle;
     }
 
     public void Init(Transform target)
@@ -99,7 +88,7 @@ public class CameraController : MonoBehaviour
 
     private void Move()
     {
-        Vector2 input = _inputActions.Camera.Move.ReadValue<Vector2>();
+        Vector2 input = PlayerInputController.CameraMoveAxis;
 
         bool hasInput = input.magnitude >= _moveThreshold;
 
@@ -154,7 +143,7 @@ public class CameraController : MonoBehaviour
 
     private void Zoom()
     {
-        float input = _inputActions.Camera.Zoom.ReadValue<float>();
+        float input = PlayerInputController.CameraZoomAxis;
 
         _targetZoomPercent += input * _zoomSpeed;
         _targetZoomPercent = Mathf.Clamp(_targetZoomPercent, 0, 1);
@@ -180,10 +169,8 @@ public class CameraController : MonoBehaviour
         transform.eulerAngles = euler;
     }
 
-    private void RotateToAngle(InputAction.CallbackContext context)
+    private void RotateToAngle(float value)
     {
-        float value = context.ReadValue<float>();
-
         float deltaAngle = Mathf.Sign(value) * _rotationAngle;
         _currentAngleY = Mathf.Repeat(_currentAngleY + deltaAngle, 360f);
     }

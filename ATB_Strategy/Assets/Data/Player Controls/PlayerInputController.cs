@@ -11,10 +11,16 @@ public class PlayerInputController : MonoBehaviour
 
     public static Vector2 MouseScreenPosition { get => _inputActions.Player.MousePosition.ReadValue<Vector2>(); }
 
+    public static Vector2 CameraMoveAxis { get => _inputActions.Camera.Move.ReadValue<Vector2>(); }
+    public static float CameraZoomAxis { get => _inputActions.Camera.Zoom.ReadValue<float>(); }
+
 
     public static event Action PointLClicl;
     public static event Action PointRClick;
     public static event Action SwitchTarget;
+
+    public static event Action<float> RotateCamera;
+
 
     public static event Action<int> SelectAbility;
     
@@ -45,6 +51,8 @@ public class PlayerInputController : MonoBehaviour
         _inputActions.Player.AbilitySwitch9.started += SelectAbilityInput9;
         
         _inputActions.Player.Escape.started += CancelEscInput;
+
+        _inputActions.Camera.Rotate.started += RotateCameraInput;
     }
 
     private void OnDisable()
@@ -67,6 +75,8 @@ public class PlayerInputController : MonoBehaviour
         _inputActions.Player.AbilitySwitch9.started -= SelectAbilityInput9;
         
         _inputActions.Player.Escape.started += CancelEscInput;
+
+        _inputActions.Camera.Rotate.started += RotateCameraInput;
     }
 
     private void SelectObjectInput(InputAction.CallbackContext context) => PointLClicl?.Invoke();
@@ -87,6 +97,8 @@ public class PlayerInputController : MonoBehaviour
     private void SelectAbilityInput9(InputAction.CallbackContext context) => SelectAbility?.Invoke(9);
     
     private void CancelEscInput(InputAction.CallbackContext context) => Cancel?.Invoke();
+
+    private void RotateCameraInput(InputAction.CallbackContext context) => RotateCamera?.Invoke(context.ReadValue<float>());
 }
 
 public class StackAction
