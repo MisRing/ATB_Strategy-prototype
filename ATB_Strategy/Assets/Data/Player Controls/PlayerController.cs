@@ -46,12 +46,12 @@ public class PlayerController : MonoBehaviour
     {
         if (!PlayerSelectionManager.SelectedUnit) return;
         
-        AbilityBasic oldAbility = PlayerSelectionManager.SelectedUnit.AbilityController.CurrentAbility;
-        if (PlayerSelectionManager.SelectedUnit.AbilityController.SelectAbility(index))
+        BasicSkill oldAbility = PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill;
+        if (PlayerSelectionManager.SelectedUnit.SkillController.SelectSkill(index))
         {
             BindAbility(oldAbility, false);
             
-            AbilityBasic newAbility = PlayerSelectionManager.SelectedUnit.AbilityController.CurrentAbility;
+            BasicSkill newAbility = PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill;
             
             bool isSameAbility = oldAbility == newAbility;
             bool isInstant = newAbility.RequiredDataType == null;
@@ -77,12 +77,12 @@ public class PlayerController : MonoBehaviour
 
         PointData data = new PointData();
         data.Position = CursorController.CursorPosition;
-        PlayerSelectionManager.SelectedUnit.AbilityController.UpdateAbilityData(data);
+        PlayerSelectionManager.SelectedUnit.SkillController.UpdateAbilityData(data);
     }
 
     public void ExecuteAbility()
     {
-        if (PlayerSelectionManager.SelectedUnit.AbilityController.ExecuteAbility())
+        if (PlayerSelectionManager.SelectedUnit.SkillController.ExecuteSkill())
         {
             OnAbilitySelected?.Invoke(-1);
             PlayerSelectionManager.SwitchToFreeUnit(true);
@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void BindAbility(AbilityBasic ability, bool bind, bool bindCancel = true)
+    private void BindAbility(BasicSkill ability, bool bind, bool bindCancel = true)
     {
         if (!ability) return;
 
@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
     {
         if (oldUnit)
         {
-            BindAbility(oldUnit.AbilityController.CurrentAbility, false);
+            BindAbility(oldUnit.SkillController.CurrentSkill, false);
         }
         if (unit)
         {

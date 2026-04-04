@@ -3,13 +3,13 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(UnitStats))]
-[RequireComponent(typeof(UnitAbilityController))]
+[RequireComponent(typeof(UnitSkillController))]
 [RequireComponent(typeof(UnitAnimator))]
 [RequireComponent(typeof(UnitAgent))]
 public class UnitController : MonoBehaviour
 {
     [HideInInspector] public UnitStats UnitStats;
-    [HideInInspector] public UnitAbilityController AbilityController;
+    [HideInInspector] public UnitSkillController SkillController;
     [HideInInspector] public UnitAnimator UnitAnimator;
     [HideInInspector] public UnitAgent AgentController;
 
@@ -23,11 +23,11 @@ public class UnitController : MonoBehaviour
     public void Init(GridTile tile)
     {        
         UnitStats = GetComponent<UnitStats>();
-        AbilityController = GetComponent<UnitAbilityController>();
+        SkillController = GetComponent<UnitSkillController>();
         UnitAnimator = GetComponent<UnitAnimator>();
         AgentController = GetComponent<UnitAgent>();
 
-        AbilityController.Init(this);
+        SkillController.Init(this);
         UnitAnimator.Init(this);
         AgentController.Init(this, tile);
         

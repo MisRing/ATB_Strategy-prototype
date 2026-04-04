@@ -22,6 +22,7 @@ public class PlayerSelectionManager : MonoBehaviour
         for (int i = 0; i < _units.Count; i++)
         {
             _units[i].Init(GridParameters.LevelGrid.GetTile(positionPreset[i].x, positionPreset[i].z, positionPreset[i].y));
+            _units[i].SkillController.OnSkillFinished += SelectReadyUnit;
         }
     }
     
@@ -29,14 +30,12 @@ public class PlayerSelectionManager : MonoBehaviour
     {
         PlayerInputController.SwitchTarget += SwitchTarget;
         PlayerInputController.PointLClicl += PointLeftClick;
-        TurnManager.OnUnitEnterExitQ += SelectReadyUnit;
     }
 
     private void OnDisable()
     {
         PlayerInputController.SwitchTarget -= SwitchTarget;
         PlayerInputController.PointLClicl -= PointLeftClick;
-        TurnManager.OnUnitEnterExitQ -= SelectReadyUnit;
     }
 
     private void Start()

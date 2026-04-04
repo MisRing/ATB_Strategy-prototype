@@ -65,7 +65,7 @@ public class UITurnLine : MonoBehaviour
         _currentTurnText.text = currentTurn.ToString();
     }
 
-    private void AddItem(AbilityBasic ability, int turn)
+    private void AddItem(UnitController unit, int turn)
     {
         if (!_items.ContainsKey(turn))
         {
@@ -75,11 +75,11 @@ public class UITurnLine : MonoBehaviour
         GameObject obj = Instantiate(_itemPrefab, _container);
         UITurnItem item = obj.GetComponent<UITurnItem>();
 
-        item.Init(ability, turn);
+        item.Init(unit, turn);
 
         _items[turn].Add(item);
 
-        float yPosition = ability.Unit.Owner == UnitOwner.Player ? -1 : +1;
+        float yPosition = unit.Owner == UnitOwner.Player ? -1 : +1;
 
         yPosition *= _items[turn].Count * _ySpacing;
 

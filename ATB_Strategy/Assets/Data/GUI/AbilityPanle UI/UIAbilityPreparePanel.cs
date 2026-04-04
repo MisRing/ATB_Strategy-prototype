@@ -10,7 +10,7 @@ public class UIAbilityPreparePanel : MonoBehaviour
     
     private PlayerController _playerController;
 
-    public void SetAbility(AbilityBasic ability, PlayerController playerController)
+    public void SetAbility(BasicSkill ability, PlayerController playerController)
     {
         _playerController = playerController;
         
@@ -20,8 +20,8 @@ public class UIAbilityPreparePanel : MonoBehaviour
         _executeButton.onClick.AddListener(Execute);
         _cancelButton.onClick.AddListener(Close);
 
-        _abilityNameText.text = ability.AbilityName;
-        _abilityDescriptionText.text = ability.AbilityDescription;
+        _abilityNameText.text = ability.SkillName;
+        _abilityDescriptionText.text = ability.SkillDescription;
     }
     
     public void Execute()

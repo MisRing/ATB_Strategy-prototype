@@ -9,11 +9,11 @@ public class UIAbilityButton : MonoBehaviour
     private int _abilityIndex = -1;
     private PlayerController _playerController;
 
-    public void SetButton(PlayerController playerController, AbilityBasic ability, int index)
+    public void SetButton(PlayerController playerController, BasicSkill ability, int index)
     {
         _abilityIndex = index;
         _playerController = playerController;
-        _buttonImage.sprite = ability.AbilityIcon;
+        _buttonImage.sprite = ability.SkillIcon;
         _button.onClick.AddListener(SetAbility);
     }
 

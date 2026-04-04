@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour
         {
             _units[i].Init(GridParameters.LevelGrid.GetTile(_positionPresset[i].x, _positionPresset[i].z, _positionPresset[i].y));
 
-            _units[i].AbilityController.OnAbilityFinished += StartUnitAbility;
+            _units[i].SkillController.OnSkillFinished += StartUnitAbility;
             StartUnitAbility(_units[i]);
         }
     }
@@ -50,7 +50,7 @@ public class EnemyController : MonoBehaviour
                 continue;
             }
 
-            if (unit.AbilityController.ForceExecuteAbility(-1, data))
+            if (unit.SkillController.ForceExecuteSkill(-1, data))
             {
                 break;
             }
