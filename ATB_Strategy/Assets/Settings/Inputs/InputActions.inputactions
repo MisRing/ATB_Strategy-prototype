@@ -52,15 +52,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "AbilitySwitch0",
-                    "type": "Button",
-                    "id": "73060ef3-0d66-413a-b4de-1d476dab8d4a",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "AbilitySwitch1",
                     "type": "Button",
                     "id": "f4076f8c-76d3-4aee-b8db-310718a6de36",
@@ -142,6 +133,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "AbilitySwitch10",
+                    "type": "Button",
+                    "id": "702d8c0f-95ad-4afd-96b3-0181b79b1c7e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Escape",
                     "type": "Button",
                     "id": "15af99b0-99f1-4f44-879e-d93059f82ed2",
@@ -209,19 +209,8 @@
                 },
                 {
                     "name": "",
-                    "id": "a02edd66-624e-492b-a855-814dc7bccb47",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AbilitySwitch0",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "87ac4830-22d7-4cf6-8b3f-52aebf8e6f20",
-                    "path": "<Keyboard>/2",
+                    "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -232,7 +221,7 @@
                 {
                     "name": "",
                     "id": "2a7dbf65-b48e-49d9-8225-f890cb91b4d4",
-                    "path": "<Keyboard>/3",
+                    "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -243,7 +232,7 @@
                 {
                     "name": "",
                     "id": "81841a78-a5ad-40fa-9504-91f477df0fc4",
-                    "path": "<Keyboard>/4",
+                    "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -254,7 +243,7 @@
                 {
                     "name": "",
                     "id": "e01e62b7-8307-4c61-8625-b4ab36820878",
-                    "path": "<Keyboard>/5",
+                    "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -265,7 +254,7 @@
                 {
                     "name": "",
                     "id": "b925c315-0a92-4156-9dab-cf9d7fbabd80",
-                    "path": "<Keyboard>/6",
+                    "path": "<Keyboard>/5",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -276,7 +265,7 @@
                 {
                     "name": "",
                     "id": "48a4bb47-76ac-4396-b186-c77fe4222237",
-                    "path": "<Keyboard>/7",
+                    "path": "<Keyboard>/6",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -287,7 +276,7 @@
                 {
                     "name": "",
                     "id": "75f75a34-55c1-4387-a132-9d336cf91e91",
-                    "path": "<Keyboard>/8",
+                    "path": "<Keyboard>/7",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -298,7 +287,7 @@
                 {
                     "name": "",
                     "id": "43801bb4-11a2-4d5d-a32e-27ba690d0298",
-                    "path": "<Keyboard>/9",
+                    "path": "<Keyboard>/8",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -309,11 +298,22 @@
                 {
                     "name": "",
                     "id": "a88e9f76-2657-4276-82b1-46d742761f86",
-                    "path": "<Keyboard>/0",
+                    "path": "<Keyboard>/9",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "AbilitySwitch9",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "22bea330-d6e8-4b15-b4b8-dd26eb08fbdc",
+                    "path": "<Keyboard>/0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AbilitySwitch10",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

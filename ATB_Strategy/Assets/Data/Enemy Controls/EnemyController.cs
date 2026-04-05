@@ -50,7 +50,7 @@ public class EnemyController : MonoBehaviour
                 continue;
             }
 
-            if (unit.SkillController.ForceExecuteSkill(-1, data))
+            if (unit.SkillController.ForceExecuteSkill(0, data))
             {
                 break;
             }

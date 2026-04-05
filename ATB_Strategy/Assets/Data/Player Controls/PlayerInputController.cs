@@ -39,7 +39,6 @@ public class PlayerInputController : MonoBehaviour
         _inputActions.Player.PointRightClick.started += SelectPointInput;
         _inputActions.Player.SwitchTarget.started += SwitchTargetInput;
 
-        _inputActions.Player.AbilitySwitch0.started += SelectAbilityInput0;
         _inputActions.Player.AbilitySwitch1.started += SelectAbilityInput1;
         _inputActions.Player.AbilitySwitch2.started += SelectAbilityInput2;
         _inputActions.Player.AbilitySwitch3.started += SelectAbilityInput3;
@@ -49,7 +48,9 @@ public class PlayerInputController : MonoBehaviour
         _inputActions.Player.AbilitySwitch7.started += SelectAbilityInput7;
         _inputActions.Player.AbilitySwitch8.started += SelectAbilityInput8;
         _inputActions.Player.AbilitySwitch9.started += SelectAbilityInput9;
-        
+        _inputActions.Player.AbilitySwitch10.started += SelectAbilityInput10;
+
+
         _inputActions.Player.Escape.started += CancelEscInput;
 
         _inputActions.Camera.Rotate.started += RotateCameraInput;
@@ -63,7 +64,6 @@ public class PlayerInputController : MonoBehaviour
         _inputActions.Player.PointRightClick.started -= SelectPointInput;
         _inputActions.Player.SwitchTarget.started -= SwitchTargetInput;
 
-        _inputActions.Player.AbilitySwitch0.started -= SelectAbilityInput0;
         _inputActions.Player.AbilitySwitch1.started -= SelectAbilityInput1;
         _inputActions.Player.AbilitySwitch2.started -= SelectAbilityInput2;
         _inputActions.Player.AbilitySwitch3.started -= SelectAbilityInput3;
@@ -73,7 +73,8 @@ public class PlayerInputController : MonoBehaviour
         _inputActions.Player.AbilitySwitch7.started -= SelectAbilityInput7;
         _inputActions.Player.AbilitySwitch8.started -= SelectAbilityInput8;
         _inputActions.Player.AbilitySwitch9.started -= SelectAbilityInput9;
-        
+        _inputActions.Player.AbilitySwitch10.started += SelectAbilityInput10;
+
         _inputActions.Player.Escape.started += CancelEscInput;
 
         _inputActions.Camera.Rotate.started += RotateCameraInput;
@@ -85,7 +86,6 @@ public class PlayerInputController : MonoBehaviour
 
     private void SwitchTargetInput(InputAction.CallbackContext context) => SwitchTarget?.Invoke();
 
-    private void SelectAbilityInput0(InputAction.CallbackContext context) => SelectAbility?.Invoke(0);
     private void SelectAbilityInput1(InputAction.CallbackContext context) => SelectAbility?.Invoke(1);
     private void SelectAbilityInput2(InputAction.CallbackContext context) => SelectAbility?.Invoke(2);
     private void SelectAbilityInput3(InputAction.CallbackContext context) => SelectAbility?.Invoke(3);
@@ -95,7 +95,9 @@ public class PlayerInputController : MonoBehaviour
     private void SelectAbilityInput7(InputAction.CallbackContext context) => SelectAbility?.Invoke(7);
     private void SelectAbilityInput8(InputAction.CallbackContext context) => SelectAbility?.Invoke(8);
     private void SelectAbilityInput9(InputAction.CallbackContext context) => SelectAbility?.Invoke(9);
-    
+    private void SelectAbilityInput10(InputAction.CallbackContext context) => SelectAbility?.Invoke(10);
+
+
     private void CancelEscInput(InputAction.CallbackContext context) => Cancel?.Invoke();
 
     private void RotateCameraInput(InputAction.CallbackContext context) => RotateCamera?.Invoke(context.ReadValue<float>());

@@ -4,8 +4,21 @@ using System.Collections.Generic;
 
 public class UnitSkillController : MonoBehaviour
 {
-    public BasicSkill DefaultSkill;
-    public BasicSkill[] Skills;
+    public BasicSkill DefaultMovementSkill;
+    public BasicSkill DefaultAttackSkill;
+    //public BasicSkill DefaultSkill;
+    [SerializeField] private BasicSkill[] skills;
+    public int SkillsCount
+    {
+        get
+        {
+            int count = 0;
+            if(DefaultMovementSkill) count++;
+            if(DefaultAttackSkill) count++;
+            count += skills.Length;
+            return count;
+        }
+    }
     public BasicSkill CurrentSkill;
 
     [HideInInspector] public UnitController Unit;
@@ -16,8 +29,9 @@ public class UnitSkillController : MonoBehaviour
     {
         Unit = unit;
 
-        DefaultSkill?.Init(this);
-        foreach (var skill in Skills)
+        DefaultMovementSkill?.Init(this);
+        DefaultAttackSkill?.Init(this);
+        foreach (var skill in skills)
         {
             skill.Init(this);
         }
@@ -25,15 +39,11 @@ public class UnitSkillController : MonoBehaviour
 
     public bool SelectSkill(int index)
     {
-        if (index == -1)
-        {
-            ChangeSkill(DefaultSkill);
+        BasicSkill skill = GetSkillByIndex(index);
 
-            return true;
-        }
-        if (!Skills.IsValidIndex(index)) return false;
-        
-        ChangeSkill(Skills[index]);
+        if (skill == null) return false;
+
+        ChangeSkill(skill);
 
         return true;
     }
@@ -66,10 +76,8 @@ public class UnitSkillController : MonoBehaviour
     
     public bool ForceExecuteSkill(int index, SkillData data)
     {
-        if (!Skills.IsValidIndex(index) && index != -1) return false;
-        
-        BasicSkill skill = index == -1 ? DefaultSkill : Skills[index];
-        
+        BasicSkill skill = GetSkillByIndex(index);
+
         skill.UpdateData(data);
 
         if (skill.Execute())
@@ -79,6 +87,31 @@ public class UnitSkillController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public BasicSkill GetSkillByIndex(int index)
+    {
+        // TODO: BETTER SELECTION
+        if (!DefaultMovementSkill)
+        {
+            index++;
+        }
+        if (!DefaultAttackSkill && index >= 1)
+        {
+            index++;
+        }
+        switch (index)
+        {
+            case (0):
+                return DefaultMovementSkill;
+            case (1):
+                return DefaultAttackSkill;
+            default:
+                index -= 2;
+                break;
+        }
+        if (!skills.IsValidIndex(index)) return null;
+        return skills[index];
     }
 
     public void FinishSkill()

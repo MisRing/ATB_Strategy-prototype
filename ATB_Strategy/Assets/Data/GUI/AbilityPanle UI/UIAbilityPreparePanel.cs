@@ -31,6 +31,6 @@ public class UIAbilityPreparePanel : MonoBehaviour
     
     public void Close()
     {
-        _playerController.SelectAbility(-1);
+        _playerController.SelectAbility(0);
     }
 }

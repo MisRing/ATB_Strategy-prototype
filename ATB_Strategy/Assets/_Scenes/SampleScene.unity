@@ -6561,8 +6561,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74bc143dd651ade41a8ea59a5a14de26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitSkillController
-  DefaultSkill: {fileID: 669000081}
-  Skills:
+  DefaultMovementSkill: {fileID: 669000081}
+  DefaultAttackSkill: {fileID: 0}
+  skills:
   - {fileID: 669000080}
   CurrentSkill: {fileID: 0}
   Unit: {fileID: 0}
@@ -9624,8 +9625,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74bc143dd651ade41a8ea59a5a14de26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitSkillController
-  DefaultSkill: {fileID: 0}
-  Skills: []
+  DefaultMovementSkill: {fileID: 0}
+  DefaultAttackSkill: {fileID: 0}
+  skills: []
   CurrentSkill: {fileID: 0}
   Unit: {fileID: 0}
 --- !u!1 &950995642
@@ -14078,8 +14080,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74bc143dd651ade41a8ea59a5a14de26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitSkillController
-  DefaultSkill: {fileID: 0}
-  Skills: []
+  DefaultMovementSkill: {fileID: 0}
+  DefaultAttackSkill: {fileID: 0}
+  skills: []
   CurrentSkill: {fileID: 0}
   Unit: {fileID: 0}
 --- !u!1 &1321793261
@@ -67835,8 +67838,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74bc143dd651ade41a8ea59a5a14de26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitSkillController
-  DefaultSkill: {fileID: 1816743780}
-  Skills:
+  DefaultMovementSkill: {fileID: 1816743780}
+  DefaultAttackSkill: {fileID: 0}
+  skills:
   - {fileID: 1816743783}
   CurrentSkill: {fileID: 0}
   Unit: {fileID: 0}
@@ -68981,8 +68985,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74bc143dd651ade41a8ea59a5a14de26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitSkillController
-  DefaultSkill: {fileID: 0}
-  Skills: []
+  DefaultMovementSkill: {fileID: 0}
+  DefaultAttackSkill: {fileID: 0}
+  skills: []
   CurrentSkill: {fileID: 0}
   Unit: {fileID: 0}
 --- !u!1 &1984724993

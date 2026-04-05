@@ -138,15 +138,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""AbilitySwitch0"",
-                    ""type"": ""Button"",
-                    ""id"": ""73060ef3-0d66-413a-b4de-1d476dab8d4a"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""AbilitySwitch1"",
                     ""type"": ""Button"",
                     ""id"": ""f4076f8c-76d3-4aee-b8db-310718a6de36"",
@@ -228,6 +219,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""AbilitySwitch10"",
+                    ""type"": ""Button"",
+                    ""id"": ""702d8c0f-95ad-4afd-96b3-0181b79b1c7e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Escape"",
                     ""type"": ""Button"",
                     ""id"": ""15af99b0-99f1-4f44-879e-d93059f82ed2"",
@@ -295,19 +295,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a02edd66-624e-492b-a855-814dc7bccb47"",
-                    ""path"": ""<Keyboard>/1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""AbilitySwitch0"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""87ac4830-22d7-4cf6-8b3f-52aebf8e6f20"",
-                    ""path"": ""<Keyboard>/2"",
+                    ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -318,7 +307,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2a7dbf65-b48e-49d9-8225-f890cb91b4d4"",
-                    ""path"": ""<Keyboard>/3"",
+                    ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -329,7 +318,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""81841a78-a5ad-40fa-9504-91f477df0fc4"",
-                    ""path"": ""<Keyboard>/4"",
+                    ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -340,7 +329,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e01e62b7-8307-4c61-8625-b4ab36820878"",
-                    ""path"": ""<Keyboard>/5"",
+                    ""path"": ""<Keyboard>/4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -351,7 +340,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b925c315-0a92-4156-9dab-cf9d7fbabd80"",
-                    ""path"": ""<Keyboard>/6"",
+                    ""path"": ""<Keyboard>/5"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -362,7 +351,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""48a4bb47-76ac-4396-b186-c77fe4222237"",
-                    ""path"": ""<Keyboard>/7"",
+                    ""path"": ""<Keyboard>/6"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -373,7 +362,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""75f75a34-55c1-4387-a132-9d336cf91e91"",
-                    ""path"": ""<Keyboard>/8"",
+                    ""path"": ""<Keyboard>/7"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -384,7 +373,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""43801bb4-11a2-4d5d-a32e-27ba690d0298"",
-                    ""path"": ""<Keyboard>/9"",
+                    ""path"": ""<Keyboard>/8"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -395,11 +384,22 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a88e9f76-2657-4276-82b1-46d742761f86"",
-                    ""path"": ""<Keyboard>/0"",
+                    ""path"": ""<Keyboard>/9"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""AbilitySwitch9"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""22bea330-d6e8-4b15-b4b8-dd26eb08fbdc"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AbilitySwitch10"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -643,7 +643,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_PointRightClick = m_Player.FindAction("PointRightClick", throwIfNotFound: true);
         m_Player_SwitchTarget = m_Player.FindAction("SwitchTarget", throwIfNotFound: true);
         m_Player_ReverseInputModifier = m_Player.FindAction("ReverseInputModifier", throwIfNotFound: true);
-        m_Player_AbilitySwitch0 = m_Player.FindAction("AbilitySwitch0", throwIfNotFound: true);
         m_Player_AbilitySwitch1 = m_Player.FindAction("AbilitySwitch1", throwIfNotFound: true);
         m_Player_AbilitySwitch2 = m_Player.FindAction("AbilitySwitch2", throwIfNotFound: true);
         m_Player_AbilitySwitch3 = m_Player.FindAction("AbilitySwitch3", throwIfNotFound: true);
@@ -653,6 +652,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_AbilitySwitch7 = m_Player.FindAction("AbilitySwitch7", throwIfNotFound: true);
         m_Player_AbilitySwitch8 = m_Player.FindAction("AbilitySwitch8", throwIfNotFound: true);
         m_Player_AbilitySwitch9 = m_Player.FindAction("AbilitySwitch9", throwIfNotFound: true);
+        m_Player_AbilitySwitch10 = m_Player.FindAction("AbilitySwitch10", throwIfNotFound: true);
         m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
@@ -745,7 +745,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_PointRightClick;
     private readonly InputAction m_Player_SwitchTarget;
     private readonly InputAction m_Player_ReverseInputModifier;
-    private readonly InputAction m_Player_AbilitySwitch0;
     private readonly InputAction m_Player_AbilitySwitch1;
     private readonly InputAction m_Player_AbilitySwitch2;
     private readonly InputAction m_Player_AbilitySwitch3;
@@ -755,6 +754,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_AbilitySwitch7;
     private readonly InputAction m_Player_AbilitySwitch8;
     private readonly InputAction m_Player_AbilitySwitch9;
+    private readonly InputAction m_Player_AbilitySwitch10;
     private readonly InputAction m_Player_Escape;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
@@ -787,10 +787,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/ReverseInputModifier".
         /// </summary>
         public InputAction @ReverseInputModifier => m_Wrapper.m_Player_ReverseInputModifier;
-        /// <summary>
-        /// Provides access to the underlying input action "Player/AbilitySwitch0".
-        /// </summary>
-        public InputAction @AbilitySwitch0 => m_Wrapper.m_Player_AbilitySwitch0;
         /// <summary>
         /// Provides access to the underlying input action "Player/AbilitySwitch1".
         /// </summary>
@@ -827,6 +823,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/AbilitySwitch9".
         /// </summary>
         public InputAction @AbilitySwitch9 => m_Wrapper.m_Player_AbilitySwitch9;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/AbilitySwitch10".
+        /// </summary>
+        public InputAction @AbilitySwitch10 => m_Wrapper.m_Player_AbilitySwitch10;
         /// <summary>
         /// Provides access to the underlying input action "Player/Escape".
         /// </summary>
@@ -872,9 +872,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @ReverseInputModifier.started += instance.OnReverseInputModifier;
             @ReverseInputModifier.performed += instance.OnReverseInputModifier;
             @ReverseInputModifier.canceled += instance.OnReverseInputModifier;
-            @AbilitySwitch0.started += instance.OnAbilitySwitch0;
-            @AbilitySwitch0.performed += instance.OnAbilitySwitch0;
-            @AbilitySwitch0.canceled += instance.OnAbilitySwitch0;
             @AbilitySwitch1.started += instance.OnAbilitySwitch1;
             @AbilitySwitch1.performed += instance.OnAbilitySwitch1;
             @AbilitySwitch1.canceled += instance.OnAbilitySwitch1;
@@ -902,6 +899,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @AbilitySwitch9.started += instance.OnAbilitySwitch9;
             @AbilitySwitch9.performed += instance.OnAbilitySwitch9;
             @AbilitySwitch9.canceled += instance.OnAbilitySwitch9;
+            @AbilitySwitch10.started += instance.OnAbilitySwitch10;
+            @AbilitySwitch10.performed += instance.OnAbilitySwitch10;
+            @AbilitySwitch10.canceled += instance.OnAbilitySwitch10;
             @Escape.started += instance.OnEscape;
             @Escape.performed += instance.OnEscape;
             @Escape.canceled += instance.OnEscape;
@@ -931,9 +931,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @ReverseInputModifier.started -= instance.OnReverseInputModifier;
             @ReverseInputModifier.performed -= instance.OnReverseInputModifier;
             @ReverseInputModifier.canceled -= instance.OnReverseInputModifier;
-            @AbilitySwitch0.started -= instance.OnAbilitySwitch0;
-            @AbilitySwitch0.performed -= instance.OnAbilitySwitch0;
-            @AbilitySwitch0.canceled -= instance.OnAbilitySwitch0;
             @AbilitySwitch1.started -= instance.OnAbilitySwitch1;
             @AbilitySwitch1.performed -= instance.OnAbilitySwitch1;
             @AbilitySwitch1.canceled -= instance.OnAbilitySwitch1;
@@ -961,6 +958,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @AbilitySwitch9.started -= instance.OnAbilitySwitch9;
             @AbilitySwitch9.performed -= instance.OnAbilitySwitch9;
             @AbilitySwitch9.canceled -= instance.OnAbilitySwitch9;
+            @AbilitySwitch10.started -= instance.OnAbilitySwitch10;
+            @AbilitySwitch10.performed -= instance.OnAbilitySwitch10;
+            @AbilitySwitch10.canceled -= instance.OnAbilitySwitch10;
             @Escape.started -= instance.OnEscape;
             @Escape.performed -= instance.OnEscape;
             @Escape.canceled -= instance.OnEscape;
@@ -1223,13 +1223,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnReverseInputModifier(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "AbilitySwitch0" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnAbilitySwitch0(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "AbilitySwitch1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -1292,6 +1285,13 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAbilitySwitch9(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "AbilitySwitch10" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAbilitySwitch10(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Escape" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

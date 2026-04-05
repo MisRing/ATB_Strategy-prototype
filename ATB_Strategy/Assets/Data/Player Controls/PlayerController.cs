@@ -61,14 +61,14 @@ public class PlayerController : MonoBehaviour
                 ExecuteAbility();
                 return;
             }
-            BindAbility(newAbility, true, index != -1);
+            BindAbility(newAbility, true, index != 0);
             OnAbilitySelected?.Invoke(index);
         }
     }
 
     private void CancelAbility()
     {
-        SelectAbility(-1);
+        SelectAbility(0);
     }
 
     private void UpdateAbilityPointData()
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
     {
         if (PlayerSelectionManager.SelectedUnit.SkillController.ExecuteSkill())
         {
-            OnAbilitySelected?.Invoke(-1);
+            OnAbilitySelected?.Invoke(0);
             PlayerSelectionManager.SwitchToFreeUnit(true);
         }
     }
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
         }
         if (unit)
         {
-            SelectAbility(-1);
+            SelectAbility(0);
         }
     }
 

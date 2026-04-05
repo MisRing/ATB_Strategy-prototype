@@ -32,25 +32,25 @@ public class UIAbilityController : MonoBehaviour
         _unit = unit;
 
         _buttons = new List<UIAbilityButton>();
-        for(int i = 0; i < unit.SkillController.Skills.Length; i++)
+        for(int i = 1; i < unit.SkillController.SkillsCount; i++)
         {
             GameObject button = Instantiate(_abilityButtonPrefab, _rectTransform);
             UIAbilityButton uiButton = button.GetComponent<UIAbilityButton>();
             _buttons.Add(uiButton);
-            uiButton.SetButton(_playerController, unit.SkillController.Skills[i], i);
+            uiButton.SetButton(_playerController, unit.SkillController.GetSkillByIndex(i), i);
         }
     }
 
     public void SetAbilityPreparePanel(int index)
     {
-        if(index == -1)
+        if(index == 0)
         {
             _preparePanel.gameObject.SetActive(false);
         }
         else
         {
             _preparePanel.gameObject.SetActive(true);
-            _preparePanel.SetAbility(_unit.SkillController.Skills[index], _playerController);
+            _preparePanel.SetAbility(_unit.SkillController.GetSkillByIndex(index), _playerController);
         }
     }
 }
