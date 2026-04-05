@@ -23,8 +23,7 @@ public class TurnManager : MonoBehaviour
     
     private static readonly List<UnitController> _freeUnits = new List<UnitController>();
     
-    private static readonly Dictionary<int, List<UnitController>> _playerUnitsOnAction = new Dictionary<int, List<UnitController>>();
-    private static readonly Dictionary<int, List<UnitController>> _enemyUnitsOnAction = new Dictionary<int, List<UnitController>>();
+    private static readonly Dictionary<int, List<UnitController>> _unitsOnAction = new Dictionary<int, List<UnitController>>();
     
     public static event Action<UnitController, int> OnAbilityScheduled;
     public static event Action<int> OnAbilityResolved;
@@ -52,30 +51,18 @@ public class TurnManager : MonoBehaviour
             TimeService.SetTimeSpeed(_minTimeSpeed);
         }
     }
-    
+
     public static void EnterBusyQ(UnitController unit, int turnCost)
     {
         int turnKey = _currentTurn + turnCost;
 
-        if (unit.Owner == UnitOwner.Player)
+        if (!_unitsOnAction.ContainsKey(turnKey))
         {
-
-            if (!_playerUnitsOnAction.ContainsKey(turnKey))
-            {
-                _playerUnitsOnAction.Add(turnKey, new List<UnitController>());
-            }
-
-            _playerUnitsOnAction[turnKey].Add(unit);
+            _unitsOnAction.Add(turnKey, new List<UnitController>());
         }
-        else
-        {
-            if (!_enemyUnitsOnAction.ContainsKey(turnKey))
-            {
-                _enemyUnitsOnAction.Add(turnKey, new List<UnitController>());
-            }
 
-            _enemyUnitsOnAction[turnKey].Add(unit);
-        }
+        _unitsOnAction[turnKey].Add(unit); _unitsOnAction[turnKey].Add(unit);
+
         OnAbilityScheduled?.Invoke(unit, turnKey);
         RemoveFromWaitingQ(unit);
     }
@@ -92,35 +79,20 @@ public class TurnManager : MonoBehaviour
             {
                 _currentTurnTime -= TurnTime;
                 _currentTurn++;
-
-                if (_playerUnitsOnAction.ContainsKey(_currentTurn) || _enemyUnitsOnAction.ContainsKey(_currentTurn))
+                _lastTurnPause = false;
+                if (_unitsOnAction.ContainsKey(_currentTurn))
                 {
-                    if (_enemyUnitsOnAction.ContainsKey(_currentTurn))
+                    foreach (UnitController unit in _unitsOnAction[_currentTurn])
                     {
-                        _lastTurnPause = false;
-                        foreach (UnitController unit in _enemyUnitsOnAction[_currentTurn])
+                        if (unit.Owner == UnitOwner.Player)
                         {
-                            EnterWaitingQ(unit);
-                            unit.SkillController.FinishSkill();
+                            _lastTurnPause = true;
                         }
-                        OnAbilityResolved?.Invoke(_currentTurn);
-                        _enemyUnitsOnAction.Remove(_currentTurn);
+                        EnterWaitingQ(unit);
+                        unit.SkillController.FinishSkill();
                     }
-                    if (_playerUnitsOnAction.ContainsKey(_currentTurn))
-                    {
-                        _lastTurnPause = true;
-                        foreach (UnitController unit in _playerUnitsOnAction[_currentTurn])
-                        {
-                            EnterWaitingQ(unit);
-                            unit.SkillController.FinishSkill();
-                        }
-                        OnAbilityResolved?.Invoke(_currentTurn);
-                        _playerUnitsOnAction.Remove(_currentTurn);
-                    }
-                }
-                else
-                {
-                    _lastTurnPause = false;
+                    OnAbilityResolved?.Invoke(_currentTurn);
+                    _unitsOnAction.Remove(_currentTurn);
                 }
             }
 
@@ -129,7 +101,6 @@ public class TurnManager : MonoBehaviour
             yield return null;
         }
     }
-
 
     private void SetTimeSlowdown()
     {
@@ -147,10 +118,17 @@ public class TurnManager : MonoBehaviour
             startSlowdown = 1f - MathF.Pow(1f - startSlowdown, 3);
         }
 
-        if (_playerUnitsOnAction.ContainsKey(_currentTurn + 1))
+        if (_unitsOnAction.ContainsKey(_currentTurn + 1))
         {
-            endSlowdown = Mathf.Clamp01(remainingTime / _timeStopDuration);
-            endSlowdown = 1f - MathF.Pow(1f - endSlowdown, 3);
+            foreach (UnitController unit in _unitsOnAction[_currentTurn + 1])
+            {
+                if (unit.Owner == UnitOwner.Player)
+                {
+                    endSlowdown = Mathf.Clamp01(remainingTime / _timeStopDuration);
+                    endSlowdown = 1f - MathF.Pow(1f - endSlowdown, 3);
+                    break;
+                }
+            }
         }
 
         float slowdown = Mathf.Min(startSlowdown, endSlowdown);
