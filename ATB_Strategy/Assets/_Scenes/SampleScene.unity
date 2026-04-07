@@ -3001,6 +3001,7 @@ MonoBehaviour:
   _minZoom: -10
   _zoomSpeed: 0.2
   _zoomSmoothTime: 0.15
+  _extraZoomPercent: 1.2
   _focusMaxDistance: 15
   _focusSmoothTime: 0.2
 --- !u!1 &318893684
@@ -6397,6 +6398,7 @@ GameObject:
   - component: {fileID: 669000087}
   - component: {fileID: 669000086}
   - component: {fileID: 669000089}
+  - component: {fileID: 669000090}
   - component: {fileID: 669000084}
   - component: {fileID: 669000083}
   - component: {fileID: 669000082}
@@ -6528,6 +6530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitComponent
   UnitStats: {fileID: 0}
   SkillController: {fileID: 0}
+  UnitCombat: {fileID: 0}
   UnitAnimator: {fileID: 0}
   AgentController: {fileID: 0}
   State: 0
@@ -6567,6 +6570,18 @@ MonoBehaviour:
   - {fileID: 669000080}
   CurrentSkill: {fileID: 0}
   Unit: {fileID: 0}
+--- !u!114 &669000090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669000078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62af5bcb0a8e2ea498ab11d32b4c2bed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitCombat
 --- !u!1 &669288542
 GameObject:
   m_ObjectHideFlags: 0
@@ -9592,6 +9607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitComponent
   UnitStats: {fileID: 0}
   SkillController: {fileID: 0}
+  UnitCombat: {fileID: 0}
   UnitAnimator: {fileID: 0}
   AgentController: {fileID: 0}
   State: 0
@@ -14047,6 +14063,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitComponent
   UnitStats: {fileID: 0}
   SkillController: {fileID: 0}
+  UnitCombat: {fileID: 0}
   UnitAnimator: {fileID: 0}
   AgentController: {fileID: 0}
   State: 0
@@ -67674,6 +67691,7 @@ GameObject:
   - component: {fileID: 1816743775}
   - component: {fileID: 1816743774}
   - component: {fileID: 1816743784}
+  - component: {fileID: 1816743785}
   - component: {fileID: 1816743782}
   - component: {fileID: 1816743773}
   - component: {fileID: 1816743777}
@@ -67735,6 +67753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitComponent
   UnitStats: {fileID: 0}
   SkillController: {fileID: 0}
+  UnitCombat: {fileID: 0}
   UnitAnimator: {fileID: 0}
   AgentController: {fileID: 0}
   State: 0
@@ -67844,6 +67863,18 @@ MonoBehaviour:
   - {fileID: 1816743783}
   CurrentSkill: {fileID: 0}
   Unit: {fileID: 0}
+--- !u!114 &1816743785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816743772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62af5bcb0a8e2ea498ab11d32b4c2bed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitCombat
 --- !u!1 &1825537674
 GameObject:
   m_ObjectHideFlags: 0
@@ -68952,6 +68983,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitComponent
   UnitStats: {fileID: 0}
   SkillController: {fileID: 0}
+  UnitCombat: {fileID: 0}
   UnitAnimator: {fileID: 0}
   AgentController: {fileID: 0}
   State: 0

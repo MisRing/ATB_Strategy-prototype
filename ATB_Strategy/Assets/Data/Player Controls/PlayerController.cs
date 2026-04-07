@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
         BasicSkill oldAbility = PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill;
         if (PlayerSelectionManager.SelectedUnit.SkillController.SelectSkill(index))
         {
+            CameraController.SetExtraZoom(index != 0);
             BindAbility(oldAbility, false);
             
             BasicSkill newAbility = PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill;
@@ -84,6 +85,7 @@ public class PlayerController : MonoBehaviour
     {
         if (PlayerSelectionManager.SelectedUnit.SkillController.ExecuteSkill())
         {
+            CameraController.SetExtraZoom(false);
             OnAbilitySelected?.Invoke(0);
             PlayerSelectionManager.SwitchToFreeUnit(true);
         }

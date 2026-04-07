@@ -4,12 +4,14 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(UnitStats))]
 [RequireComponent(typeof(UnitSkillController))]
+[RequireComponent(typeof(UnitCombat))]
 [RequireComponent(typeof(UnitAnimator))]
 [RequireComponent(typeof(UnitAgent))]
 public class UnitController : MonoBehaviour
 {
     [HideInInspector] public UnitStats UnitStats;
     [HideInInspector] public UnitSkillController SkillController;
+    [HideInInspector] public UnitCombat UnitCombat;
     [HideInInspector] public UnitAnimator UnitAnimator;
     [HideInInspector] public UnitAgent AgentController;
 
@@ -24,10 +26,12 @@ public class UnitController : MonoBehaviour
     {        
         UnitStats = GetComponent<UnitStats>();
         SkillController = GetComponent<UnitSkillController>();
+        UnitCombat = GetComponent<UnitCombat>();
         UnitAnimator = GetComponent<UnitAnimator>();
         AgentController = GetComponent<UnitAgent>();
 
         SkillController.Init(this);
+        UnitCombat.Init(this);
         UnitAnimator.Init(this);
         AgentController.Init(this, tile);
         

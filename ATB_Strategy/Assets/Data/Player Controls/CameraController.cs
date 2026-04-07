@@ -30,6 +30,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float _minZoom = -10f;
     [SerializeField] private float _zoomSpeed = 0.3f;
     [SerializeField] private float _zoomSmoothTime = 0.15f;
+    [SerializeField] private float _extraZoomPercent = 1.2f;
+    private bool _extraZoom = false;
     private float _targetZoomPercent;
     private float _zoomVelocity;
 
@@ -85,6 +87,8 @@ public class CameraController : MonoBehaviour
         _focusVelocity = Vector3.zero;
         _focusTarget = null;
     }
+
+    public void SetExtraZoom(bool value) => _extraZoom = value;
 
     private void Move()
     {
@@ -149,7 +153,12 @@ public class CameraController : MonoBehaviour
         _targetZoomPercent = Mathf.Clamp(_targetZoomPercent, 0, 1);
 
         float targetZoom = Mathf.Lerp(_minZoom, _maxZoom, _targetZoomPercent);
-
+        
+        if (_extraZoom)
+        {
+            targetZoom /= _extraZoomPercent;
+        }
+        
         float currentZoom = _cameraTransform.localPosition.z;
 
         float smoothZoom = Mathf.SmoothDamp(
