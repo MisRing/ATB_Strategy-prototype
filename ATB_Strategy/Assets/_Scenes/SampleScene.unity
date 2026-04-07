@@ -2986,8 +2986,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 592bd1a86471c964a84868cb98f2d5a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  _baseTransform: {fileID: 211259978}
-  _cameraTransform: {fileID: 330585546}
   _cameraPitch: 40
   _moveSpeedMaxZoom: 7.5
   _moveSpeedMinZoom: 12.5

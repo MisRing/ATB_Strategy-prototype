@@ -1,12 +1,16 @@
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
     [Header("Main")]
-    [SerializeField] private Transform _baseTransform;
-    [SerializeField] private Transform _cameraTransform;
+    //[SerializeField] private Transform _baseTransform;
+    //[SerializeField] private Transform _cameraTransform;
     [SerializeField] private float _cameraPitch = 40f;
+    private Vector3 _position;
+    private Vector3 _rotation;
+    private float _zoom;
 
     [Header("Move settings")]
     [SerializeField] private float _moveSpeedMaxZoom = 5f;
@@ -53,12 +57,12 @@ public class CameraController : MonoBehaviour
 
     public void Init(Transform target)
     {
-        _baseTransform.localEulerAngles = new Vector3(_cameraPitch, 0, 0);
-        transform.eulerAngles = new Vector3(0, _startAngle, 0);
+        //_baseTransform.localEulerAngles = new Vector3(_cameraPitch, 0, 0);
+        _rotation = new Vector3(0, _startAngle, 0);
         EnterFocusMode(target, true);
         _currentAngleY = _startAngle;
         _targetZoomPercent = 0f;
-        _cameraTransform.localPosition = new Vector3(0, 0, _minZoom);
+        _zoom = _minZoom;
     }
 
     private void Update()
@@ -68,15 +72,28 @@ public class CameraController : MonoBehaviour
         Rotate();
 
         Move();
+
+        SetPosition();
+    }
+
+    private void SetPosition()
+    {
+        Quaternion rot = Quaternion.Euler(_cameraPitch, _rotation.y, 0f);
+
+        Vector3 offset = rot * Vector3.back;
+
+        transform.position = _position + offset * _zoom;
+
+        transform.rotation = rot;
     }
 
     public void EnterFocusMode(Transform target, bool instantly = false)
     {
         _focusTarget = target;
 
-        if(instantly || Vector3.Distance(transform.position, _focusTarget.position) >= _focusMaxDistance)
+        if(instantly || Vector3.Distance(_position, _focusTarget.position) >= _focusMaxDistance)
         {
-            transform.position = _focusTarget.position;
+            _position = _focusTarget.position;
         }
     }
 
@@ -116,7 +133,9 @@ public class CameraController : MonoBehaviour
         if (input == Vector2.zero && _moveVelocity == Vector3.zero)
             return;
 
-        _targetMoveDirection = transform.forward * input.y + transform.right * input.x;
+        Vector3 forward = Quaternion.Euler(_rotation) * Vector3.forward;
+        Vector3 right = Quaternion.Euler(_rotation) * Vector3.right;
+        _targetMoveDirection = forward * input.y + right * input.x;
 
         float moveSpeed = Mathf.Lerp(_moveSpeedMinZoom, _moveSpeedMaxZoom, _targetZoomPercent);
         Vector3 targetVelocity = _targetMoveDirection * moveSpeed;
@@ -130,15 +149,15 @@ public class CameraController : MonoBehaviour
             smoothTime);
 
 
-        transform.position += _moveVelocity * Time.deltaTime;
+        _position += _moveVelocity * Time.deltaTime;
     }
 
     private void MoveToTarget()
     {
         if (!_focusTarget) return;
 
-        transform.position = Vector3.SmoothDamp(
-            transform.position,
+        _position = Vector3.SmoothDamp(
+            _position,
             _focusTarget.position,
             ref _focusVelocity,
             _focusSmoothTime);
@@ -159,7 +178,7 @@ public class CameraController : MonoBehaviour
             targetZoom /= _extraZoomPercent;
         }
         
-        float currentZoom = _cameraTransform.localPosition.z;
+        float currentZoom = _zoom;
 
         float smoothZoom = Mathf.SmoothDamp(
             currentZoom,
@@ -167,15 +186,15 @@ public class CameraController : MonoBehaviour
             ref _zoomVelocity,
             _zoomSmoothTime);
 
-        _cameraTransform.localPosition = new Vector3(0, 0, smoothZoom);
+        _zoom = smoothZoom;
     }
 
     private void Rotate()
     {
-        float yAngle = Mathf.LerpAngle(transform.eulerAngles.y, _currentAngleY, Time.deltaTime * _rotationSpeed);
-        Vector3 euler = transform.eulerAngles;
+        float yAngle = Mathf.LerpAngle(_rotation.y, _currentAngleY, Time.deltaTime * _rotationSpeed);
+        Vector3 euler = _rotation;
         euler.y = yAngle;
-        transform.eulerAngles = euler;
+        _rotation = euler;
     }
 
     private void RotateToAngle(float value)
