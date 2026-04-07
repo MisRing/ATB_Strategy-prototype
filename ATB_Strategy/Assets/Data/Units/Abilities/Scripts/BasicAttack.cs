@@ -4,6 +4,16 @@ using System.Collections.Generic;
 
 public class BasicAttack : BasicSkill, ITargetSwitchable
 {
+    public GameObject CurrentTarget
+    {
+        get
+        {
+            if (_targets == null || _targets.Count == 0) return null;
+
+            return (_targets[_currentTarget] as CombatAbstract).gameObject;
+        }
+    }
+    
     public event Action<GameObject> OnTargetSwitched;
 
     private int _currentTarget;

@@ -1,9 +1,15 @@
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class TacticalCamera : MonoBehaviour
 {
     [Header("Main")]
     [SerializeField] private float _cameraPitch = 40f;
+    [SerializeField] private float _transitionMoveSmooth = 0.25f;
+    [SerializeField] private float _transitionRotSpeed = 5f;
+
+    private bool _isTransitioning;
+    private Vector3 _transitionVelocity;
+    
     private Vector3 _position;
     private Vector3 _rotation;
     private float _zoom;
@@ -17,8 +23,7 @@ public class CameraController : MonoBehaviour
     private Vector3 _moveVelocity;
     private Vector3 _moveSmoothVelocity;
     private Vector3 _targetMoveDirection;
-
-
+    
     [Header("Rotation settings")]
     [SerializeField] private float _rotationAngle = -90f;
     [SerializeField] private float _startAngle = 315f;
@@ -44,6 +49,7 @@ public class CameraController : MonoBehaviour
     private void OnEnable()
     {
         PlayerInputController.RotateCamera += RotateToAngle;
+        _isTransitioning = true;
     }
 
     private void OnDisable()
@@ -63,24 +69,60 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        if (_isTransitioning)
+        {
+            UpdateTransition();
+            return;
+        }
+        
         Zoom();
-
         Rotate();
-
         Move();
-
         SetPosition();
+    }
+    
+    private void UpdateTransition()
+    {
+        Quaternion targetRot = Quaternion.Euler(_cameraPitch, _rotation.y, 0f);
+
+        Vector3 offset = targetRot * Vector3.back;
+        Vector3 targetPos = _position + offset * _zoom;
+
+        transform.position = Vector3.SmoothDamp(
+            transform.position,
+            targetPos,
+            ref _transitionVelocity,
+            _transitionMoveSmooth
+            );
+
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            targetRot,
+            Time.deltaTime * _transitionRotSpeed
+            );
+
+        bool posDone = Vector3.Distance(transform.position, targetPos) < 0.05f;
+        bool rotDone = Quaternion.Angle(transform.rotation, targetRot) < 0.5f;
+
+        if (posDone && rotDone)
+        {
+            transform.position = targetPos;
+            transform.rotation = targetRot;
+
+            _isTransitioning = false;
+        }
     }
 
     private void SetPosition()
     {
-        Quaternion rot = Quaternion.Euler(_cameraPitch, _rotation.y, 0f);
+        Quaternion targetRotation = Quaternion.Euler(_cameraPitch, _rotation.y, 0f);
 
-        Vector3 offset = rot * Vector3.back;
+        Vector3 offset = targetRotation * Vector3.back;
 
-        transform.position = _position + offset * _zoom;
+        Vector3 targetPosition = _position + offset * _zoom;
 
-        transform.rotation = rot;
+        transform.rotation = targetRotation;
+        transform.position = targetPosition;
     }
 
     public void EnterFocusMode(Transform target, bool instantly = false)
@@ -194,6 +236,8 @@ public class CameraController : MonoBehaviour
 
     private void RotateToAngle(float value)
     {
+        if (_isTransitioning) return;
+        
         float deltaAngle = Mathf.Sign(value) * _rotationAngle;
         _currentAngleY = Mathf.Repeat(_currentAngleY + deltaAngle, 360f);
     }

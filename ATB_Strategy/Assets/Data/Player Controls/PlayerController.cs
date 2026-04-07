@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.Collections;
 
 public class PlayerController : MonoBehaviour
 {
@@ -49,7 +50,6 @@ public class PlayerController : MonoBehaviour
         BasicSkill oldAbility = PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill;
         if (PlayerSelectionManager.SelectedUnit.SkillController.SelectSkill(index))
         {
-            CameraController.SetExtraZoom(index != 0);
             BindAbility(oldAbility, false);
             
             BasicSkill newAbility = PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill;
@@ -62,6 +62,16 @@ public class PlayerController : MonoBehaviour
                 ExecuteAbility();
                 return;
             }
+            if (newAbility.RequiredDataType == typeof(TargetData))
+            {
+                // TODO: WRITE BETTER
+                CameraController.AimTarget(PlayerSelectionManager.SelectedUnit.transform, (newAbility as ITargetSwitchable).CurrentTarget.transform.position);
+            }
+            else
+            {
+                CameraController.SetExtraZoom(index != 0);
+            }
+            
             BindAbility(newAbility, true, index != 0);
             OnAbilitySelected?.Invoke(index);
         }
@@ -69,6 +79,7 @@ public class PlayerController : MonoBehaviour
 
     private void CancelAbility()
     {
+        CameraController.ChangeCameraMod(CameraMod.Tactical);
         SelectAbility(0);
     }
 
@@ -118,10 +129,12 @@ public class PlayerController : MonoBehaviour
             if (bind)
             {
                 PlayerInputController.SwitchTarget += targetSwitchable.Switch;
+                targetSwitchable.OnTargetSwitched += SetTargeting;
             }
             else
             {
                 PlayerInputController.SwitchTarget -= targetSwitchable.Switch;
+                targetSwitchable.OnTargetSwitched -= SetTargeting;
             }
         }
 
@@ -143,6 +156,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void SetTargeting(GameObject target)
+    {
+        if(!target || !PlayerSelectionManager.SelectedUnit) return;
+        
+        CameraController.AimTarget(PlayerSelectionManager.SelectedUnit.transform, target.transform.position);
+    }
     
     //---------------------------------------------DEBUG-GUI--------------------------------------------
     private void OnDrawGizmos()

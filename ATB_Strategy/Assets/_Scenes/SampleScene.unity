@@ -3257,7 +3257,9 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585550}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3397,6 +3399,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   _cameraPitch: 40
+  _transitionMoveSmooth: 0.15
+  _transitionRotSpeed: 5
   _moveSpeedMaxZoom: 7.5
   _moveSpeedMinZoom: 12.5
   _moveThreshold: 0.2
@@ -3412,6 +3416,35 @@ MonoBehaviour:
   _extraZoomPercent: 1.2
   _focusMaxDistance: 15
   _focusSmoothTime: 0.2
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e6f72127c9a1614c94aa56c24a5e043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AimCamera
+  _moveSmoothTime: 0.2
+  _rotationSpeed: 5
+  _aimOffset: {x: 0.75, y: 2, z: 0}
+  _aimDistance: 2
+--- !u!114 &330585550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad518ff3397c4b4d9b91c91b78acd4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraController
+  _cameraMod: 0
 --- !u!1 &338780342
 GameObject:
   m_ObjectHideFlags: 0
@@ -6877,7 +6910,7 @@ Transform:
   m_GameObject: {fileID: 693508092}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.71, y: 0.6, z: 19.06}
+  m_LocalPosition: {x: 6.9, y: 0.6, z: 23.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7692,7 +7725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed2e816511eca349918fa22deaebf19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  CameraController: {fileID: 330585548}
+  CameraController: {fileID: 330585550}
   CursorController: {fileID: 0}
   PlayerSelectionManager: {fileID: 0}
   _positionPreset:

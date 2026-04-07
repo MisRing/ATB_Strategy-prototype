@@ -101,7 +101,7 @@ public class PlayerSelectionManager : MonoBehaviour
         OnSelectionChanged?.Invoke(oldUnit, SelectedUnit);
         if (focusView)
         {
-            _playerController.CameraController.EnterFocusMode(SelectedUnit.transform);
+            _playerController.CameraController.FocusTarget(SelectedUnit.transform);
         }
     }
     

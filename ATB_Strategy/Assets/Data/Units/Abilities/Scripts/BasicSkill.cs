@@ -58,6 +58,7 @@ public class PointData : SkillData
 
 public interface ITargetSwitchable
 {
+    GameObject CurrentTarget { get; }
     event Action<GameObject> OnTargetSwitched;
     void Switch();
 }
