@@ -112,6 +112,18 @@ public class PlayerController : MonoBehaviour
                 PlayerInputController.PointRClick -= ExecuteAbility;
             }
         }
+        if (type == typeof(TargetData))
+        {
+            ITargetSwitchable targetSwitchable = ability as ITargetSwitchable;
+            if (bind)
+            {
+                PlayerInputController.SwitchTarget += targetSwitchable.Switch;
+            }
+            else
+            {
+                PlayerInputController.SwitchTarget -= targetSwitchable.Switch;
+            }
+        }
 
         if (bind && bindCancel)
             PlayerInputController.Cancel += CancelAbility;

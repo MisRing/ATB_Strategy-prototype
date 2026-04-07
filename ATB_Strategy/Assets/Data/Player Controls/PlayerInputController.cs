@@ -17,7 +17,7 @@ public class PlayerInputController : MonoBehaviour
 
     public static event Action PointLClicl;
     public static event Action PointRClick;
-    public static event Action SwitchTarget;
+    public static StackAction SwitchTarget = new StackAction();
 
     public static event Action<float> RotateCamera;
 

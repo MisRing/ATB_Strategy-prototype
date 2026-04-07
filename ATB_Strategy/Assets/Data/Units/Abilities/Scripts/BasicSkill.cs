@@ -55,3 +55,9 @@ public class PointData : SkillData
 {
     public Vector3 Position;
 }
+
+public interface ITargetSwitchable
+{
+    event Action<GameObject> OnTargetSwitched;
+    void Switch();
+}

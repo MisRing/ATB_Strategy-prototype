@@ -28,13 +28,13 @@ public class PlayerSelectionManager : MonoBehaviour
     
     private void OnEnable()
     {
-        PlayerInputController.SwitchTarget += SwitchTarget;
+        PlayerInputController.SwitchTarget.DefaultAction += SwitchTarget;
         PlayerInputController.PointLClicl += PointLeftClick;
     }
 
     private void OnDisable()
     {
-        PlayerInputController.SwitchTarget -= SwitchTarget;
+        PlayerInputController.SwitchTarget.DefaultAction -= SwitchTarget;
         PlayerInputController.PointLClicl -= PointLeftClick;
     }
 

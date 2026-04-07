@@ -38,11 +38,13 @@ public static class CombatService
 public interface ICombat
 {
     Vector3 Position { get; }
+    UnitOwner Owner { get; }
 }
 
 public abstract class CombatAbstract : MonoBehaviour, ICombat
 {
     public virtual Vector3 Position { get => transform.position; }
+    public virtual UnitOwner Owner { get => UnitOwner.Enemy; }
 
     private protected virtual void OnEnable()
     {
