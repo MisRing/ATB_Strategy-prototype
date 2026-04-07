@@ -20,11 +20,15 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
     {
         _targets = CombatService.GetCombats(transform.position, 100f);
 
-        foreach (ICombat combat in _targets)
+        if (_targets.Count != 0)
         {
-            if (combat.Owner == Unit.Owner)
+            for(int i = 0; i < _targets.Count; i++)
             {
-                _targets.Remove(combat);
+                if (_targets[i].Owner == Unit.Owner)
+                {
+                    _targets.Remove(_targets[i]);
+                    i--;
+                }
             }
         }
         _currentTarget = 0;

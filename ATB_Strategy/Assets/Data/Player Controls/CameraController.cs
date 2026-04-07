@@ -1,12 +1,8 @@
-using Unity.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
     [Header("Main")]
-    //[SerializeField] private Transform _baseTransform;
-    //[SerializeField] private Transform _cameraTransform;
     [SerializeField] private float _cameraPitch = 40f;
     private Vector3 _position;
     private Vector3 _rotation;
@@ -30,8 +26,8 @@ public class CameraController : MonoBehaviour
     private float _currentAngleY;
 
     [Header("Zoom settings")]
-    [SerializeField] private float _maxZoom = -1.5f;
-    [SerializeField] private float _minZoom = -10f;
+    [SerializeField] private float _maxZoom = 1.5f;
+    [SerializeField] private float _minZoom = 10f;
     [SerializeField] private float _zoomSpeed = 0.3f;
     [SerializeField] private float _zoomSmoothTime = 0.15f;
     [SerializeField] private float _extraZoomPercent = 1.2f;
@@ -57,12 +53,12 @@ public class CameraController : MonoBehaviour
 
     public void Init(Transform target)
     {
-        //_baseTransform.localEulerAngles = new Vector3(_cameraPitch, 0, 0);
         _rotation = new Vector3(0, _startAngle, 0);
         EnterFocusMode(target, true);
         _currentAngleY = _startAngle;
         _targetZoomPercent = 0f;
         _zoom = _minZoom;
+        SetPosition();
     }
 
     private void Update()
@@ -162,8 +158,7 @@ public class CameraController : MonoBehaviour
             ref _focusVelocity,
             _focusSmoothTime);
     }
-
-
+    
     private void Zoom()
     {
         float input = PlayerInputController.CameraZoomAxis;
