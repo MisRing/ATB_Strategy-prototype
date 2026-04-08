@@ -11,4 +11,7 @@ public class UnitStats : MonoBehaviour
     public IntStat MaxHealth = new IntStat(5);
     public IntStat Armor = new IntStat(3);
     public IntStat MaxArmor = new IntStat(3);
+    
+    [Header("Vision")]
+    public FloatStat Vision = new FloatStat(60f);
 }

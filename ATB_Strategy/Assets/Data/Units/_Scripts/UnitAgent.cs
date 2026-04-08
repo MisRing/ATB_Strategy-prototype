@@ -8,6 +8,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     [SerializeField] private float _accelerationDistance = 0.5f;
     [SerializeField] private float _minAcceleration = 0.1f;
     [SerializeField] private float _rotationSpeed = 36f;
+    [SerializeField] private float _coverDistant = 2f;
 
     public Vector3Int CurrentTile = new Vector3Int();
 
@@ -20,6 +21,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     private UnitController _unit;
 
     public event Action<PathData> OnPathChanged;
+    public event Action<TileCover, int> OnCoverChanged;
 
     private void Awake()
     {
@@ -113,8 +115,15 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         if (_pathData == null) return false;
 
         GridTile finalTile = new GridTile();
-        GridParameters.LevelGrid.GetTileByWorldPos(ref finalTile,_pathData.Points[_pathData.Points.Count - 1]);
+        GridParameters.LevelGrid.GetTileByWorldPos(ref finalTile, _pathData.Points[_pathData.Points.Count - 1]);
         SetAgentTile(finalTile);
+
+        _pathData.Cover = GridPathFinder.GetTileCover(
+            ref _pathData.FinalDirection,
+            finalTile,
+            _unit.UnitStats.Vision,
+            _unit.Owner
+            );
 
         StartCoroutine(Move());
         return true;
@@ -125,6 +134,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         float currentPassedDistance = 0f;
         int nextPointIndex = 1;
         float nextPointDistance = Vector3.Distance(_pathData.Points[0], _pathData.Points[1]);
+        bool finalMove = false;
 
         while (currentPassedDistance < _pathData.Distance)
         {
@@ -137,6 +147,15 @@ public class UnitAgent : MonoBehaviour, IPathHandler
             currentPassedDistance += step * velocity;
 
             MoveToDirection(direction, step);
+            if (_pathData.Distance - currentPassedDistance <= _coverDistant)
+            {
+                if (!finalMove)
+                {
+                    finalMove = true;
+                    OnCoverChanged?.Invoke(_pathData.Cover, 1);
+                }
+                //direction = (_pathData.FinalDirection).normalized * velocity;
+            }
             RotateToDirection(direction, velocity);
 
             if (currentPassedDistance >= nextPointDistance)
@@ -201,6 +220,6 @@ public class PathData
     public int TurnsCost;
     public float Duration;
     public float Distance;
-    //public TileCover Cover;
-    //public Vector3 finalDirection;
+    public TileCover Cover;
+    public Vector3 FinalDirection;
 }

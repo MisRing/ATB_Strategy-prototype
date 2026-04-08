@@ -33,6 +33,42 @@ public static class CombatService
 
         return combatsOnRange;
     }
+    
+    public static List<ICombat> GetCombats(Vector3 position, float range, UnitOwner ally)
+    {
+        List<ICombat> combatsOnRange = new List<ICombat>();
+
+        foreach (ICombat comb in COMBATS_ON_LEVEL)
+        {
+            if (Vector3.Distance(position, comb.Position) <= range && comb.Owner != ally)
+            {
+                combatsOnRange.Add(comb);
+            }
+        }
+
+        return combatsOnRange;
+    }
+    
+    public static ICombat GetNearestCombat(Vector3 position, float range, UnitOwner ally)
+    {
+        ICombat combat = null;
+        float distance = range;
+
+        foreach (ICombat comb in COMBATS_ON_LEVEL)
+        {
+            if (comb.Owner == ally) continue;
+
+            float newDistance = Vector3.Distance(position, comb.Position);
+
+            if (newDistance <= distance)
+            {
+                distance = newDistance;
+                combat = comb;
+            }
+        }
+
+        return combat;
+    }
 }
 
 public interface ICombat

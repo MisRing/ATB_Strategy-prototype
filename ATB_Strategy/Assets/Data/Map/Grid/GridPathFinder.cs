@@ -7,6 +7,76 @@ public static class GridPathFinder
     private static readonly float _lineCutStep = 0.5f;
     private static readonly float _raycastHeight = 0.4f;
 
+    public static TileCover GetTileCover(ref Vector3 direction, GridTile tile, float visionRange, UnitOwner ally)
+    {
+        // ❌ нет укрытия вообще
+        if (tile.Covers[0] == 0 && tile.Covers[1] == 0 && tile.Covers[2] == 0 && tile.Covers[3] == 0)
+            return TileCover.None;
+
+        Vector3 position = GridParameters.LevelGrid.GetTileWorldPos(tile);
+
+        ICombat enemy = CombatService.GetNearestCombat(position, visionRange, ally);
+
+        int bestIndex = -1;
+        TileCover bestCoverValue = 0;
+        float bestDot = -1f;
+
+        // 🔥 1. Пытаемся выбрать относительно врага
+        if (enemy != null)
+        {
+            Vector3 toEnemy = (enemy.Position - position).normalized;
+
+            for (int i = 0; i < 4; i++)
+            {
+                TileCover coverValue = tile.Covers[i];
+                if (coverValue == 0) continue;
+
+                Vector3 coverDir = GridParameters.COVER_DIRECTIONS[i];
+
+                float dot = Vector3.Dot(coverDir, toEnemy);
+
+                // приоритет:
+                // 1) ближе к направлению
+                // 2) если почти одинаково — большее укрытие
+                if (dot > bestDot || (Mathf.Approximately(dot, bestDot) && coverValue > bestCoverValue))
+                {
+                    bestDot = dot;
+                    bestCoverValue = coverValue;
+                    bestIndex = i;
+                }
+            }
+
+            if (bestIndex != -1)
+            {
+                direction = GridParameters.COVER_DIRECTIONS[bestIndex];
+                return bestCoverValue;
+            }
+        }
+
+        // 🔥 2. Просто лучшее укрытие
+        bestIndex = -1;
+        bestCoverValue = 0;
+
+        for (int i = 0; i < 4; i++)
+        {
+            TileCover coverValue = tile.Covers[i];
+            if (coverValue > bestCoverValue)
+            {
+                bestCoverValue = coverValue;
+                bestIndex = i;
+            }
+        }
+
+        if (bestIndex != -1)
+        {
+            direction = GridParameters.COVER_DIRECTIONS[bestIndex];
+            return bestCoverValue;
+        }
+
+        // 🔥 3. fallback — направление движения (direction уже задан)
+        return TileCover.None;
+    }
+
     public static bool CalculatePath(ref PathData pathData, Vector3 agentPoisition, Vector3 targetPosition)
     {
         pathData = new PathData();
@@ -22,10 +92,14 @@ public static class GridPathFinder
 
             pathData.Distance = 0;
 
-            for (int i = 0; i < pathData.Points.Count - 1; i++)
+            int pointsCount = pathData.Points.Count;
+
+            for (int i = 0; i < pointsCount - 1; i++)
             {
                 pathData.Distance += Vector3.Distance(pathData.Points[i], pathData.Points[i + 1]);
             }
+
+            pathData.FinalDirection = (pathData.Points[pointsCount - 1] - pathData.Points[pointsCount - 2]).normalized;
 
             return true;
         }
