@@ -28,19 +28,8 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
 
     public override void EnterPrepare()
     {
-        _targets = CombatService.GetCombats(transform.position, 100f);
+        _targets = CombatService.GetCombats(transform.position, Unit.UnitStats.Vision, Unit.Owner);
 
-        if (_targets.Count != 0)
-        {
-            for(int i = 0; i < _targets.Count; i++)
-            {
-                if (_targets[i].Owner == Unit.Owner)
-                {
-                    _targets.Remove(_targets[i]);
-                    i--;
-                }
-            }
-        }
         _currentTarget = 0;
 
         if (_targets.Count != 0)
