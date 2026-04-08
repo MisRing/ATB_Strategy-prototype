@@ -67661,7 +67661,7 @@ MonoBehaviour:
   MaxArmor:
     _value: 3
   Vision:
-    _value: 60
+    _value: 30
 --- !u!114 &1816743775
 MonoBehaviour:
   m_ObjectHideFlags: 0
