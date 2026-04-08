@@ -8,7 +8,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     [SerializeField] private float _accelerationDistance = 0.5f;
     [SerializeField] private float _minAcceleration = 0.1f;
     [SerializeField] private float _rotationSpeed = 36f;
-    [SerializeField] private float _coverDistant = 2f;
+    [SerializeField] private float _coverDistance = 2f;
 
     public Vector3Int CurrentTile = new Vector3Int();
 
@@ -21,7 +21,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     private UnitController _unit;
 
     public event Action<PathData> OnPathChanged;
-    public event Action<TileCover, int> OnCoverChanged;
+    public event Action<TileCover, int, float> OnCoverChanged;
 
     private void Awake()
     {
@@ -134,11 +134,11 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         float currentPassedDistance = 0f;
         int nextPointIndex = 1;
         float nextPointDistance = Vector3.Distance(_pathData.Points[0], _pathData.Points[1]);
-        bool finalMove = false;
 
         while (currentPassedDistance < _pathData.Distance)
         {
-            float velocity = GetAcceleration(currentPassedDistance, _pathData.Distance);
+            float remainingDistance = _pathData.Distance - currentPassedDistance;
+            float velocity = GetAcceleration(currentPassedDistance, remainingDistance);
 
             Vector3 direction = (_pathData.Points[nextPointIndex] - transform.position).normalized * velocity;
 
@@ -147,14 +147,11 @@ public class UnitAgent : MonoBehaviour, IPathHandler
             currentPassedDistance += step * velocity;
 
             MoveToDirection(direction, step);
-            if (_pathData.Distance - currentPassedDistance <= _coverDistant)
+            if (remainingDistance <= _coverDistance)
             {
-                if (!finalMove)
-                {
-                    finalMove = true;
-                    OnCoverChanged?.Invoke(_pathData.Cover, 1);
-                }
-                //direction = (_pathData.FinalDirection).normalized * velocity;
+                float percent = 1f - (remainingDistance / _coverDistance);
+                OnCoverChanged?.Invoke(_pathData.Cover, 1, percent);
+                direction = (_pathData.FinalDirection).normalized * velocity;
             }
             RotateToDirection(direction, velocity);
 
