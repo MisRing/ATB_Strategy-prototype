@@ -53,7 +53,7 @@ public class UnitAnimator : MonoBehaviour
     }
     private void UpdateAnimationSpeed(float timeSpeed)
     {
-        _animator.speed = timeSpeed;
+        _animator.speed = 1f;// timeSpeed;
     }
 
     private void SetCover(TileCover cover, int look, float percent)

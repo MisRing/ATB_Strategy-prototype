@@ -14,8 +14,6 @@ public class BasicSkill : MonoBehaviour
     private protected UnitSkillController _skillController;
     private protected SkillData _skillData;
     
-    public  UnitController Unit => _skillController.Unit;
-
     public virtual void Init(UnitSkillController skillController)
     {
         _skillController = skillController;
@@ -36,10 +34,10 @@ public class BasicSkill : MonoBehaviour
         _skillData = abilityData;
     }
 
-    public virtual bool Execute()
+    public virtual bool Execute(ref int cost)
     {
         Debug.Log("Start executing <" + SkillName + ">");
-        TurnManager.EnterBusyQ(Unit, 1);
+        cost = 1;
         return true;
     }
 }

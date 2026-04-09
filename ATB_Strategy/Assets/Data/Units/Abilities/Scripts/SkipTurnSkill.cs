@@ -12,11 +12,11 @@ public class SkipTurnSkill : BasicSkill
         SkillName = "Skip";
     }
 
-    public override bool Execute()
+    public override bool Execute(ref int cost)
     {
         Debug.Log("Start executing <" + SkillName + "> | Cost: " + _skipTurnCount);
 
-        TurnManager.EnterBusyQ(Unit, _skipTurnCount);
+        cost = _skipTurnCount;
 
         return true;
     }

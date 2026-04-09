@@ -16,7 +16,6 @@ public static class GridPathFinder
         Vector3 position = GridParameters.LevelGrid.GetTileWorldPos(tile);
 
         ICombat enemy = CombatService.GetNearestCombat(position, visionRange, ally);
-        Debug.Log(enemy);
 
         int bestIndex = -1;
         TileCover bestCoverValue = 0;
@@ -48,7 +47,7 @@ public static class GridPathFinder
 
             if (bestIndex != -1)
             {
-                direction = GridParameters.COVER_DIRECTIONS[bestIndex];
+                direction = -GridParameters.COVER_DIRECTIONS[bestIndex];
                 
                 return bestCoverValue;
             }
@@ -70,7 +69,7 @@ public static class GridPathFinder
 
         if (bestIndex != -1)
         {
-            direction = GridParameters.COVER_DIRECTIONS[bestIndex];
+            direction = -GridParameters.COVER_DIRECTIONS[bestIndex];
             return bestCoverValue;
         }
 

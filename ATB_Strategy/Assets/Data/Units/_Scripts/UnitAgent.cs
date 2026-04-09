@@ -150,7 +150,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
             if (remainingDistance <= _coverDistance)
             {
                 float percent = 1f - (remainingDistance / _coverDistance);
-                OnCoverChanged?.Invoke(_pathData.Cover, 1, percent);
+                OnCoverChanged?.Invoke(_pathData.Cover, -1, percent);
                 direction = (_pathData.FinalDirection).normalized * velocity;
             }
             RotateToDirection(direction, velocity);

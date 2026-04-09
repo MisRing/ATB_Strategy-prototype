@@ -28,7 +28,7 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
 
     public override void EnterPrepare()
     {
-        _targets = CombatService.GetCombats(transform.position, Unit.UnitStats.Vision, Unit.Owner);
+        _targets = CombatService.GetCombats(transform.position, _skillController.Unit.UnitStats.Vision, _skillController.Unit.Owner);
 
         _currentTarget = 0;
 
@@ -63,11 +63,13 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         OnTargetSwitched?.Invoke((_targets[_currentTarget] as CombatAbstract).gameObject);
     }
 
-    public override bool Execute()
+    public override bool Execute(ref int cost)
     {
+        if(_targets.Count == 0) return false;
+        
         Debug.Log("Start executing <" + SkillName + "> | Cost: " + 3);
 
-        TurnManager.EnterBusyQ(Unit, 3);
+        cost = 3;
 
         return true;
     }

@@ -63,10 +63,11 @@ public class UnitSkillController : MonoBehaviour
     public bool ExecuteSkill()
     {
         if (!CurrentSkill) return false;
-        
-        if (CurrentSkill.Execute())
+        int cost = 0;
+        if (CurrentSkill.Execute(ref cost))
         {
             Unit.State = UnitState.Engaged;
+            TurnManager.EnterBusyQ(Unit, cost);
             CurrentSkill.ExitPrepare();
             return true;
         }
@@ -79,10 +80,11 @@ public class UnitSkillController : MonoBehaviour
         BasicSkill skill = GetSkillByIndex(index);
 
         skill.UpdateData(data);
-
-        if (skill.Execute())
+        int cost = 0;
+        if (skill.Execute(ref cost))
         {
             Unit.State = UnitState.Engaged;
+            TurnManager.EnterBusyQ(Unit, cost);
             return true;
         }
 

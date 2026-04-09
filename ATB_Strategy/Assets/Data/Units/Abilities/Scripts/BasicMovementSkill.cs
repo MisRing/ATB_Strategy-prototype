@@ -11,7 +11,7 @@ public class BasicMovementSkill : BasicSkill
         base.Init(skillController);
         SkillName = "Basic movement";
         RequiredDataType = typeof(PointData);
-        _agent = Unit.AgentController;
+        _agent = _skillController.Unit.AgentController;
     }
 
     public override void EnterPrepare()
@@ -34,13 +34,13 @@ public class BasicMovementSkill : BasicSkill
         _agent.CalculatePath((_skillData as PointData).Position);
     }
 
-    public override bool Execute()
+    public override bool Execute(ref int cost)
     {
         if(!_agent.StartMove()) return false;
         
         Debug.Log("Start executing <" + SkillName + "> | Cost: " + _agent.PathData.TurnsCost);
 
-        TurnManager.EnterBusyQ(Unit, _agent.PathData.TurnsCost);
+        cost = _agent.PathData.TurnsCost;
 
         return true;
     }
