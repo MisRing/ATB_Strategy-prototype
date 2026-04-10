@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class UnitAnimator : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
+    [SerializeField] private UnitWeaponIKController _weaponIK;
     
     private static readonly int MOVEMENT_X_ID = Animator.StringToHash("MoveX");
     private static readonly int MOVEMENT_Z_ID = Animator.StringToHash("MoveZ");
@@ -51,6 +53,69 @@ public class UnitAnimator : MonoBehaviour
         _animator.SetFloat(MOVEMENT_X_ID, realDirection.x);
         _animator.SetFloat(MOVEMENT_Z_ID, realDirection.z);
     }
+
+    public void AnimateAim(Vector3 target, float delay, float rotationTime, float shootTime)
+    {
+        StartCoroutine(AimAnimation(target, delay, rotationTime, shootTime));
+    }
+
+    public event Action OnAttackAnim;
+
+    private IEnumerator AimAnimation(Vector3 target, float delay, float rotationTime, float shootTime)
+    {
+        Quaternion startRotation = transform.rotation;
+        Vector3 directionXZ = Vector3.ProjectOnPlane(target - transform.position, Vector3.up).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(directionXZ, Vector3.up);
+
+        float time = 0;
+
+        float finalTime = delay * 2 + rotationTime * 2 + shootTime;
+
+        while (time < delay)
+        {
+            time += TimeService.TimeSpeedDelta;
+            yield return null;
+        }
+
+        while (time < delay + rotationTime)
+        {
+            time += TimeService.TimeSpeedDelta;
+
+            float t = Mathf.Clamp01((time - delay) / rotationTime);
+
+            transform.rotation = Quaternion.Lerp(startRotation, targetRotation, t);
+
+            _weaponIK.SetAimWeight(t);
+
+            yield return null;
+        }
+
+        while (time < delay + rotationTime + shootTime)
+        {
+            time += TimeService.TimeSpeedDelta;
+            yield return null;
+        }
+
+        while (time < delay + rotationTime + shootTime + rotationTime)
+        {
+            time += TimeService.TimeSpeedDelta;
+
+            float t = Mathf.Clamp01((time - (delay + rotationTime + shootTime)) / rotationTime);
+
+            transform.rotation = Quaternion.Lerp(targetRotation, startRotation, t);
+
+            _weaponIK.SetAimWeight(1f - t);
+
+            yield return null;
+        }
+
+        while (time < delay + rotationTime + shootTime + rotationTime + delay)
+        {
+            time += TimeService.TimeSpeedDelta;
+            yield return null;
+        }
+    }
+
     private void UpdateAnimationSpeed(float timeSpeed)
     {
         _animator.speed = 1f;// timeSpeed;

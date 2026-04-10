@@ -67,9 +67,11 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
     {
         if(_targets.Count == 0) return false;
         
-        Debug.Log("Start executing <" + SkillName + "> | Cost: " + 3);
+        Debug.Log("Start executing <" + SkillName + "> | Cost: " + 5);
 
-        cost = 3;
+        cost = 5;
+
+        _skillController.Unit.UnitAnimator.AnimateAim(_targets[_currentTarget].Position, TurnManager.TurnTime * 0.2f, TurnManager.TurnTime * 1.3f, TurnManager.TurnTime * 2f);
 
         return true;
     }

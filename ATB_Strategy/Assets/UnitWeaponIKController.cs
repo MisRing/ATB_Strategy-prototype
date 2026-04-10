@@ -3,13 +3,17 @@ using UnityEngine.Animations.Rigging;
 
 public class UnitWeaponIKController : MonoBehaviour
 {
+    [Header("Rig settings")]
     [SerializeField] private MultiAimConstraint _headAimConstraint;
     [SerializeField] private MultiAimConstraint _weaponAimConstraint;
     [SerializeField] private MultiPositionConstraint _weaponPositionConstraint;
 
+    [Header("Aim Settings")]
+    [SerializeField] private Transform _aimTransform;
+
     private void Awake()
     {
-        SetAimWeight(1f);
+        SetAimWeight(0f);
     }
 
     public void SetAimWeight(float value)
@@ -27,5 +31,10 @@ public class UnitWeaponIKController : MonoBehaviour
         source.SetWeight(0, 1 - value);
         source.SetWeight(1, value);
         _weaponPositionConstraint.data.sourceObjects = source;
+    }
+
+    public void SetAimRotation(Vector3 target)
+    {
+        _aimTransform.LookAt(target);
     }
 }

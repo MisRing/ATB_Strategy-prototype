@@ -10137,6 +10137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitAnimator
   _animator: {fileID: 1223420529}
+  _weaponIK: {fileID: 0}
 --- !u!114 &935260121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15354,6 +15355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitAnimator
   _animator: {fileID: 2100347068}
+  _weaponIK: {fileID: 0}
 --- !u!114 &1306086773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69173,6 +69175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitAnimator
   _animator: {fileID: 1087539341}
+  _weaponIK: {fileID: 2079010749}
 --- !u!114 &1816743774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70506,6 +70509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitAnimator
   _animator: {fileID: 1499648711}
+  _weaponIK: {fileID: 0}
 --- !u!114 &1979210997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71649,6 +71653,7 @@ MonoBehaviour:
   _headAimConstraint: {fileID: 648168288}
   _weaponAimConstraint: {fileID: 1086753760}
   _weaponPositionConstraint: {fileID: 1274490992}
+  _aimTransform: {fileID: 391966781}
 --- !u!4 &2085503235 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7078722787440015773, guid: 96dd546f62d6cc94e987160b25fc4a14, type: 3}
