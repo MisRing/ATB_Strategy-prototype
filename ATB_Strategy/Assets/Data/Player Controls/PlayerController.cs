@@ -65,7 +65,15 @@ public class PlayerController : MonoBehaviour
             if (newAbility.RequiredDataType == typeof(TargetData) && (newAbility as ITargetSwitchable).CurrentTarget)
             {
                 // TODO: WRITE BETTER
-                CameraController.AimTarget(PlayerSelectionManager.SelectedUnit.transform, (newAbility as ITargetSwitchable).CurrentTarget.transform.position);
+                if (isSameAbility)
+                {
+                    ExecuteAbility();
+                    return;
+                }
+                else
+                {
+                    CameraController.AimTarget(PlayerSelectionManager.SelectedUnit.transform, (newAbility as ITargetSwitchable).CurrentTarget.transform.position);
+                }
             }
             else
             {

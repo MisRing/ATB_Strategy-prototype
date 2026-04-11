@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,6 +6,7 @@ public class UnitAnimator : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private UnitWeaponIKController _weaponIK;
+    [SerializeField] private Transform _unitModel;
     
     private static readonly int MOVEMENT_X_ID = Animator.StringToHash("MoveX");
     private static readonly int MOVEMENT_Z_ID = Animator.StringToHash("MoveZ");
@@ -54,64 +55,100 @@ public class UnitAnimator : MonoBehaviour
         _animator.SetFloat(MOVEMENT_Z_ID, realDirection.z);
     }
 
-    public void AnimateAim(Vector3 target, float delay, float rotationTime, float shootTime)
-    {
-        StartCoroutine(AimAnimation(target, delay, rotationTime, shootTime));
-    }
-
     public event Action OnAttackAnim;
 
-    private IEnumerator AimAnimation(Vector3 target, float delay, float rotationTime, float shootTime)
+    public void AnimateAim(Vector3 target, float fullTime)
     {
-        Quaternion startRotation = transform.rotation;
-        Vector3 directionXZ = Vector3.ProjectOnPlane(target - transform.position, Vector3.up).normalized;
-        Quaternion targetRotation = Quaternion.LookRotation(directionXZ, Vector3.up);
+        StartCoroutine(AimAnimation(target, fullTime));
+    }
 
-        float time = 0;
+    private IEnumerator AimAnimation(Vector3 target, float fullTime)
+    {
+        float animTime = TurnManager.TurnTime;
+        float delay = TurnManager.TurnTime * 0.2f;
 
-        float finalTime = delay * 2 + rotationTime * 2 + shootTime;
+        float rotateTime = (fullTime - animTime - delay * 4f) / 2f;
 
-        while (time < delay)
+        Quaternion startRot = _unitModel.rotation;
+        TileCover startCover = _cover;
+
+        Vector3 dir = Vector3.ProjectOnPlane(target - _unitModel.position, Vector3.up).normalized;
+        Quaternion targetRot = Quaternion.LookRotation(dir, Vector3.up);
+
+        // 🔹 Phase 1 — Delay
+        yield return Wait(delay);
+
+        // 🔹 Phase 2 — Rotate to target
+        yield return RotatePhase(startRot, targetRot, rotateTime, target, 0f, 1f, TileCover.None);
+
+        // 🔹 Phase 3 — Pre-fire delay
+        yield return WaitWithAim(delay, target);
+
+        // 🔹 Phase 4 — Fire
+        yield return WaitWithAim(animTime, target); // тут потом вставишь анимацию
+
+        // 🔹 Phase 5 — Post-fire delay
+        yield return WaitWithAim(delay, target);
+
+        // 🔹 Phase 6 — Rotate back
+        yield return RotatePhase(startRot, targetRot, rotateTime, target, 1f, 0f, startCover);
+
+        // 🔹 Phase 7 — End delay
+        yield return Wait(delay);
+    }
+
+    private IEnumerator Wait(float duration)
+    {
+        float t = 0;
+        while (t < duration)
         {
-            time += TimeService.TimeSpeedDelta;
+            t += TimeService.TimeSpeedDelta;
             yield return null;
         }
+    }
 
-        while (time < delay + rotationTime)
+    private IEnumerator WaitWithAim(float duration, Vector3 target)
+    {
+        float t = 0;
+        while (t < duration)
         {
-            time += TimeService.TimeSpeedDelta;
+            t += TimeService.TimeSpeedDelta;
 
-            float t = Mathf.Clamp01((time - delay) / rotationTime);
-
-            transform.rotation = Quaternion.Lerp(startRotation, targetRotation, t);
-
-            _weaponIK.SetAimWeight(t);
+            _weaponIK.SetAimRotation(target);
 
             yield return null;
         }
+    }
 
-        while (time < delay + rotationTime + shootTime)
+    private IEnumerator RotatePhase(
+    Quaternion startRotation,
+    Quaternion targetRotation,
+    float duration,
+    Vector3 target,
+    float coverFrom,
+    float coverTo,
+    TileCover coverState)
+    {
+        float t = 0;
+
+        while (t < duration)
         {
-            time += TimeService.TimeSpeedDelta;
-            yield return null;
-        }
+            t += TimeService.TimeSpeedDelta;
+            float lerp = Mathf.Clamp01(t / duration);
+            float eased = 1f - Mathf.Pow(1f - lerp, 2);
 
-        while (time < delay + rotationTime + shootTime + rotationTime)
-        {
-            time += TimeService.TimeSpeedDelta;
+            _unitModel.rotation = Quaternion.Lerp(startRotation, targetRotation, Mathf.Lerp(coverFrom, coverTo, eased));
 
-            float t = Mathf.Clamp01((time - (delay + rotationTime + shootTime)) / rotationTime);
+            // cover плавно
+            SetCover(coverState, 0, Mathf.Lerp(coverFrom, coverTo, lerp));
 
-            transform.rotation = Quaternion.Lerp(targetRotation, startRotation, t);
+            // IK
+            float angle = Quaternion.Angle(_unitModel.rotation, targetRotation);
+            float weight = 1 - Mathf.Clamp01(angle / 60f);
 
-            _weaponIK.SetAimWeight(1f - t);
+            _weaponIK.SetAimWeight(weight);
+            _weaponIK.SetAimRotation(target);
 
-            yield return null;
-        }
-
-        while (time < delay + rotationTime + shootTime + rotationTime + delay)
-        {
-            time += TimeService.TimeSpeedDelta;
             yield return null;
         }
     }
@@ -121,6 +158,7 @@ public class UnitAnimator : MonoBehaviour
         _animator.speed = 1f;// timeSpeed;
     }
 
+    private TileCover _cover;
     private void SetCover(TileCover cover, int look, float percent)
     {
         if (cover == TileCover.None)
@@ -136,5 +174,6 @@ public class UnitAnimator : MonoBehaviour
             _animator.SetFloat(COVER_VERTICAL_ID, Mathf.Lerp(_animator.GetFloat(COVER_VERTICAL_ID), vertical, percent));
             _animator.SetFloat(COVER_HORIZONTAL_ID, Mathf.Lerp(_animator.GetFloat(COVER_HORIZONTAL_ID), horizontal, percent));
         }
+        _cover = cover;
     }
 }
