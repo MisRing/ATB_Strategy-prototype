@@ -3,6 +3,7 @@ using UnityEngine;
 public class TacticalCamera : MonoBehaviour
 {
     [Header("Main")]
+    [SerializeField] private Vector3 _positionOffset = new Vector3(0f, 0.5f, 0f);
     [SerializeField] private float _cameraPitch = 40f;
     [SerializeField] private float _transitionMoveSmooth = 0.25f;
     [SerializeField] private float _transitionRotSpeed = 5f;
@@ -86,7 +87,7 @@ public class TacticalCamera : MonoBehaviour
         Quaternion targetRot = Quaternion.Euler(_cameraPitch, _rotation.y, 0f);
 
         Vector3 offset = targetRot * Vector3.back;
-        Vector3 targetPos = _position + offset * _zoom;
+        Vector3 targetPos = _position + offset * _zoom + _positionOffset;
 
         transform.position = Vector3.SmoothDamp(
             transform.position,
@@ -119,7 +120,7 @@ public class TacticalCamera : MonoBehaviour
 
         Vector3 offset = targetRotation * Vector3.back;
 
-        Vector3 targetPosition = _position + offset * _zoom;
+        Vector3 targetPosition = _position + offset * _zoom + _positionOffset;
 
         transform.rotation = targetRotation;
         transform.position = targetPosition;

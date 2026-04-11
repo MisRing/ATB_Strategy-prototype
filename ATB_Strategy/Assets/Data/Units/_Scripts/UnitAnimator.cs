@@ -14,6 +14,10 @@ public class UnitAnimator : MonoBehaviour
     private static readonly int COVER_VERTICAL_ID = Animator.StringToHash("CoverVertical");
     private static readonly int COVER_HORIZONTAL_ID = Animator.StringToHash("CoverHorizontal");
 
+    private static readonly int AIM_ID = Animator.StringToHash("Aim");
+    private static readonly int Shoot_ID = Animator.StringToHash("Shoot");
+
+
     private UnitController _unit;
 
     private void Awake()
@@ -64,8 +68,8 @@ public class UnitAnimator : MonoBehaviour
 
     private IEnumerator AimAnimation(Vector3 target, float fullTime)
     {
-        float animTime = TurnManager.TurnTime;
-        float delay = TurnManager.TurnTime * 0.2f;
+        float animTime = TurnManager.TurnTime * 2f;
+        float delay = TurnManager.TurnTime * 0.5f;
 
         float rotateTime = (fullTime - animTime - delay * 4f) / 2f;
 
@@ -78,18 +82,21 @@ public class UnitAnimator : MonoBehaviour
         // 🔹 Phase 1 — Delay
         yield return Wait(delay);
 
+        _animator.SetBool(AIM_ID, true);
         // 🔹 Phase 2 — Rotate to target
         yield return RotatePhase(startRot, targetRot, rotateTime, target, 0f, 1f, TileCover.None);
 
         // 🔹 Phase 3 — Pre-fire delay
         yield return WaitWithAim(delay, target);
 
+        _animator.SetTrigger(Shoot_ID);
         // 🔹 Phase 4 — Fire
         yield return WaitWithAim(animTime, target); // тут потом вставишь анимацию
 
         // 🔹 Phase 5 — Post-fire delay
         yield return WaitWithAim(delay, target);
 
+        _animator.SetBool(AIM_ID, false);
         // 🔹 Phase 6 — Rotate back
         yield return RotatePhase(startRot, targetRot, rotateTime, target, 1f, 0f, startCover);
 
@@ -144,7 +151,8 @@ public class UnitAnimator : MonoBehaviour
 
             // IK
             float angle = Quaternion.Angle(_unitModel.rotation, targetRotation);
-            float weight = 1 - Mathf.Clamp01(angle / 60f);
+            float weight = 1f - Mathf.Clamp01(angle / 60f);
+            weight = Mathf.Pow(weight, 2);
 
             _weaponIK.SetAimWeight(weight);
             _weaponIK.SetAimRotation(target);

@@ -66,10 +66,10 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
     public override bool Execute(ref int cost)
     {
         if(_targets.Count == 0) return false;
-        
-        Debug.Log("Start executing <" + SkillName + "> | Cost: " + 5);
 
-        cost = 5;
+        cost = 6;
+
+        Debug.Log("Start executing <" + SkillName + "> | Cost: " + cost);
 
         _skillController.Unit.UnitAnimator.AnimateAim(_targets[_currentTarget].Position, TurnManager.TurnTime * cost);
 
