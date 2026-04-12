@@ -7,7 +7,10 @@ public class UnitAnimator : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private UnitWeaponIKController _weaponIK;
     [SerializeField] private Transform _unitModel;
-    
+
+    [SerializeField] private Animator _weaponAnimator;
+
+
     private static readonly int MOVEMENT_X_ID = Animator.StringToHash("MoveX");
     private static readonly int MOVEMENT_Z_ID = Animator.StringToHash("MoveZ");
     
@@ -68,10 +71,14 @@ public class UnitAnimator : MonoBehaviour
 
     private IEnumerator AimAnimation(Vector3 target, float fullTime)
     {
-        float animTime = TurnManager.TurnTime * 2f;
-        float delay = TurnManager.TurnTime * 0.5f;
+        float t1 = fullTime * 0.05f;
+        float t2 = fullTime * 0.25f;
+        float t3 = fullTime * 0.1f;
+        float t4 = fullTime * 0.15f;
+        float t5 = fullTime * 0.05f;
+        float t6 = fullTime * 0.35f;
+        float t7 = fullTime * 0.05f;
 
-        float rotateTime = (fullTime - animTime - delay * 4f) / 2f;
 
         Quaternion startRot = _unitModel.rotation;
         TileCover startCover = _cover;
@@ -80,28 +87,37 @@ public class UnitAnimator : MonoBehaviour
         Quaternion targetRot = Quaternion.LookRotation(dir, Vector3.up);
 
         // 🔹 Phase 1 — Delay
-        yield return Wait(delay);
+        yield return Wait(t1);
 
         _animator.SetBool(AIM_ID, true);
         // 🔹 Phase 2 — Rotate to target
-        yield return RotatePhase(startRot, targetRot, rotateTime, target, 0f, 1f, TileCover.None);
+        yield return RotatePhase(startRot, targetRot, t2, target, 0f, 1f, TileCover.None);
 
         // 🔹 Phase 3 — Pre-fire delay
-        yield return WaitWithAim(delay, target);
+        yield return WaitWithAim(t3, target);
 
         _animator.SetTrigger(Shoot_ID);
+        _weaponAnimator.SetTrigger("Fire");
         // 🔹 Phase 4 — Fire
-        yield return WaitWithAim(animTime, target); // тут потом вставишь анимацию
+        yield return WaitWithAim(t4, target); // тут потом вставишь анимацию
 
         // 🔹 Phase 5 — Post-fire delay
-        yield return WaitWithAim(delay, target);
+        yield return WaitWithAim(t5, target);
 
         _animator.SetBool(AIM_ID, false);
         // 🔹 Phase 6 — Rotate back
-        yield return RotatePhase(startRot, targetRot, rotateTime, target, 1f, 0f, startCover);
+        if (startCover == 0)
+        {
+            transform.rotation = _unitModel.rotation;
+            yield return RotatePhase(transform.rotation, targetRot, t6, Vector3.zero, 1f, 0f, startCover);
+        }
+        else
+        {
+            yield return RotatePhase(startRot, targetRot, t6, Vector3.zero, 1f, 0f, startCover);
+        }
 
         // 🔹 Phase 7 — End delay
-        yield return Wait(delay);
+        yield return Wait(t7);
     }
 
     private IEnumerator Wait(float duration)
@@ -155,7 +171,10 @@ public class UnitAnimator : MonoBehaviour
             weight = Mathf.Pow(weight, 2);
 
             _weaponIK.SetAimWeight(weight);
-            _weaponIK.SetAimRotation(target);
+            if (target != Vector3.zero)
+            {
+                _weaponIK.SetAimRotation(target);
+            }
 
             yield return null;
         }

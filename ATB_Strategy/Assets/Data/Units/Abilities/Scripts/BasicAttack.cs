@@ -67,7 +67,7 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
     {
         if(_targets.Count == 0) return false;
 
-        cost = 6;
+        cost = 8;
 
         Debug.Log("Start executing <" + SkillName + "> | Cost: " + cost);
 
