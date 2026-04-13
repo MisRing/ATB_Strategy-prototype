@@ -16,7 +16,7 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
     
     public event Action<GameObject> OnTargetSwitched;
 
-    private int _currentTarget;
+    private int _currentTarget = 0;
     private List<ICombat> _targets;
     
     public override void Init(UnitSkillController skillController)
@@ -29,9 +29,7 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
     public override void EnterPrepare()
     {
         _targets = CombatService.GetCombats(transform.position, _skillController.Unit.UnitStats.Vision, _skillController.Unit.Owner);
-
-        _currentTarget = 0;
-
+        
         if (_targets.Count != 0)
         {
             OnTargetSwitched?.Invoke((_targets[_currentTarget] as CombatAbstract).gameObject);

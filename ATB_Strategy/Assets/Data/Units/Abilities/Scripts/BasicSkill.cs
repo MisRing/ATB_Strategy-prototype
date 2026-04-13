@@ -13,6 +13,8 @@ public class BasicSkill : MonoBehaviour
     
     private protected UnitSkillController _skillController;
     private protected SkillData _skillData;
+
+    private protected bool _onPrepare = false;
     
     public virtual void Init(UnitSkillController skillController)
     {
@@ -21,11 +23,13 @@ public class BasicSkill : MonoBehaviour
 
     public virtual void EnterPrepare()
     {
+        _onPrepare = true;
         Debug.Log("Enter prepare <" + SkillName + ">");
     }
 
     public virtual void ExitPrepare()
     {
+        _onPrepare = false;
         Debug.Log("Exit prepare <" + SkillName + ">");
     }
 

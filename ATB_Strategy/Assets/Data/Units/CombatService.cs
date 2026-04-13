@@ -21,30 +21,31 @@ public static class CombatService
     
     public static List<ICombat> GetCombats(Vector3 position, float range)
     {
-        List<ICombat> combatsOnRange = new List<ICombat>();
-
-        foreach (ICombat comb in COMBATS_ON_LEVEL)
-        {
-            if (Vector3.Distance(position, comb.Position) <= range)
-            {
-                combatsOnRange.Add(comb);
-            }
-        }
-
-        return combatsOnRange;
+        return GetCombats(position, range, UnitOwner.None);
     }
     
     public static List<ICombat> GetCombats(Vector3 position, float range, UnitOwner ally)
     {
+        float sqrRange = range * range;
+
         List<ICombat> combatsOnRange = new List<ICombat>();
 
         foreach (ICombat comb in COMBATS_ON_LEVEL)
         {
-            if (Vector3.Distance(position, comb.Position) <= range && comb.Owner != ally)
+            float sqrDist = (comb.Position - position).sqrMagnitude;
+
+            if (sqrDist <= sqrRange && comb.Owner != ally)
             {
                 combatsOnRange.Add(comb);
             }
         }
+
+        combatsOnRange.Sort((a, b) =>
+        {
+            float distA = (a.Position - position).sqrMagnitude;
+            float distB = (b.Position - position).sqrMagnitude;
+            return distA.CompareTo(distB);
+        });
 
         return combatsOnRange;
     }

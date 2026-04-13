@@ -42,7 +42,8 @@ public class UnitSkillController : MonoBehaviour
         BasicSkill skill = GetSkillByIndex(index);
 
         if (skill == null) return false;
-
+        if (skill == CurrentSkill) return true;
+        
         ChangeSkill(skill);
 
         return true;

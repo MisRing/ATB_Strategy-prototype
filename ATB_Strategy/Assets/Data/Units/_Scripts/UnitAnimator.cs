@@ -18,7 +18,7 @@ public class UnitAnimator : MonoBehaviour
     private static readonly int COVER_HORIZONTAL_ID = Animator.StringToHash("CoverHorizontal");
 
     private static readonly int AIM_ID = Animator.StringToHash("Aim");
-    private static readonly int Shoot_ID = Animator.StringToHash("Shoot");
+    private static readonly int SHOOT_ID = Animator.StringToHash("Shoot");
 
 
     private UnitController _unit;
@@ -90,13 +90,15 @@ public class UnitAnimator : MonoBehaviour
         yield return Wait(t1);
 
         _animator.SetBool(AIM_ID, true);
+
         // 🔹 Phase 2 — Rotate to target
-        yield return RotatePhase(startRot, targetRot, t2, target, 0f, 1f, TileCover.None);
+        //yield return RotatePhase(startRot, targetRot, t2, target, 0f, 1f, TileCover.None);
+        yield return RotateToTarget(startRot, targetRot, t2, TileCover.None, target, 0f, 1f);
 
         // 🔹 Phase 3 — Pre-fire delay
         yield return WaitWithAim(t3, target);
 
-        _animator.SetTrigger(Shoot_ID);
+        _animator.SetTrigger(SHOOT_ID);
         _weaponAnimator.SetTrigger("Fire");
         // 🔹 Phase 4 — Fire
         yield return WaitWithAim(t4, target); // тут потом вставишь анимацию
@@ -108,13 +110,12 @@ public class UnitAnimator : MonoBehaviour
         // 🔹 Phase 6 — Rotate back
         if (startCover == 0)
         {
-            transform.rotation = _unitModel.rotation;
-            yield return RotatePhase(transform.rotation, targetRot, t6, Vector3.zero, 1f, 0f, startCover);
+            transform.rotation = targetRot;
+            _unitModel.transform.rotation = targetRot;
+            startRot = targetRot;
         }
-        else
-        {
-            yield return RotatePhase(startRot, targetRot, t6, Vector3.zero, 1f, 0f, startCover);
-        }
+        yield return RotateToTarget(startRot, targetRot, t6, startCover, Vector3.zero, 1f, 0f);
+
 
         // 🔹 Phase 7 — End delay
         yield return Wait(t7);
@@ -143,34 +144,40 @@ public class UnitAnimator : MonoBehaviour
         }
     }
 
-    private IEnumerator RotatePhase(
-    Quaternion startRotation,
-    Quaternion targetRotation,
-    float duration,
-    Vector3 target,
-    float coverFrom,
-    float coverTo,
-    TileCover coverState)
+    private IEnumerator RotateToTarget(
+        Quaternion startRotation,
+        Quaternion targetRotation,
+        float duration,
+        TileCover endCover,
+        Vector3 target,
+        float from,
+        float to)
     {
         float t = 0;
+
+        float angle = Quaternion.Angle(startRotation, targetRotation);
+        bool angleWeight = angle > 60f;
+
 
         while (t < duration)
         {
             t += TimeService.TimeSpeedDelta;
             float lerp = Mathf.Clamp01(t / duration);
             float eased = 1f - Mathf.Pow(1f - lerp, 2);
-
-            _unitModel.rotation = Quaternion.Lerp(startRotation, targetRotation, Mathf.Lerp(coverFrom, coverTo, eased));
-
-            // cover плавно
-            SetCover(coverState, 0, Mathf.Lerp(coverFrom, coverTo, lerp));
-
-            // IK
-            float angle = Quaternion.Angle(_unitModel.rotation, targetRotation);
-            float weight = 1f - Mathf.Clamp01(angle / 60f);
-            weight = Mathf.Pow(weight, 2);
-
-            _weaponIK.SetAimWeight(weight);
+            _unitModel.rotation = Quaternion.Lerp(startRotation, targetRotation, Mathf.Lerp(from, to, eased));
+            SetCover(endCover, 0, eased);
+            if (angleWeight)
+            {
+                angle = Quaternion.Angle(_unitModel.rotation, targetRotation);
+                float weight = 1f - Mathf.Clamp01(angle / 60f);
+                weight = Mathf.Pow(weight, 2);
+                
+                _weaponIK.SetAimWeight(weight);
+            }
+            else
+            {
+                _weaponIK.SetAimWeight(Mathf.Lerp(from, to, eased));
+            }
             if (target != Vector3.zero)
             {
                 _weaponIK.SetAimRotation(target);

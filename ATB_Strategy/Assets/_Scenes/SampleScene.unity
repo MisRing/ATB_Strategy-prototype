@@ -69030,7 +69030,7 @@ MonoBehaviour:
   UnitAnimator: {fileID: 0}
   AgentController: {fileID: 0}
   State: 0
-  Owner: 0
+  Owner: 1
 --- !u!4 &1816743776
 Transform:
   m_ObjectHideFlags: 0

@@ -63,6 +63,7 @@ public enum UnitState
 
 public enum UnitOwner
 {
+    None,
     Player,
     Enemy
 }
