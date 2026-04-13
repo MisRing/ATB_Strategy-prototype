@@ -14,7 +14,8 @@ public class BasicSkill : MonoBehaviour
     private protected UnitSkillController _skillController;
     private protected SkillData _skillData;
 
-    private protected bool _onPrepare = false;
+    public bool OnPrepare { get { return _onPrepare; } }
+    private bool _onPrepare = false;
     
     public virtual void Init(UnitSkillController skillController)
     {

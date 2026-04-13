@@ -10,17 +10,17 @@ public class UnitAnimator : MonoBehaviour
 
     [SerializeField] private Animator _weaponAnimator;
 
+    private TileCover _coverState;
 
-    private static readonly int MOVEMENT_X_ID = Animator.StringToHash("MoveX");
-    private static readonly int MOVEMENT_Z_ID = Animator.StringToHash("MoveZ");
+    public static readonly int MOVEMENT_X_ID = Animator.StringToHash("MoveX");
+    public static readonly int MOVEMENT_Z_ID = Animator.StringToHash("MoveZ");
     
-    private static readonly int COVER_VERTICAL_ID = Animator.StringToHash("CoverVertical");
-    private static readonly int COVER_HORIZONTAL_ID = Animator.StringToHash("CoverHorizontal");
+    public static readonly int COVER_VERTICAL_ID = Animator.StringToHash("CoverVertical");
+    public static readonly int COVER_HORIZONTAL_ID = Animator.StringToHash("CoverHorizontal");
 
-    private static readonly int AIM_ID = Animator.StringToHash("Aim");
-    private static readonly int SHOOT_ID = Animator.StringToHash("Shoot");
-
-
+    public static readonly int AIM_ID = Animator.StringToHash("Aim");
+    public static readonly int SHOOT_ID = Animator.StringToHash("Shoot");
+    
     private UnitController _unit;
 
     private void Awake()
@@ -28,21 +28,24 @@ public class UnitAnimator : MonoBehaviour
         UpdateAnimationSpeed(TimeService.TimeSpeed);
     }
 
-    private void OnEnable()
+    public void Init(UnitController unit)
     {
+        _unit = unit;
+        // TODO: MOVE TO OnEnable();
         TimeService.OnTimeSpeedChanged += UpdateAnimationSpeed;
         _unit.AgentController.OnCoverChanged += SetCover;
+    }
+    
+    private void OnEnable()
+    {
+        // TimeService.OnTimeSpeedChanged += UpdateAnimationSpeed;
+        // _unit.AgentController.OnCoverChanged += SetCover;
     }
     
     private void OnDisable()
     {
         TimeService.OnTimeSpeedChanged -= UpdateAnimationSpeed;
         _unit.AgentController.OnCoverChanged -= SetCover;
-    }
-
-    public void Init(UnitController unit)
-    {
-        _unit = unit;
     }
 
     private void Update()
@@ -64,61 +67,54 @@ public class UnitAnimator : MonoBehaviour
 
     public event Action OnAttackAnim;
 
-    public void AnimateAim(Vector3 target, float fullTime)
+    private Quaternion _aimStartRotation;
+    private Quaternion _aimTargetRotation;
+    private TileCover _coverBeforeAim;
+    public IEnumerator Aim(float duration, Vector3 target)
     {
-        StartCoroutine(AimAnimation(target, fullTime));
-    }
-
-    private IEnumerator AimAnimation(Vector3 target, float fullTime)
-    {
-        float t1 = fullTime * 0.05f;
-        float t2 = fullTime * 0.25f;
-        float t3 = fullTime * 0.1f;
-        float t4 = fullTime * 0.15f;
-        float t5 = fullTime * 0.05f;
-        float t6 = fullTime * 0.35f;
-        float t7 = fullTime * 0.05f;
-
-
-        Quaternion startRot = _unitModel.rotation;
-        TileCover startCover = _cover;
-
-        Vector3 dir = Vector3.ProjectOnPlane(target - _unitModel.position, Vector3.up).normalized;
-        Quaternion targetRot = Quaternion.LookRotation(dir, Vector3.up);
-
-        // 🔹 Phase 1 — Delay
-        yield return Wait(t1);
-
+        _aimStartRotation = transform.rotation;
+        Vector3 dir = Vector3.ProjectOnPlane(target - transform.position, Vector3.up).normalized;
+        _aimTargetRotation = Quaternion.LookRotation(dir, Vector3.up);
+        _coverBeforeAim = _coverState;
+        
+        float waitDelay = duration * 0.2f;
+        float rotateDuration = duration * 0.8f;
+            
+        yield return Wait(waitDelay);
+    
         _animator.SetBool(AIM_ID, true);
-
-        // 🔹 Phase 2 — Rotate to target
-        //yield return RotatePhase(startRot, targetRot, t2, target, 0f, 1f, TileCover.None);
-        yield return RotateToTarget(startRot, targetRot, t2, TileCover.None, target, 0f, 1f);
-
-        // 🔹 Phase 3 — Pre-fire delay
-        yield return WaitWithAim(t3, target);
-
-        _animator.SetTrigger(SHOOT_ID);
-        _weaponAnimator.SetTrigger("Fire");
-        // 🔹 Phase 4 — Fire
-        yield return WaitWithAim(t4, target); // тут потом вставишь анимацию
-
-        // 🔹 Phase 5 — Post-fire delay
-        yield return WaitWithAim(t5, target);
-
-        _animator.SetBool(AIM_ID, false);
-        // 🔹 Phase 6 — Rotate back
-        if (startCover == 0)
+        yield return RotateToTarget(_aimStartRotation, _aimTargetRotation, rotateDuration, TileCover.None, target, 0f, 1f);
+    }
+    
+    public IEnumerator Shoot(float duration, Vector3 target, bool shoot = true)
+    {
+        float aimDuration = duration * 0.35f;
+        float shootDuration = duration * 0.5f;
+        float waitDelay = duration * 0.15f;
+        
+        yield return WaitWithAim(aimDuration, target);
+        if (shoot)
         {
-            transform.rotation = targetRot;
-            _unitModel.transform.rotation = targetRot;
-            startRot = targetRot;
+            _animator.SetTrigger(SHOOT_ID);
+            _weaponAnimator.SetTrigger("Fire");
         }
-        yield return RotateToTarget(startRot, targetRot, t6, startCover, Vector3.zero, 1f, 0f);
-
-
-        // 🔹 Phase 7 — End delay
-        yield return Wait(t7);
+        yield return WaitWithAim(shootDuration, target); // тут потом вставишь анимацию
+        yield return WaitWithAim(waitDelay, target);
+    }
+    
+    public IEnumerator EndAim(float duration)
+    {
+        float rotateDuration = duration * 0.9f;
+        float waitDelay = duration * 0.1f;
+        if (_coverState == 0)
+        {
+            transform.rotation = _aimTargetRotation;
+            _unitModel.transform.rotation = _aimTargetRotation;
+            _aimStartRotation = _aimTargetRotation;
+        }
+        _animator.SetBool(AIM_ID, false);
+        yield return RotateToTarget(_aimStartRotation, _aimTargetRotation, rotateDuration, _coverBeforeAim, Vector3.zero, 1f, 0f);
+        yield return Wait(waitDelay);
     }
 
     private IEnumerator Wait(float duration)
@@ -189,10 +185,9 @@ public class UnitAnimator : MonoBehaviour
 
     private void UpdateAnimationSpeed(float timeSpeed)
     {
-        _animator.speed = 1f;// timeSpeed;
+        _animator.speed = timeSpeed;
     }
 
-    private TileCover _cover;
     private void SetCover(TileCover cover, int look, float percent)
     {
         if (cover == TileCover.None)
@@ -208,6 +203,5 @@ public class UnitAnimator : MonoBehaviour
             _animator.SetFloat(COVER_VERTICAL_ID, Mathf.Lerp(_animator.GetFloat(COVER_VERTICAL_ID), vertical, percent));
             _animator.SetFloat(COVER_HORIZONTAL_ID, Mathf.Lerp(_animator.GetFloat(COVER_HORIZONTAL_ID), horizontal, percent));
         }
-        _cover = cover;
     }
 }

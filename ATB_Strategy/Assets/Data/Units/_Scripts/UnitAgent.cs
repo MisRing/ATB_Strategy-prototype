@@ -10,10 +10,10 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     [SerializeField] private float _rotationSpeed = 36f;
     [SerializeField] private float _coverDistance = 2f;
 
-    public Vector3Int CurrentTile = new Vector3Int();
-
+    public Vector3Int CurrentTile;
+    
     public Vector3 Velocity { get { return _velocity; } }
-    Vector3 _velocity = Vector3.zero;
+    private Vector3 _velocity = Vector3.zero;
 
     public PathData PathData { get { return _pathData; } }
     private PathData _pathData;

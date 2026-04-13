@@ -6,6 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(UnitSkillController))]
 [RequireComponent(typeof(UnitCombat))]
 [RequireComponent(typeof(UnitAnimator))]
+[RequireComponent(typeof(UnitPreviewAnimator))]
 [RequireComponent(typeof(UnitAgent))]
 public class UnitController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class UnitController : MonoBehaviour
     [HideInInspector] public UnitSkillController SkillController;
     [HideInInspector] public UnitCombat UnitCombat;
     [HideInInspector] public UnitAnimator UnitAnimator;
+    [HideInInspector] public UnitPreviewAnimator UnitPreviewAnimator;
     [HideInInspector] public UnitAgent AgentController;
 
     public event Action<bool> OnSelectionChanged;
@@ -28,6 +30,7 @@ public class UnitController : MonoBehaviour
         SkillController = GetComponent<UnitSkillController>();
         UnitCombat = GetComponent<UnitCombat>();
         UnitAnimator = GetComponent<UnitAnimator>();
+        UnitPreviewAnimator = GetComponent<UnitPreviewAnimator>();
         AgentController = GetComponent<UnitAgent>();
 
         SkillController.Init(this);

@@ -1,9 +1,12 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 
 public class BasicAttack : BasicSkill, ITargetSwitchable
 {
+    [SerializeField] private int _cost = 8;
+    
     public GameObject CurrentTarget
     {
         get
@@ -34,6 +37,8 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         {
             OnTargetSwitched?.Invoke((_targets[_currentTarget] as CombatAbstract).gameObject);
         }
+        
+        _skillController.Unit.UnitPreviewAnimator.AimToTarget(_targets[_currentTarget].BodyParts[0].transform);
 
         base.EnterPrepare();
     }
@@ -42,6 +47,7 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
     {
         _targets.Clear();
         _currentTarget = 0;
+        _skillController.Unit.UnitPreviewAnimator.EndPreview();
         base.ExitPrepare();
     }
 
@@ -58,6 +64,8 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         
         _currentTarget = (_currentTarget + 1) % _targets.Count;
         
+        _skillController.Unit.UnitPreviewAnimator.AimToTarget(_targets[_currentTarget].BodyParts[0].transform);
+        
         OnTargetSwitched?.Invoke((_targets[_currentTarget] as CombatAbstract).gameObject);
     }
 
@@ -65,13 +73,28 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
     {
         if(_targets.Count == 0) return false;
 
-        cost = 8;
+        cost = _cost;
 
-        Debug.Log("Start executing <" + SkillName + "> | Cost: " + cost);
+        Debug.Log("Start executing <" + SkillName + "> | Cost: " + _cost);
 
-        _skillController.Unit.UnitAnimator.AnimateAim(_targets[_currentTarget].Position, TurnManager.TurnTime * cost);
+        StartCoroutine(Fire(_targets[_currentTarget] as CombatAbstract));
 
         return true;
+    }
+
+    private IEnumerator Fire(CombatAbstract target)
+    {
+        float duration = TurnManager.TurnTime * _cost;
+        float aimDuration = duration * 0.2f;
+        float shootDuration = duration * 0.45f;
+        float endDuration = duration * 0.35f;
+        
+        Vector3 targetPosition = target.Position;
+        
+        yield return _skillController.Unit.UnitAnimator.Aim(aimDuration, targetPosition);
+        bool shoot = target != null;
+        yield return _skillController.Unit.UnitAnimator.Shoot(shootDuration, targetPosition, shoot);
+        yield return _skillController.Unit.UnitAnimator.EndAim(endDuration);
     }
 
 }

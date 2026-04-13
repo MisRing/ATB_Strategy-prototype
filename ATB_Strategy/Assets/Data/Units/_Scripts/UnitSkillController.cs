@@ -42,7 +42,6 @@ public class UnitSkillController : MonoBehaviour
         BasicSkill skill = GetSkillByIndex(index);
 
         if (skill == null) return false;
-        if (skill == CurrentSkill) return true;
         
         ChangeSkill(skill);
 
@@ -51,6 +50,7 @@ public class UnitSkillController : MonoBehaviour
     
     private void ChangeSkill(BasicSkill skill)
     {
+        if (skill == CurrentSkill && skill.OnPrepare) return;
         CurrentSkill?.ExitPrepare();
         CurrentSkill = skill;
         CurrentSkill.EnterPrepare();
