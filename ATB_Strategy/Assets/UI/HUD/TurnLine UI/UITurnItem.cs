@@ -13,19 +13,12 @@ public class UITurnItem : MonoBehaviour
 
     public void Init(UnitController unit, int turn)
     {
-        //Ability = ability;
         Turn = turn;
 
         RectTransform = GetComponent<RectTransform>();
 
-        //if (_icon)
-        //    _icon.sprite = ability.SkillIcon;
-
-        if (_ownerColor)
-        {
-            _ownerColor.color = unit.Owner == UnitOwner.Player
-                ? Color.green
-                : Color.red;
-        }
+        _ownerColor.color = unit.Owner == UnitOwner.Player
+            ? Color.green
+            : Color.red;
     }
 }

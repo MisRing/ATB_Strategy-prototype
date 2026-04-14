@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class AbilityViewRenderer : MonoBehaviour
 {
     [SerializeField] private CursorCostDisplay _costDisplay;
     [SerializeField] private PathLineRenderer _pathRenderer;
-    public static List<IPathHandler> PathHandlers = new List<IPathHandler>();
+    public static readonly List<IPathHandler> PathHandlers = new List<IPathHandler>();
 
     private void Awake()
     {
@@ -18,10 +17,8 @@ public class AbilityViewRenderer : MonoBehaviour
     {
         foreach(IPathHandler pathHandler in PathHandlers)
         {
-            if(pathHandler == null)
-            {
-                continue;
-            }
+            if(pathHandler == null) continue;
+            
             pathHandler.OnPathChanged += DrawPath;
         }
     }
@@ -30,10 +27,8 @@ public class AbilityViewRenderer : MonoBehaviour
     {
         foreach (IPathHandler pathHandler in PathHandlers)
         {
-            if (pathHandler == null)
-            {
-                continue;
-            }
+            if (pathHandler == null) continue;
+            
             pathHandler.OnPathChanged -= DrawPath;
         }
     }

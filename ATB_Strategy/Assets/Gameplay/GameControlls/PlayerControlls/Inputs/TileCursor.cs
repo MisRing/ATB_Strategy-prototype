@@ -1,8 +1,5 @@
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class TileCursor : MonoBehaviour
 {
@@ -33,9 +30,6 @@ public class TileCursor : MonoBehaviour
         {
             switch (tile.Covers[i])
             {
-                case(TileCover.None) :
-                    _covers[i].gameObject.SetActive(false);
-                    break;
                 case(TileCover.Low) :
                     _covers[i].gameObject.SetActive(true);
                     _covers[i].sprite = _lowCover;
@@ -43,6 +37,10 @@ public class TileCursor : MonoBehaviour
                 case(TileCover.Full) :
                     _covers[i].gameObject.SetActive(true);
                     _covers[i].sprite = _fullCover;
+                    break;
+                
+                default:
+                    _covers[i].gameObject.SetActive(false);
                     break;
             }
         }

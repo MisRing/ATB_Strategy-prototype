@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,14 +7,13 @@ public class HealthGUI : MonoBehaviour
     [SerializeField] private Vector3 _startOffset;
     [SerializeField] private Vector3 _offset;
     
-    private List<HealthPointGUI> _healthPoints = new List<HealthPointGUI>();
+    private readonly List<HealthPointGUI> _healthPoints = new List<HealthPointGUI>();
     
     public void SetHealth(UnitController unit)
     {
         for (int i = 0; i < unit.UnitStats.MaxHealth; i++)
         {
-            GameObject point = Instantiate(_healthPointPref);
-            point.transform.SetParent(transform);
+            GameObject point = Instantiate(_healthPointPref, transform);
             point.transform.localPosition = _startOffset + _offset * i;
             HealthPointGUI pointGUI = point.GetComponent<HealthPointGUI>();
             pointGUI.SetState(false, true);
@@ -26,8 +24,7 @@ public class HealthGUI : MonoBehaviour
         
         for (int i = 0; i < unit.UnitStats.MaxArmor; i++)
         {
-            GameObject point = Instantiate(_healthPointPref);
-            point.transform.SetParent(transform);
+            GameObject point = Instantiate(_healthPointPref, transform);
             point.transform.localPosition = _startOffset + _offset * (i + health);
             HealthPointGUI pointGUI = point.GetComponent<HealthPointGUI>();
             pointGUI.SetState(true, true);

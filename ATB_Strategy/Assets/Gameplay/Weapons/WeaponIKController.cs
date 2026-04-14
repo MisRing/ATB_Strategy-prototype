@@ -22,7 +22,7 @@ public class WeaponIKController : MonoBehaviour
 
         _headAimConstraint.weight = value;
 
-        var source = _weaponAimConstraint.data.sourceObjects;
+        WeightedTransformArray source = _weaponAimConstraint.data.sourceObjects;
         source.SetWeight(0, 1 - value);
         source.SetWeight(1, value);
         _weaponAimConstraint.data.sourceObjects = source;

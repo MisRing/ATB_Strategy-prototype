@@ -9,8 +9,10 @@ public class UnitOverheadUI : MonoBehaviour
     private void Start()
     {
         _healthGUI.SetHealth(_unit);
-        _unit.UnitStats.Health.OnValueChanged += HealthChanged; //!
-        _unit.UnitStats.Armor.OnValueChanged += HealthChanged;  //!
+        
+        // TODO: MOVE TO OnEnable
+        _unit.UnitStats.Health.OnValueChanged += HealthChanged;
+        _unit.UnitStats.Armor.OnValueChanged += HealthChanged;
     }
     private void OnEnable()
     {

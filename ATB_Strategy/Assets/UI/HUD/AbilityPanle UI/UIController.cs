@@ -8,6 +8,8 @@ public class UIController : MonoBehaviour
 
     [SerializeField] private GameObject _pauseCanvas;
 
+    private bool _pauseOpened = false;
+    
     private void Awake()
     {
         _uiAbilityController.Init(_playerController);
@@ -30,7 +32,6 @@ public class UIController : MonoBehaviour
         PlayerInputController.Cancel.DefaultAction -= OpenPauseMenu;
     }
 
-    private bool _pauseOpened = false;
     private void OpenPauseMenu()
     {
         _pauseOpened = !_pauseOpened;

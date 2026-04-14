@@ -24,12 +24,12 @@ public class UIAbilityPreparePanel : MonoBehaviour
         _abilityDescriptionText.text = ability.SkillDescription;
     }
     
-    public void Execute()
+    private void Execute()
     {
         _playerController.ExecuteAbility();
     }
     
-    public void Close()
+    private void Close()
     {
         _playerController.SelectAbility(0);
     }

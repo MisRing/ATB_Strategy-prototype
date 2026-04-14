@@ -25,13 +25,11 @@ public class BasicSkill : MonoBehaviour
     public virtual void EnterPrepare()
     {
         _onPrepare = true;
-        Debug.Log("Enter prepare <" + SkillName + ">");
     }
 
     public virtual void ExitPrepare()
     {
         _onPrepare = false;
-        Debug.Log("Exit prepare <" + SkillName + ">");
     }
 
     public virtual void UpdateData(SkillData abilityData)
@@ -41,29 +39,7 @@ public class BasicSkill : MonoBehaviour
 
     public virtual bool Execute(ref int cost)
     {
-        Debug.Log("Start executing <" + SkillName + ">");
         cost = 1;
         return true;
     }
-}
-
-public abstract class SkillData { }
-
-public class TargetData : SkillData
-{
-    public GameObject Target;
-}
-
-public class PointData : SkillData
-{
-    public Vector3 Position;
-}
-
-public interface ITargetSwitchable
-{
-    GameObject CurrentTarget { get; }
-    int TargetIndex { get; }
-    int TargetsCount { get; }
-    event Action<GameObject> OnTargetSwitched;
-    void Switch(int index);
 }

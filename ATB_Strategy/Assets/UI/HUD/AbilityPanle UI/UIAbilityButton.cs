@@ -14,10 +14,10 @@ public class UIAbilityButton : MonoBehaviour
         _abilityIndex = index;
         _playerController = playerController;
         _buttonImage.sprite = ability.SkillIcon;
-        _button.onClick.AddListener(SetAbility);
+        _button.onClick.AddListener(SelectThisAbility);
     }
 
-    public void SetAbility()
+    private void SelectThisAbility()
     {
         _playerController.SelectAbility(_abilityIndex);
     }

@@ -15,7 +15,7 @@ public class PlayerInputController : MonoBehaviour
     public static float CameraZoomAxis { get => _inputActions.Camera.Zoom.ReadValue<float>(); }
 
 
-    public static event Action PointLClicl;
+    public static event Action PointLClick;
     public static event Action PointRClick;
     public static StackAction SwitchTarget = new StackAction();
 
@@ -80,27 +80,43 @@ public class PlayerInputController : MonoBehaviour
         _inputActions.Camera.Rotate.started += RotateCameraInput;
     }
 
-    private void SelectObjectInput(InputAction.CallbackContext context) => PointLClicl?.Invoke();
+    private static void SelectObjectInput(InputAction.CallbackContext context)
+        => PointLClick?.Invoke();
 
-    private void SelectPointInput(InputAction.CallbackContext context) => PointRClick?.Invoke();
+    private static void SelectPointInput(InputAction.CallbackContext context)
+        => PointRClick?.Invoke();
 
-    private void SwitchTargetInput(InputAction.CallbackContext context) => SwitchTarget?.Invoke();
+    private static void SwitchTargetInput(InputAction.CallbackContext context)
+        => SwitchTarget?.Invoke();
+    
 
-    private void SelectAbilityInput1(InputAction.CallbackContext context) => SelectAbility?.Invoke(1);
-    private void SelectAbilityInput2(InputAction.CallbackContext context) => SelectAbility?.Invoke(2);
-    private void SelectAbilityInput3(InputAction.CallbackContext context) => SelectAbility?.Invoke(3);
-    private void SelectAbilityInput4(InputAction.CallbackContext context) => SelectAbility?.Invoke(4);
-    private void SelectAbilityInput5(InputAction.CallbackContext context) => SelectAbility?.Invoke(5);
-    private void SelectAbilityInput6(InputAction.CallbackContext context) => SelectAbility?.Invoke(6);
-    private void SelectAbilityInput7(InputAction.CallbackContext context) => SelectAbility?.Invoke(7);
-    private void SelectAbilityInput8(InputAction.CallbackContext context) => SelectAbility?.Invoke(8);
-    private void SelectAbilityInput9(InputAction.CallbackContext context) => SelectAbility?.Invoke(9);
-    private void SelectAbilityInput10(InputAction.CallbackContext context) => SelectAbility?.Invoke(10);
+    private static void SelectAbilityInput1(InputAction.CallbackContext context)
+        => SelectAbility?.Invoke(1);
+    private static void SelectAbilityInput2(InputAction.CallbackContext context)
+        => SelectAbility?.Invoke(2);
+    private static void SelectAbilityInput3(InputAction.CallbackContext context)
+        => SelectAbility?.Invoke(3);
+    private static void SelectAbilityInput4(InputAction.CallbackContext context)
+        => SelectAbility?.Invoke(4);
+    private static void SelectAbilityInput5(InputAction.CallbackContext context)
+        => SelectAbility?.Invoke(5);
+    private static void SelectAbilityInput6(InputAction.CallbackContext context)
+        => SelectAbility?.Invoke(6);
+    private static void SelectAbilityInput7(InputAction.CallbackContext context)
+        => SelectAbility?.Invoke(7);
+    private static void SelectAbilityInput8(InputAction.CallbackContext context)
+        => SelectAbility?.Invoke(8);
+    private static void SelectAbilityInput9(InputAction.CallbackContext context)
+        => SelectAbility?.Invoke(9);
+    private static void SelectAbilityInput10(InputAction.CallbackContext context)
+        => SelectAbility?.Invoke(10);
 
 
-    private void CancelEscInput(InputAction.CallbackContext context) => Cancel?.Invoke();
+    private static void CancelEscInput(InputAction.CallbackContext context)
+        => Cancel?.Invoke();
 
-    private void RotateCameraInput(InputAction.CallbackContext context) => RotateCamera?.Invoke(context.ReadValue<float>());
+    private static void RotateCameraInput(InputAction.CallbackContext context)
+        => RotateCamera?.Invoke(context.ReadValue<float>());
 }
 
 public class StackAction
@@ -122,7 +138,7 @@ public class StackAction
         DefaultAction?.Invoke();
     }
 
-    public void Add(Action a)
+    private void Add(Action a)
     {
         if (_actionsQ.Contains(a))
         {
@@ -131,7 +147,7 @@ public class StackAction
         _actionsQ.Insert(0, a);
     }
 
-    public void Remove(Action a)
+    private void Remove(Action a)
     {
         if (!_actionsQ.Contains(a)) return;
         _actionsQ.RemoveAll(x => x == a);

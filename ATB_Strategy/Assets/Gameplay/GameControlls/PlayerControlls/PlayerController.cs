@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Unity.Collections;
 
 public class PlayerController : MonoBehaviour
 {

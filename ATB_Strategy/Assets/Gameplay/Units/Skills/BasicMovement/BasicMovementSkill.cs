@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class BasicMovementSkill : BasicSkill
 {
@@ -38,8 +35,6 @@ public class BasicMovementSkill : BasicSkill
     {
         if(!_agent.StartMove()) return false;
         
-        Debug.Log("Start executing <" + SkillName + "> | Cost: " + _agent.PathData.TurnsCost);
-
         cost = _agent.PathData.TurnsCost;
 
         return true;

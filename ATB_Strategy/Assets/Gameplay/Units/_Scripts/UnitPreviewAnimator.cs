@@ -2,24 +2,28 @@ using UnityEngine;
 
 public class UnitPreviewAnimator : MonoBehaviour
 {
+    [Header("Main Settings")]
     [SerializeField] private Animator _unitAnimator;
     [SerializeField] private Animator _previewAnimator;
-    
     [SerializeField] private WeaponIKController _previewWeaponIK;
     [SerializeField] private Transform _previewModel;
-
     [SerializeField] private Animator _previewWeaponAnimator;
-
+    
     private bool _isActive = false;
     
+    [Header("Targeting settings")]
+    [SerializeField] private float _targetDuration = 0.3f;
+    
+    private Transform _aimTarget;
+    private float _time = 0f;
+
     public void StartPreview()
     {
-        if (!_isActive)
-        {
-            _previewModel.gameObject.SetActive(true);
-            _isActive = true;
-            SetAnimationParameters();
-        }
+        if (_isActive) return;
+
+        _previewModel.gameObject.SetActive(true);
+        _isActive = true;
+        SetAnimationParameters();
     }
 
     public void EndPreview()
@@ -36,9 +40,6 @@ public class UnitPreviewAnimator : MonoBehaviour
         _time = 0f;
     }
 
-    private Transform _aimTarget;
-    private float _time = 0f;
-    private float _targetDuration = 0.3f;
 
     private void Update()
     {

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class HealthPointGUI : MonoBehaviour
@@ -22,26 +21,12 @@ public class HealthPointGUI : MonoBehaviour
         if (isArmor)
         {
             transform.localScale = _size * _armorSizeMod;
-            if (isFull)
-            {
-                _spriteRenderer.color = _armorFullColor;
-            }
-            else
-            {
-                _spriteRenderer.color = _armorColor;
-            }
+            _spriteRenderer.color = isFull ? _armorFullColor : _armorColor;
         }
         else
         {
             transform.localScale = _size;
-            if (isFull)
-            {
-                _spriteRenderer.color = _healthFullColor;
-            }
-            else
-            {
-                _spriteRenderer.color = _healthColor;
-            }
+            _spriteRenderer.color = isFull ? _healthFullColor : _healthColor;
         }
     }
 }

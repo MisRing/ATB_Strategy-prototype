@@ -78,9 +78,7 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         if(_targets.Count == 0) return false;
 
         cost = _cost;
-
-        Debug.Log("Start executing <" + SkillName + "> | Cost: " + _cost);
-
+        
         StartCoroutine(Fire(_targets[_currentTarget] as CombatAbstract));
 
         return true;

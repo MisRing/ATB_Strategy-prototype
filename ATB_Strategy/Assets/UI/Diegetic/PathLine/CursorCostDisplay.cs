@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,7 +24,9 @@ public class CursorCostDisplay : MonoBehaviour
     private void Update()
     {
         if (!_text.enabled) return;
-        _rectTransform.localPosition = PlayerInputController.MouseScreenPosition - new Vector2(Screen.width / 2f, Screen.height / 2f) + _offset;
+        Vector2 halfScreenSize = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
+        Vector2 screenPosition = (PlayerInputController.MouseScreenPosition + _offset) - halfScreenSize;
+        _rectTransform.localPosition = screenPosition;
     }
 
     public void UnsetCost()

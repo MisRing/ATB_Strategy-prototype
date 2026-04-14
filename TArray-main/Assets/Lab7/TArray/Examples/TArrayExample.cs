@@ -1,4 +1,4 @@
-using Extensions;
+using TArrayExtensions;
 using UnityEngine;
 
 public class TArrayExample : MonoBehaviour

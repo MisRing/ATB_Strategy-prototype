@@ -1,16 +1,18 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
 public static class GridPathFinder
 {
-    private static readonly float _lineCutStep = 0.5f;
-    private static readonly float _raycastHeight = 0.4f;
+    private static readonly float LINE_CUT_STEP = 0.5f;
+    private static readonly float RAYCAST_HEIGHT = 0.4f;
 
+    // TODO: REWRITE THIS
     public static TileCover GetTileCover(ref Vector3 direction, ref int coverLook, GridTile tile, float visionRange, UnitOwner ally)
     {
         coverLook = 0;
-        // ❌ нет укрытия вообще
+        
         if (tile.Covers[0] == 0 && tile.Covers[1] == 0 && tile.Covers[2] == 0 && tile.Covers[3] == 0)
             return TileCover.None;
 
@@ -22,7 +24,7 @@ public static class GridPathFinder
         TileCover bestCoverValue = 0;
         float bestDot = -1f;
 
-        // 🔥 1. Пытаемся выбрать относительно врага
+        
         if (enemy != null)
         {
             Vector3 toEnemy = (enemy.Position - position).normalized;
@@ -34,10 +36,7 @@ public static class GridPathFinder
                 Vector3 coverDir = GridParameters.COVER_DIRECTIONS[i];
 
                 float dot = Vector3.Dot(coverDir, toEnemy);
-
-                // приоритет:
-                // 1) ближе к направлению
-                // 2) если почти одинаково — большее укрытие
+                
                 if (dot > bestDot || (Mathf.Approximately(dot, bestDot) && coverValue > bestCoverValue))
                 {
                     bestDot = dot;
@@ -56,7 +55,6 @@ public static class GridPathFinder
             }
         }
 
-        // 🔥 2. Просто лучшее укрытие
         bestIndex = -1;
         bestCoverValue = 0;
 
@@ -76,7 +74,6 @@ public static class GridPathFinder
             return bestCoverValue;
         }
 
-        // 🔥 3. fallback — направление движения (direction уже задан)
         return TileCover.None;
     }
     
@@ -131,19 +128,19 @@ public static class GridPathFinder
 
         for (int i = 0; i < path.Count - 1; i++)
         {
-            if (Vector3.Distance(path[i], path[i + 1]) <= _lineCutStep)
+            if (Vector3.Distance(path[i], path[i + 1]) <= LINE_CUT_STEP)
             {
                 newPath.Add(SetPointHeight(path[i + 1]));
                 continue;
             }
 
-            int newDotsCount = Mathf.FloorToInt(Vector3.Distance(path[i], path[i + 1]) / _lineCutStep);
+            int newDotsCount = Mathf.FloorToInt(Vector3.Distance(path[i], path[i + 1]) / LINE_CUT_STEP);
 
-            while (Vector3.Distance(newPath[newPath.Count - 1], path[i + 1]) >= _lineCutStep)
+            while (Vector3.Distance(newPath[newPath.Count - 1], path[i + 1]) >= LINE_CUT_STEP)
             {
                 Vector3 p1 = newPath[newPath.Count - 1];
                 Vector3 p2 = path[i + 1];
-                float t = _lineCutStep / Vector3.Distance(p1, p2);
+                float t = LINE_CUT_STEP / Vector3.Distance(p1, p2);
                 Vector3 newDot = p1 + (p2 - p1) * t;
                 newPath.Add(SetPointHeight(newDot));
             }
@@ -169,7 +166,7 @@ public static class GridPathFinder
             smoothed.Add(smooth);
         }
 
-        smoothed.Add(path[path.Count - 1]);
+        smoothed.Add(path.Last());
         return smoothed;
     }
 
@@ -177,7 +174,7 @@ public static class GridPathFinder
     {
         NavMeshHit hit;
 
-        if (NavMesh.SamplePosition(point, out hit, _raycastHeight, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(point, out hit, RAYCAST_HEIGHT, NavMesh.AllAreas))
         {
             return hit.position;
         }

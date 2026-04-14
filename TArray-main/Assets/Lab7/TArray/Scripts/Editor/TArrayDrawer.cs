@@ -3,7 +3,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Extensions.Editor
+namespace TArrayExtensions.Editor
 {
     /// <summary>
     /// Custom property drawer for the <see cref="TArray{T}"/> type.

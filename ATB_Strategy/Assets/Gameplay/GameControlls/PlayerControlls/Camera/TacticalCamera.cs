@@ -12,7 +12,7 @@ public class TacticalCamera : MonoBehaviour
     private Vector3 _transitionVelocity;
     
     private Vector3 _position;
-    private Vector3 _rotation;
+    private float _rotationY;
     private float _zoom;
 
     [Header("Move settings")]
@@ -60,7 +60,7 @@ public class TacticalCamera : MonoBehaviour
 
     public void Init(Transform target)
     {
-        _rotation = new Vector3(0, _startAngle, 0);
+        _rotationY = _startAngle;
         EnterFocusMode(target, true);
         _currentAngleY = _startAngle;
         _targetZoomPercent = 0f;
@@ -84,7 +84,7 @@ public class TacticalCamera : MonoBehaviour
     
     private void UpdateTransition()
     {
-        Quaternion targetRot = Quaternion.Euler(_cameraPitch, _rotation.y, 0f);
+        Quaternion targetRot = Quaternion.Euler(_cameraPitch, _rotationY, 0f);
 
         Vector3 offset = targetRot * Vector3.back;
         Vector3 targetPos = _position + offset * _zoom + _positionOffset;
@@ -116,7 +116,7 @@ public class TacticalCamera : MonoBehaviour
 
     private void SetPosition()
     {
-        Quaternion targetRotation = Quaternion.Euler(_cameraPitch, _rotation.y, 0f);
+        Quaternion targetRotation = Quaternion.Euler(_cameraPitch, _rotationY, 0f);
 
         Vector3 offset = targetRotation * Vector3.back;
 
@@ -172,8 +172,9 @@ public class TacticalCamera : MonoBehaviour
         if (input == Vector2.zero && _moveVelocity == Vector3.zero)
             return;
 
-        Vector3 forward = Quaternion.Euler(_rotation) * Vector3.forward;
-        Vector3 right = Quaternion.Euler(_rotation) * Vector3.right;
+        Vector3 rotation = new Vector3(0f, _rotationY, 0f);
+        Vector3 forward = Quaternion.Euler(rotation) * Vector3.forward;
+        Vector3 right = Quaternion.Euler(rotation) * Vector3.right;
         _targetMoveDirection = forward * input.y + right * input.x;
 
         float moveSpeed = Mathf.Lerp(_moveSpeedMinZoom, _moveSpeedMaxZoom, _targetZoomPercent);
@@ -229,10 +230,8 @@ public class TacticalCamera : MonoBehaviour
 
     private void Rotate()
     {
-        float yAngle = Mathf.LerpAngle(_rotation.y, _currentAngleY, Time.deltaTime * _rotationSpeed);
-        Vector3 euler = _rotation;
-        euler.y = yAngle;
-        _rotation = euler;
+        float yAngle = Mathf.LerpAngle(_rotationY, _currentAngleY, Time.deltaTime * _rotationSpeed);
+        _rotationY = yAngle;
     }
 
     private void RotateToAngle(float value)

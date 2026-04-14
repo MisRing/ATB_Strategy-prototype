@@ -4,7 +4,7 @@ using UnityEngine;
 
 #pragma warning disable CS0693 
 
-namespace Extensions
+namespace TArrayExtensions
 {
     #region TArray
 

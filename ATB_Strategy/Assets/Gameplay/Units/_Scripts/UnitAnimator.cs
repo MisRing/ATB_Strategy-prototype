@@ -53,7 +53,8 @@ public class UnitAnimator : MonoBehaviour
     {
         Vector3 movementDirection = _unit.AgentController.Velocity;
 
-        Vector3 directionXZ = Vector3.ProjectOnPlane(movementDirection, Vector3.up).normalized * movementDirection.magnitude;
+        Vector3 directionXZ = Vector3.ProjectOnPlane(movementDirection, Vector3.up).normalized
+                              * movementDirection.magnitude;
 
         SetMovement(directionXZ);
     }
@@ -66,7 +67,7 @@ public class UnitAnimator : MonoBehaviour
         _animator.SetFloat(MOVEMENT_Z_ID, realDirection.z);
     }
 
-    public event Action OnAttackAnim;
+    //public event Action OnAttackAnim;
 
     private Quaternion _aimStartRotation;
     private TileCover _coverBeforeAim;
@@ -83,7 +84,16 @@ public class UnitAnimator : MonoBehaviour
         yield return Wait(waitDelay);
     
         _animator.SetBool(AIM_ID, true);
-        yield return RotateToTarget(_aimStartRotation, target, rotateDuration, TileCover.None, 0, 0f, 1f, true);
+        yield return RotateToTarget(
+            _aimStartRotation,
+            target,
+            rotateDuration,
+            TileCover.None,
+            0,
+            0f,
+            1f,
+            true
+            );
     }
     
     public IEnumerator Shoot(float duration, Transform target, bool shoot = true)
@@ -96,9 +106,9 @@ public class UnitAnimator : MonoBehaviour
         if (shoot)
         {
             _animator.SetTrigger(SHOOT_ID);
-            _weaponAnimator.SetTrigger("Fire");
+            _weaponAnimator.SetTrigger("Fire"); // TODO: Move to weapon scripts
         }
-        yield return WaitWithAim(shootDuration, target); // тут потом вставишь анимацию
+        yield return WaitWithAim(shootDuration, target); // for animation time
         yield return WaitWithAim(waitDelay, target);
     }
     
@@ -113,7 +123,17 @@ public class UnitAnimator : MonoBehaviour
             _aimStartRotation = transform.rotation;
         }
         _animator.SetBool(AIM_ID, false);
-        yield return RotateToTarget(_aimStartRotation, target, rotateDuration, _coverBeforeAim, _coverLookBeforeAim, 1f, 0f, false);
+        
+        yield return RotateToTarget(
+            _aimStartRotation, 
+            target, rotateDuration,
+            _coverBeforeAim, 
+            _coverLookBeforeAim, 
+            1f, 
+            0f, 
+            false
+            );
+        
         yield return Wait(waitDelay);
     }
 

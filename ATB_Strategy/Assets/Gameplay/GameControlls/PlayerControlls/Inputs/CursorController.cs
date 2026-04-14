@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 
 public class CursorController : MonoBehaviour
 {
@@ -50,7 +48,7 @@ public class CursorController : MonoBehaviour
                 {
                     if (GridParameters.LevelGrid.GetTileByWorldPos(ref tile, realPoint))
                     {
-                        if (tile.Owner == null)
+                        if (!tile.Owner)
                         {
                             cursorOnTile = true;
                         }

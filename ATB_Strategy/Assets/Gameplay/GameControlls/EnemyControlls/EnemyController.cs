@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Net;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -14,6 +13,7 @@ public class EnemyController : MonoBehaviour
 
     private void Init()
     {
+        // TODO: REMOVE THIS
         if (GridParameters.LevelGrid == null)
         {
             GridParameters.LevelGrid = FindFirstObjectByType(typeof(GridMap)) as GridMap;

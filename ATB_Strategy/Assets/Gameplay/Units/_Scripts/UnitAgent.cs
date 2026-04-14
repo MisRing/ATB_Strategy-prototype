@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UnitAgent : MonoBehaviour, IPathHandler
@@ -54,14 +55,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     public void ShowPath(bool show)
     {
         _showPath = show;
-        if (_showPath)
-        {
-            OnPathChanged?.Invoke(_pathData);
-        }
-        else
-        {
-            OnPathChanged?.Invoke(null);
-        }
+        OnPathChanged?.Invoke(_showPath ? _pathData : null);
     }
 
     public void CalculatePath(Vector3 targetPosition)
@@ -209,9 +203,10 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     private void EndMove()
     {
         _velocity = Vector3.zero;
-        transform.position = _pathData.Points[_pathData.Points.Count - 1];
+        transform.position = _pathData.Points.Last();
     }
 }
+
 public class PathData
 {
     public List<Vector3> Points;

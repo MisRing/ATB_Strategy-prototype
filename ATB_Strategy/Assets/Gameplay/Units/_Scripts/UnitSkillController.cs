@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public class UnitSkillController : MonoBehaviour
 {
+    [Header("Skills")]
     public BasicSkill DefaultMovementSkill;
     public BasicSkill DefaultAttackSkill;
-    //public BasicSkill DefaultSkill;
-    [SerializeField] private BasicSkill[] skills;
+    [SerializeField] private BasicSkill[] _skills;
     public int SkillsCount
     {
         get
@@ -15,7 +15,7 @@ public class UnitSkillController : MonoBehaviour
             int count = 0;
             if(DefaultMovementSkill) count++;
             if(DefaultAttackSkill) count++;
-            count += skills.Length;
+            count += _skills.Length;
             return count;
         }
     }
@@ -31,7 +31,7 @@ public class UnitSkillController : MonoBehaviour
 
         DefaultMovementSkill?.Init(this);
         DefaultAttackSkill?.Init(this);
-        foreach (var skill in skills)
+        foreach (BasicSkill skill in _skills)
         {
             skill.Init(this);
         }
@@ -41,7 +41,7 @@ public class UnitSkillController : MonoBehaviour
     {
         BasicSkill skill = GetSkillByIndex(index);
 
-        if (skill == null) return false;
+        if (!skill) return false;
         
         ChangeSkill(skill);
 
@@ -113,26 +113,13 @@ public class UnitSkillController : MonoBehaviour
                 index -= 2;
                 break;
         }
-        if (!skills.IsValidIndex(index)) return null;
-        return skills[index];
+        if (!_skills.IsValidIndex(index)) return null;
+        return _skills[index];
     }
 
     public void FinishSkill()
     {
         Unit.State = UnitState.WaitingForOrder;
         OnSkillFinished?.Invoke(Unit);
-    }
-}
-
-public static class CollectionExtensions
-{
-    public static bool IsValidIndex<T>(this IList<T> collection, int index)
-    {
-        return index >= 0 && index < collection.Count;
-    }
-    
-    public static bool IsValidIndex<T>(this T[] array, int index)
-    {
-        return index >= 0 && index < array.Length;
     }
 }

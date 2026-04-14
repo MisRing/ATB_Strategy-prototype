@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,8 +15,8 @@ public class UITurnLine : MonoBehaviour
     [SerializeField] private GameObject _itemPrefab;
     [SerializeField] private Text _currentTurnText;
 
-    private Dictionary<int, List<UITurnItem>> _items = new();
-    private List<RectTransform> _turnLines = new List<RectTransform>();
+    private readonly Dictionary<int, List<UITurnItem>> _items = new Dictionary<int, List<UITurnItem>>();
+    private readonly List<RectTransform> _turnLines = new List<RectTransform>();
 
     private int _cachedTurn;
 
