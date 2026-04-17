@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class CombatDummy : CombatAbstract
+public class CombatDummy : CombatObject
 {
-    public override ICombat.BodyPart[] BodyParts {get => _bodyParts; }
+    public override CombatBodyParts BodyParts {get => _bodyParts; }
 
-    [SerializeField] private ICombat.BodyPart[] _bodyParts;
+    [SerializeField] private CombatBodyParts _bodyParts;
 }

@@ -4,57 +4,59 @@ using System.Collections.Generic;
 
 public static class CombatService
 {
-    private static readonly List<ICombat> COMBATS_ON_LEVEL = new List<ICombat>();
+    private static readonly List<CombatObject> COMBATS_ON_LEVEL = new List<CombatObject>();
     
-    public static void RegisterCombat(ICombat comb)
+    public static void RegisterCombat(CombatObject comb)
     {
         if (COMBATS_ON_LEVEL.Contains(comb)) return;
         COMBATS_ON_LEVEL.Add(comb);
     }
     
-    public static void UnregisterCombat(ICombat comb)
+    public static void UnregisterCombat(CombatObject comb)
     {
         if (!COMBATS_ON_LEVEL.Contains(comb)) return;
         COMBATS_ON_LEVEL.Remove(comb);
     }
     
-    public static List<ICombat> GetCombats(Vector3 position, float range)
+    public static List<CombatTarget> GetCombats(CombatObject unitCombat, float range)
     {
-        return GetCombats(position, range, UnitOwner.None);
+        return GetCombats(unitCombat, range, UnitOwner.None);
     }
     
-    public static List<ICombat> GetCombats(Vector3 position, float range, UnitOwner ally)
+    public static List<CombatTarget> GetCombats(CombatObject unitCombat, float range, UnitOwner ally)
     {
         float sqrRange = range * range;
+        Vector3 unitPosition = unitCombat.Position;
 
-        List<ICombat> combatsOnRange = new List<ICombat>();
+        List<CombatTarget> combatsOnRange = new List<CombatTarget>();
 
-        foreach (ICombat comb in COMBATS_ON_LEVEL)
+        foreach (CombatObject comb in COMBATS_ON_LEVEL)
         {
-            float sqrDist = (comb.Position - position).sqrMagnitude;
+            float sqrDist = (comb.Position - unitPosition).sqrMagnitude;
 
             if (sqrDist <= sqrRange && comb.Owner != ally)
             {
-                combatsOnRange.Add(comb);
+                CombatTarget target = new CombatTarget(comb, 1f);
+                combatsOnRange.Add(target);
             }
         }
 
         combatsOnRange.Sort((a, b) =>
         {
-            float distA = (a.Position - position).sqrMagnitude;
-            float distB = (b.Position - position).sqrMagnitude;
+            float distA = (a.Target.Position - unitPosition).sqrMagnitude;
+            float distB = (b.Target.Position - unitPosition).sqrMagnitude;
             return distA.CompareTo(distB);
         });
 
         return combatsOnRange;
     }
     
-    public static ICombat GetNearestCombat(Vector3 position, float range, UnitOwner ally)
+    public static CombatObject GetNearestCombat(Vector3 position, float range, UnitOwner ally)
     {
-        ICombat combat = null;
+        CombatObject combat = null;
         float distance = range;
 
-        foreach (ICombat comb in COMBATS_ON_LEVEL)
+        foreach (CombatObject comb in COMBATS_ON_LEVEL)
         {
             if (comb.Owner == ally) continue;
 

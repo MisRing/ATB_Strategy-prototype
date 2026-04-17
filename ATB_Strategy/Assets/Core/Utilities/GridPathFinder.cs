@@ -18,7 +18,7 @@ public static class GridPathFinder
 
         Vector3 position = GridParameters.LevelGrid.GetTileWorldPos(tile);
 
-        ICombat enemy = CombatService.GetNearestCombat(position, visionRange, ally);
+        CombatObject enemy = CombatService.GetNearestCombat(position, visionRange, ally);
 
         int bestIndex = -1;
         TileCover bestCoverValue = 0;

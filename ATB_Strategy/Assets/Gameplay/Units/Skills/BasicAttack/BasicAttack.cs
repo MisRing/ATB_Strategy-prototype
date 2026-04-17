@@ -6,49 +6,48 @@ using System.Collections.Generic;
 public class BasicAttack : BasicSkill, ITargetSwitchable
 {
     [SerializeField] private int _cost = 8;
-    
-    public GameObject CurrentTarget
+
+    public int TargetIndex { get { return _currentTarget; } }
+
+    public int TargetsCount { get { return _unitCombat.Targets.Count; } }
+
+    public CombatTarget CurrentTarget
     {
         get
         {
-            if (_targets == null || _targets.Count == 0) return null;
-
-            return (_targets[_currentTarget] as CombatAbstract).gameObject;
+            if (!_unitCombat.Targets.IsValidIndex(_currentTarget)) return new CombatTarget();
+            return _unitCombat.Targets[_currentTarget];
         }
     }
-    public int TargetIndex { get { return _currentTarget; } }
-
-    public int TargetsCount { get { return _targets.Count; } }
-    
-    public event Action<GameObject> OnTargetSwitched;
+    public event Action<CombatTarget> OnTargetSwitched;
 
     private int _currentTarget = 0;
-    private List<ICombat> _targets;
+    
+    private UnitCombat _unitCombat;
     
     public override void Init(UnitSkillController skillController)
     {
         base.Init(skillController);
         SkillName = "Basic attack";
         RequiredDataType = typeof(TargetData);
+        _unitCombat = skillController.Unit.UnitCombat;
     }
 
     public override void EnterPrepare()
     {
-        _targets = CombatService.GetCombats(transform.position, _skillController.Unit.UnitStats.Vision, _skillController.Unit.Owner);
+        _unitCombat.Targets = CombatService.GetCombats(_unitCombat, _skillController.Unit.UnitStats.Vision, _skillController.Unit.Owner);
         
-        if (_targets.Count != 0)
+        if (_unitCombat.Targets.Count != 0)
         {
-            OnTargetSwitched?.Invoke((_targets[_currentTarget] as CombatAbstract).gameObject);
+            OnTargetSwitched?.Invoke(_unitCombat.Targets[_currentTarget]);
+            _skillController.Unit.UnitPreviewAnimator.AimToTarget(_unitCombat.Targets[_currentTarget].Target.BodyParts.Body.Transform);
         }
         
-        _skillController.Unit.UnitPreviewAnimator.AimToTarget(_targets[_currentTarget].BodyParts[0].transform);
-
         base.EnterPrepare();
     }
 
     public override void ExitPrepare()
     {
-        _targets.Clear();
         _currentTarget = 0;
         _skillController.Unit.UnitPreviewAnimator.EndPreview();
         base.ExitPrepare();
@@ -63,35 +62,35 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
     
     public void Switch(int index)
     {
-        if(_targets.Count == 0) return;
-        if (!_targets.IsValidIndex(index)) return;
+        if(_unitCombat.Targets.Count == 0) return;
+        if (!_unitCombat.Targets.IsValidIndex(index)) return;
         
         _currentTarget = index;
         
-        _skillController.Unit.UnitPreviewAnimator.AimToTarget(_targets[_currentTarget].BodyParts[0].transform);
+        _skillController.Unit.UnitPreviewAnimator.AimToTarget(_unitCombat.Targets[_currentTarget].Target.BodyParts.Body.Transform);
         
-        OnTargetSwitched?.Invoke((_targets[_currentTarget] as CombatAbstract).gameObject);
+        OnTargetSwitched?.Invoke(_unitCombat.Targets[_currentTarget]);
     }
 
     public override bool Execute(ref int cost)
     {
-        if(_targets.Count == 0) return false;
+        if(_unitCombat.Targets.Count == 0) return false;
 
         cost = _cost;
         
-        StartCoroutine(Fire(_targets[_currentTarget] as CombatAbstract));
+        StartCoroutine(Fire(_unitCombat.Targets[_currentTarget].Target));
 
         return true;
     }
 
-    private IEnumerator Fire(CombatAbstract target)
+    private IEnumerator Fire(CombatObject target)
     {
         float duration = TurnManager.TurnTime * _cost;
         float aimDuration = duration * 0.2f;
         float shootDuration = duration * 0.45f;
         float endDuration = duration * 0.35f;
         
-        Transform targetTransform = target.BodyParts[0].transform;
+        Transform targetTransform = target.BodyParts.Body.Transform;
         
         yield return _skillController.Unit.UnitAnimator.Aim(aimDuration, targetTransform);
         bool shoot = target != null;

@@ -6,6 +6,7 @@ public class UIAbilityController : MonoBehaviour
     [SerializeField] private GameObject _abilityButtonPrefab;
     [SerializeField] private RectTransform _rectTransform;
     [SerializeField] private UIAbilityPreparePanel  _preparePanel;
+    [SerializeField] private TargetAimUI _targetAimUI;
     
     private List<UIAbilityButton> _buttons;
     private UnitController _unit;
@@ -50,7 +51,7 @@ public class UIAbilityController : MonoBehaviour
         else
         {
             _preparePanel.gameObject.SetActive(true);
-            _preparePanel.SetAbility(_unit.SkillController.GetSkillByIndex(index), _playerController);
+            _preparePanel.SetAbility(_unit.SkillController.GetSkillByIndex(index), _playerController, _targetAimUI);
         }
     }
 }

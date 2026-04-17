@@ -61,18 +61,20 @@ public class PlayerController : MonoBehaviour
                 ExecuteAbility();
                 return;
             }
-            if (newAbility.RequiredDataType == typeof(TargetData) && (newAbility as ITargetSwitchable).CurrentTarget)
+            if (newAbility.RequiredDataType == typeof(TargetData) && (newAbility as ITargetSwitchable).TargetsCount > 0)
             {
                 // TODO: WRITE BETTER
                 if (isSameAbility)
                 {
                     ExecuteAbility();
+
                     return;
                 }
-                else
-                {
-                    CameraController.AimTarget(PlayerSelectionManager.SelectedUnit.transform, (newAbility as ITargetSwitchable).CurrentTarget.transform.position);
-                }
+                CameraController.AimTarget(
+                    PlayerSelectionManager.SelectedUnit.transform,
+                    (newAbility as ITargetSwitchable).CurrentTarget.Target.Position
+                    );
+
             }
             else
             {
@@ -185,11 +187,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void SetTargeting(GameObject target)
+    private void SetTargeting(CombatTarget target)
     {
-        if(!target || !PlayerSelectionManager.SelectedUnit) return;
+        if(!PlayerSelectionManager.SelectedUnit) return;
         
-        CameraController.AimTarget(PlayerSelectionManager.SelectedUnit.transform, target.transform.position);
+        CameraController.AimTarget(PlayerSelectionManager.SelectedUnit.transform, target.Target.Position);
     }
     
     //---------------------------------------------DEBUG-GUI--------------------------------------------

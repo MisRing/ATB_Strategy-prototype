@@ -3,9 +3,9 @@ using UnityEngine;
 
 public interface ITargetSwitchable
 {
-    GameObject CurrentTarget { get; }
-    int TargetIndex { get; }
-    int TargetsCount { get; }
-    event Action<GameObject> OnTargetSwitched;
+    public CombatTarget CurrentTarget { get; }
+    public int TargetIndex { get; }
+    public int TargetsCount { get; }
+    event Action<CombatTarget> OnTargetSwitched;
     void Switch(int index);
 }
