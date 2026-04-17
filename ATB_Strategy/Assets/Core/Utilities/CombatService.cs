@@ -36,7 +36,8 @@ public static class CombatService
 
             if (sqrDist <= sqrRange && comb.Owner != ally)
             {
-                CombatTarget target = new CombatTarget(comb, 1f);
+                float percent = GetVisionPercent(unitCombat.BodyParts.Head.Transform.position, comb);
+                CombatTarget target = new CombatTarget(comb, percent);
                 combatsOnRange.Add(target);
             }
         }
@@ -70,5 +71,51 @@ public static class CombatService
         }
 
         return combat;
+    }
+
+    private static float GetVisionPercent(Vector3 fromPos, CombatObject target)
+    {
+        LayerMask mask = LayerMask.GetMask("Grid Environment");
+
+        float percent = 0;
+        if (target.BodyParts.Body.Transform)
+        {
+            percent += HasLineBetween(
+                fromPos,
+                target.BodyParts.Body.Transform.position,
+                mask
+                )
+                ? target.BodyParts.Body.Weight
+                : 0f;
+        }
+        
+        if (target.BodyParts.Head.Transform)
+        {
+            percent += HasLineBetween(
+                fromPos,
+                target.BodyParts.Head.Transform.position,
+                mask
+                )
+                ? target.BodyParts.Head.Weight
+                : 0f;
+        }
+
+        foreach (CombatBodyParts.BodyPart part in target.BodyParts.OtherParts)
+        {
+            percent += HasLineBetween(
+                fromPos,
+                part.Transform.position,
+                mask
+                )
+                ? part.Weight
+                : 0f;
+        }
+
+        return percent;
+    }
+
+    private static bool HasLineBetween(Vector3 point1, Vector3 point2, LayerMask mask)
+    {
+        return !Physics.Linecast(point1, point2, mask);
     }
 }

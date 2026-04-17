@@ -54,7 +54,7 @@ public class UIAbilityPreparePanel : MonoBehaviour
     private void SetTarget(CombatTarget combatTarget)
     {
         _targetAimUI.gameObject.SetActive(true);
-        _targetAimUI.SetTarget(combatTarget.Target.BodyParts.Body.Transform, Mathf.CeilToInt(combatTarget.VisionPercent * 100));
+        _targetAimUI.SetTarget(combatTarget.Target.BodyParts.Body.Transform, Mathf.CeilToInt(combatTarget.VisionPercent * 100f));
     }
 
     private void Execute()
