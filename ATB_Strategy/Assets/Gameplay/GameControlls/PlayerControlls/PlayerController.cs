@@ -187,11 +187,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void SetTargeting(CombatTarget target)
+    private void SetTargeting(HitInfo hit)
     {
         if(!PlayerSelectionManager.SelectedUnit) return;
         
-        CameraController.AimTarget(PlayerSelectionManager.SelectedUnit.transform, target.Target.Position);
+        CameraController.AimTarget(PlayerSelectionManager.SelectedUnit.transform, hit.Target.Position);
     }
     
     //---------------------------------------------DEBUG-GUI--------------------------------------------

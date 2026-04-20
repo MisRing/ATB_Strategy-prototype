@@ -12,6 +12,9 @@ public class UnitStats : MonoBehaviour
     public IntStat Armor = new IntStat(3);
     public IntStat MaxArmor = new IntStat(3);
     
-    [Header("Vision")]
-    public FloatStat Vision = new FloatStat(60f);
+    [Header("Combat")]
+    public FloatStat VisionRange = new FloatStat(16f);
+    public IntStat Accuracy = new IntStat(50);
+    public IntStat Dodge = new IntStat(10);
+    public IntStat SelfControll = new IntStat(30);
 }

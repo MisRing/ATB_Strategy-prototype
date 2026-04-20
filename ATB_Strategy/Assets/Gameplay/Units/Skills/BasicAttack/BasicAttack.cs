@@ -11,15 +11,9 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
 
     public int TargetsCount { get { return _unitCombat.Targets.Count; } }
 
-    public CombatTarget CurrentTarget
-    {
-        get
-        {
-            if (!_unitCombat.Targets.IsValidIndex(_currentTarget)) return new CombatTarget();
-            return _unitCombat.Targets[_currentTarget];
-        }
-    }
-    public event Action<CombatTarget> OnTargetSwitched;
+    public HitInfo CurrentTarget { get; set; }
+
+    public event Action<HitInfo> OnTargetSwitched;
 
     private int _currentTarget = 0;
     
@@ -35,13 +29,9 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
 
     public override void EnterPrepare()
     {
-        _unitCombat.Targets = CombatService.GetCombats(_unitCombat, _skillController.Unit.UnitStats.Vision, _skillController.Unit.Owner);
-        
-        if (_unitCombat.Targets.Count != 0)
-        {
-            OnTargetSwitched?.Invoke(_unitCombat.Targets[_currentTarget]);
-            _skillController.Unit.UnitPreviewAnimator.AimToTarget(_unitCombat.Targets[_currentTarget].Target.BodyParts.Body.Transform);
-        }
+        _unitCombat.Targets = CombatService.GetCombats(_unitCombat, _skillController.Unit.UnitStats.VisionRange, _skillController.Unit.Owner);
+
+        Switch(0);
         
         base.EnterPrepare();
     }
@@ -66,10 +56,17 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         if (!_unitCombat.Targets.IsValidIndex(index)) return;
         
         _currentTarget = index;
+
+        CurrentTarget = CombatService.CalculateHit(
+            _skillController.Unit.UnitStats.Accuracy,
+            0,
+            5,
+            _unitCombat.Targets[_currentTarget]
+            );
         
         _skillController.Unit.UnitPreviewAnimator.AimToTarget(_unitCombat.Targets[_currentTarget].Target.BodyParts.Body.Transform);
         
-        OnTargetSwitched?.Invoke(_unitCombat.Targets[_currentTarget]);
+        OnTargetSwitched?.Invoke(CurrentTarget);
     }
 
     public override bool Execute(ref int cost)

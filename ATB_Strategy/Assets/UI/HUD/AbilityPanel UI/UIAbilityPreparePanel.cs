@@ -51,10 +51,10 @@ public class UIAbilityPreparePanel : MonoBehaviour
         }
     }
 
-    private void SetTarget(CombatTarget combatTarget)
+    private void SetTarget(HitInfo hitInfo)
     {
         _targetAimUI.gameObject.SetActive(true);
-        _targetAimUI.SetTarget(combatTarget.Target.BodyParts.Body.Transform, Mathf.CeilToInt(combatTarget.VisionPercent * 100f));
+        _targetAimUI.SetTarget(hitInfo.Target.BodyParts.Body.Transform, hitInfo.HitChance);
     }
 
     private void Execute()

@@ -8,9 +8,9 @@ public abstract class CombatObject : MonoBehaviour
 
     public virtual CombatBodyParts BodyParts { get; }
 
-    public virtual UnitOwner Owner { get => UnitOwner.Enemy; }
+    public virtual int Dodge { get => 10; }
 
-    public List<CombatTarget> Targets = new List<CombatTarget>();
+    public virtual UnitOwner Owner { get => UnitOwner.Enemy; }
 
     private protected virtual void OnEnable()
     {

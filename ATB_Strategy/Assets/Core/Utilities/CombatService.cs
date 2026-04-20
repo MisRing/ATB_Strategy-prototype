@@ -118,4 +118,38 @@ public static class CombatService
     {
         return !Physics.Linecast(point1, point2, mask);
     }
+
+    public static HitInfo CalculateHit(int accuracyPercent, int weaponAccuracyPercent, int weaponCritPercent, CombatTarget target)
+    {
+        HitInfo hit = new HitInfo();
+
+        float distanceFactor = 1f;
+
+        float hitChance = (accuracyPercent + weaponAccuracyPercent * distanceFactor) - target.Target.Dodge + (0 * 10);
+        float critChance = Mathf.Clamp01(hitChance - 100) + weaponCritPercent * distanceFactor;
+
+        hit.HitChance = Mathf.CeilToInt(Mathf.Clamp(hitChance, 1, 100));
+        hit.CritChance = Mathf.CeilToInt(Mathf.Clamp(critChance, 0, 100));
+        
+        hit.Dealler = null;
+        hit.Target = target.Target;
+
+        return hit;
+
+        // HitChance = (UnitAccuracy + WeaponAccuracyBonus * DistanceFactor) – EnemyDodge + (HighAdvantage * 10)
+        // CritChance = Clamp01(HitChance – 100 %) + WeaponCritChance * DistanceFactor
+
+    }
+}
+
+public struct HitInfo
+{
+    public CombatObject Dealler;
+    public CombatObject Target;
+
+    public int HitChance;
+    public int CritChance;
+
+    public int Damage;
+    public int CritDamage;
 }

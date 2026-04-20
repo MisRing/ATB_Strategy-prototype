@@ -116,7 +116,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
             ref _pathData.FinalDirection,
             ref _pathData.CoverLook,
             finalTile,
-            _unit.UnitStats.Vision,
+            _unit.UnitStats.VisionRange,
             _unit.Owner
             );
 
