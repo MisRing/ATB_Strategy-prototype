@@ -74,14 +74,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
             _pathData = null;
         }
 
-        if (_showPath)
-        {
-            OnPathChanged?.Invoke(_pathData);
-        }
-        else
-        {
-            OnPathChanged?.Invoke(null);
-        }
+        OnPathChanged?.Invoke(_showPath ? _pathData : null);
     }
 
     private float CalculateDuration(float fullDistance, float normalSpeed, float timeStep = 0.05f)
@@ -204,6 +197,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     {
         _velocity = Vector3.zero;
         transform.position = _pathData.Points.Last();
+        _pathData = null;
     }
 }
 

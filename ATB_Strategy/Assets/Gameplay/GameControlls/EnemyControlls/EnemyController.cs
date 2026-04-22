@@ -52,7 +52,7 @@ public class EnemyController : MonoBehaviour
 
             if (unit.SkillController.ForceExecuteSkill(0, data))
             {
-                break;
+                return;
             }
         }
     }

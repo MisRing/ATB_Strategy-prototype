@@ -8,7 +8,7 @@ public class UnitAnimator : MonoBehaviour
     [SerializeField] private WeaponIKController _weaponIK;
     [SerializeField] private Transform _unitModel;
 
-    [SerializeField] private Animator _weaponAnimator;
+    [SerializeField] private WeaponAnimator _weaponAnimator;
 
     private TileCover _coverState;
     private int _coverLook;
@@ -106,7 +106,7 @@ public class UnitAnimator : MonoBehaviour
         if (shoot)
         {
             _animator.SetTrigger(SHOOT_ID);
-            _weaponAnimator.SetTrigger("Fire"); // TODO: Move to weapon scripts
+            _weaponAnimator.FireAnimation();
         }
         yield return WaitWithAim(shootDuration, target); // for animation time
         yield return WaitWithAim(waitDelay, target);

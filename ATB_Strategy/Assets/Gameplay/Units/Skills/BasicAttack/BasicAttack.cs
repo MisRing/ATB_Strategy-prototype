@@ -11,9 +11,9 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
 
     public int TargetsCount { get { return _unitCombat.Targets.Count; } }
 
-    public HitInfo CurrentTarget { get; set; }
+    public CombatContext CurrentTarget { get; set; }
 
-    public event Action<HitInfo> OnTargetSwitched;
+    public event Action<CombatContext> OnTargetSwitched;
 
     private int _currentTarget = 0;
     
@@ -57,10 +57,10 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         
         _currentTarget = index;
 
-        CurrentTarget = CombatService.CalculateHit(
+        CurrentTarget = CombatService.CalculateHitContext(
+            _skillController.Unit.UnitCombat,
             _skillController.Unit.UnitStats.Accuracy,
-            0,
-            5,
+            _skillController.Unit.UnitCombat.Weapon,
             _unitCombat.Targets[_currentTarget]
             );
         
@@ -90,7 +90,27 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         Transform targetTransform = target.BodyParts.Body.Transform;
         
         yield return _skillController.Unit.UnitAnimator.Aim(aimDuration, targetTransform);
-        bool shoot = target != null;
+        
+        float visionPercent = CombatService.GetVisionPercent(
+            _skillController.Unit.UnitCombat.Position + Vector3.up,
+            target
+            );
+        bool shoot = target != null && visionPercent > 0f;
+
+        if (shoot)
+        {
+            HitResult hit;
+            if (CombatService.CalculateHit(CurrentTarget, out hit))
+            {
+                target.GetDamage(hit);
+                Debug.Log("His success " + hit.Damage);
+            }
+            else
+            {
+                Debug.Log("Miss!");
+            }
+        }
+        
         yield return _skillController.Unit.UnitAnimator.Shoot(shootDuration, targetTransform, shoot);
         yield return _skillController.Unit.UnitAnimator.EndAim(endDuration, targetTransform);
     }

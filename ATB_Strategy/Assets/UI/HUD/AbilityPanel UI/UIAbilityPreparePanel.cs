@@ -33,7 +33,7 @@ public class UIAbilityPreparePanel : MonoBehaviour
             
             _targetSwitchable.OnTargetSwitched += SetTarget;
             
-            if(_targetSwitchable.TargetsCount > 1)
+            if(_targetSwitchable.TargetsCount >= 1)
             {
                 SetTarget(_targetSwitchable.CurrentTarget);
             }
@@ -51,10 +51,10 @@ public class UIAbilityPreparePanel : MonoBehaviour
         }
     }
 
-    private void SetTarget(HitInfo hitInfo)
+    private void SetTarget(CombatContext combatContext)
     {
         _targetAimUI.gameObject.SetActive(true);
-        _targetAimUI.SetTarget(hitInfo.Target.BodyParts.Body.Transform, hitInfo.HitChance);
+        _targetAimUI.SetTarget(combatContext.Target.Target.BodyParts.Body.Transform, combatContext.HitChance, combatContext.CritChance);
     }
 
     private void Execute()

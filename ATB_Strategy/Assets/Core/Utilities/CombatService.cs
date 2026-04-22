@@ -1,9 +1,17 @@
-using System;
 using UnityEngine;
 using System.Collections.Generic;
 
 public static class CombatService
 {
+    private static readonly int HEIGHT_ADVANTAGE_BONUS_ACCURACY = 5;
+    
+    private static readonly float MELEE_DISTANCE_THRESHHOLD = 5f;
+    private static readonly float MEDIUM_DISTANCE_THRESHHOLD = 15f;
+    private static readonly float RANGE_DISTANCE_THRESHHOLD = 20f;
+
+    private static readonly float MAX_DISTANCE_FACTOR = 1f;
+    private static readonly float MIN_DISTANCE_FACTOR = -0.5f;
+    
     private static readonly List<CombatObject> COMBATS_ON_LEVEL = new List<CombatObject>();
     
     public static void RegisterCombat(CombatObject comb)
@@ -36,7 +44,7 @@ public static class CombatService
 
             if (sqrDist <= sqrRange && comb.Owner != ally)
             {
-                float percent = GetVisionPercent(unitCombat.BodyParts.Head.Transform.position, comb);
+                float percent = GetVisionPercent(unitCombat.Position + Vector3.up, comb);
                 CombatTarget target = new CombatTarget(comb, percent);
                 combatsOnRange.Add(target);
             }
@@ -73,7 +81,7 @@ public static class CombatService
         return combat;
     }
 
-    private static float GetVisionPercent(Vector3 fromPos, CombatObject target)
+    public static float GetVisionPercent(Vector3 fromPos, CombatObject target)
     {
         LayerMask mask = LayerMask.GetMask("Grid Environment");
 
@@ -119,37 +127,153 @@ public static class CombatService
         return !Physics.Linecast(point1, point2, mask);
     }
 
-    public static HitInfo CalculateHit(int accuracyPercent, int weaponAccuracyPercent, int weaponCritPercent, CombatTarget target)
+    public static CombatContext CalculateHitContext(CombatObject dealer, int accuracyPercent, WeaponController weapon, CombatTarget target)
     {
-        HitInfo hit = new HitInfo();
+        CombatContext context = new CombatContext();
 
-        float distanceFactor = 1f;
-
-        float hitChance = (accuracyPercent + weaponAccuracyPercent * distanceFactor) - target.Target.Dodge + (0 * 10);
-        float critChance = Mathf.Clamp01(hitChance - 100) + weaponCritPercent * distanceFactor;
-
-        hit.HitChance = Mathf.CeilToInt(Mathf.Clamp(hitChance, 1, 100));
-        hit.CritChance = Mathf.CeilToInt(Mathf.Clamp(critChance, 0, 100));
+        float distance = Vector3.Distance(target.Target.Position, dealer.Position);
+        float distanceFactor = CalculateDistanceFactor(distance, weapon.RangeType);
+        float heightDiff = dealer.Position.y - target.Target.Position.y;
+        int heightAdvantage = Mathf.FloorToInt(Mathf.Abs(heightDiff)) * (int)Mathf.Sign(heightDiff);
         
-        hit.Dealler = null;
-        hit.Target = target.Target;
+        float hitChance =
+            (accuracyPercent
+             + weapon.Accuracy * distanceFactor
+             + (heightAdvantage * HEIGHT_ADVANTAGE_BONUS_ACCURACY))
+            * target.VisionPercent
+            - target.Target.Dodge;
+        
+        float critChance = Mathf.Clamp01(hitChance - 100) + weapon.CritChance * distanceFactor;
 
-        return hit;
+        context.HitChance = Mathf.CeilToInt(Mathf.Clamp(hitChance, 1, 100));
+        context.CritChance = Mathf.CeilToInt(Mathf.Clamp(critChance, 0, 100));
+        
+        context.Dealer = dealer;
+        context.Target = target;
 
-        // HitChance = (UnitAccuracy + WeaponAccuracyBonus * DistanceFactor) – EnemyDodge + (HighAdvantage * 10)
-        // CritChance = Clamp01(HitChance – 100 %) + WeaponCritChance * DistanceFactor
+        context.Damage = weapon.Damage;
+        context.CritDamage = weapon.CritDamage;
 
+        return context;
+    }
+
+    public static bool CalculateHit(CombatContext context, out HitResult result)
+    {
+        int random = Random.Range(0, 100);
+
+        result = new HitResult();
+
+        if (random < context.HitChance)
+        {
+            random = Random.Range(0, 100);
+            if (random < context.CritChance)
+            {
+                result.IsCritical = true;
+                result.Damage = Random.Range(context.CritDamage.Min, context.CritDamage.Max + 1);
+            }
+            else
+            {
+                result.IsCritical = false;
+                result.Damage = Random.Range(context.Damage.Min, context.Damage.Max + 1);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private static float CalculateDistanceFactor(float distance, WeaponRangeType type)
+    {
+        switch (type)
+        {
+            case(WeaponRangeType.Melee): return CalculateDistanceFactorMelee(distance);
+            case(WeaponRangeType.Medium): return CalculateDistanceFactorMedium(distance);
+            case(WeaponRangeType.Ranged): return CalculateDistanceFactorRange(distance);
+        }
+        
+        return MAX_DISTANCE_FACTOR;
+    }
+
+    private static float CalculateDistanceFactorMelee(float distance)
+    {
+        if (distance <= MELEE_DISTANCE_THRESHHOLD)
+        {
+            return MAX_DISTANCE_FACTOR;
+        }
+        if (distance >= MEDIUM_DISTANCE_THRESHHOLD)
+        {
+            return MIN_DISTANCE_FACTOR;
+        }
+        float f = (distance - MELEE_DISTANCE_THRESHHOLD) / (MEDIUM_DISTANCE_THRESHHOLD - MELEE_DISTANCE_THRESHHOLD);
+        float distanceFactor = Mathf.Lerp(MAX_DISTANCE_FACTOR, MIN_DISTANCE_FACTOR, f);
+
+        return distanceFactor;
+    }
+    
+    private static float CalculateDistanceFactorMedium(float distance)
+    {
+        if (distance <= MELEE_DISTANCE_THRESHHOLD)
+        {
+            float f = distance / MELEE_DISTANCE_THRESHHOLD;
+            float distanceFactor = Mathf.Lerp(MIN_DISTANCE_FACTOR, MAX_DISTANCE_FACTOR, f);
+
+            return distanceFactor;
+        }
+        if (distance >= MEDIUM_DISTANCE_THRESHHOLD)
+        {
+            float f = (distance - MEDIUM_DISTANCE_THRESHHOLD) / (RANGE_DISTANCE_THRESHHOLD - MEDIUM_DISTANCE_THRESHHOLD);
+            float distanceFactor = Mathf.Lerp(MAX_DISTANCE_FACTOR, MIN_DISTANCE_FACTOR, f);
+
+            return distanceFactor;
+        }
+
+        return MAX_DISTANCE_FACTOR;
+    }
+    
+    private static float CalculateDistanceFactorRange(float distance)
+    {
+        if (distance <= MELEE_DISTANCE_THRESHHOLD)
+        {
+            return MIN_DISTANCE_FACTOR;
+        }
+        if (distance >= MEDIUM_DISTANCE_THRESHHOLD)
+        {
+            return MAX_DISTANCE_FACTOR;
+        }
+        float f = (distance - MELEE_DISTANCE_THRESHHOLD) / (MEDIUM_DISTANCE_THRESHHOLD - MELEE_DISTANCE_THRESHHOLD);
+        float distanceFactor = Mathf.Lerp(MIN_DISTANCE_FACTOR, MAX_DISTANCE_FACTOR, f);
+
+        return distanceFactor;
     }
 }
 
-public struct HitInfo
+public struct CombatContext
 {
-    public CombatObject Dealler;
-    public CombatObject Target;
+    public CombatObject Dealer;
+    public CombatTarget Target;
 
     public int HitChance;
     public int CritChance;
 
-    public int Damage;
-    public int CritDamage;
+    public RangeIntStat Damage;
+    public RangeIntStat CritDamage;
+}
+
+public struct HitResult
+{
+    public int Damage; 
+    public bool IsCritical;
+}
+
+public struct CombatTarget
+{
+    public CombatObject Target;
+    public float VisionPercent;
+
+    public CombatTarget(CombatObject target, float visionPercent)
+    {
+        Target = target;
+        VisionPercent = visionPercent;
+    }
 }

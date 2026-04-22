@@ -21,6 +21,11 @@ public abstract class CombatObject : MonoBehaviour
     {
         CombatService.UnregisterCombat(this);
     }
+
+    public virtual void GetDamage(HitResult result)
+    {
+        Debug.Log("Someone deal me " + result.Damage + " damage");
+    }
 }
 
 [Serializable]
@@ -35,17 +40,5 @@ public struct CombatBodyParts
     {
         public Transform Transform;
         [Range(0f,1f)] public float Weight;
-    }
-}
-
-public struct CombatTarget
-{
-    public CombatObject Target;
-    public float VisionPercent;
-
-    public CombatTarget(CombatObject target, float visionPercent)
-    {
-        Target = target;
-        VisionPercent = visionPercent;
     }
 }

@@ -6,6 +6,7 @@ public class TargetAimUI : MonoBehaviour
 {
     [Header("Main Settings")]
     [SerializeField] private Text _hitChanceText;
+    [SerializeField] private Text _critChanceText;
     [SerializeField] private Vector3 _offset;
 
     private Transform _target;
@@ -16,10 +17,11 @@ public class TargetAimUI : MonoBehaviour
         _rectTransform = GetComponent<RectTransform>();
     }
 
-    public void SetTarget(Transform target, int chance)
+    public void SetTarget(Transform target, int hitChance, int critChance)
     {
         _target = target;
-        _hitChanceText.text = chance.ToString() + "%";
+        _hitChanceText.text = hitChance.ToString() + "%";
+        _critChanceText.text = critChance.ToString() + "%";
     }
 
     private void Update()

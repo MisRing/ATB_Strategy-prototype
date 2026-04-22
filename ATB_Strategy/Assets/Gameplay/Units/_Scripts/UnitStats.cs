@@ -16,5 +16,5 @@ public class UnitStats : MonoBehaviour
     public FloatStat VisionRange = new FloatStat(16f);
     public IntStat Accuracy = new IntStat(50);
     public IntStat Dodge = new IntStat(10);
-    public IntStat SelfControll = new IntStat(30);
+    public IntStat SelfControl = new IntStat(30);
 }

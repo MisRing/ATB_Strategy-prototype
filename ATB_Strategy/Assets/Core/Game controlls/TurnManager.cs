@@ -59,7 +59,7 @@ public class TurnManager : MonoBehaviour
             _unitsOnAction.Add(turnKey, new List<UnitController>());
         }
 
-        _unitsOnAction[turnKey].Add(unit); _unitsOnAction[turnKey].Add(unit);
+        _unitsOnAction[turnKey].Add(unit);
 
         OnAbilityScheduled?.Invoke(unit, turnKey);
         RemoveFromWaitingQ(unit);

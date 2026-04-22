@@ -7,7 +7,6 @@ public class UnitPreviewAnimator : MonoBehaviour
     [SerializeField] private Animator _previewAnimator;
     [SerializeField] private WeaponIKController _previewWeaponIK;
     [SerializeField] private Transform _previewModel;
-    [SerializeField] private Animator _previewWeaponAnimator;
     
     private bool _isActive = false;
     

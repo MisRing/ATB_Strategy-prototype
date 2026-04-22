@@ -56,3 +56,16 @@ public class IntStat
         return stat.Value;
     }
 }
+
+[Serializable]
+public class RangeIntStat
+{
+    public IntStat Min = new IntStat(0);
+    public IntStat Max = new IntStat(1);
+
+    public RangeIntStat(int min, int max)
+    {
+        Min.Value = min;
+        Max.Value = max;
+    }
+}

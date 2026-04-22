@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
                 }
                 CameraController.AimTarget(
                     PlayerSelectionManager.SelectedUnit.transform,
-                    (newAbility as ITargetSwitchable).CurrentTarget.Target.Position
+                    (newAbility as ITargetSwitchable).CurrentTarget.Target.Target.Position
                     );
 
             }
@@ -187,11 +187,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void SetTargeting(HitInfo hit)
+    private void SetTargeting(CombatContext hit)
     {
         if(!PlayerSelectionManager.SelectedUnit) return;
         
-        CameraController.AimTarget(PlayerSelectionManager.SelectedUnit.transform, hit.Target.Position);
+        CameraController.AimTarget(PlayerSelectionManager.SelectedUnit.transform, hit.Target.Target.Position);
     }
     
     //---------------------------------------------DEBUG-GUI--------------------------------------------
