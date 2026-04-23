@@ -45,6 +45,7 @@ public static class CombatService
             if (sqrDist <= sqrRange && comb.Owner != ally)
             {
                 float percent = GetVisionPercent(unitCombat.Position + Vector3.up, comb);
+                if(percent == 0f) continue;
                 CombatTarget target = new CombatTarget(comb, percent);
                 combatsOnRange.Add(target);
             }

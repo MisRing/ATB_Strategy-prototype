@@ -19,13 +19,17 @@ public class PlayerController : MonoBehaviour
         PlayerSelectionManager.Init(this, units);
 
         CursorController.Init();
+        
+        PlayerInputController.SelectAbility += SelectAbility;//!
+
+        PlayerSelectionManager.OnSelectionChanged += UnitSelected;
     }
 
     private void OnEnable()
     {
-        PlayerInputController.SelectAbility += SelectAbility;
-
-        PlayerSelectionManager.OnSelectionChanged += UnitSelected;
+        // PlayerInputController.SelectAbility += SelectAbility;
+        //
+        // PlayerSelectionManager.OnSelectionChanged += UnitSelected;
     }
 
     private void OnDisable()

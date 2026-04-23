@@ -19,6 +19,11 @@ public class UnitCombat : CombatObject
     public void Init(UnitController unit)
     {
         _unitController = unit;
+        
+    }
+
+    public void Start()
+    {
         SetVisibility();
     }
 
