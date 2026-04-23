@@ -7,24 +7,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public CameraController CameraController;
     [HideInInspector] public CursorController CursorController;
     [HideInInspector] public PlayerSelectionManager PlayerSelectionManager;
-
-    [SerializeField] private List<Vector3Int> _positionPreset = new List<Vector3Int>();
     
     public event Action<int, bool> OnAbilitySelected;
     public event Action<int> OnTargetSwitched;
 
-    private void Awake()
+    public void Init(List<UnitController> units)
     {
-        if (GridParameters.LevelGrid == null)
-        {
-            // TODO: DELETE THIS
-            GridParameters.LevelGrid = FindFirstObjectByType(typeof(GridMap)) as GridMap; 
-        }
-
         CursorController = GetComponent<CursorController>();
         PlayerSelectionManager = GetComponent<PlayerSelectionManager>();
         
-        PlayerSelectionManager.Init(this, _positionPreset);
+        PlayerSelectionManager.Init(this, units);
 
         CursorController.Init();
     }
@@ -209,23 +201,5 @@ public class PlayerController : MonoBehaviour
         if(!PlayerSelectionManager.SelectedUnit) return;
         
         CameraController.AimTarget(PlayerSelectionManager.SelectedUnit.transform, hit.Target.Target.Position);
-    }
-    
-    //---------------------------------------------DEBUG-GUI--------------------------------------------
-    private void OnDrawGizmos()
-    {
-        if(GridParameters.LevelGrid == null)
-        {
-            GridParameters.LevelGrid = FindFirstObjectByType(typeof(GridMap)) as GridMap;
-        }
-
-        foreach(Vector3Int point in _positionPreset)
-        {
-            if(GridParameters.LevelGrid.CheckTile(point.x, point.z, point.y))
-            {
-                Gizmos.color = Color.darkGreen;
-                Gizmos.DrawSphere(GridParameters.LevelGrid.GetTileWorldPos(point.x, point.z, point.y), 0.3f);
-            }
-        }
     }
 }

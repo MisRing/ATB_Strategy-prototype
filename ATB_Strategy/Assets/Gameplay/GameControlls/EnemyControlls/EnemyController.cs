@@ -3,26 +3,15 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] private List<UnitController> _units = new List<UnitController>();
-    [SerializeField] private List<Vector3Int> _positionPresset = new List<Vector3Int>();
-    
-    private void Awake()
-    {
-        Init();
-    }
+    private List<UnitController> _units = new List<UnitController>();
 
-    private void Init()
+
+    public void Init(List<UnitController> units)
     {
-        // TODO: REMOVE THIS
-        if (GridParameters.LevelGrid == null)
-        {
-            GridParameters.LevelGrid = FindFirstObjectByType(typeof(GridMap)) as GridMap;
-        }
+        _units = units;
 
         for (int i = 0; i < _units.Count; i++)
         {
-            _units[i].Init(GridParameters.LevelGrid.GetTile(_positionPresset[i].x, _positionPresset[i].z, _positionPresset[i].y));
-
             _units[i].SkillController.OnSkillFinished += StartUnitAbility;
             StartUnitAbility(_units[i]);
         }
@@ -53,23 +42,6 @@ public class EnemyController : MonoBehaviour
             if (unit.SkillController.ForceExecuteSkill(0, data))
             {
                 return;
-            }
-        }
-    }
-    
-    private void OnDrawGizmos()
-    {
-        if(GridParameters.LevelGrid == null)
-        {
-            GridParameters.LevelGrid = FindFirstObjectByType(typeof(GridMap)) as GridMap;
-        }
-
-        foreach(Vector3Int point in _positionPresset)
-        {
-            if(GridParameters.LevelGrid.CheckTile(point.x, point.z, point.y))
-            {
-                Gizmos.color = Color.darkRed;
-                Gizmos.DrawSphere(GridParameters.LevelGrid.GetTileWorldPos(point.x, point.z, point.y), 0.3f);
             }
         }
     }

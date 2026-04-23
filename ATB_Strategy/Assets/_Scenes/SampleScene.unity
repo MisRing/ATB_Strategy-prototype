@@ -11513,14 +11513,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4e1716df61fb1448cd2191471cd51d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  _units:
-  - {fileID: 798402253}
-  - {fileID: 1249828914}
-  - {fileID: 1186993996}
-  _positionPresset:
-  - {x: 18, y: 0, z: 25}
-  - {x: 21, y: 0, z: 24}
-  - {x: 20, y: 0, z: 27}
 --- !u!4 &723904379
 Transform:
   m_ObjectHideFlags: 0
@@ -11947,10 +11939,6 @@ MonoBehaviour:
   CameraController: {fileID: 330585550}
   CursorController: {fileID: 0}
   PlayerSelectionManager: {fileID: 0}
-  _positionPreset:
-  - {x: 2, y: 1, z: 30}
-  - {x: 4, y: 1, z: 28}
-  - {x: 5, y: 1, z: 31}
 --- !u!114 &742375539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11993,8 +11981,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8ad6455bdb52334b910f7b5a0a992c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSelectionManager
-  _units:
-  - {fileID: 1816743775}
   SelectedUnit: {fileID: 0}
   _selectRayDistance: 100
 --- !u!1 &742785749
@@ -19564,9 +19550,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1156684632}
+  - component: {fileID: 1156684633}
   - component: {fileID: 1156684631}
   m_Layer: 0
-  m_Name: TurnManager
+  m_Name: GameControlls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19599,6 +19586,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1156684633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156684630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c463a350ed86b4443b86470e569e150b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneEntryPoint
+  _playerController: {fileID: 742375538}
+  _enemyController: {fileID: 723904378}
+  _playerUnits:
+  - {fileID: 1816743775}
+  _playerPositionPreset:
+  - {x: 4, y: 1, z: 32}
+  - {x: 4, y: 1, z: 35}
+  - {x: 2, y: 1, z: 34}
+  _enemyUnits:
+  - {fileID: 798402253}
+  - {fileID: 1249828914}
+  - {fileID: 1186993996}
+  _enemyPositionPreset:
+  - {x: 25, y: 0, z: 18}
+  - {x: 27, y: 0, z: 20}
+  - {x: 28, y: 0, z: 17}
 --- !u!4 &1160346664 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2916570863362053800, guid: 96dd546f62d6cc94e987160b25fc4a14, type: 3}

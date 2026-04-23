@@ -4,8 +4,8 @@ using System;
 
 public class PlayerSelectionManager : MonoBehaviour
 {
-    [Header("Main Settings")]
-    [SerializeField] private List<UnitController> _units = new List<UnitController>();
+    //[Header("Main Settings")]
+    private List<UnitController> _units = new List<UnitController>();
     public UnitController SelectedUnit;
 
     [Header("Raycast Settings")]
@@ -15,13 +15,13 @@ public class PlayerSelectionManager : MonoBehaviour
     
     public event Action<UnitController, UnitController> OnSelectionChanged;
 
-    public void Init(PlayerController playerController, List<Vector3Int> positionPreset)
+    public void Init(PlayerController playerController, List<UnitController> units)
     {
         _playerController = playerController;
+        _units = units;
         
         for (int i = 0; i < _units.Count; i++)
         {
-            _units[i].Init(GridParameters.LevelGrid.GetTile(positionPreset[i].x, positionPreset[i].z, positionPreset[i].y));
             _units[i].SkillController.OnSkillFinished += SelectReadyUnit;
         }
     }
