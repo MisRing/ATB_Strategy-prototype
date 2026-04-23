@@ -29,9 +29,9 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
 
     public override void EnterPrepare()
     {
-        _unitCombat.Targets = CombatService.GetCombats(_unitCombat, _skillController.Unit.UnitStats.VisionRange, _skillController.Unit.Owner);
+        //_unitCombat.Targets = CombatService.GetCombats(_unitCombat, _skillController.Unit.UnitStats.VisionRange, _skillController.Unit.Owner);
 
-        Switch(0);
+        //Switch(0);
         
         base.EnterPrepare();
     }
@@ -49,7 +49,12 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
 
         base.UpdateData(skillData);
     }
-    
+
+    public override bool CanExecute()
+    {
+        return _unitCombat.Targets.Count > 0;
+    }
+
     public void Switch(int index)
     {
         if(_unitCombat.Targets.Count == 0) return;

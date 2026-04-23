@@ -5,6 +5,7 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private UIAbilityController _uiAbilityController;
+    [SerializeField] private UIUnitTargets _uiUnitTargets;
 
     [SerializeField] private GameObject _pauseCanvas;
 
@@ -13,11 +14,13 @@ public class UIController : MonoBehaviour
     private void Awake()
     {
         _uiAbilityController.Init(_playerController);
+        _uiUnitTargets.Init(_playerController);
     }
     
     private void OnEnable()
     {
         _playerController.PlayerSelectionManager.OnSelectionChanged += _uiAbilityController.SetAbilityButtons;
+        _playerController.PlayerSelectionManager.OnSelectionChanged += _uiUnitTargets.SetUnitTargets;
         _playerController.OnAbilitySelected += _uiAbilityController.SetAbilityPreparePanel;
 
 
@@ -27,6 +30,7 @@ public class UIController : MonoBehaviour
     private void OnDisable()
     {
         _playerController.PlayerSelectionManager.OnSelectionChanged -= _uiAbilityController.SetAbilityButtons;
+        _playerController.PlayerSelectionManager.OnSelectionChanged -= _uiUnitTargets.SetUnitTargets;
         _playerController.OnAbilitySelected += _uiAbilityController.SetAbilityPreparePanel;
 
         PlayerInputController.Cancel.DefaultAction -= OpenPauseMenu;

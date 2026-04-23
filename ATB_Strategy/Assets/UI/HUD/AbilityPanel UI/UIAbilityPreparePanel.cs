@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class UIAbilityPreparePanel : MonoBehaviour
 {
+    [SerializeField] private GameObject _cantExecutePanel;
     [SerializeField] private Button _executeButton;
     [SerializeField] private Button _cancelButton;
     [SerializeField] private Text _abilityNameText;
@@ -13,8 +14,10 @@ public class UIAbilityPreparePanel : MonoBehaviour
     private TargetAimUI _targetAimUI;
     private ITargetSwitchable _targetSwitchable;
 
-    public void SetAbility(BasicSkill ability, PlayerController playerController, TargetAimUI targetAimUI)
+    public void SetAbility(BasicSkill ability, PlayerController playerController, TargetAimUI targetAimUI, bool canExecute)
     {
+        _cantExecutePanel.SetActive(!canExecute);
+        
         _targetAimUI = targetAimUI;
         _playerController = playerController;
         
@@ -31,28 +34,33 @@ public class UIAbilityPreparePanel : MonoBehaviour
         {
             _targetSwitchable = ability as ITargetSwitchable;
             
-            _targetSwitchable.OnTargetSwitched += SetTarget;
+            //_targetSwitchable.OnTargetSwitched += SetTarget;
+            _playerController.OnTargetSwitched += SetTarget;
             
             if(_targetSwitchable.TargetsCount >= 1)
             {
-                SetTarget(_targetSwitchable.CurrentTarget);
+                SetTarget(0);
             }
         }
     }
 
-    
+
 
     private void OnDisable()
     {
         _targetAimUI.gameObject.SetActive(false);
-        if (_targetSwitchable != null)
-        {
-            _targetSwitchable.OnTargetSwitched -= SetTarget;
-        }
+
+        _playerController.OnTargetSwitched -= SetTarget;
     }
 
-    private void SetTarget(CombatContext combatContext)
+    private void SetTarget(int index)
     {
+        if (index == -1)
+        {
+            _targetAimUI.gameObject.SetActive(false);
+            return;
+        }
+        CombatContext combatContext = _targetSwitchable.CurrentTarget;
         _targetAimUI.gameObject.SetActive(true);
         _targetAimUI.SetTarget(combatContext.Target.Target.BodyParts.Body.Transform, combatContext.HitChance, combatContext.CritChance);
     }

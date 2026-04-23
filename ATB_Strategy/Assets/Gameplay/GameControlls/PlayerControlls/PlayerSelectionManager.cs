@@ -55,7 +55,7 @@ public class PlayerSelectionManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit, _selectRayDistance))
         {
             UnitController unit = hit.collider.gameObject.GetComponent<UnitController>();
-            if(unit != null && unit.State == UnitState.WaitingForOrder)
+            if(unit != null)
             {
                 SelectUnit(unit, false);
             }
@@ -89,9 +89,14 @@ public class PlayerSelectionManager : MonoBehaviour
     
     public void SelectUnit(UnitController unit, bool focusView = true)
     {
-        if (!_units.Contains(unit)) return;
         if (unit == SelectedUnit) return;
-        if (unit.Owner != UnitOwner.Player) return;
+        if (unit.Owner != UnitOwner.Player)
+        {
+            TrySelectTarget(unit);
+            return;
+        }
+        if (!_units.Contains(unit)) return;
+        if(unit.State != UnitState.WaitingForOrder) return;
 
         UnitController oldUnit = SelectedUnit;
         
@@ -102,6 +107,17 @@ public class PlayerSelectionManager : MonoBehaviour
         if (focusView)
         {
             _playerController.CameraController.FocusTarget(SelectedUnit.transform);
+        }
+    }
+
+    public void TrySelectTarget(UnitController unit)
+    {
+        if (!SelectedUnit) return;
+        int index = SelectedUnit.UnitCombat.CheckTarget(unit);
+
+        if (index != -1)
+        {
+            _playerController.AbilitySwitchTarget(index);
         }
     }
     

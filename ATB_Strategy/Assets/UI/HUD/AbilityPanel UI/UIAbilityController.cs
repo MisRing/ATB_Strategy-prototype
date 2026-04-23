@@ -42,7 +42,7 @@ public class UIAbilityController : MonoBehaviour
         }
     }
 
-    public void SetAbilityPreparePanel(int index)
+    public void SetAbilityPreparePanel(int index, bool canExecute)
     {
         if(index == 0)
         {
@@ -51,7 +51,7 @@ public class UIAbilityController : MonoBehaviour
         else
         {
             _preparePanel.gameObject.SetActive(true);
-            _preparePanel.SetAbility(_unit.SkillController.GetSkillByIndex(index), _playerController, _targetAimUI);
+            _preparePanel.SetAbility(_unit.SkillController.GetSkillByIndex(index), _playerController, _targetAimUI, canExecute);
         }
     }
 }

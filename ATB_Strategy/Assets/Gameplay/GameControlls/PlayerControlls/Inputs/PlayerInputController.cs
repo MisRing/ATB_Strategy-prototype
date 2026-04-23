@@ -22,7 +22,7 @@ public class PlayerInputController : MonoBehaviour
     public static event Action<float> RotateCamera;
 
 
-    public static event Action<int> SelectAbility;
+    public static event Action<int, int> SelectAbility;
     
     public static StackAction Cancel = new StackAction();
     
@@ -91,25 +91,25 @@ public class PlayerInputController : MonoBehaviour
     
 
     private static void SelectAbilityInput1(InputAction.CallbackContext context)
-        => SelectAbility?.Invoke(1);
+        => SelectAbility?.Invoke(1, 0);
     private static void SelectAbilityInput2(InputAction.CallbackContext context)
-        => SelectAbility?.Invoke(2);
+        => SelectAbility?.Invoke(2, 0);
     private static void SelectAbilityInput3(InputAction.CallbackContext context)
-        => SelectAbility?.Invoke(3);
+        => SelectAbility?.Invoke(3, 0);
     private static void SelectAbilityInput4(InputAction.CallbackContext context)
-        => SelectAbility?.Invoke(4);
+        => SelectAbility?.Invoke(4, 0);
     private static void SelectAbilityInput5(InputAction.CallbackContext context)
-        => SelectAbility?.Invoke(5);
+        => SelectAbility?.Invoke(5, 0);
     private static void SelectAbilityInput6(InputAction.CallbackContext context)
-        => SelectAbility?.Invoke(6);
+        => SelectAbility?.Invoke(6, 0);
     private static void SelectAbilityInput7(InputAction.CallbackContext context)
-        => SelectAbility?.Invoke(7);
+        => SelectAbility?.Invoke(7, 0);
     private static void SelectAbilityInput8(InputAction.CallbackContext context)
-        => SelectAbility?.Invoke(8);
+        => SelectAbility?.Invoke(8, 0);
     private static void SelectAbilityInput9(InputAction.CallbackContext context)
-        => SelectAbility?.Invoke(9);
+        => SelectAbility?.Invoke(9, 0);
     private static void SelectAbilityInput10(InputAction.CallbackContext context)
-        => SelectAbility?.Invoke(10);
+        => SelectAbility?.Invoke(10, 0);
 
 
     private static void CancelEscInput(InputAction.CallbackContext context)

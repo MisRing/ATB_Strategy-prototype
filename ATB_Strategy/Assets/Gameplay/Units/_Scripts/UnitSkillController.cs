@@ -121,6 +121,7 @@ public class UnitSkillController : MonoBehaviour
     public void FinishSkill()
     {
         Unit.State = UnitState.WaitingForOrder;
+        Unit.UnitCombat.SetVisibility();
         OnSkillFinished?.Invoke(Unit);
     }
 }

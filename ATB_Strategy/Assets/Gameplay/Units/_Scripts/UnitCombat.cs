@@ -19,6 +19,28 @@ public class UnitCombat : CombatObject
     public void Init(UnitController unit)
     {
         _unitController = unit;
+        SetVisibility();
+    }
+
+    public void SetVisibility()
+    {
+        Targets = CombatService.GetCombats(this, _unitController.UnitStats.VisionRange, _unitController.Owner);
+    }
+
+    public int CheckTarget(UnitController unit)
+    {
+        for (int i = 0; i < Targets.Count; i++)
+        {
+            if (Targets[i].Target.gameObject.layer == LayerMask.NameToLayer("Unit"))
+            {
+                if (Targets[i].Target.gameObject.GetComponent<UnitController>() == unit)
+                {
+                    return i;
+                }
+            }
+        }
+
+        return -1;
     }
 
     public override void GetDamage(HitResult result)

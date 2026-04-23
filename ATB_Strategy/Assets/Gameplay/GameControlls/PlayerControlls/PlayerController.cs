@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private List<Vector3Int> _positionPreset = new List<Vector3Int>();
     
-    public event Action<int> OnAbilitySelected;
+    public event Action<int, bool> OnAbilitySelected;
+    public event Action<int> OnTargetSwitched;
 
     private void Awake()
     {
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour
         PlayerSelectionManager.OnSelectionChanged -= UnitSelected;
     }
 
-    public void SelectAbility(int index)
+    public void SelectAbility(int index, int targetID = 0)
     {
         if (!PlayerSelectionManager.SelectedUnit) return;
         
@@ -50,6 +51,7 @@ public class PlayerController : MonoBehaviour
         if (PlayerSelectionManager.SelectedUnit.SkillController.SelectSkill(index))
         {
             BindAbility(oldAbility, false);
+            OnTargetSwitched?.Invoke(-1);
             
             BasicSkill newAbility = PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill;
             
@@ -61,28 +63,37 @@ public class PlayerController : MonoBehaviour
                 ExecuteAbility();
                 return;
             }
-            if (newAbility.RequiredDataType == typeof(TargetData) && (newAbility as ITargetSwitchable).TargetsCount > 0)
+            bool canExecute = newAbility.CanExecute();
+            if (canExecute)
             {
-                // TODO: WRITE BETTER
-                if (isSameAbility)
+                if (newAbility.RequiredDataType == typeof(TargetData))
                 {
-                    ExecuteAbility();
+                    // TODO: WRITE BETTER
+                    if (isSameAbility)
+                    {
+                        ExecuteAbility();
 
-                    return;
+                        return;
+                    }
+                    AbilitySwitchTarget(targetID);
+                    CameraController.AimTarget(
+                        PlayerSelectionManager.SelectedUnit.transform,
+                        (newAbility as ITargetSwitchable).CurrentTarget.Target.Target.Position
+                        );
+
                 }
-                CameraController.AimTarget(
-                    PlayerSelectionManager.SelectedUnit.transform,
-                    (newAbility as ITargetSwitchable).CurrentTarget.Target.Target.Position
-                    );
-
+                else
+                {
+                    CameraController.SetExtraZoom(index != 0);
+                }
             }
             else
             {
                 CameraController.SetExtraZoom(index != 0);
             }
-            
+
             BindAbility(newAbility, true, index != 0);
-            OnAbilitySelected?.Invoke(index);
+            OnAbilitySelected?.Invoke(index, canExecute);
         }
     }
 
@@ -90,6 +101,7 @@ public class PlayerController : MonoBehaviour
     {
         if(!PlayerSelectionManager.SelectedUnit) return;
         if (PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill.RequiredDataType != typeof(TargetData)) return;
+        if (PlayerSelectionManager.SelectedUnit.UnitCombat.Targets.Count == 0) return;
         
         int step = !PlayerInputController.IsReverseModifier ? 1 : -1;
         
@@ -102,10 +114,14 @@ public class PlayerController : MonoBehaviour
     public void AbilitySwitchTarget(int index)
     {
         if(!PlayerSelectionManager.SelectedUnit) return;
-        if (PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill.RequiredDataType != typeof(TargetData)) return;
+        if (PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill.RequiredDataType != typeof(TargetData))
+        {
+            SelectAbility(1, index);
+        }
         
         ITargetSwitchable targetSwitchable = PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill as ITargetSwitchable;
         targetSwitchable.Switch(index);
+        OnTargetSwitched?.Invoke(index);
     }
 
     private void CancelAbility()
@@ -128,7 +144,8 @@ public class PlayerController : MonoBehaviour
         if (PlayerSelectionManager.SelectedUnit.SkillController.ExecuteSkill())
         {
             CameraController.SetExtraZoom(false);
-            OnAbilitySelected?.Invoke(0);
+            OnAbilitySelected?.Invoke(0, true);
+            OnTargetSwitched?.Invoke(-1);
             PlayerSelectionManager.SwitchToFreeUnit(true);
         }
     }

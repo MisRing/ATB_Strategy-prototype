@@ -32,6 +32,11 @@ public class BasicSkill : MonoBehaviour
         _onPrepare = false;
     }
 
+    public virtual bool CanExecute()
+    {
+        return true;
+    }
+
     public virtual void UpdateData(SkillData abilityData)
     {
         _skillData = abilityData;
