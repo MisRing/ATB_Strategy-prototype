@@ -4867,7 +4867,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 95
+    m_Bits: 223
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -13050,7 +13050,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitSkillController
   DefaultMovementSkill: {fileID: 798402256}
   DefaultAttackSkill: {fileID: 798402255}
-  _skills: []
+  _skills:
+  - {fileID: 798402254}
   CurrentSkill: {fileID: 0}
   Unit: {fileID: 0}
 --- !u!114 &798402263
@@ -19552,6 +19553,7 @@ GameObject:
   - component: {fileID: 1156684632}
   - component: {fileID: 1156684633}
   - component: {fileID: 1156684631}
+  - component: {fileID: 1156684634}
   m_Layer: 0
   m_Name: GameControlls
   m_TagString: Untagged
@@ -19614,6 +19616,20 @@ MonoBehaviour:
   - {x: 25, y: 0, z: 18}
   - {x: 27, y: 0, z: 20}
   - {x: 28, y: 0, z: 17}
+--- !u!114 &1156684634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156684630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cef1a4b7088d1ea4abe814f78f486b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameLogService
+  _messagePrefab: {fileID: 8455819858315953404, guid: 85405e00ed9ae624195c988653e9575f, type: 3}
+  _cameraController: {fileID: 330585550}
 --- !u!4 &1160346664 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2916570863362053800, guid: 96dd546f62d6cc94e987160b25fc4a14, type: 3}
@@ -21297,7 +21313,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitSkillController
   DefaultMovementSkill: {fileID: 1186993999}
   DefaultAttackSkill: {fileID: 1186993998}
-  _skills: []
+  _skills:
+  - {fileID: 1186993997}
   CurrentSkill: {fileID: 0}
   Unit: {fileID: 0}
 --- !u!114 &1186994006
@@ -22617,7 +22634,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitSkillController
   DefaultMovementSkill: {fileID: 1249828906}
   DefaultAttackSkill: {fileID: 1249828905}
-  _skills: []
+  _skills:
+  - {fileID: 1249828904}
   CurrentSkill: {fileID: 0}
   Unit: {fileID: 0}
 --- !u!114 &1249828913

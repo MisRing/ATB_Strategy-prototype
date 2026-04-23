@@ -19,6 +19,11 @@ public class EnemyController : MonoBehaviour
 
     private void StartUnitAbility(UnitController unit)
     {
+        if (unit.SkillController.ForceExecuteSkill(2, null))
+        {
+            return;
+        }
+        
         while (true)
         {
             PointData data = new PointData();

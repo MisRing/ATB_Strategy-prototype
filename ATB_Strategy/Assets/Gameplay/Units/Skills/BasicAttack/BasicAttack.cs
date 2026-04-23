@@ -108,12 +108,16 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
             if (CombatService.CalculateHit(CurrentTarget, out hit))
             {
                 target.GetDamage(hit);
-                Debug.Log("His success " + hit.Damage);
+                GameLogService.ShowMessage((hit.IsCritical ? "Critical! " : "") + "-" + hit.Damage, target.BodyParts.Body.Transform);
             }
             else
             {
-                Debug.Log("Miss!");
+                GameLogService.ShowMessage("Miss!", target.BodyParts.Body.Transform);
             }
+        }
+        else
+        {
+            GameLogService.ShowMessage("Target out of vision!", _skillController.Unit.UnitCombat.BodyParts.Body.Transform);
         }
         
         yield return _skillController.Unit.UnitAnimator.Shoot(shootDuration, targetTransform, shoot);
