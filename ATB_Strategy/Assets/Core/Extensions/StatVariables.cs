@@ -1,6 +1,7 @@
-using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
+using static IntStat;
 
 [Serializable]
 public class FloatStat
@@ -72,6 +73,22 @@ public class FloatStat
             realValue += buff.Value;
         }
         return realValue;
+    }
+
+    public override string ToString()
+    {
+        string str = _value.ToString() + " (";
+        float buffs = 0;
+        foreach (FloatStutBuff buff in _buffs)
+        {
+            buffs += buff.Value;
+        }
+
+        if (buffs >= 0) str += "+";
+
+        str += buffs + ")";
+
+        return str;
     }
 
     public static implicit operator float(FloatStat stat)
@@ -151,11 +168,28 @@ public class IntStat
         }
         return realValue;
     }
+
+    public override string ToString()
+    {
+        string str = _value.ToString() + " (";
+        int buffs = 0;
+        foreach (IntStutBuff buff in _buffs)
+        {
+            buffs += buff.Value;
+        }
+
+        if (buffs >= 0) str += "+";
+
+        str += buffs + ")";
+
+        return str;
+    }
     
     public static implicit operator int(IntStat stat)
     {
         return stat.Value;
     }
+
 }
 
 [Serializable]

@@ -7,7 +7,7 @@ public class UIUtilityPanel : MonoBehaviour
     [SerializeField] private Button _infoButton;
 
     [Header("Pannels")]
-    [SerializeField] private GameObject _infoPannel;
+    [SerializeField] private UIStatPanel _infoPannel;
 
     private UnitController _selectedUnit;
 
@@ -33,6 +33,7 @@ public class UIUtilityPanel : MonoBehaviour
 
     private void OpenInfoPannel()
     {
-        _infoPannel.SetActive(!_infoPannel.activeSelf);
+        _infoPannel.gameObject.SetActive(true);
+        _infoPannel.SetStatPanel(_selectedUnit);
     }
 }
