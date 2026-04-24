@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CursorController : MonoBehaviour
 {
@@ -38,19 +40,22 @@ public class CursorController : MonoBehaviour
 
         GridTile tile = new GridTile();
 
-        if (Physics.Raycast(ray, out hit, _rayDistance))
+        if (!RaycastExtensions.IsPointerOverUIObject())
         {
-            if (((1 << hit.collider.gameObject.layer) & _groundMasks.value) != 0)
+            if (Physics.Raycast(ray, out hit, _rayDistance))
             {
-                Vector3 realPoint = hit.point;
-                float normalAngle = Vector3.Angle(hit.normal, Vector3.up);
-                if (normalAngle <= _maxRayNormalAngle)
+                if (((1 << hit.collider.gameObject.layer) & _groundMasks.value) != 0)
                 {
-                    if (GridParameters.LevelGrid.GetTileByWorldPos(ref tile, realPoint))
+                    Vector3 realPoint = hit.point;
+                    float normalAngle = Vector3.Angle(hit.normal, Vector3.up);
+                    if (normalAngle <= _maxRayNormalAngle)
                     {
-                        if (!tile.Owner)
+                        if (GridParameters.LevelGrid.GetTileByWorldPos(ref tile, realPoint))
                         {
-                            cursorOnTile = true;
+                            if (!tile.Owner)
+                            {
+                                cursorOnTile = true;
+                            }
                         }
                     }
                 }

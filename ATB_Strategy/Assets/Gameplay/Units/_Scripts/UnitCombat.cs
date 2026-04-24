@@ -54,20 +54,20 @@ public class UnitCombat : CombatObject
         {
             if (_unitController.UnitStats.Armor >= result.Damage)
             {
-                _unitController.UnitStats.Armor.Value = 0;
+                _unitController.UnitStats.Armor.ClearValue = 0;
             }
             else
             {
                 int breakThrowDamage = result.Damage - _unitController.UnitStats.Armor;
-                _unitController.UnitStats.Armor.Value = 0;
-                _unitController.UnitStats.Health.Value -= Mathf.Clamp(breakThrowDamage, 0,_unitController.UnitStats.Health);
+                _unitController.UnitStats.Armor.ClearValue = 0;
+                _unitController.UnitStats.Health.ClearValue -= Mathf.Clamp(breakThrowDamage, 0,_unitController.UnitStats.Health);
             }
         }
         else
         {
             int breakThrowDamage = result.Damage - _unitController.UnitStats.Armor;
-            _unitController.UnitStats.Armor.Value -= Mathf.Clamp(result.Damage, 0, _unitController.UnitStats.Armor);
-            _unitController.UnitStats.Health.Value -= Mathf.Clamp(breakThrowDamage, 0,_unitController.UnitStats.Health);
+            _unitController.UnitStats.Armor.ClearValue -= Mathf.Clamp(result.Damage, 0, _unitController.UnitStats.Armor);
+            _unitController.UnitStats.Health.ClearValue -= Mathf.Clamp(breakThrowDamage, 0,_unitController.UnitStats.Health);
         }
     }
 }

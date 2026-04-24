@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
     public void AbilitySwitchToNextTarget()
     {
-        if(!PlayerSelectionManager.SelectedUnit) return;
+        if (!PlayerSelectionManager.SelectedUnit) return;
         if (PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill.RequiredDataType != typeof(TargetData)) return;
         if (PlayerSelectionManager.SelectedUnit.UnitCombat.Targets.Count == 0) return;
         

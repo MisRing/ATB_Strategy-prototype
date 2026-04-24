@@ -49,6 +49,8 @@ public class PlayerSelectionManager : MonoBehaviour
 
     private void PointLeftClick()
     {
+        if (RaycastExtensions.IsPointerOverUIObject()) return;
+
         Vector2 mousePosition = PlayerInputController.MouseScreenPosition;
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         RaycastHit hit;
