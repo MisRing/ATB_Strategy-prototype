@@ -21,9 +21,10 @@ public class PlayerInputController : MonoBehaviour
 
     public static event Action<float> RotateCamera;
 
-
     public static event Action<int, int> SelectAbility;
-    
+
+    public static event Action<int> SelectUtility;
+
     public static StackAction Cancel = new StackAction();
     
     private void Awake()
@@ -50,6 +51,18 @@ public class PlayerInputController : MonoBehaviour
         _inputActions.Player.AbilitySwitch9.started += SelectAbilityInput9;
         _inputActions.Player.AbilitySwitch10.started += SelectAbilityInput10;
 
+        _inputActions.Player.Utility1.started += SelectUtilityInput1;
+        _inputActions.Player.Utility2.started += SelectUtilityInput2;
+        _inputActions.Player.Utility3.started += SelectUtilityInput3;
+        _inputActions.Player.Utility4.started += SelectUtilityInput4;
+        _inputActions.Player.Utility5.started += SelectUtilityInput5;
+        _inputActions.Player.Utility6.started += SelectUtilityInput6;
+        _inputActions.Player.Utility7.started += SelectUtilityInput7;
+        _inputActions.Player.Utility8.started += SelectUtilityInput8;
+        _inputActions.Player.Utility9.started += SelectUtilityInput9;
+        _inputActions.Player.Utility10.started += SelectUtilityInput10;
+        _inputActions.Player.Utility11.started += SelectUtilityInput11;
+        _inputActions.Player.Utility12.started += SelectUtilityInput12;
 
         _inputActions.Player.Escape.started += CancelEscInput;
 
@@ -75,9 +88,22 @@ public class PlayerInputController : MonoBehaviour
         _inputActions.Player.AbilitySwitch9.started -= SelectAbilityInput9;
         _inputActions.Player.AbilitySwitch10.started += SelectAbilityInput10;
 
-        _inputActions.Player.Escape.started += CancelEscInput;
+        _inputActions.Player.Utility1.started -= SelectUtilityInput1;
+        _inputActions.Player.Utility2.started -= SelectUtilityInput2;
+        _inputActions.Player.Utility3.started -= SelectUtilityInput3;
+        _inputActions.Player.Utility4.started -= SelectUtilityInput4;
+        _inputActions.Player.Utility5.started -= SelectUtilityInput5;
+        _inputActions.Player.Utility6.started -= SelectUtilityInput6;
+        _inputActions.Player.Utility7.started -= SelectUtilityInput7;
+        _inputActions.Player.Utility8.started -= SelectUtilityInput8;
+        _inputActions.Player.Utility9.started -= SelectUtilityInput9;
+        _inputActions.Player.Utility10.started -= SelectUtilityInput10;
+        _inputActions.Player.Utility11.started -= SelectUtilityInput11;
+        _inputActions.Player.Utility12.started -= SelectUtilityInput12;
 
-        _inputActions.Camera.Rotate.started += RotateCameraInput;
+        _inputActions.Player.Escape.started -= CancelEscInput;
+
+        _inputActions.Camera.Rotate.started -= RotateCameraInput;
     }
 
     private static void SelectObjectInput(InputAction.CallbackContext context)
@@ -110,6 +136,31 @@ public class PlayerInputController : MonoBehaviour
         => SelectAbility?.Invoke(9, 0);
     private static void SelectAbilityInput10(InputAction.CallbackContext context)
         => SelectAbility?.Invoke(10, 0);
+
+    private static void SelectUtilityInput1(InputAction.CallbackContext context)
+        => SelectUtility?.Invoke(0);
+    private static void SelectUtilityInput2(InputAction.CallbackContext context)
+        => SelectUtility?.Invoke(1);
+    private static void SelectUtilityInput3(InputAction.CallbackContext context)
+        => SelectUtility?.Invoke(2);
+    private static void SelectUtilityInput4(InputAction.CallbackContext context)
+        => SelectUtility?.Invoke(3);
+    private static void SelectUtilityInput5(InputAction.CallbackContext context)
+        => SelectUtility?.Invoke(4);
+    private static void SelectUtilityInput6(InputAction.CallbackContext context)
+        => SelectUtility?.Invoke(5);
+    private static void SelectUtilityInput7(InputAction.CallbackContext context)
+        => SelectUtility?.Invoke(6);
+    private static void SelectUtilityInput8(InputAction.CallbackContext context)
+        => SelectUtility?.Invoke(7);
+    private static void SelectUtilityInput9(InputAction.CallbackContext context)
+        => SelectUtility?.Invoke(8);
+    private static void SelectUtilityInput10(InputAction.CallbackContext context)
+        => SelectUtility?.Invoke(9);
+    private static void SelectUtilityInput11(InputAction.CallbackContext context)
+        => SelectUtility?.Invoke(10);
+    private static void SelectUtilityInput12(InputAction.CallbackContext context)
+        => SelectUtility?.Invoke(11);
 
 
     private static void CancelEscInput(InputAction.CallbackContext context)

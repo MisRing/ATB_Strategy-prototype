@@ -235,6 +235,114 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Utility1"",
+                    ""type"": ""Button"",
+                    ""id"": ""2751c8ff-d824-4efc-8b91-9ca7d26f4c6e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Utility2"",
+                    ""type"": ""Button"",
+                    ""id"": ""bd273482-e0da-4fe0-9eb8-64785763e2af"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Utility3"",
+                    ""type"": ""Button"",
+                    ""id"": ""a3dfa4c5-d38e-4d07-a85b-ba631d3a7782"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Utility4"",
+                    ""type"": ""Button"",
+                    ""id"": ""af425187-6821-4528-90c7-0d610a01d6d5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Utility5"",
+                    ""type"": ""Button"",
+                    ""id"": ""d20e887b-47f3-4f13-b156-f12eb77e7ce8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Utility6"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d2abcdb-4711-449b-bae0-da3adb9adc58"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Utility7"",
+                    ""type"": ""Button"",
+                    ""id"": ""6ddee063-ce12-41c2-b0f7-2c3f6940fc51"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Utility8"",
+                    ""type"": ""Button"",
+                    ""id"": ""38f6a748-f389-442d-9a17-589051f5d743"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Utility9"",
+                    ""type"": ""Button"",
+                    ""id"": ""88ec2955-4526-474a-ac70-d86928104aa2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Utility10"",
+                    ""type"": ""Button"",
+                    ""id"": ""42fa8fce-5a4b-457e-a37b-427a5b7ab2a0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Utility11"",
+                    ""type"": ""Button"",
+                    ""id"": ""414e0bd3-3e40-4338-8242-99c4a9c35207"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Utility12"",
+                    ""type"": ""Button"",
+                    ""id"": ""9cf53c44-f057-4419-9d7b-3d9b670eaea5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -411,6 +519,138 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d783901-9a48-4e60-bdbf-b6d5828d207a"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Utility1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""133021c5-1f25-4cab-94c0-46dd1caa0201"",
+                    ""path"": ""<Keyboard>/f2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Utility2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c5123cf3-ccb9-4bfd-a455-06b97ca9b447"",
+                    ""path"": ""<Keyboard>/f3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Utility3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f40462cb-f425-449a-bb27-df602fae8641"",
+                    ""path"": ""<Keyboard>/f4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Utility4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""29aa5afd-f775-4598-990e-8468b626aa73"",
+                    ""path"": ""<Keyboard>/f5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Utility5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b3993104-3ae0-4bcf-8419-63734b516168"",
+                    ""path"": ""<Keyboard>/f6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Utility6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4743f348-d3eb-4daa-a4e3-025422394345"",
+                    ""path"": ""<Keyboard>/f7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Utility7"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ae301547-27bd-425d-b24e-c8a0e0c8a0a6"",
+                    ""path"": ""<Keyboard>/f8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Utility8"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8c3f11ef-a3dc-489d-aa31-0b75ad648e94"",
+                    ""path"": ""<Keyboard>/f9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Utility9"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44578c2a-4b8d-46af-86cf-75d0b389a591"",
+                    ""path"": ""<Keyboard>/f10"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Utility10"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""45d7168a-a8a9-4d76-92fe-61c7902452ad"",
+                    ""path"": ""<Keyboard>/f11"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Utility11"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62453a43-21e4-4ed9-93d4-4a14559a30e0"",
+                    ""path"": ""<Keyboard>/f12"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Utility12"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -654,6 +894,18 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_AbilitySwitch9 = m_Player.FindAction("AbilitySwitch9", throwIfNotFound: true);
         m_Player_AbilitySwitch10 = m_Player.FindAction("AbilitySwitch10", throwIfNotFound: true);
         m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
+        m_Player_Utility1 = m_Player.FindAction("Utility1", throwIfNotFound: true);
+        m_Player_Utility2 = m_Player.FindAction("Utility2", throwIfNotFound: true);
+        m_Player_Utility3 = m_Player.FindAction("Utility3", throwIfNotFound: true);
+        m_Player_Utility4 = m_Player.FindAction("Utility4", throwIfNotFound: true);
+        m_Player_Utility5 = m_Player.FindAction("Utility5", throwIfNotFound: true);
+        m_Player_Utility6 = m_Player.FindAction("Utility6", throwIfNotFound: true);
+        m_Player_Utility7 = m_Player.FindAction("Utility7", throwIfNotFound: true);
+        m_Player_Utility8 = m_Player.FindAction("Utility8", throwIfNotFound: true);
+        m_Player_Utility9 = m_Player.FindAction("Utility9", throwIfNotFound: true);
+        m_Player_Utility10 = m_Player.FindAction("Utility10", throwIfNotFound: true);
+        m_Player_Utility11 = m_Player.FindAction("Utility11", throwIfNotFound: true);
+        m_Player_Utility12 = m_Player.FindAction("Utility12", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Move = m_Camera.FindAction("Move", throwIfNotFound: true);
@@ -756,6 +1008,18 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_AbilitySwitch9;
     private readonly InputAction m_Player_AbilitySwitch10;
     private readonly InputAction m_Player_Escape;
+    private readonly InputAction m_Player_Utility1;
+    private readonly InputAction m_Player_Utility2;
+    private readonly InputAction m_Player_Utility3;
+    private readonly InputAction m_Player_Utility4;
+    private readonly InputAction m_Player_Utility5;
+    private readonly InputAction m_Player_Utility6;
+    private readonly InputAction m_Player_Utility7;
+    private readonly InputAction m_Player_Utility8;
+    private readonly InputAction m_Player_Utility9;
+    private readonly InputAction m_Player_Utility10;
+    private readonly InputAction m_Player_Utility11;
+    private readonly InputAction m_Player_Utility12;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -832,6 +1096,54 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Escape => m_Wrapper.m_Player_Escape;
         /// <summary>
+        /// Provides access to the underlying input action "Player/Utility1".
+        /// </summary>
+        public InputAction @Utility1 => m_Wrapper.m_Player_Utility1;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Utility2".
+        /// </summary>
+        public InputAction @Utility2 => m_Wrapper.m_Player_Utility2;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Utility3".
+        /// </summary>
+        public InputAction @Utility3 => m_Wrapper.m_Player_Utility3;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Utility4".
+        /// </summary>
+        public InputAction @Utility4 => m_Wrapper.m_Player_Utility4;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Utility5".
+        /// </summary>
+        public InputAction @Utility5 => m_Wrapper.m_Player_Utility5;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Utility6".
+        /// </summary>
+        public InputAction @Utility6 => m_Wrapper.m_Player_Utility6;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Utility7".
+        /// </summary>
+        public InputAction @Utility7 => m_Wrapper.m_Player_Utility7;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Utility8".
+        /// </summary>
+        public InputAction @Utility8 => m_Wrapper.m_Player_Utility8;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Utility9".
+        /// </summary>
+        public InputAction @Utility9 => m_Wrapper.m_Player_Utility9;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Utility10".
+        /// </summary>
+        public InputAction @Utility10 => m_Wrapper.m_Player_Utility10;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Utility11".
+        /// </summary>
+        public InputAction @Utility11 => m_Wrapper.m_Player_Utility11;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Utility12".
+        /// </summary>
+        public InputAction @Utility12 => m_Wrapper.m_Player_Utility12;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -905,6 +1217,42 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Escape.started += instance.OnEscape;
             @Escape.performed += instance.OnEscape;
             @Escape.canceled += instance.OnEscape;
+            @Utility1.started += instance.OnUtility1;
+            @Utility1.performed += instance.OnUtility1;
+            @Utility1.canceled += instance.OnUtility1;
+            @Utility2.started += instance.OnUtility2;
+            @Utility2.performed += instance.OnUtility2;
+            @Utility2.canceled += instance.OnUtility2;
+            @Utility3.started += instance.OnUtility3;
+            @Utility3.performed += instance.OnUtility3;
+            @Utility3.canceled += instance.OnUtility3;
+            @Utility4.started += instance.OnUtility4;
+            @Utility4.performed += instance.OnUtility4;
+            @Utility4.canceled += instance.OnUtility4;
+            @Utility5.started += instance.OnUtility5;
+            @Utility5.performed += instance.OnUtility5;
+            @Utility5.canceled += instance.OnUtility5;
+            @Utility6.started += instance.OnUtility6;
+            @Utility6.performed += instance.OnUtility6;
+            @Utility6.canceled += instance.OnUtility6;
+            @Utility7.started += instance.OnUtility7;
+            @Utility7.performed += instance.OnUtility7;
+            @Utility7.canceled += instance.OnUtility7;
+            @Utility8.started += instance.OnUtility8;
+            @Utility8.performed += instance.OnUtility8;
+            @Utility8.canceled += instance.OnUtility8;
+            @Utility9.started += instance.OnUtility9;
+            @Utility9.performed += instance.OnUtility9;
+            @Utility9.canceled += instance.OnUtility9;
+            @Utility10.started += instance.OnUtility10;
+            @Utility10.performed += instance.OnUtility10;
+            @Utility10.canceled += instance.OnUtility10;
+            @Utility11.started += instance.OnUtility11;
+            @Utility11.performed += instance.OnUtility11;
+            @Utility11.canceled += instance.OnUtility11;
+            @Utility12.started += instance.OnUtility12;
+            @Utility12.performed += instance.OnUtility12;
+            @Utility12.canceled += instance.OnUtility12;
         }
 
         /// <summary>
@@ -964,6 +1312,42 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Escape.started -= instance.OnEscape;
             @Escape.performed -= instance.OnEscape;
             @Escape.canceled -= instance.OnEscape;
+            @Utility1.started -= instance.OnUtility1;
+            @Utility1.performed -= instance.OnUtility1;
+            @Utility1.canceled -= instance.OnUtility1;
+            @Utility2.started -= instance.OnUtility2;
+            @Utility2.performed -= instance.OnUtility2;
+            @Utility2.canceled -= instance.OnUtility2;
+            @Utility3.started -= instance.OnUtility3;
+            @Utility3.performed -= instance.OnUtility3;
+            @Utility3.canceled -= instance.OnUtility3;
+            @Utility4.started -= instance.OnUtility4;
+            @Utility4.performed -= instance.OnUtility4;
+            @Utility4.canceled -= instance.OnUtility4;
+            @Utility5.started -= instance.OnUtility5;
+            @Utility5.performed -= instance.OnUtility5;
+            @Utility5.canceled -= instance.OnUtility5;
+            @Utility6.started -= instance.OnUtility6;
+            @Utility6.performed -= instance.OnUtility6;
+            @Utility6.canceled -= instance.OnUtility6;
+            @Utility7.started -= instance.OnUtility7;
+            @Utility7.performed -= instance.OnUtility7;
+            @Utility7.canceled -= instance.OnUtility7;
+            @Utility8.started -= instance.OnUtility8;
+            @Utility8.performed -= instance.OnUtility8;
+            @Utility8.canceled -= instance.OnUtility8;
+            @Utility9.started -= instance.OnUtility9;
+            @Utility9.performed -= instance.OnUtility9;
+            @Utility9.canceled -= instance.OnUtility9;
+            @Utility10.started -= instance.OnUtility10;
+            @Utility10.performed -= instance.OnUtility10;
+            @Utility10.canceled -= instance.OnUtility10;
+            @Utility11.started -= instance.OnUtility11;
+            @Utility11.performed -= instance.OnUtility11;
+            @Utility11.canceled -= instance.OnUtility11;
+            @Utility12.started -= instance.OnUtility12;
+            @Utility12.performed -= instance.OnUtility12;
+            @Utility12.canceled -= instance.OnUtility12;
         }
 
         /// <summary>
@@ -1299,6 +1683,90 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnEscape(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Utility1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUtility1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Utility2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUtility2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Utility3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUtility3(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Utility4" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUtility4(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Utility5" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUtility5(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Utility6" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUtility6(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Utility7" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUtility7(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Utility8" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUtility8(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Utility9" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUtility9(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Utility10" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUtility10(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Utility11" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUtility11(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Utility12" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUtility12(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Camera" which allows adding and removing callbacks.

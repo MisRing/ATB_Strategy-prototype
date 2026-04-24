@@ -5,7 +5,8 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private UIAbilityController _uiAbilityController;
-    [SerializeField] private UIUnitTargets _uiUnitTargets;
+    [SerializeField] private UIUnitTargets _unitTargets;
+    [SerializeField] private UIUtilityPanel _utilityPanel;
 
     [SerializeField] private GameObject _pauseCanvas;
 
@@ -14,15 +15,17 @@ public class UIController : MonoBehaviour
     private void Awake()
     {
         _uiAbilityController.Init(_playerController);
-        _uiUnitTargets.Init(_playerController);
+        _unitTargets.Init(_playerController);
     }
     
     private void OnEnable()
     {
         _playerController.PlayerSelectionManager.OnSelectionChanged += _uiAbilityController.SetAbilityButtons;
-        _playerController.PlayerSelectionManager.OnSelectionChanged += _uiUnitTargets.SetUnitTargets;
+        _playerController.PlayerSelectionManager.OnSelectionChanged += _unitTargets.SetUnitTargets;
+        _playerController.PlayerSelectionManager.OnSelectionChanged += _utilityPanel.UnitSelected;
         _playerController.OnAbilitySelected += _uiAbilityController.SetAbilityPreparePanel;
 
+        PlayerInputController.SelectUtility += _utilityPanel.OpenUtilityPanel;
 
         PlayerInputController.Cancel.DefaultAction += OpenPauseMenu;
     }
@@ -30,8 +33,11 @@ public class UIController : MonoBehaviour
     private void OnDisable()
     {
         _playerController.PlayerSelectionManager.OnSelectionChanged -= _uiAbilityController.SetAbilityButtons;
-        _playerController.PlayerSelectionManager.OnSelectionChanged -= _uiUnitTargets.SetUnitTargets;
+        _playerController.PlayerSelectionManager.OnSelectionChanged -= _unitTargets.SetUnitTargets;
+        _playerController.PlayerSelectionManager.OnSelectionChanged -= _utilityPanel.UnitSelected;
         _playerController.OnAbilitySelected += _uiAbilityController.SetAbilityPreparePanel;
+
+        PlayerInputController.SelectUtility -= _utilityPanel.OpenUtilityPanel;
 
         PlayerInputController.Cancel.DefaultAction -= OpenPauseMenu;
     }
