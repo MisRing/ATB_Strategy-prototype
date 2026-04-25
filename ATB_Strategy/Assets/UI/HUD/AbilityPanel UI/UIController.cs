@@ -7,6 +7,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private UIAbilityController _uiAbilityController;
     [SerializeField] private UIUnitTargets _unitTargets;
     [SerializeField] private UIUtilityPanel _utilityPanel;
+    [SerializeField] private UISquadPanel _squadPanel;
 
     [SerializeField] private GameObject _pauseCanvas;
 
@@ -16,6 +17,7 @@ public class UIController : MonoBehaviour
     {
         _uiAbilityController.Init(_playerController);
         _unitTargets.Init(_playerController);
+        _squadPanel.Init(_playerController.PlayerSelectionManager);
     }
     
     private void OnEnable()

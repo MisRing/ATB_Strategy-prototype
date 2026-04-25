@@ -3,6 +3,10 @@ using System;
 
 public class UnitStats : MonoBehaviour
 {
+    [Header("Main")]
+    public string Name = "unit-name";
+    public Sprite Icon;
+
     [Header("Movement")]
     public FloatStat Speed = new FloatStat(8f);
     

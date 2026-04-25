@@ -5,7 +5,7 @@ using System;
 public class PlayerSelectionManager : MonoBehaviour
 {
     //[Header("Main Settings")]
-    private List<UnitController> _units = new List<UnitController>();
+    public List<UnitController> Units = new List<UnitController>();
     public UnitController SelectedUnit;
 
     [Header("Raycast Settings")]
@@ -18,11 +18,11 @@ public class PlayerSelectionManager : MonoBehaviour
     public void Init(PlayerController playerController, List<UnitController> units)
     {
         _playerController = playerController;
-        _units = units;
+        Units = units;
         
-        for (int i = 0; i < _units.Count; i++)
+        for (int i = 0; i < Units.Count; i++)
         {
-            _units[i].SkillController.OnSkillFinished += SelectReadyUnit;
+            Units[i].SkillController.OnSkillFinished += SelectReadyUnit;
         }
     }
     
@@ -40,9 +40,9 @@ public class PlayerSelectionManager : MonoBehaviour
 
     private void Start()
     {
-        if (_units.Count >= 1)
+        if (Units.Count >= 1)
         {
-            SelectUnit(_units[0]);
+            SelectUnit(Units[0]);
         }
         _playerController.CameraController.Init(SelectedUnit.transform);
     }
@@ -69,12 +69,12 @@ public class PlayerSelectionManager : MonoBehaviour
     public void SwitchToFreeUnit(bool next = true, bool leaveCurrentIfCant = false)
     {
         int step = next ? 1 : -1;
-        for (int i = _units.Count + step; i > 0 && i < _units.Count * 2; i+= step)
+        for (int i = Units.Count + step; i > 0 && i < Units.Count * 2; i+= step)
         {
-            int newIndex = (_units.Count + _units.IndexOf(SelectedUnit) + i) % _units.Count;
-            if (_units[newIndex].State == UnitState.WaitingForOrder)
+            int newIndex = (Units.Count + Units.IndexOf(SelectedUnit) + i) % Units.Count;
+            if (Units[newIndex].State == UnitState.WaitingForOrder)
             {
-                SelectUnit(_units[newIndex]);
+                SelectUnit(Units[newIndex]);
                 return;
             }
         }
@@ -97,7 +97,7 @@ public class PlayerSelectionManager : MonoBehaviour
             TrySelectTarget(unit);
             return;
         }
-        if (!_units.Contains(unit)) return;
+        if (!Units.Contains(unit)) return;
         if(unit.State != UnitState.WaitingForOrder) return;
 
         UnitController oldUnit = SelectedUnit;

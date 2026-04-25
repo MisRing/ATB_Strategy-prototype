@@ -13,7 +13,7 @@ public class UIStatPanel : MonoBehaviour
         _closeButton.onClick.RemoveAllListeners();
         _closeButton.onClick.AddListener(Close);
 
-        _nameText.text = "Name: " + unit.gameObject.name;
+        _nameText.text = "Name: " + unit.UnitStats.Name;
 
         _statText.text = "";
 
