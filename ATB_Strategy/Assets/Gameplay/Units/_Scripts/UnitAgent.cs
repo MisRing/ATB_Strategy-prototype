@@ -101,17 +101,11 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     {
         if (_pathData == null) return false;
 
+        //?????????????????????????????
         GridTile finalTile = new GridTile();
         GridParameters.LevelGrid.GetTileByWorldPos(ref finalTile, _pathData.Points[_pathData.Points.Count - 1]);
         SetAgentTile(finalTile);
-
-        _pathData.Cover = GridPathFinder.GetTileCover(
-            ref _pathData.FinalDirection,
-            ref _pathData.CoverLook,
-            finalTile,
-            _unit.UnitStats.VisionRange,
-            _unit.Owner
-            );
+        //?????????????????????????????
 
         StartCoroutine(Move());
         return true;
@@ -122,6 +116,9 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         float currentPassedDistance = 0f;
         int nextPointIndex = 1;
         float nextPointDistance = Vector3.Distance(_pathData.Points[0], _pathData.Points[1]);
+
+        bool coverSeted = false;
+        float distanceToCover = _coverDistance < _pathData.Distance ? _coverDistance : _pathData.Distance;
 
         while (currentPassedDistance < _pathData.Distance)
         {
@@ -135,13 +132,31 @@ public class UnitAgent : MonoBehaviour, IPathHandler
             currentPassedDistance += step * velocity;
 
             MoveToDirection(direction, step);
-            if (remainingDistance <= _coverDistance)
+            if (remainingDistance <= distanceToCover)
             {
-                float percent = 1f - (remainingDistance / _coverDistance);
+                if (!coverSeted)
+                {
+                    GridTile finalTile = new GridTile();
+                    GridParameters.LevelGrid.GetTileByWorldPos(ref finalTile, _pathData.Points[_pathData.Points.Count - 1]);
+                    List<CombatTarget> targets = CombatService.GetCombats(_unit.UnitCombat, _unit.UnitStats.VisionRange, _unit.Owner);
+                    _pathData.Cover = GridPathFinder.GetTileCover(
+                        ref _pathData.FinalDirection,
+                        out _pathData.CoverLook,
+                        finalTile,
+                        targets
+                        );
+
+                    coverSeted = true;
+                }
+                float percent = 1f - (remainingDistance / distanceToCover);
                 OnCoverChanged?.Invoke(_pathData.Cover, _pathData.CoverLook, percent);
-                direction = (_pathData.FinalDirection).normalized * velocity;
+
+                LerpRotate(_pathData.FinalDirection, percent);
             }
-            RotateToDirection(direction, velocity);
+            else
+            {
+                RotateToDirection(direction, velocity);
+            }
 
             if (currentPassedDistance >= nextPointDistance)
             {
@@ -191,6 +206,16 @@ public class UnitAgent : MonoBehaviour, IPathHandler
 
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * velocity * TimeService.TimeSpeedDelta);
         }
+    }
+
+    private void LerpRotate(Vector3 direction, float t)
+    {
+        direction = _pathData.FinalDirection;
+
+        direction.y = 0;
+        direction = direction.normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, t);
     }
 
     private void EndMove()

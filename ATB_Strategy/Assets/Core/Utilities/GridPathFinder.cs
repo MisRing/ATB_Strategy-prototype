@@ -9,72 +9,76 @@ public static class GridPathFinder
     private static readonly float RAYCAST_HEIGHT = 0.4f;
 
     // TODO: REWRITE THIS
-    public static TileCover GetTileCover(ref Vector3 direction, ref int coverLook, GridTile tile, float visionRange, UnitOwner ally)
+    public static TileCover GetTileCover(ref Vector3 direction, out int coverLook, GridTile tile, List<CombatTarget> targets)
     {
-        coverLook = 0;
-        
-        if (tile.Covers[0] == 0 && tile.Covers[1] == 0 && tile.Covers[2] == 0 && tile.Covers[3] == 0)
-            return TileCover.None;
-
-        Vector3 position = GridParameters.LevelGrid.GetTileWorldPos(tile);
-
-        CombatObject enemy = CombatService.GetNearestCombat(position, visionRange, ally);
-
-        int bestIndex = -1;
-        TileCover bestCoverValue = 0;
-        float bestDot = -1f;
-
-        
-        if (enemy != null)
+        //NOT DONE
+        if (targets != null && targets.Count > 0)
         {
-            Vector3 toEnemy = (enemy.Position - position).normalized;
+            coverLook = 0;
+            return TileCover.Full;
+        }
 
-            for (int i = 0; i < 4; i++)
+        //DONE!
+        List<int> bestCovers = GetBestCoversID(tile.Covers);
+        if (bestCovers.Count > 0)
+        {
+            int closestCover = -1;
+            float closestCoverAngle = float.MaxValue;
+
+            for (int i = 0; i < bestCovers.Count; i++)
             {
-                TileCover coverValue = tile.Covers[i];
-
-                Vector3 coverDir = GridParameters.COVER_DIRECTIONS[i];
-
-                float dot = Vector3.Dot(coverDir, toEnemy);
-                
-                if (dot > bestDot || (Mathf.Approximately(dot, bestDot) && coverValue > bestCoverValue))
+                float angle = Vector3.Angle(direction, GridParameters.COVER_DIRECTIONS[bestCovers[i]]);
+                if (angle < closestCoverAngle)
                 {
-                    bestDot = dot;
-                    bestCoverValue = coverValue;
-                    bestIndex = i;
+                    closestCover = bestCovers[i];
+                    closestCoverAngle = angle;
                 }
             }
+            int coverLeftID = (closestCover - 1 + tile.Covers.Length) % tile.Covers.Length;
+            int coverRightID = (closestCover + 1 + tile.Covers.Length) % tile.Covers.Length;
 
-            if (bestIndex != -1)
+            if (tile.Covers[coverLeftID] == tile.Covers[coverRightID])
             {
-                Vector3 coverDirection = GridParameters.COVER_DIRECTIONS[bestIndex];
-                direction = -coverDirection;
-                coverLook = GetLookSide(position, coverDirection, enemy.Position);
-                
-                return bestCoverValue;
+                float angleLeft = Vector3.Angle(direction, GridParameters.COVER_DIRECTIONS[coverLeftID]);
+                float angleRight = Vector3.Angle(direction, GridParameters.COVER_DIRECTIONS[coverRightID]);
+
+                coverLook = angleLeft < angleRight ? -1 : 1;
             }
-        }
-
-        bestIndex = -1;
-        bestCoverValue = 0;
-
-        for (int i = 0; i < 4; i++)
-        {
-            TileCover coverValue = tile.Covers[i];
-            if (coverValue > bestCoverValue)
+            else
             {
-                bestCoverValue = coverValue;
-                bestIndex = i;
+                coverLook = tile.Covers[coverLeftID] < tile.Covers[coverRightID] ? -1 : 1;
             }
+
+            direction = -GridParameters.COVER_DIRECTIONS[closestCover];
+            return tile.Covers[closestCover];
         }
 
-        if (bestIndex != -1)
-        {
-            direction = -GridParameters.COVER_DIRECTIONS[bestIndex];
-            return bestCoverValue;
-        }
-
+        //DONE!
+        coverLook = 0;
         return TileCover.None;
+    }
+
+    private static List<int> GetBestCoversID(TileCover[] covers)
+    {
+        List<int> bestCovers = new List<int>();
+        for(int i = 0; i < covers.Length; i++)
+        {
+            if (covers[i] > 0)
+            {
+                if(bestCovers.Count == 0 || covers[i] > covers[bestCovers[0]])
+                {
+                    bestCovers.Clear();
+                    bestCovers.Add(i);
+                    continue;
+                }
+
+                if(covers[i] == covers[bestCovers[0]])
+                {
+                    bestCovers.Add(i);
+                }
+            }
+        }
+        return bestCovers;
     }
     
     private static int GetLookSide(Vector3 position, Vector3 look, Vector3 target)

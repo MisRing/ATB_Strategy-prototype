@@ -22425,7 +22425,6 @@ MonoBehaviour:
   _enemyController: {fileID: 723904378}
   _playerUnits:
   - {fileID: 1816743775}
-  - {fileID: 1649079319}
   _playerPositionPreset:
   - {x: 4, y: 1, z: 32}
   - {x: 4, y: 1, z: 35}
@@ -82769,7 +82768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1649079318
 Transform:
   m_ObjectHideFlags: 0
@@ -86865,7 +86864,7 @@ MonoBehaviour:
   _accelerationDistance: 0.25
   _minAcceleration: 0.1
   _rotationSpeed: 36
-  _coverDistance: 1
+  _coverDistance: 2
   CurrentTile: {x: 0, y: 0, z: 0}
 --- !u!114 &1816743783
 MonoBehaviour:
