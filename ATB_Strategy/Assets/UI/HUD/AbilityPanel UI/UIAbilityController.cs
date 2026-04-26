@@ -16,6 +16,12 @@ public class UIAbilityController : MonoBehaviour
     public void Init(PlayerController playerController)
     {
         _playerController = playerController;
+        _playerController.OnAbilityExecuted += UpdateButtons;
+    }
+
+    private void OnDisable()
+    {
+        _playerController.OnAbilityExecuted -= UpdateButtons;
     }
 
     public void SetAbilityButtons(UnitController oldUnit, UnitController unit)
@@ -39,6 +45,16 @@ public class UIAbilityController : MonoBehaviour
             UIAbilityButton uiButton = button.GetComponent<UIAbilityButton>();
             _buttons.Add(uiButton);
             uiButton.SetButton(_playerController, unit.SkillController.GetSkillByIndex(i), i);
+        }
+    }
+
+    private void UpdateButtons()
+    {
+        if (_buttons == null || _buttons.Count == 0) return;
+
+        foreach (UIAbilityButton button in _buttons)
+        {
+            button.UpdateButton();
         }
     }
 

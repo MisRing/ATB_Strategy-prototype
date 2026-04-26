@@ -25,6 +25,8 @@ public class TurnManager : MonoBehaviour
     
     public static event Action<UnitController, int> OnAbilityScheduled;
     public static event Action<int> OnAbilityResolved;
+    public static event Action OnTurnEnded;
+
 
     private void Start()
     {
@@ -76,27 +78,34 @@ public class TurnManager : MonoBehaviour
             if (_currentTurnTime >= TurnTime)
             {
                 _currentTurnTime -= TurnTime;
-                _currentTurn++;
-                _lastTurnPause = false;
-                if (_unitsOnAction.ContainsKey(_currentTurn))
-                {
-                    foreach (UnitController unit in _unitsOnAction[_currentTurn])
-                    {
-                        if (unit.Owner == UnitOwner.Player)
-                        {
-                            _lastTurnPause = true;
-                        }
-                        EnterWaitingQ(unit);
-                        unit.SkillController.FinishSkill();
-                    }
-                    OnAbilityResolved?.Invoke(_currentTurn);
-                    _unitsOnAction.Remove(_currentTurn);
-                }
+                EndTurn();
             }
 
             SetTimeSlowdown();
 
             yield return null;
+        }
+    }
+
+    private void EndTurn()
+    {
+        OnTurnEnded?.Invoke();
+
+        _currentTurn++;
+        _lastTurnPause = false;
+        if (_unitsOnAction.ContainsKey(_currentTurn))
+        {
+            foreach (UnitController unit in _unitsOnAction[_currentTurn])
+            {
+                if (unit.Owner == UnitOwner.Player)
+                {
+                    _lastTurnPause = true;
+                }
+                EnterWaitingQ(unit);
+                unit.SkillController.FinishSkill();
+            }
+            OnAbilityResolved?.Invoke(_currentTurn);
+            _unitsOnAction.Remove(_currentTurn);
         }
     }
 

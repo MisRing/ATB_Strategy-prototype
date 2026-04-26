@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour
 
     private void StartUnitAbility(UnitController unit)
     {
-        if (unit.SkillController.ForceExecuteSkill(2, null))
+        if (unit.SkillController.ForceExecuteSkill(2, null, out bool isInstant))
         {
             return;
         }
@@ -44,10 +44,10 @@ public class EnemyController : MonoBehaviour
                 continue;
             }
 
-            if (unit.SkillController.ForceExecuteSkill(0, data))
-            {
-                return;
-            }
+            //if (unit.SkillController.ForceExecuteSkill(0, data, out bool isInstant))
+            //{
+            //    return;
+            //}
         }
     }
 }

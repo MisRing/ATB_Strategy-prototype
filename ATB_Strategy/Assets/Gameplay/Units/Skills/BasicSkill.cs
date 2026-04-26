@@ -10,7 +10,13 @@ public class BasicSkill : MonoBehaviour
 
     [Header("Skill parameters")]
     public Type RequiredDataType = null;
-    
+    private protected int _skillCost = 1;
+    private protected int _skillCooldown = 0;
+    private protected int _skillCooldownTimer = 0;
+
+    public int CurrentCooldown { get { return _skillCooldownTimer; } }
+    public int MaxCooldown { get { return _skillCooldown; } }
+
     private protected UnitSkillController _skillController;
     private protected SkillData _skillData;
 
@@ -20,10 +26,24 @@ public class BasicSkill : MonoBehaviour
     public virtual void Init(UnitSkillController skillController)
     {
         _skillController = skillController;
+
+        TurnManager.OnTurnEnded += CooldownTick;
+    }
+
+    private void OnDisable()
+    {
+        TurnManager.OnTurnEnded -= CooldownTick;
+    }
+
+    private void CooldownTick()
+    {
+        _skillCooldownTimer--;
     }
 
     public virtual void EnterPrepare()
     {
+        if (_skillCooldownTimer > 0) return;
+
         _onPrepare = true;
     }
 
@@ -34,7 +54,13 @@ public class BasicSkill : MonoBehaviour
 
     public virtual bool CanExecute()
     {
+        if (_skillCooldownTimer > 0) return false;
         return true;
+    }
+
+    public virtual bool IsOnCooldown()
+    {
+        return _skillCooldownTimer > 0;
     }
 
     public virtual void UpdateData(SkillData abilityData)
@@ -44,7 +70,10 @@ public class BasicSkill : MonoBehaviour
 
     public virtual bool Execute(ref int cost)
     {
-        cost = 1;
+        if (!CanExecute()) return false;
+
+        cost = _skillCost;
+        _skillCooldownTimer = _skillCooldown;
         return true;
     }
 }

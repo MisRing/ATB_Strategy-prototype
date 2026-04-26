@@ -3,9 +3,8 @@ using UnityEngine;
 
 public interface ITargetSwitchable
 {
-    CombatContext CurrentTarget { get; set; }
+    CombatContext SelectedTargetContext { get; set; }
     public int TargetIndex { get; }
     public int TargetsCount { get; }
-    event Action<CombatContext> OnTargetSwitched;
     void Switch(int index);
 }

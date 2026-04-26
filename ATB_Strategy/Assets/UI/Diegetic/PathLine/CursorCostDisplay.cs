@@ -12,18 +12,18 @@ public class CursorCostDisplay : MonoBehaviour
     public void Init()
     {
         _rectTransform = GetComponent<RectTransform>();
-        _text.enabled = false;
+        _text.gameObject.SetActive(false);
     }
 
     public void SetCost(int cost)
     {
-        _text.enabled = true;
+        _text.gameObject.SetActive(true);
         _text.text = cost.ToString();
     }
 
     private void Update()
     {
-        if (!_text.enabled) return;
+        if (!_text.gameObject.activeSelf) return;
         Vector2 halfScreenSize = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
         Vector2 screenPosition = (PlayerInputController.MouseScreenPosition + _offset) - halfScreenSize;
         _rectTransform.localPosition = screenPosition;
@@ -31,6 +31,6 @@ public class CursorCostDisplay : MonoBehaviour
 
     public void UnsetCost()
     {
-        _text.enabled = false;
+        _text.gameObject.SetActive(false);
     }
 }

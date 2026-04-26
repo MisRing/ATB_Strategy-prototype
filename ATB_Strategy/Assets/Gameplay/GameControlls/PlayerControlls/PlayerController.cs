@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     
     public event Action<int, bool> OnAbilitySelected;
     public event Action<int> OnTargetSwitched;
+    public event Action OnAbilityExecuted;
 
     public void Init(List<UnitController> units)
     {
@@ -53,13 +54,13 @@ public class PlayerController : MonoBehaviour
             
             bool isSameAbility = oldAbility == newAbility;
             bool isInstant = newAbility.RequiredDataType == null;
+            bool canExecute = newAbility.CanExecute();
 
-            if (isSameAbility && isInstant)
+            if (isSameAbility && isInstant && canExecute)
             {
                 ExecuteAbility();
                 return;
             }
-            bool canExecute = newAbility.CanExecute();
             if (canExecute)
             {
                 if (newAbility.RequiredDataType == typeof(TargetData))
@@ -74,7 +75,7 @@ public class PlayerController : MonoBehaviour
                     AbilitySwitchTarget(targetID);
                     CameraController.AimTarget(
                         PlayerSelectionManager.SelectedUnit.transform,
-                        (newAbility as ITargetSwitchable).CurrentTarget.Target.Target.Position
+                        (newAbility as ITargetSwitchable).SelectedTargetContext.Target.Target.Position
                         );
 
                 }
@@ -117,6 +118,7 @@ public class PlayerController : MonoBehaviour
         
         ITargetSwitchable targetSwitchable = PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill as ITargetSwitchable;
         targetSwitchable.Switch(index);
+        CameraController.AimTarget(PlayerSelectionManager.SelectedUnit.transform, targetSwitchable.SelectedTargetContext.Target.Target.Position);
         OnTargetSwitched?.Invoke(index);
     }
 
@@ -137,12 +139,22 @@ public class PlayerController : MonoBehaviour
 
     public void ExecuteAbility()
     {
-        if (PlayerSelectionManager.SelectedUnit.SkillController.ExecuteSkill())
+        if (PlayerSelectionManager.SelectedUnit.SkillController.ExecuteSkill(out bool isInstant))
         {
+            OnAbilityExecuted?.Invoke();
+
             CameraController.SetExtraZoom(false);
             OnAbilitySelected?.Invoke(0, true);
             OnTargetSwitched?.Invoke(-1);
-            PlayerSelectionManager.SwitchToFreeUnit(true);
+
+            if (!isInstant)
+            {
+                PlayerSelectionManager.SwitchToFreeUnit(true);
+            }
+            else
+            {
+                SelectAbility(0);
+            }
         }
     }
 
@@ -173,12 +185,12 @@ public class PlayerController : MonoBehaviour
             if (bind)
             {
                 PlayerInputController.SwitchTarget += AbilitySwitchToNextTarget;
-                targetSwitchable.OnTargetSwitched += SetTargeting;
+                //targetSwitchable.OnTargetSwitched += SetTargeting;
             }
             else
             {
                 PlayerInputController.SwitchTarget -= AbilitySwitchToNextTarget;
-                targetSwitchable.OnTargetSwitched -= SetTargeting;
+                //targetSwitchable.OnTargetSwitched -= SetTargeting;
             }
         }
 
@@ -198,12 +210,5 @@ public class PlayerController : MonoBehaviour
         {
             SelectAbility(0);
         }
-    }
-
-    private void SetTargeting(CombatContext hit)
-    {
-        if(!PlayerSelectionManager.SelectedUnit) return;
-        
-        CameraController.AimTarget(PlayerSelectionManager.SelectedUnit.transform, hit.Target.Target.Position);
     }
 }

@@ -10875,7 +10875,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &581355122
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15076,7 +15076,6 @@ MonoBehaviour:
   SkillName: Basic Skill
   SkillDescription: This skill did nothing
   SkillIcon: {fileID: 21300000, guid: ec76bfedcf8e8304290a653aad76d755, type: 3}
-  _skipTurnCount: 2
 --- !u!114 &798402255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15092,7 +15091,6 @@ MonoBehaviour:
   SkillName: Basic Skill
   SkillDescription: Shoots to target
   SkillIcon: {fileID: 21300000, guid: 59fb75de552867849bc0de3ec1267dfc, type: 3}
-  _cost: 8
 --- !u!114 &798402256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16017,7 +16015,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &874787688
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24020,7 +24018,6 @@ MonoBehaviour:
   SkillName: Basic Skill
   SkillDescription: This skill did nothing
   SkillIcon: {fileID: 21300000, guid: ec76bfedcf8e8304290a653aad76d755, type: 3}
-  _skipTurnCount: 2
 --- !u!114 &1186993998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24036,7 +24033,6 @@ MonoBehaviour:
   SkillName: Basic Skill
   SkillDescription: Shoots to target
   SkillIcon: {fileID: 21300000, guid: 59fb75de552867849bc0de3ec1267dfc, type: 3}
-  _cost: 8
 --- !u!114 &1186993999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25424,7 +25420,6 @@ MonoBehaviour:
   SkillName: Basic Skill
   SkillDescription: This skill did nothing
   SkillIcon: {fileID: 21300000, guid: ec76bfedcf8e8304290a653aad76d755, type: 3}
-  _skipTurnCount: 2
 --- !u!114 &1249828905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25440,7 +25435,6 @@ MonoBehaviour:
   SkillName: Basic Skill
   SkillDescription: Shoots to target
   SkillIcon: {fileID: 21300000, guid: 59fb75de552867849bc0de3ec1267dfc, type: 3}
-  _cost: 8
 --- !u!114 &1249828906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82829,7 +82823,6 @@ MonoBehaviour:
   SkillName: Basic Skill
   SkillDescription: This skill did nothing
   SkillIcon: {fileID: 21300000, guid: ec76bfedcf8e8304290a653aad76d755, type: 3}
-  _skipTurnCount: 2
 --- !u!114 &1649079321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82845,7 +82838,6 @@ MonoBehaviour:
   SkillName: Basic Skill
   SkillDescription: Shoots to target
   SkillIcon: {fileID: 21300000, guid: 59fb75de552867849bc0de3ec1267dfc, type: 3}
-  _cost: 8
 --- !u!114 &1649079322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86725,6 +86717,7 @@ GameObject:
   - component: {fileID: 1816743777}
   - component: {fileID: 1816743780}
   - component: {fileID: 1816743786}
+  - component: {fileID: 1816743788}
   - component: {fileID: 1816743783}
   m_Layer: 3
   m_Name: Unit 1
@@ -86889,7 +86882,6 @@ MonoBehaviour:
   SkillName: Basic Skill
   SkillDescription: This skill did nothing
   SkillIcon: {fileID: 21300000, guid: ec76bfedcf8e8304290a653aad76d755, type: 3}
-  _skipTurnCount: 2
 --- !u!114 &1816743784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86905,6 +86897,7 @@ MonoBehaviour:
   DefaultMovementSkill: {fileID: 1816743780}
   DefaultAttackSkill: {fileID: 1816743786}
   _skills:
+  - {fileID: 1816743788}
   - {fileID: 1816743783}
   CurrentSkill: {fileID: 0}
   Unit: {fileID: 0}
@@ -86952,7 +86945,6 @@ MonoBehaviour:
   SkillName: Basic Skill
   SkillDescription: Shoots to target
   SkillIcon: {fileID: 21300000, guid: 59fb75de552867849bc0de3ec1267dfc, type: 3}
-  _cost: 8
 --- !u!114 &1816743787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86970,6 +86962,21 @@ MonoBehaviour:
   _previewWeaponIK: {fileID: 1845392816}
   _previewModel: {fileID: 1845392748}
   _targetDuration: 0.3
+--- !u!114 &1816743788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816743772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcf4c33ef5fa0df4a939b29f402c04ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpringSkill
+  SkillName: Basic Skill
+  SkillDescription: This skill did nothing
+  SkillIcon: {fileID: 21300000, guid: ee533fa51ed97af49800b57ec598ba00, type: 3}
 --- !u!1 &1817406150
 GameObject:
   m_ObjectHideFlags: 0

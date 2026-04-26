@@ -44,17 +44,17 @@ public class UnitSkillController : MonoBehaviour
 
         if (!skill) return false;
         
-        ChangeSkill(skill);
-
-        return true;
+        return ChangeSkill(skill);
     }
     
-    private void ChangeSkill(BasicSkill skill)
+    private bool ChangeSkill(BasicSkill skill)
     {
-        if (skill == CurrentSkill && skill.OnPrepare) return;
+        if (skill == CurrentSkill && skill.OnPrepare) return true;
+        if (skill.IsOnCooldown()) return false;
         CurrentSkill?.ExitPrepare();
         CurrentSkill = skill;
         CurrentSkill.EnterPrepare();
+        return true;
     }
 
     public void UpdateAbilityData(SkillData data)
@@ -62,14 +62,22 @@ public class UnitSkillController : MonoBehaviour
         CurrentSkill?.UpdateData(data);
     }
     
-    public bool ExecuteSkill()
+    public bool ExecuteSkill(out bool isInstant)
     {
+        isInstant = false;
         if (!CurrentSkill) return false;
         int cost = 0;
         if (CurrentSkill.Execute(ref cost))
         {
-            Unit.State = UnitState.Engaged;
-            TurnManager.EnterBusyQ(Unit, cost);
+            if (cost > 0)
+            {
+                Unit.State = UnitState.Engaged;
+                TurnManager.EnterBusyQ(Unit, cost);
+            }
+            else
+            {
+                isInstant = true;
+            }
             CurrentSkill.ExitPrepare();
             return true;
         }
@@ -77,16 +85,25 @@ public class UnitSkillController : MonoBehaviour
         return false;
     }
     
-    public bool ForceExecuteSkill(int index, SkillData data)
+    public bool ForceExecuteSkill(int index, SkillData data, out bool isInstant)
     {
+        isInstant = false;
+
         BasicSkill skill = GetSkillByIndex(index);
 
         skill.UpdateData(data);
         int cost = 0;
         if (skill.Execute(ref cost))
         {
-            Unit.State = UnitState.Engaged;
-            TurnManager.EnterBusyQ(Unit, cost);
+            if (cost > 0)
+            {
+                Unit.State = UnitState.Engaged;
+                TurnManager.EnterBusyQ(Unit, cost);
+            }
+            else
+            {
+                isInstant = true;
+            }
             return true;
         }
 

@@ -1,0 +1,38 @@
+using UnityEngine;
+
+public class SprintSkill : BasicSkill
+{
+    private FloatStat.FloatStutBuff SpeedBuff = new FloatStat.FloatStutBuff("Spring", 0);
+    public override void Init(UnitSkillController skillController)
+    {
+        base.Init(skillController);
+        SkillName = "Sprint";
+        SkillDescription = "Buff next move to x1.5 speed";
+        _skillCost = 0;
+        _skillCooldown = 20;
+    }
+
+    public override bool Execute(ref int cost)
+    {
+        if (!CanExecute()) return false;
+
+        cost = _skillCost;
+        _skillCooldownTimer = _skillCooldown;
+
+        _skillController.Unit.UnitStats.Speed.RemoveBuff(SpeedBuff);
+        SpeedBuff = new FloatStat.FloatStutBuff("Spring", _skillController.Unit.UnitStats.Speed * 0.5f);
+        _skillController.Unit.UnitStats.Speed.SetBuff(SpeedBuff);
+
+        GameLogService.ShowMessage("Sprint!", _skillController.Unit.UnitCombat.BodyParts.Body.Transform);
+
+        _skillController.OnSkillFinished += RemoveBuff;
+
+        return true;
+    }
+
+    private void RemoveBuff(UnitController unit)
+    {
+        _skillController.Unit.UnitStats.Speed.RemoveBuff(SpeedBuff);
+        _skillController.OnSkillFinished -= RemoveBuff;
+    }
+}

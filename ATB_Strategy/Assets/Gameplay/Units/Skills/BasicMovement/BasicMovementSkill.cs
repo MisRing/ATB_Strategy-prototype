@@ -9,6 +9,7 @@ public class BasicMovementSkill : BasicSkill
         SkillName = "Basic movement";
         RequiredDataType = typeof(PointData);
         _agent = _skillController.Unit.AgentController;
+        _skillCooldown = 0;
     }
 
     public override void EnterPrepare()
@@ -33,7 +34,8 @@ public class BasicMovementSkill : BasicSkill
 
     public override bool Execute(ref int cost)
     {
-        if(!_agent.StartMove()) return false;
+        if (!CanExecute()) return false;
+        if (!_agent.StartMove()) return false;
         
         cost = _agent.PathData.TurnsCost;
 

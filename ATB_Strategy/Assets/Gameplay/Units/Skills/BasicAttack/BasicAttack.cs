@@ -5,18 +5,18 @@ using System.Collections.Generic;
 
 public class BasicAttack : BasicSkill, ITargetSwitchable
 {
-    [SerializeField] private int _cost = 8;
+    //----------------------------ITargetSwitchable----------------------------
 
     public int TargetIndex { get { return _currentTarget; } }
 
     public int TargetsCount { get { return _unitCombat.Targets.Count; } }
 
-    public CombatContext CurrentTarget { get; set; }
-
-    public event Action<CombatContext> OnTargetSwitched;
+    public CombatContext SelectedTargetContext { get; set; }
 
     private int _currentTarget = 0;
-    
+
+    //----------------------------OTHER-----------------------------------------
+
     private UnitCombat _unitCombat;
     
     public override void Init(UnitSkillController skillController)
@@ -25,14 +25,12 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         SkillName = "Basic attack";
         RequiredDataType = typeof(TargetData);
         _unitCombat = skillController.Unit.UnitCombat;
+        _skillCost = 4;
+        _skillCooldown = 0;
     }
 
     public override void EnterPrepare()
     {
-        //_unitCombat.Targets = CombatService.GetCombats(_unitCombat, _skillController.Unit.UnitStats.VisionRange, _skillController.Unit.Owner);
-
-        //Switch(0);
-        
         base.EnterPrepare();
     }
 
@@ -52,6 +50,7 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
 
     public override bool CanExecute()
     {
+        if (_skillCooldownTimer > 0) return false;
         return _unitCombat.Targets.Count > 0;
     }
 
@@ -62,7 +61,7 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         
         _currentTarget = index;
 
-        CurrentTarget = CombatService.CalculateHitContext(
+        SelectedTargetContext = CombatService.CalculateHitContext(
             _skillController.Unit.UnitCombat,
             _skillController.Unit.UnitStats.Accuracy,
             _skillController.Unit.UnitCombat.Weapon,
@@ -70,15 +69,13 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
             );
         
         _skillController.Unit.UnitPreviewAnimator.AimToTarget(_unitCombat.Targets[_currentTarget].Target.BodyParts.Body.Transform);
-        
-        OnTargetSwitched?.Invoke(CurrentTarget);
     }
 
     public override bool Execute(ref int cost)
     {
-        if(_unitCombat.Targets.Count == 0) return false;
+        if (!CanExecute()) return false;
 
-        cost = _cost;
+        cost = _skillCost;
         
         StartCoroutine(Fire(_unitCombat.Targets[_currentTarget].Target));
 
@@ -87,7 +84,7 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
 
     private IEnumerator Fire(CombatObject target)
     {
-        float duration = TurnManager.TurnTime * _cost;
+        float duration = TurnManager.TurnTime * _skillCost;
         float aimDuration = duration * 0.2f;
         float shootDuration = duration * 0.45f;
         float endDuration = duration * 0.35f;
@@ -105,7 +102,7 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         if (shoot)
         {
             HitResult hit;
-            if (CombatService.CalculateHit(CurrentTarget, out hit))
+            if (CombatService.CalculateHit(SelectedTargetContext, out hit))
             {
                 target.GetDamage(hit);
                 GameLogService.ShowMessage((hit.IsCritical ? "Critical! " : "") + "-" + hit.Damage, target.BodyParts.Body.Transform);

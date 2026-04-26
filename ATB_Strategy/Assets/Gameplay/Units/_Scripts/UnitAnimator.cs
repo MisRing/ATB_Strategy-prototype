@@ -24,19 +24,15 @@ public class UnitAnimator : MonoBehaviour
     
     private UnitController _unit;
 
-    private void Awake()
-    {
-        UpdateAnimationSpeed(TimeService.TimeSpeed);
-    }
-
     public void Init(UnitController unit)
     {
         _unit = unit;
+        UpdateAnimationSpeed(TimeService.TimeSpeed);
         // TODO: MOVE TO OnEnable();
         TimeService.OnTimeSpeedChanged += UpdateAnimationSpeed;
         _unit.AgentController.OnCoverChanged += SetCover;
     }
-    
+
     private void OnEnable()
     {
         // TimeService.OnTimeSpeedChanged += UpdateAnimationSpeed;
@@ -214,7 +210,7 @@ public class UnitAnimator : MonoBehaviour
 
     private void UpdateAnimationSpeed(float timeSpeed)
     {
-        _animator.speed = timeSpeed;
+        _animator.speed = timeSpeed * (_unit.UnitStats.Speed / _unit.UnitStats.Speed.ClearValue);
     }
 
     private void SetCover(TileCover cover, int look, float percent)
