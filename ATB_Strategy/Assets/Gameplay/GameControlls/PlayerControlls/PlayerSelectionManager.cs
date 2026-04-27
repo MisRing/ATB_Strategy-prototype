@@ -38,15 +38,6 @@ public class PlayerSelectionManager : MonoBehaviour
         PlayerInputController.PointLClick -= PointLeftClick;
     }
 
-    private void Start()
-    {
-        if (Units.Count >= 1)
-        {
-            SelectUnit(Units[0]);
-        }
-        _playerController.CameraController.Init(SelectedUnit.transform);
-    }
-
     private void PointLeftClick()
     {
         if (RaycastExtensions.IsPointerOverUIObject()) return;

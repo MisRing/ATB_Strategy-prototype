@@ -3,8 +3,12 @@ using UnityEngine;
 
 public class SceneEntryPoint : MonoBehaviour
 {
+    [Header("Teams controls")]
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private EnemyController _enemyController;
+    
+    [Header("Start parameters")]
+    [SerializeField] private Vector3 _unitsStartDirection = Vector3.right;
     
     [Header("Units instance settings")]
     [SerializeField] private List<UnitController> _playerUnits = new List<UnitController>();
@@ -23,18 +27,27 @@ public class SceneEntryPoint : MonoBehaviour
         
         _playerController.Init(_playerUnits);
         _enemyController.Init(_enemyUnits);
+        
+        if (_playerController.PlayerSelectionManager.Units.Count >= 1)
+        {
+            _playerController.PlayerSelectionManager.SelectUnit(_playerController.PlayerSelectionManager.Units[0]);
+        }
+        _playerController.CameraController.Init(_playerController.PlayerSelectionManager.SelectedUnit.transform);
     }
 
     private void SetUnitsOnLevel()
     {
+        Quaternion startDirection = Quaternion.LookRotation(_unitsStartDirection);
         for (int i = 0; i < _playerUnits.Count; i++)
         {
             _playerUnits[i].Init(GridParameters.LevelGrid.GetTile(_playerPositionPreset[i].x, _playerPositionPreset[i].z, _playerPositionPreset[i].y));
+            _playerUnits[i].gameObject.transform.rotation = startDirection;
         }
         
         for (int i = 0; i < _enemyUnits.Count; i++)
         {
             _enemyUnits[i].Init(GridParameters.LevelGrid.GetTile(_enemyPositionPreset[i].x, _enemyPositionPreset[i].z, _enemyPositionPreset[i].y));
+            _enemyUnits[i].gameObject.transform.rotation = startDirection;
         }
     }
     

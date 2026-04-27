@@ -5169,7 +5169,7 @@ MonoBehaviour:
   _smoothTimeStart: 0.1
   _smoothTimeEnd: 0.05
   _rotationAngle: -90
-  _startAngle: 315
+  _startAngle: 135
   _rotationSpeed: 10
   _maxZoom: 3
   _minZoom: 10
@@ -20346,6 +20346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SceneEntryPoint
   _playerController: {fileID: 742375538}
   _enemyController: {fileID: 723904378}
+  _unitsStartDirection: {x: 1, y: 0, z: 0}
   _playerUnits:
   - {fileID: 1816743775}
   _playerPositionPreset:
