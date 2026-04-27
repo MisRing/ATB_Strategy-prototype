@@ -7,18 +7,61 @@ public static class GridPathFinder
 {
     private static readonly float LINE_CUT_STEP = 0.5f;
     private static readonly float RAYCAST_HEIGHT = 0.4f;
+    private static readonly float MAX_COVER_ANGLE = 90f;
 
-    // TODO: REWRITE THIS
     public static TileCover GetTileCover(ref Vector3 direction, out int coverLook, GridTile tile, List<CombatTarget> targets)
     {
-        //NOT DONE
         if (targets != null && targets.Count > 0)
         {
-            coverLook = 0;
-            return TileCover.Full;
+            Vector3 tilePos = GridParameters.LevelGrid.GetTileWorldPos(tile);
+            
+            CombatTarget closestTarget = targets[0];
+            float closestTargetDistance = Vector3.Distance(tilePos, closestTarget.Target.Position);
+            for (int i = 1; i < targets.Count; i++)
+            {
+                float distance = Vector3.Distance(tilePos, targets[i].Target.Position);
+                if (distance < closestTargetDistance)
+                {
+                    closestTargetDistance = distance;
+                    closestTarget = targets[i];
+                }
+            }
+            
+            Vector3 directionToTarget = closestTarget.Target.Position - tilePos;
+            directionToTarget = new Vector3(directionToTarget.x, 0f, directionToTarget.z).normalized;
+
+            int closestCoverID = -1;
+            float closestCoverAngle = float.MaxValue;
+            for (int i = 0; i < tile.Covers.Length; i++)
+            {
+                if(tile.Covers[i] == 0) continue;
+                
+                float angle = Vector3.Angle(directionToTarget, GridParameters.COVER_DIRECTIONS[i]);
+                
+                if (angle >= MAX_COVER_ANGLE) continue;
+
+                if (angle < closestCoverAngle)
+                {
+                    closestCoverAngle = angle;
+                    closestCoverID = i;
+                }
+            }
+
+            if (closestCoverID == -1)
+            {
+                direction = directionToTarget; // MAYBE NOT NEEDED
+                coverLook = 0;
+
+                return TileCover.None;
+            }
+            
+            float cross = Vector3.Cross(GridParameters.COVER_DIRECTIONS[closestCoverID], directionToTarget).y;
+            
+            coverLook = cross > 0 ? +1 : -1;
+            direction = -GridParameters.COVER_DIRECTIONS[closestCoverID];
+            return tile.Covers[closestCoverID];
         }
 
-        //DONE!
         List<int> bestCovers = GetBestCoversID(tile.Covers);
         if (bestCovers.Count > 0)
         {
@@ -53,7 +96,6 @@ public static class GridPathFinder
             return tile.Covers[closestCover];
         }
 
-        //DONE!
         coverLook = 0;
         return TileCover.None;
     }
@@ -79,18 +121,6 @@ public static class GridPathFinder
             }
         }
         return bestCovers;
-    }
-    
-    private static int GetLookSide(Vector3 position, Vector3 look, Vector3 target)
-    {
-        Vector3 dirToTarget = (target - position).normalized;
-
-        float cross = Vector3.Cross(look, dirToTarget).y;
-
-        if (Mathf.Abs(cross) < 0.1f)
-            return 0;
-
-        return cross > 0 ? 1 : -1;
     }
 
     public static bool CalculatePath(ref PathData pathData, Vector3 agentPoisition, Vector3 targetPosition)

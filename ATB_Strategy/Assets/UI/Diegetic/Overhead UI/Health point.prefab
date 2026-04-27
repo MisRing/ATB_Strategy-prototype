@@ -107,6 +107,6 @@ MonoBehaviour:
   _size: {x: 2.5, y: 1.25, z: 1}
   _armorSizeMod: 1.25
   _healthFullColor: {r: 0.1333333, g: 0.5450981, b: 0.1333333, a: 1}
-  _armorFullColor: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 1}
-  _healthColor: {r: 0.3333333, g: 0.4196079, b: 0.1843137, a: 1}
-  _armorColor: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 1}
+  _armorFullColor: {r: 0.83137256, g: 0.83137256, b: 0.83137256, a: 1}
+  _healthColor: {r: 0.6698113, g: 0, b: 0.068881124, a: 1}
+  _armorColor: {r: 0.34901962, g: 0.34901962, b: 0.34901962, a: 1}
