@@ -10,6 +10,9 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     [SerializeField] private float _minAcceleration = 0.1f;
     [SerializeField] private float _rotationSpeed = 36f;
     [SerializeField] private float _coverDistance = 2f;
+    
+    [SerializeField] private float _visibilityResetTriggerDistance = 2f;
+    private int _visibilityResetTimer = 0;
 
     public Vector3Int CurrentTile;
     
@@ -123,7 +126,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         int nextPointIndex = 1;
         float nextPointDistance = Vector3.Distance(_pathData.Points[0], _pathData.Points[1]);
 
-        bool coverSeted = false;
+        bool coverSet = false;
         float distanceToCover = _coverDistance < _pathData.Distance ? _coverDistance : _pathData.Distance;
 
         while (currentPassedDistance < _pathData.Distance)
@@ -140,19 +143,18 @@ public class UnitAgent : MonoBehaviour, IPathHandler
             MoveToDirection(direction, step);
             if (remainingDistance <= distanceToCover)
             {
-                if (!coverSeted)
+                if (!coverSet)
                 {
                     GridTile finalTile = new GridTile();
                     GridParameters.LevelGrid.GetTileByWorldPos(ref finalTile, _pathData.Points[_pathData.Points.Count - 1]);
-                    List<CombatTarget> targets = CombatService.GetCombats(_unit.UnitCombat, _unit.UnitStats.VisionRange, _unit.Owner);
                     _pathData.Cover = GridPathFinder.GetTileCover(
                         ref _pathData.FinalDirection,
                         out _pathData.CoverLook,
                         finalTile,
-                        targets
+                        _unit.UnitCombat.Targets
                         );
 
-                    coverSeted = true;
+                    coverSet = true;
                 }
                 float percent = 1f - (remainingDistance / distanceToCover);
                 OnCoverChanged?.Invoke(_pathData.Cover, _pathData.CoverLook, percent);
@@ -174,6 +176,13 @@ public class UnitAgent : MonoBehaviour, IPathHandler
                     );
 
                 nextPointIndex++;
+            }
+
+            if (_visibilityResetTimer >= currentPassedDistance / _visibilityResetTriggerDistance)
+            {
+                _visibilityResetTimer++;
+                CombatService.TriggerVisibilityReset();
+                CombatService.ResetVisibility();
             }
 
             yield return null;

@@ -13,6 +13,22 @@ public static class CombatService
     private static readonly float MIN_DISTANCE_FACTOR = -0.5f;
     
     private static readonly List<CombatObject> COMBATS_ON_LEVEL = new List<CombatObject>();
+
+    public static event System.Action OnVisibilityChanged;
+    private static bool _needToResetVisibility = false;
+
+    public static void TriggerVisibilityReset()
+    {
+        _needToResetVisibility = true;
+    }
+
+    public static void ResetVisibility()
+    {
+        if (!_needToResetVisibility) return;
+
+        _needToResetVisibility = false;
+        OnVisibilityChanged?.Invoke();
+    }
     
     public static void RegisterCombat(CombatObject comb)
     {

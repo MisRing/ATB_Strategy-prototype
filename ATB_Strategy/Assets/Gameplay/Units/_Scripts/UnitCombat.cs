@@ -21,12 +21,23 @@ public class UnitCombat : CombatObject
     public void Init(UnitController unit)
     {
         _unitController = unit;
-        
     }
 
     public void Start()
     {
         SetVisibility();
+    }
+
+    private protected override void OnEnable()
+    {
+        base.OnEnable();
+        CombatService.OnVisibilityChanged += SetVisibility;
+    }
+
+    private protected override void OnDisable()
+    {
+        base.OnDisable();
+        CombatService.OnVisibilityChanged -= SetVisibility;
     }
 
     public void SetVisibility()
@@ -85,6 +96,7 @@ public class UnitCombat : CombatObject
         _unitController.AgentController.RemoveFromGrid();
         
         CombatService.UnregisterCombat(this);
+        CombatService.TriggerVisibilityReset();
         OnUnitDie?.Invoke();
     }
 }
