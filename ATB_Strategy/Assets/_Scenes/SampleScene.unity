@@ -1240,7 +1240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIUtilityPanel
   _infoButton: {fileID: 928042032}
-  _infoPannel: {fileID: 1658201072}
+  _infoPanel: {fileID: 1658201072}
 --- !u!1 &82118123
 GameObject:
   m_ObjectHideFlags: 0

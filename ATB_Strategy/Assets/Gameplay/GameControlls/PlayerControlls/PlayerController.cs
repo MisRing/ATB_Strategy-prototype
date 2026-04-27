@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
         // PlayerInputController.SelectAbility += SelectAbility;
         //
         // PlayerSelectionManager.OnSelectionChanged += UnitSelected;
+
+        GameGlobalComandService.OnPlayerCommandReset += ResetCommands;
     }
 
     private void OnDisable()
@@ -38,6 +40,13 @@ public class PlayerController : MonoBehaviour
         PlayerInputController.SelectAbility -= SelectAbility;
         
         PlayerSelectionManager.OnSelectionChanged -= UnitSelected;
+        
+        GameGlobalComandService.OnPlayerCommandReset -= ResetCommands;
+    }
+
+    private void ResetCommands()
+    {
+        SelectAbility(0);
     }
 
     public void SelectAbility(int index, int targetID = 0)
@@ -47,6 +56,8 @@ public class PlayerController : MonoBehaviour
         BasicSkill oldAbility = PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill;
         if (PlayerSelectionManager.SelectedUnit.SkillController.SelectSkill(index))
         {
+            GameGlobalComandService.ResetUI();
+            
             BindAbility(oldAbility, false);
             OnTargetSwitched?.Invoke(-1);
             
@@ -141,6 +152,8 @@ public class PlayerController : MonoBehaviour
     {
         if (PlayerSelectionManager.SelectedUnit.SkillController.ExecuteSkill(out bool isInstant))
         {
+            GameGlobalComandService.ResetUI();
+            
             OnAbilityExecuted?.Invoke();
 
             CameraController.SetExtraZoom(false);

@@ -49,5 +49,10 @@ public class UIController : MonoBehaviour
         _pauseOpened = !_pauseOpened;
         _pauseCanvas.SetActive(_pauseOpened);
         TimeService.GamePause(_pauseOpened);
+
+        if (_pauseOpened)
+        {
+            GameGlobalComandService.ResetPlayerCommands();
+        }
     }
 }
