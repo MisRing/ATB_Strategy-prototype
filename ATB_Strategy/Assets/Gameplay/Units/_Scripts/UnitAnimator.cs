@@ -22,6 +22,11 @@ public class UnitAnimator : MonoBehaviour
     public static readonly int AIM_ID = Animator.StringToHash("Aim");
     public static readonly int SHOOT_ID = Animator.StringToHash("Shoot");
     
+    public static readonly int DEATH_ID = Animator.StringToHash("Death");
+    public static readonly int HIT_X_ID = Animator.StringToHash("HitX");
+    public static readonly int HIT_Z_ID = Animator.StringToHash("HitZ");
+
+    
     private UnitController _unit;
 
     public void Init(UnitController unit)
@@ -230,5 +235,33 @@ public class UnitAnimator : MonoBehaviour
         }
         _coverState = cover;
         _coverLook = look;
+    }
+
+    public void DeathAnimation(Vector3 damageFrom)
+    {
+        Vector3 damageDirection = damageFrom - transform.position;
+        damageDirection = new Vector3(damageDirection.x, 0f, damageDirection.z).normalized;
+        
+        Vector3 localDir = transform.InverseTransformDirection(damageDirection);
+
+        float x = localDir.x;
+        float z = localDir.z;
+
+        float hitX = 0;
+        float hitZ = 0;
+
+        if (Mathf.Abs(x) > Mathf.Abs(z))
+        {
+            hitX = x > 0 ? 1 : -1;
+        }
+        else
+        {
+            hitZ = z > 0 ? 1 : -1;
+        }
+
+        _animator.SetFloat(HIT_X_ID, hitX);
+        _animator.SetFloat(HIT_Z_ID, hitZ);
+        
+        _animator.SetTrigger(DEATH_ID);
     }
 }

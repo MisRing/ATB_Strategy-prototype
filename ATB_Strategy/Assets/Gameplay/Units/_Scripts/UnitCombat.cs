@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -13,6 +14,7 @@ public class UnitCombat : CombatObject
     public override int Dodge { get => _unitController.UnitStats.Dodge; }
 
     public List<CombatTarget> Targets = new List<CombatTarget>();
+    public event Action OnUnitDie;
 
     private UnitController _unitController;
 
@@ -69,5 +71,20 @@ public class UnitCombat : CombatObject
             _unitController.UnitStats.Armor.ClearValue -= Mathf.Clamp(result.Damage, 0, _unitController.UnitStats.Armor);
             _unitController.UnitStats.Health.ClearValue -= Mathf.Clamp(breakThrowDamage, 0,_unitController.UnitStats.Health);
         }
+
+        if (_unitController.UnitStats.Health <= 0)
+        {
+            Die(result);
+        }
+    }
+
+    public void Die(HitResult lastHit)
+    {
+        _unitController.State = UnitState.Dead;
+        _unitController.UnitAnimator.DeathAnimation(lastHit.Dealer.Position);
+        _unitController.AgentController.RemoveFromGrid();
+        
+        CombatService.UnregisterCombat(this);
+        OnUnitDie?.Invoke();
     }
 }

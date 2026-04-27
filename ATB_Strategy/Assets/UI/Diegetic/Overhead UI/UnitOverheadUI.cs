@@ -13,6 +13,8 @@ public class UnitOverheadUI : MonoBehaviour
         // TODO: MOVE TO OnEnable
         _unit.UnitStats.Health.OnValueChanged += HealthChanged;
         _unit.UnitStats.Armor.OnValueChanged += HealthChanged;
+        _unit.UnitCombat.OnUnitDie += DisableHealthGUI;
+
     }
     private void OnEnable()
     {
@@ -26,11 +28,18 @@ public class UnitOverheadUI : MonoBehaviour
         _healthGUI.gameObject.SetActive(false);
         _unit.UnitStats.Health.OnValueChanged -= HealthChanged;
         _unit.UnitStats.Armor.OnValueChanged -= HealthChanged;
+        
+        _unit.UnitCombat.OnUnitDie -= DisableHealthGUI;
     }
 
     private void HandleSelectionChanged(bool isSelected)
     {
         _selectionRing.SetActive(isSelected);
+    }
+
+    private void DisableHealthGUI()
+    {
+        _healthGUI.gameObject.SetActive(false);
     }
 
     private void HealthChanged(int value)

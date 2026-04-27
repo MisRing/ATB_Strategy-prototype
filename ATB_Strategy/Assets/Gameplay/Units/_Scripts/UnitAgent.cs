@@ -52,6 +52,12 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         GridParameters.LevelGrid.SetTileOwner(CurrentTile.x, CurrentTile.z, CurrentTile.y, _unit);
     }
 
+    public void RemoveFromGrid()
+    {
+        GridParameters.LevelGrid.SetTileOwner(CurrentTile.x, CurrentTile.z, CurrentTile.y, null);
+        CurrentTile = Vector3Int.zero;
+    }
+
     public void ShowPath(bool show)
     {
         _showPath = show;

@@ -60,7 +60,8 @@ public class UnitController : MonoBehaviour
 public enum UnitState
 {
     WaitingForOrder,
-    Engaged
+    Engaged,
+    Dead
 }
 
 public enum UnitOwner

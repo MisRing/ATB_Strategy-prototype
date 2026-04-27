@@ -163,7 +163,7 @@ public static class CombatService
         int random = Random.Range(0, 100);
 
         result = new HitResult();
-
+        result.Dealer = context.Dealer;
         if (random < context.HitChance)
         {
             random = Random.Range(0, 100);
@@ -263,6 +263,7 @@ public struct CombatContext
 
 public struct HitResult
 {
+    public CombatObject Dealer;
     public int Damage; 
     public bool IsCritical;
 }
