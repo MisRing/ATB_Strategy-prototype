@@ -47,58 +47,68 @@ public class PlayerController : MonoBehaviour
 
     public void SelectAbility(int index, int targetID = 0)
     {
-        if (!PlayerSelectionManager.SelectedUnit) return;
+        UnitController unit = PlayerSelectionManager.SelectedUnit;
+        if (!unit) return;
         
-        BasicSkill oldAbility = PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill;
-        if (PlayerSelectionManager.SelectedUnit.SkillController.SelectSkill(index))
+        BasicSkill oldAbility = unit.SkillController.CurrentSkill;
+
+        if (!unit.SkillController.SelectSkill(index))
+            return;
+
+        GameGlobalComandService.ResetUI();
+
+        BindAbility(oldAbility, false);
+        OnTargetSwitched?.Invoke(-1);
+
+        BasicSkill newAbility = unit.SkillController.CurrentSkill;
+
+        bool isSame = oldAbility == newAbility;
+        bool isInstant = newAbility.RequiredDataType == null;
+        bool canExecute = newAbility.CanExecute();
+
+        if (isSame && isInstant && canExecute)
         {
-            GameGlobalComandService.ResetUI();
-            
-            BindAbility(oldAbility, false);
-            OnTargetSwitched?.Invoke(-1);
-            
-            BasicSkill newAbility = PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill;
-            
-            bool isSameAbility = oldAbility == newAbility;
-            bool isInstant = newAbility.RequiredDataType == null;
-            bool canExecute = newAbility.CanExecute();
-
-            if (isSameAbility && isInstant && canExecute)
-            {
-                ExecuteAbility();
-                return;
-            }
-            if (canExecute)
-            {
-                if (newAbility.RequiredDataType == typeof(TargetData))
-                {
-                    // TODO: WRITE BETTER
-                    if (isSameAbility)
-                    {
-                        ExecuteAbility();
-
-                        return;
-                    }
-                    AbilitySwitchTarget(targetID);
-                    CameraController.AimTarget(
-                        PlayerSelectionManager.SelectedUnit.transform,
-                        (newAbility as ITargetSwitchable).SelectedTargetContext.Target.Target.Position
-                        );
-
-                }
-                else
-                {
-                    CameraController.SetExtraZoom(index != 0);
-                }
-            }
-            else
-            {
-                CameraController.SetExtraZoom(index != 0);
-            }
-
-            BindAbility(newAbility, true, index != 0);
-            OnAbilitySelected?.Invoke(index, canExecute);
+            ExecuteAbility();
+            return;
         }
+
+        if (!canExecute)
+        {
+            CameraController.SetExtraZoom(index != 0);
+            FinalizeSelection(newAbility, index, canExecute);
+            return;
+        }
+
+        if (newAbility.RequiredDataType == typeof(TargetData))
+        {
+            HandleTargetAbility(newAbility, isSame, targetID, unit);
+            FinalizeSelection(newAbility, index, canExecute);
+            return;
+        }
+
+        CameraController.SetExtraZoom(index != 0);
+        FinalizeSelection(newAbility, index, canExecute);
+    }
+    
+    private void HandleTargetAbility(BasicSkill ability, bool isSame, int targetID, UnitController unit)
+    {
+        if (isSame)
+        {
+            ExecuteAbility();
+            return;
+        }
+
+        AbilitySwitchTarget(targetID);
+
+        Vector3 targetPosition = (ability as ITargetSwitchable).SelectedTargetContext.Target.Target.BodyParts.Body.Transform.position;
+
+        CameraController.AimTarget(unit.transform, targetPosition);
+    }
+    
+    private void FinalizeSelection(BasicSkill ability, int index, bool canExecute)
+    {
+        BindAbility(ability, true, index != 0);
+        OnAbilitySelected?.Invoke(index, canExecute);
     }
 
     public void AbilitySwitchToNextTarget()
@@ -125,7 +135,7 @@ public class PlayerController : MonoBehaviour
         
         ITargetSwitchable targetSwitchable = PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill as ITargetSwitchable;
         targetSwitchable.Switch(index);
-        CameraController.AimTarget(PlayerSelectionManager.SelectedUnit.transform, targetSwitchable.SelectedTargetContext.Target.Target.Position);
+        CameraController.AimTarget(PlayerSelectionManager.SelectedUnit.transform, targetSwitchable.SelectedTargetContext.Target.Target.BodyParts.Body.Transform.position);
         OnTargetSwitched?.Invoke(index);
     }
 
@@ -194,12 +204,10 @@ public class PlayerController : MonoBehaviour
             if (bind)
             {
                 PlayerInputController.SwitchTarget += AbilitySwitchToNextTarget;
-                //targetSwitchable.OnTargetSwitched += SetTargeting;
             }
             else
             {
                 PlayerInputController.SwitchTarget -= AbilitySwitchToNextTarget;
-                //targetSwitchable.OnTargetSwitched -= SetTargeting;
             }
         }
 

@@ -4,9 +4,8 @@ using System;
 
 public class PlayerSelectionManager : MonoBehaviour
 {
-    //[Header("Main Settings")]
-    public List<UnitController> Units = new List<UnitController>();
-    public UnitController SelectedUnit;
+    [HideInInspector] public List<UnitController> Units = new List<UnitController>();
+    [HideInInspector] public UnitController SelectedUnit;
 
     [Header("Raycast Settings")]
     [SerializeField] private float _selectRayDistance = 100f;

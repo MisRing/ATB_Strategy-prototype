@@ -3649,9 +3649,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AimCamera
   _moveSmoothTime: 0.2
-  _rotationSpeed: 5
-  _aimOffset: {x: 0.75, y: 2, z: 0}
-  _aimDistance: 2
+  _rotationSpeed: 4
+  _aimOffset: {x: 1.25, y: 2.25, z: 0}
+  _aimDistance: 1.5
 --- !u!114 &330585550
 MonoBehaviour:
   m_ObjectHideFlags: 0
