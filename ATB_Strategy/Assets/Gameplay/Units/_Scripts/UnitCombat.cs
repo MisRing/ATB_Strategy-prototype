@@ -9,16 +9,17 @@ public class UnitCombat : CombatObject
     public override CombatBodyParts BodyParts { get => _bodyParts; }
     [SerializeField] private CombatBodyParts _bodyParts;
 
-    public override UnitOwner Owner { get => _unitController.Owner; }
+    public override UnitOwner Owner { get => _unit.Owner; }
     
     public List<CombatTarget> Targets = new List<CombatTarget>();
+    
     public event Action OnUnitDie;
 
-    private UnitController _unitController;
+    private UnitController _unit;
 
     public void Init(UnitController unit)
     {
-        _unitController = unit;
+        _unit = unit;
     }
 
     public void Start()
@@ -38,20 +39,9 @@ public class UnitCombat : CombatObject
         CombatService.OnVisibilityChanged -= SetVisibility;
     }
 
-    public override int GetDodge(Vector3 dealerPosition)
-    {
-        if (_unitController.Agent.IsMoving) return _unitController.Stats.Dodge;
-        
-        Vector3Int tilePos = _unitController.Agent.CurrentTile;
-        GridTile tile = GridParameters.LevelGrid.GetTile(tilePos.x, tilePos.z, tilePos.y);
-        int dodge = CombatService.CalculateCoverDodge(tile, _unitController.Stats.Dodge, dealerPosition);
-        
-        return dodge;
-    }
-
     public void SetVisibility()
     {
-        Targets = CombatService.GetCombats(this, _unitController.Stats.VisionRange, _unitController.Owner);
+        Targets = CombatService.GetCombats(this, _unit.Stats.VisionRange, _unit.Owner);
     }
 
     public int CheckTarget(UnitController unit)
@@ -60,7 +50,7 @@ public class UnitCombat : CombatObject
         {
             if (Targets[i].Target.gameObject.layer == LayerMask.NameToLayer("Unit"))
             {
-                if (Targets[i].Target.gameObject.GetComponent<UnitController>() == unit)
+                if (Targets[i].Target.gameObject == unit.gameObject)
                 {
                     return i;
                 }
@@ -69,30 +59,41 @@ public class UnitCombat : CombatObject
 
         return -1;
     }
+    
+    public override int GetDodge(Vector3 dealerPosition)
+    {
+        if (_unit.Agent.IsMoving) return _unit.Stats.Dodge;
+        
+        Vector3Int tilePos = _unit.Agent.CurrentTile;
+        GridTile tile = GridParameters.LevelGrid.GetTile(tilePos.x, tilePos.z, tilePos.y);
+        int dodge = CombatService.CalculateCoverDodge(tile, _unit.Stats.Dodge, dealerPosition);
+        
+        return dodge;
+    }
 
     public override void GetDamage(HitResult result)
     {
         if (result.IsCritical)
         {
-            if (_unitController.Stats.Armor >= result.Damage)
+            if (_unit.Stats.Armor >= result.Damage)
             {
-                _unitController.Stats.Armor.ClearValue = 0;
+                _unit.Stats.Armor.ClearValue = 0;
             }
             else
             {
-                int breakThrowDamage = result.Damage - _unitController.Stats.Armor;
-                _unitController.Stats.Armor.ClearValue = 0;
-                _unitController.Stats.Health.ClearValue -= Mathf.Clamp(breakThrowDamage, 0,_unitController.Stats.Health);
+                int breakThrowDamage = result.Damage - _unit.Stats.Armor;
+                _unit.Stats.Armor.ClearValue = 0;
+                _unit.Stats.Health.ClearValue -= Mathf.Clamp(breakThrowDamage, 0,_unit.Stats.Health);
             }
         }
         else
         {
-            int breakThrowDamage = result.Damage - _unitController.Stats.Armor;
-            _unitController.Stats.Armor.ClearValue -= Mathf.Clamp(result.Damage, 0, _unitController.Stats.Armor);
-            _unitController.Stats.Health.ClearValue -= Mathf.Clamp(breakThrowDamage, 0,_unitController.Stats.Health);
+            int breakThrowDamage = result.Damage - _unit.Stats.Armor;
+            _unit.Stats.Armor.ClearValue -= Mathf.Clamp(result.Damage, 0, _unit.Stats.Armor);
+            _unit.Stats.Health.ClearValue -= Mathf.Clamp(breakThrowDamage, 0,_unit.Stats.Health);
         }
 
-        if (_unitController.Stats.Health <= 0)
+        if (_unit.Stats.Health <= 0)
         {
             Die(result);
         }
@@ -100,9 +101,9 @@ public class UnitCombat : CombatObject
 
     public void Die(HitResult lastHit)
     {
-        _unitController.State = UnitState.Dead;
-        _unitController.Animator.DeathAnimation(lastHit.Dealer.Position);
-        _unitController.Agent.RemoveFromGrid();
+        _unit.State = UnitState.Dead;
+        _unit.Animator.DeathAnimation(lastHit.Dealer.Position);
+        _unit.Agent.RemoveFromGrid();
         
         CombatService.UnregisterCombat(this);
         CombatService.TriggerVisibilityReset();

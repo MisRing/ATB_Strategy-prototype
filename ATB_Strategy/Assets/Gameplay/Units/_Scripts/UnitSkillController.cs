@@ -6,21 +6,24 @@ using Unity.VisualScripting;
 public class UnitSkillController : MonoBehaviour
 {
     [Header("Skills")]
-    public BasicSkill DefaultMovement;
-    public BasicSkill DefaultAttack;
+    [SerializeField] private BasicSkill _defaultMovement;
+    [SerializeField] private BasicSkill _defaultAttack;
     [SerializeField] private BasicSkill[] _skills;
+    
+    public BasicSkill CurrentSkill { get { return _currentSkill; } }
+    private BasicSkill _currentSkill;
+    
     public int SkillsCount
     {
         get
         {
             int count = 0;
-            if(DefaultMovement) count++;
-            if(DefaultAttack) count++;
+            if(_defaultMovement) count++;
+            if(_defaultAttack) count++;
             count += _skills.Length;
             return count;
         }
     }
-    public BasicSkill CurrentSkill;
 
     [HideInInspector] public UnitController Unit;
 
@@ -30,8 +33,8 @@ public class UnitSkillController : MonoBehaviour
     {
         Unit = unit;
 
-        DefaultMovement?.Init(this);
-        DefaultAttack?.Init(this);
+        _defaultMovement?.Init(this);
+        _defaultAttack?.Init(this);
         foreach (BasicSkill skill in _skills)
         {
             skill.Init(this);
@@ -49,25 +52,27 @@ public class UnitSkillController : MonoBehaviour
     
     private bool ChangeSkill(BasicSkill skill)
     {
-        if (skill == CurrentSkill && skill.OnPrepare) return true;
+        if (skill == _currentSkill && skill.OnPrepare) return true;
         if (skill.IsOnCooldown()) return false;
-        CurrentSkill?.ExitPrepare();
-        CurrentSkill = skill;
-        CurrentSkill.EnterPrepare();
+        
+        _currentSkill?.ExitPrepare();
+        _currentSkill = skill;
+        _currentSkill.EnterPrepare();
         return true;
     }
 
     public void UpdateAbilityData(SkillData data)
     {
-        CurrentSkill?.UpdateData(data);
+        _currentSkill?.UpdateData(data);
     }
     
     public bool ExecuteSkill(out bool isInstant)
     {
         isInstant = false;
-        if (!CurrentSkill) return false;
+        if (!_currentSkill) return false;
+        
         int cost = 0;
-        if (CurrentSkill.Execute(ref cost))
+        if (_currentSkill.Execute(ref cost))
         {
             if (cost > 0)
             {
@@ -78,7 +83,7 @@ public class UnitSkillController : MonoBehaviour
             {
                 isInstant = true;
             }
-            CurrentSkill.ExitPrepare();
+            _currentSkill.ExitPrepare();
             return true;
         }
 
@@ -90,6 +95,8 @@ public class UnitSkillController : MonoBehaviour
         isInstant = false;
 
         BasicSkill skill = GetSkillByIndex(index);
+        
+        if (!skill) return false;
 
         skill.UpdateData(data);
         int cost = 0;
@@ -112,27 +119,22 @@ public class UnitSkillController : MonoBehaviour
 
     public BasicSkill GetSkillByIndex(int index)
     {
-        // TODO: BETTER SELECTION
-        if (!DefaultMovement)
+        if (_defaultMovement)
         {
-            index++;
+            if (index == 0) return _defaultMovement;
+            index--;
         }
-        if (!DefaultAttack && index >= 1)
+
+        if (_defaultAttack)
         {
-            index++;
+            if (index == 0) return _defaultAttack;
+            index--;
         }
-        switch (index)
-        {
-            case (0):
-                return DefaultMovement;
-            case (1):
-                return DefaultAttack;
-            default:
-                index -= 2;
-                break;
-        }
-        if (!_skills.IsValidIndex(index)) return null;
-        return _skills[index];
+
+        if (_skills.IsValidIndex(index))
+            return _skills[index];
+
+        return null;
     }
 
     public void FinishSkill()

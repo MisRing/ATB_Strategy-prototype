@@ -8,10 +8,11 @@ public class UnitPreviewAnimator : MonoBehaviour
     [SerializeField] private WeaponIKController _previewWeaponIK;
     [SerializeField] private Transform _previewModel;
     
-    private bool _isActive = false;
-    
     [Header("Targeting settings")]
     [SerializeField] private float _targetDuration = 0.3f;
+    [SerializeField] private float _weaponAimAngle = 60f;
+    
+    private bool _isActive = false;
     
     private Transform _aimTarget;
     private float _time = 0f;
@@ -54,7 +55,7 @@ public class UnitPreviewAnimator : MonoBehaviour
         SetCover(TileCover.None, 0, eased);
 
         float angle = Quaternion.Angle(_previewModel.rotation, targetRotation);
-        float weight = 1f - Mathf.Clamp01(angle / 60f);
+        float weight = 1f - Mathf.Clamp01(angle / _weaponAimAngle);
         weight = Mathf.Pow(weight, 2);
 
         _previewWeaponIK.SetAimWeight(weight);

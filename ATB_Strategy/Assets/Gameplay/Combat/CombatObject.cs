@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class CombatObject : MonoBehaviour
 {
-    public virtual Vector3 Position { get => transform.position; }
-
     public virtual CombatBodyParts BodyParts { get; }
+    
+    public virtual Vector3 Position { get => transform.position; }
     
     public virtual UnitOwner Owner { get => UnitOwner.Enemy; }
 

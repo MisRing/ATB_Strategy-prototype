@@ -12,6 +12,22 @@ public class UnitAnimator : MonoBehaviour
 
     private TileCover _coverState;
     private int _coverLook;
+    
+    //Aim start parameters
+    private Quaternion _aimStartRotation;
+    private TileCover _coverBeforeAim;
+    private int _coverLookBeforeAim;
+    
+    //Shooting time rations
+    private float _aimWaitRatio = 0.2f;
+    private float _aimRotateRatio = 0.8f;
+    
+    private float _shootingStartWaitRatio = 0.35f;
+    private float _shootingRatio = 0.5f;
+    private float _shootingEndWaitRatio = 0.15f;
+    
+    private float _endRotateRatio = 0.9f;
+    private float _endWaitRatio = 0.1f;
 
     public static readonly int MOVEMENT_X_ID = Animator.StringToHash("MoveX");
     public static readonly int MOVEMENT_Z_ID = Animator.StringToHash("MoveZ");
@@ -55,8 +71,8 @@ public class UnitAnimator : MonoBehaviour
     {
         Vector3 movementDirection = _unit.Agent.Velocity;
 
-        Vector3 directionXZ = Vector3.ProjectOnPlane(movementDirection, Vector3.up).normalized
-                              * movementDirection.magnitude;
+        Vector3 directionXZ = Vector3.ProjectOnPlane(movementDirection, Vector3.up);
+        directionXZ = directionXZ.normalized * movementDirection.magnitude;
 
         SetMovement(directionXZ);
     }
@@ -68,20 +84,15 @@ public class UnitAnimator : MonoBehaviour
         _animator.SetFloat(MOVEMENT_X_ID, realDirection.x);
         _animator.SetFloat(MOVEMENT_Z_ID, realDirection.z);
     }
-
-    //public event Action OnAttackAnim;
-
-    private Quaternion _aimStartRotation;
-    private TileCover _coverBeforeAim;
-    private int _coverLookBeforeAim;
+    
     public IEnumerator Aim(float duration, Transform target)
     {
         _aimStartRotation = transform.rotation;
         _coverBeforeAim = _coverState;
         _coverLookBeforeAim = _coverLook;
         
-        float waitDelay = duration * 0.2f;
-        float rotateDuration = duration * 0.8f;
+        float waitDelay = duration * _aimWaitRatio;
+        float rotateDuration = duration * _aimRotateRatio;
             
         yield return Wait(waitDelay);
     
@@ -100,9 +111,9 @@ public class UnitAnimator : MonoBehaviour
     
     public IEnumerator Shoot(float duration, Transform target, bool shoot = true)
     {
-        float aimDuration = duration * 0.35f;
-        float shootDuration = duration * 0.5f;
-        float waitDelay = duration * 0.15f;
+        float aimDuration = duration * _shootingStartWaitRatio;
+        float shootDuration = duration * _shootingRatio;
+        float waitDelay = duration * _shootingEndWaitRatio;
         
         yield return WaitWithAim(aimDuration, target);
         if (shoot)
@@ -116,8 +127,9 @@ public class UnitAnimator : MonoBehaviour
     
     public IEnumerator EndAim(float duration, Transform target)
     {
-        float rotateDuration = duration * 0.9f;
-        float waitDelay = duration * 0.1f;
+        float rotateDuration = duration * _endRotateRatio;
+        float waitDelay = duration * _endWaitRatio;
+        
         if (_coverBeforeAim == 0)
         {
             transform.rotation = _unitModel.transform.rotation;

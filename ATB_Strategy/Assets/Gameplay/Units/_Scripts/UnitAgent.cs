@@ -12,9 +12,9 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     [SerializeField] private float _coverDistance = 2f;
     
     [SerializeField] private float _visibilityResetTriggerDistance = 2f;
-    private int _visibilityResetTimer = 0;
 
-    public Vector3Int CurrentTile;
+    public Vector3Int CurrentTile { get { return _currentTile; } }
+    private Vector3Int _currentTile;
     
     public Vector3 Velocity { get { return _velocity; } }
     private Vector3 _velocity = Vector3.zero;
@@ -32,7 +32,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     public void Init(UnitController unit, GridTile startTile)
     {
         _unit = unit;
-        CurrentTile = new Vector3Int(startTile.PositionX, startTile.Floor, startTile.PositionZ);
+        _currentTile = new Vector3Int(startTile.PositionX, startTile.Floor, startTile.PositionZ);
     }
 
     private void OnEnable()
@@ -47,30 +47,30 @@ public class UnitAgent : MonoBehaviour, IPathHandler
 
     private void Start()
     {
-        WarpAgentToTile(CurrentTile);
+        WarpAgentToTile(_currentTile);
     }
 
     private void WarpAgentToTile(Vector3Int tilePos)
     {
-        CurrentTile = tilePos;
+        _currentTile = tilePos;
 
-        transform.position = GridParameters.LevelGrid.GetTileWorldPos(CurrentTile.x, CurrentTile.z, CurrentTile.y);
-        GridParameters.LevelGrid.SetTileOwner(CurrentTile.x, CurrentTile.z, CurrentTile.y, _unit);
+        transform.position = GridParameters.LevelGrid.GetTileWorldPos(_currentTile.x, _currentTile.z, _currentTile.y);
+        GridParameters.LevelGrid.SetTileOwner(_currentTile.x, _currentTile.z, _currentTile.y, _unit);
     }
     
     private void SetAgentTile(GridTile tile)
     {
-        GridParameters.LevelGrid.SetTileOwner(CurrentTile.x, CurrentTile.z, CurrentTile.y, null);
+        GridParameters.LevelGrid.SetTileOwner(_currentTile.x, _currentTile.z, _currentTile.y, null);
 
-        CurrentTile = new Vector3Int(tile.PositionX, tile.Floor, tile.PositionZ);
+        _currentTile = new Vector3Int(tile.PositionX, tile.Floor, tile.PositionZ);
 
-        GridParameters.LevelGrid.SetTileOwner(CurrentTile.x, CurrentTile.z, CurrentTile.y, _unit);
+        GridParameters.LevelGrid.SetTileOwner(_currentTile.x, _currentTile.z, _currentTile.y, _unit);
     }
 
     public void RemoveFromGrid()
     {
-        GridParameters.LevelGrid.SetTileOwner(CurrentTile.x, CurrentTile.z, CurrentTile.y, null);
-        CurrentTile = Vector3Int.zero;
+        GridParameters.LevelGrid.SetTileOwner(_currentTile.x, _currentTile.z, _currentTile.y, null);
+        _currentTile = Vector3Int.zero;
     }
 
     public void ShowPath(bool show)
@@ -141,6 +141,8 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         bool coverSet = false;
         float distanceToCover = _coverDistance < _pathData.Distance ? _coverDistance : _pathData.Distance;
 
+        int visibilityResetTimer = 0;
+
         while (currentPassedDistance < _pathData.Distance)
         {
             float remainingDistance = _pathData.Distance - currentPassedDistance;
@@ -190,9 +192,9 @@ public class UnitAgent : MonoBehaviour, IPathHandler
                 nextPointIndex++;
             }
 
-            if (_visibilityResetTimer >= currentPassedDistance / _visibilityResetTriggerDistance)
+            if (visibilityResetTimer >= currentPassedDistance / _visibilityResetTriggerDistance)
             {
-                _visibilityResetTimer++;
+                visibilityResetTimer++;
                 CombatService.TriggerVisibilityReset();
                 CombatService.ResetVisibility();
             }
@@ -231,14 +233,16 @@ public class UnitAgent : MonoBehaviour, IPathHandler
             direction = direction.normalized;
             Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * velocity * TimeService.TimeSpeedDelta);
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                targetRotation,
+                _rotationSpeed * velocity * TimeService.TimeSpeedDelta
+                );
         }
     }
 
     private void LerpRotate(Vector3 direction, float t)
     {
-        direction = _pathData.FinalDirection;
-
         direction.y = 0;
         direction = direction.normalized;
         Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);

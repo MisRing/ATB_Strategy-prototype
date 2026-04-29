@@ -450,8 +450,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74bc143dd651ade41a8ea59a5a14de26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitSkillController
-  DefaultMovement: {fileID: 2863205103186780666}
-  DefaultAttack: {fileID: 3014812186399841547}
+  _defaultMovement: {fileID: 2863205103186780666}
+  _defaultAttack: {fileID: 3014812186399841547}
   _skills:
   - {fileID: 2068780972087786568}
   - {fileID: 5779690048134464434}
