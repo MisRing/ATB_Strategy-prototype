@@ -6,16 +6,16 @@ using Unity.VisualScripting;
 public class UnitSkillController : MonoBehaviour
 {
     [Header("Skills")]
-    public BasicSkill DefaultMovementSkill;
-    public BasicSkill DefaultAttackSkill;
+    public BasicSkill DefaultMovement;
+    public BasicSkill DefaultAttack;
     [SerializeField] private BasicSkill[] _skills;
     public int SkillsCount
     {
         get
         {
             int count = 0;
-            if(DefaultMovementSkill) count++;
-            if(DefaultAttackSkill) count++;
+            if(DefaultMovement) count++;
+            if(DefaultAttack) count++;
             count += _skills.Length;
             return count;
         }
@@ -30,8 +30,8 @@ public class UnitSkillController : MonoBehaviour
     {
         Unit = unit;
 
-        DefaultMovementSkill?.Init(this);
-        DefaultAttackSkill?.Init(this);
+        DefaultMovement?.Init(this);
+        DefaultAttack?.Init(this);
         foreach (BasicSkill skill in _skills)
         {
             skill.Init(this);
@@ -113,20 +113,20 @@ public class UnitSkillController : MonoBehaviour
     public BasicSkill GetSkillByIndex(int index)
     {
         // TODO: BETTER SELECTION
-        if (!DefaultMovementSkill)
+        if (!DefaultMovement)
         {
             index++;
         }
-        if (!DefaultAttackSkill && index >= 1)
+        if (!DefaultAttack && index >= 1)
         {
             index++;
         }
         switch (index)
         {
             case (0):
-                return DefaultMovementSkill;
+                return DefaultMovement;
             case (1):
-                return DefaultAttackSkill;
+                return DefaultAttack;
             default:
                 index -= 2;
                 break;
@@ -138,7 +138,7 @@ public class UnitSkillController : MonoBehaviour
     public void FinishSkill()
     {
         Unit.State = UnitState.WaitingForOrder;
-        Unit.UnitCombat.SetVisibility();
+        Unit.Combat.SetVisibility();
         OnSkillFinished?.Invoke(Unit);
     }
 }

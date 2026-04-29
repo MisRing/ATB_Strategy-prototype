@@ -8,7 +8,7 @@ public class BasicMovementSkill : BasicSkill
         base.Init(skillController);
         SkillName = "Basic movement";
         RequiredDataType = typeof(PointData);
-        _agent = _skillController.Unit.AgentController;
+        _agent = _skillController.Unit.Agent;
         _skillCooldown = 0;
     }
 

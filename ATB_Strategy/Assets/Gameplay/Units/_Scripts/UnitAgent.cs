@@ -29,22 +29,32 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     
     public bool IsMoving { get { return _pathData != null; } }
 
-    private void Awake()
+    public void Init(UnitController unit, GridTile startTile)
+    {
+        _unit = unit;
+        CurrentTile = new Vector3Int(startTile.PositionX, startTile.Floor, startTile.PositionZ);
+    }
+
+    private void OnEnable()
     {
         AbilityViewRenderer.PathHandlers.Add(this);
     }
 
-    public void Init(UnitController unit, GridTile startTile)
+    private void OnDisable()
     {
-        _unit = unit;
-        WarpAgentToTile(startTile);
+        AbilityViewRenderer.PathHandlers.Remove(this);
     }
 
-    private void WarpAgentToTile(GridTile tile)
+    private void Start()
     {
-        CurrentTile = new Vector3Int(tile.PositionX, tile.Floor, tile.PositionZ);
-        
-        transform.position = GridParameters.LevelGrid.GetTileWorldPos(tile);
+        WarpAgentToTile(CurrentTile);
+    }
+
+    private void WarpAgentToTile(Vector3Int tilePos)
+    {
+        CurrentTile = tilePos;
+
+        transform.position = GridParameters.LevelGrid.GetTileWorldPos(CurrentTile.x, CurrentTile.z, CurrentTile.y);
         GridParameters.LevelGrid.SetTileOwner(CurrentTile.x, CurrentTile.z, CurrentTile.y, _unit);
     }
     
@@ -74,7 +84,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         _pathData = new PathData();
         if (GridPathFinder.CalculatePath(ref _pathData, transform.position, targetPosition))
         {
-            _pathData.Duration = CalculateDuration(_pathData.Distance, _unit.UnitStats.Speed);
+            _pathData.Duration = CalculateDuration(_pathData.Distance, _unit.Stats.Speed);
 
             float realTurnsCost = Mathf.Round((_pathData.Duration / TurnManager.TurnTime) * 100f) / 100f;
             
@@ -138,7 +148,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
 
             Vector3 direction = (_pathData.Points[nextPointIndex] - transform.position).normalized * velocity;
 
-            float step = _unit.UnitStats.Speed * TimeService.TimeSpeedDelta;
+            float step = _unit.Stats.Speed * TimeService.TimeSpeedDelta;
 
             currentPassedDistance += step * velocity;
 
@@ -153,7 +163,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
                         ref _pathData.FinalDirection,
                         out _pathData.CoverLook,
                         finalTile,
-                        _unit.UnitCombat.Targets
+                        _unit.Combat.Targets
                         );
 
                     coverSet = true;

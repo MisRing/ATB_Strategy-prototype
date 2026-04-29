@@ -58,10 +58,9 @@ public class TacticalCamera : MonoBehaviour
         PlayerInputController.RotateCamera -= RotateToAngle;
     }
 
-    public void Init(Transform target)
+    public void Init()
     {
         _rotationY = _startAngle;
-        EnterFocusMode(target, true);
         _currentAngleY = _startAngle;
         _targetZoomPercent = 0f;
         _zoom = _minZoom;
@@ -133,6 +132,7 @@ public class TacticalCamera : MonoBehaviour
         if(instantly || Vector3.Distance(_position, _focusTarget.position) >= _focusMaxDistance)
         {
             _position = _focusTarget.position;
+            SetPosition();
         }
     }
 

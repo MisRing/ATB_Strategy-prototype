@@ -9,12 +9,12 @@ using UnityEngine;
 [RequireComponent(typeof(UnitAgent))]
 public class UnitController : MonoBehaviour
 {
-    [HideInInspector] public UnitStats UnitStats;
+    [HideInInspector] public UnitStats Stats;
     [HideInInspector] public UnitSkillController SkillController;
-    [HideInInspector] public UnitCombat UnitCombat;
-    [HideInInspector] public UnitAnimator UnitAnimator;
-    [HideInInspector] public UnitPreviewAnimator UnitPreviewAnimator;
-    [HideInInspector] public UnitAgent AgentController;
+    [HideInInspector] public UnitCombat Combat;
+    [HideInInspector] public UnitAnimator Animator;
+    [HideInInspector] public UnitPreviewAnimator PreviewAnimator;
+    [HideInInspector] public UnitAgent Agent;
 
     public event Action<bool> OnSelectionChanged;
 
@@ -25,17 +25,17 @@ public class UnitController : MonoBehaviour
 
     public void Init(GridTile tile)
     {        
-        UnitStats = GetComponent<UnitStats>();
+        Stats = GetComponent<UnitStats>();
         SkillController = GetComponent<UnitSkillController>();
-        UnitCombat = GetComponent<UnitCombat>();
-        UnitAnimator = GetComponent<UnitAnimator>();
-        UnitPreviewAnimator = GetComponent<UnitPreviewAnimator>();
-        AgentController = GetComponent<UnitAgent>();
+        Combat = GetComponent<UnitCombat>();
+        Animator = GetComponent<UnitAnimator>();
+        PreviewAnimator = GetComponent<UnitPreviewAnimator>();
+        Agent = GetComponent<UnitAgent>();
 
         SkillController.Init(this);
-        UnitCombat.Init(this);
-        UnitAnimator.Init(this);
-        AgentController.Init(this, tile);
+        Combat.Init(this);
+        Animator.Init(this);
+        Agent.Init(this, tile);
         
         TurnManager.EnterWaitingQ(this);
     }

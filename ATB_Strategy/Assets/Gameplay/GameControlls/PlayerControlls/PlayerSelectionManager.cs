@@ -19,23 +19,37 @@ public class PlayerSelectionManager : MonoBehaviour
     {
         _playerController = playerController;
         Units = units;
-        
-        for (int i = 0; i < Units.Count; i++)
-        {
-            Units[i].SkillController.OnSkillFinished += SelectReadyUnit;
-        }
     }
     
     private void OnEnable()
     {
         PlayerInputController.SwitchTarget.DefaultAction += SwitchTarget;
         PlayerInputController.PointLClick += PointLeftClick;
+        
+        for (int i = 0; i < Units.Count; i++)
+        {
+            if(!Units[i]) continue;
+            Units[i].SkillController.OnSkillFinished += SelectReadyUnit;
+        }
     }
 
     private void OnDisable()
     {
         PlayerInputController.SwitchTarget.DefaultAction -= SwitchTarget;
         PlayerInputController.PointLClick -= PointLeftClick;
+        
+        for (int i = 0; i < Units.Count; i++)
+        {
+            if(!Units[i]) continue;
+            Units[i].SkillController.OnSkillFinished -= SelectReadyUnit;
+        }
+    }
+
+    private void Start()
+    {
+        if(Units.Count == 0) return;
+        SelectUnit(Units[0]);
+        _playerController.CameraController.FocusTarget(SelectedUnit.transform, true);
     }
 
     private void PointLeftClick()
@@ -106,7 +120,7 @@ public class PlayerSelectionManager : MonoBehaviour
     public void TrySelectTarget(UnitController unit)
     {
         if (!SelectedUnit) return;
-        int index = SelectedUnit.UnitCombat.CheckTarget(unit);
+        int index = SelectedUnit.Combat.CheckTarget(unit);
 
         if (index != -1)
         {

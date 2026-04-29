@@ -11,7 +11,7 @@ public class HealthGUI : MonoBehaviour
     
     public void SetHealth(UnitController unit)
     {
-        for (int i = 0; i < unit.UnitStats.MaxHealth; i++)
+        for (int i = 0; i < unit.Stats.MaxHealth; i++)
         {
             GameObject point = Instantiate(_healthPointPref, transform);
             point.transform.localPosition = _startOffset + _offset * i;
@@ -20,9 +20,9 @@ public class HealthGUI : MonoBehaviour
             _healthPoints.Add(pointGUI);
         }
 
-        int health = unit.UnitStats.MaxHealth;
+        int health = unit.Stats.MaxHealth;
         
-        for (int i = 0; i < unit.UnitStats.MaxArmor; i++)
+        for (int i = 0; i < unit.Stats.MaxArmor; i++)
         {
             GameObject point = Instantiate(_healthPointPref, transform);
             point.transform.localPosition = _startOffset + _offset * (i + health);
@@ -39,18 +39,18 @@ public class HealthGUI : MonoBehaviour
 
     public void ChangeHealth(UnitController unit)
     {
-        for (int i = 0; i < unit.UnitStats.MaxHealth; i++)
+        for (int i = 0; i < unit.Stats.MaxHealth; i++)
         {
             HealthPointGUI pointGUI = _healthPoints[i];
-            pointGUI.SetState(false, unit.UnitStats.Health >= i + 1);
+            pointGUI.SetState(false, unit.Stats.Health >= i + 1);
         }
 
-        int health = unit.UnitStats.MaxHealth;
+        int health = unit.Stats.MaxHealth;
         
-        for (int i = 0; i < unit.UnitStats.MaxArmor; i++)
+        for (int i = 0; i < unit.Stats.MaxArmor; i++)
         {
             HealthPointGUI pointGUI = _healthPoints[i + health];
-            pointGUI.SetState(true, unit.UnitStats.Armor >= i + 1);
+            pointGUI.SetState(true, unit.Stats.Armor >= i + 1);
         }
     }
 }

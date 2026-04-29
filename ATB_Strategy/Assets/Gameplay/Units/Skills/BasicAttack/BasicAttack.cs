@@ -24,7 +24,7 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         base.Init(skillController);
         SkillName = "Basic attack";
         RequiredDataType = typeof(TargetData);
-        _unitCombat = skillController.Unit.UnitCombat;
+        _unitCombat = skillController.Unit.Combat;
         _skillCost = 4;
         _skillCooldown = 0;
     }
@@ -37,7 +37,7 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
     public override void ExitPrepare()
     {
         _currentTarget = 0;
-        _skillController.Unit.UnitPreviewAnimator.EndPreview();
+        _skillController.Unit.PreviewAnimator.EndPreview();
         base.ExitPrepare();
     }
 
@@ -62,13 +62,13 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         _currentTarget = index;
 
         SelectedTargetContext = CombatService.CalculateHitContext(
-            _skillController.Unit.UnitCombat,
-            _skillController.Unit.UnitStats.Accuracy,
-            _skillController.Unit.UnitCombat.Weapon,
+            _skillController.Unit.Combat,
+            _skillController.Unit.Stats.Accuracy,
+            _skillController.Unit.Combat.Weapon,
             _unitCombat.Targets[_currentTarget]
             );
         
-        _skillController.Unit.UnitPreviewAnimator.AimToTarget(_unitCombat.Targets[_currentTarget].Target.BodyParts.Body.Transform);
+        _skillController.Unit.PreviewAnimator.AimToTarget(_unitCombat.Targets[_currentTarget].Target.BodyParts.Body.Transform);
     }
 
     public override bool Execute(ref int cost)
@@ -91,10 +91,10 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         
         Transform targetTransform = target.BodyParts.Body.Transform;
         
-        yield return _skillController.Unit.UnitAnimator.Aim(aimDuration, targetTransform);
+        yield return _skillController.Unit.Animator.Aim(aimDuration, targetTransform);
         
         float visionPercent = CombatService.GetVisionPercent(
-            _skillController.Unit.UnitCombat.Position + Vector3.up,
+            _skillController.Unit.Combat.Position + Vector3.up,
             target
             );
         bool shoot = target != null && visionPercent > 0f;
@@ -114,11 +114,11 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         }
         else
         {
-            GameLogService.ShowMessage("Target out of vision!", _skillController.Unit.UnitCombat.BodyParts.Body.Transform);
+            GameLogService.ShowMessage("Target out of vision!", _skillController.Unit.Combat.BodyParts.Body.Transform);
         }
         
-        yield return _skillController.Unit.UnitAnimator.Shoot(shootDuration, targetTransform, shoot);
-        yield return _skillController.Unit.UnitAnimator.EndAim(endDuration, targetTransform);
+        yield return _skillController.Unit.Animator.Shoot(shootDuration, targetTransform, shoot);
+        yield return _skillController.Unit.Animator.EndAim(endDuration, targetTransform);
     }
 
 }

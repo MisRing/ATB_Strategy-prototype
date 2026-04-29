@@ -11,9 +11,9 @@ public class UnitOverheadUI : MonoBehaviour
         _healthGUI.SetHealth(_unit);
         
         // TODO: MOVE TO OnEnable
-        _unit.UnitStats.Health.OnValueChanged += HealthChanged;
-        _unit.UnitStats.Armor.OnValueChanged += HealthChanged;
-        _unit.UnitCombat.OnUnitDie += DisableHealthGUI;
+        _unit.Stats.Health.OnValueChanged += HealthChanged;
+        _unit.Stats.Armor.OnValueChanged += HealthChanged;
+        _unit.Combat.OnUnitDie += DisableHealthGUI;
 
     }
     private void OnEnable()
@@ -26,10 +26,10 @@ public class UnitOverheadUI : MonoBehaviour
     {
         _unit.OnSelectionChanged -= HandleSelectionChanged;
         _healthGUI.gameObject.SetActive(false);
-        _unit.UnitStats.Health.OnValueChanged -= HealthChanged;
-        _unit.UnitStats.Armor.OnValueChanged -= HealthChanged;
+        _unit.Stats.Health.OnValueChanged -= HealthChanged;
+        _unit.Stats.Armor.OnValueChanged -= HealthChanged;
         
-        _unit.UnitCombat.OnUnitDie -= DisableHealthGUI;
+        _unit.Combat.OnUnitDie -= DisableHealthGUI;
     }
 
     private void HandleSelectionChanged(bool isSelected)

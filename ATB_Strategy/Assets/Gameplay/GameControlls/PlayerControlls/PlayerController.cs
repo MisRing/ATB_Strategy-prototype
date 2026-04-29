@@ -20,17 +20,13 @@ public class PlayerController : MonoBehaviour
         PlayerSelectionManager.Init(this, units);
 
         CursorController.Init();
-        
-        PlayerInputController.SelectAbility += SelectAbility;//!
-
-        PlayerSelectionManager.OnSelectionChanged += UnitSelected;
     }
 
     private void OnEnable()
     {
-        // PlayerInputController.SelectAbility += SelectAbility;
-        //
-        // PlayerSelectionManager.OnSelectionChanged += UnitSelected;
+        PlayerInputController.SelectAbility += SelectAbility;
+
+        PlayerSelectionManager.OnSelectionChanged += UnitSelected;
 
         GameGlobalComandService.OnPlayerCommandReset += ResetCommands;
     }
@@ -109,7 +105,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!PlayerSelectionManager.SelectedUnit) return;
         if (PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill.RequiredDataType != typeof(TargetData)) return;
-        if (PlayerSelectionManager.SelectedUnit.UnitCombat.Targets.Count == 0) return;
+        if (PlayerSelectionManager.SelectedUnit.Combat.Targets.Count == 0) return;
         
         int step = !PlayerInputController.IsReverseModifier ? 1 : -1;
         

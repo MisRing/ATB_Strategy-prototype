@@ -19,11 +19,11 @@ public class SprintSkill : BasicSkill
         cost = _skillCost;
         _skillCooldownTimer = _skillCooldown;
 
-        _skillController.Unit.UnitStats.Speed.RemoveBuff(SpeedBuff);
-        SpeedBuff = new FloatStat.FloatStutBuff("Spring", _skillController.Unit.UnitStats.Speed * 0.5f);
-        _skillController.Unit.UnitStats.Speed.SetBuff(SpeedBuff);
+        _skillController.Unit.Stats.Speed.RemoveBuff(SpeedBuff);
+        SpeedBuff = new FloatStat.FloatStutBuff("Spring", _skillController.Unit.Stats.Speed * 0.5f);
+        _skillController.Unit.Stats.Speed.SetBuff(SpeedBuff);
 
-        GameLogService.ShowMessage("Sprint!", _skillController.Unit.UnitCombat.BodyParts.Body.Transform);
+        GameLogService.ShowMessage("Sprint!", _skillController.Unit.Combat.BodyParts.Body.Transform);
 
         _skillController.OnSkillFinished += RemoveBuff;
 
@@ -32,7 +32,7 @@ public class SprintSkill : BasicSkill
 
     private void RemoveBuff(UnitController unit)
     {
-        _skillController.Unit.UnitStats.Speed.RemoveBuff(SpeedBuff);
+        _skillController.Unit.Stats.Speed.RemoveBuff(SpeedBuff);
         _skillController.OnSkillFinished -= RemoveBuff;
     }
 }

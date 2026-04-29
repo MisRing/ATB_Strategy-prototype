@@ -21,14 +21,14 @@ public class UIUnitPanel : MonoBehaviour, IPointerClickHandler
         _squadPanel = squadPanel;
         _rectTransform = GetComponent<RectTransform>();
 
-        _nameText.text = Unit.UnitStats.Name;
-        _icon.sprite = Unit.UnitStats.Icon;
+        _nameText.text = Unit.Stats.Name;
+        _icon.sprite = Unit.Stats.Icon;
 
-        Unit.UnitStats.Health.OnValueChanged += DrawHealth;
-        Unit.UnitStats.MaxHealth.OnValueChanged += DrawHealth;
+        Unit.Stats.Health.OnValueChanged += DrawHealth;
+        Unit.Stats.MaxHealth.OnValueChanged += DrawHealth;
 
-        Unit.UnitStats.Armor.OnValueChanged += DrawArmor;
-        Unit.UnitStats.MaxArmor.OnValueChanged += DrawArmor;
+        Unit.Stats.Armor.OnValueChanged += DrawArmor;
+        Unit.Stats.MaxArmor.OnValueChanged += DrawArmor;
 
         DrawHealth(0);
         DrawArmor(0);
@@ -38,21 +38,21 @@ public class UIUnitPanel : MonoBehaviour, IPointerClickHandler
     {
         if (!Unit) return;
 
-        Unit.UnitStats.Health.OnValueChanged -= DrawHealth;
-        Unit.UnitStats.MaxHealth.OnValueChanged -= DrawHealth;
+        Unit.Stats.Health.OnValueChanged -= DrawHealth;
+        Unit.Stats.MaxHealth.OnValueChanged -= DrawHealth;
 
-        Unit.UnitStats.Armor.OnValueChanged -= DrawArmor;
-        Unit.UnitStats.MaxArmor.OnValueChanged -= DrawArmor;
+        Unit.Stats.Armor.OnValueChanged -= DrawArmor;
+        Unit.Stats.MaxArmor.OnValueChanged -= DrawArmor;
     }
 
     private void DrawHealth(int value)
     {
-        _healthBar.SetValue(Unit.UnitStats.Health, Unit.UnitStats.MaxHealth);
+        _healthBar.SetValue(Unit.Stats.Health, Unit.Stats.MaxHealth);
     }
 
     private void DrawArmor(int value)
     {
-        _armorBar.SetValue(Unit.UnitStats.Armor, Unit.UnitStats.MaxArmor);
+        _armorBar.SetValue(Unit.Stats.Armor, Unit.Stats.MaxArmor);
     }
 
     public void SetSelection(bool selection)

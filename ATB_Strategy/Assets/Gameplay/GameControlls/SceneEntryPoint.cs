@@ -18,6 +18,7 @@ public class SceneEntryPoint : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("Initializing start...");
         if(GridParameters.LevelGrid == null)
         {
             GridParameters.LevelGrid = FindFirstObjectByType(typeof(GridMap)) as GridMap;
@@ -27,12 +28,9 @@ public class SceneEntryPoint : MonoBehaviour
         
         _playerController.Init(_playerUnits);
         _enemyController.Init(_enemyUnits);
-        
-        if (_playerController.PlayerSelectionManager.Units.Count >= 1)
-        {
-            _playerController.PlayerSelectionManager.SelectUnit(_playerController.PlayerSelectionManager.Units[0]);
-        }
-        _playerController.CameraController.Init(_playerController.PlayerSelectionManager.SelectedUnit.transform);
+        _playerController.CameraController.Init();
+
+        Debug.Log("Initializing complete.");
     }
 
     private void SetUnitsOnLevel()

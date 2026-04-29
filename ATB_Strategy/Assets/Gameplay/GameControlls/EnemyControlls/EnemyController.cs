@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour
 {
@@ -9,17 +11,37 @@ public class EnemyController : MonoBehaviour
     public void Init(List<UnitController> units)
     {
         _units = units;
+    }
 
+    private void OnEnable()
+    {
         for (int i = 0; i < _units.Count; i++)
         {
+            if(!_units[i]) continue;
             _units[i].SkillController.OnSkillFinished += StartUnitAbility;
+        }
+    }
+
+    private void OnDisable()
+    {
+        for (int i = 0; i < _units.Count; i++)
+        {
+            if(!_units[i]) continue;
+            _units[i].SkillController.OnSkillFinished -= StartUnitAbility;
+        }
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < _units.Count; i++)
+        {
             StartUnitAbility(_units[i]);
         }
     }
 
     private void StartUnitAbility(UnitController unit)
     {
-        if (unit.SkillController.ForceExecuteSkill(2, null, out bool isInstant))
+        if (unit.SkillController.ForceExecuteSkill(3, null, out bool isInstant))
         {
             return;
         }

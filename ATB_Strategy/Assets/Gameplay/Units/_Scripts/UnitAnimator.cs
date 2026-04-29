@@ -32,27 +32,28 @@ public class UnitAnimator : MonoBehaviour
     public void Init(UnitController unit)
     {
         _unit = unit;
-        UpdateAnimationSpeed(TimeService.TimeSpeed);
-        // TODO: MOVE TO OnEnable();
-        TimeService.OnTimeSpeedChanged += UpdateAnimationSpeed;
-        _unit.AgentController.OnCoverChanged += SetCover;
     }
 
     private void OnEnable()
     {
-        // TimeService.OnTimeSpeedChanged += UpdateAnimationSpeed;
-        // _unit.AgentController.OnCoverChanged += SetCover;
+        TimeService.OnTimeSpeedChanged += UpdateAnimationSpeed;
+        _unit.Agent.OnCoverChanged += SetCover;
     }
     
     private void OnDisable()
     {
         TimeService.OnTimeSpeedChanged -= UpdateAnimationSpeed;
-        _unit.AgentController.OnCoverChanged -= SetCover;
+        _unit.Agent.OnCoverChanged -= SetCover;
+    }
+
+    private void Start()
+    {
+        UpdateAnimationSpeed(TimeService.TimeSpeed);
     }
 
     private void Update()
     {
-        Vector3 movementDirection = _unit.AgentController.Velocity;
+        Vector3 movementDirection = _unit.Agent.Velocity;
 
         Vector3 directionXZ = Vector3.ProjectOnPlane(movementDirection, Vector3.up).normalized
                               * movementDirection.magnitude;
@@ -215,7 +216,7 @@ public class UnitAnimator : MonoBehaviour
 
     private void UpdateAnimationSpeed(float timeSpeed)
     {
-        _animator.speed = timeSpeed * (_unit.UnitStats.Speed / _unit.UnitStats.Speed.ClearValue);
+        _animator.speed = timeSpeed * (_unit.Stats.Speed / _unit.Stats.Speed.ClearValue);
     }
 
     private void SetCover(TileCover cover, int look, float percent)

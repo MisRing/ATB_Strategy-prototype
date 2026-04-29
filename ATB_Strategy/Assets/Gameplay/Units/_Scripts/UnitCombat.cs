@@ -40,18 +40,18 @@ public class UnitCombat : CombatObject
 
     public override int GetDodge(Vector3 dealerPosition)
     {
-        if (_unitController.AgentController.IsMoving) return _unitController.UnitStats.Dodge;
+        if (_unitController.Agent.IsMoving) return _unitController.Stats.Dodge;
         
-        Vector3Int tilePos = _unitController.AgentController.CurrentTile;
+        Vector3Int tilePos = _unitController.Agent.CurrentTile;
         GridTile tile = GridParameters.LevelGrid.GetTile(tilePos.x, tilePos.z, tilePos.y);
-        int dodge = CombatService.CalculateCoverDodge(tile, _unitController.UnitStats.Dodge, dealerPosition);
+        int dodge = CombatService.CalculateCoverDodge(tile, _unitController.Stats.Dodge, dealerPosition);
         
         return dodge;
     }
 
     public void SetVisibility()
     {
-        Targets = CombatService.GetCombats(this, _unitController.UnitStats.VisionRange, _unitController.Owner);
+        Targets = CombatService.GetCombats(this, _unitController.Stats.VisionRange, _unitController.Owner);
     }
 
     public int CheckTarget(UnitController unit)
@@ -74,25 +74,25 @@ public class UnitCombat : CombatObject
     {
         if (result.IsCritical)
         {
-            if (_unitController.UnitStats.Armor >= result.Damage)
+            if (_unitController.Stats.Armor >= result.Damage)
             {
-                _unitController.UnitStats.Armor.ClearValue = 0;
+                _unitController.Stats.Armor.ClearValue = 0;
             }
             else
             {
-                int breakThrowDamage = result.Damage - _unitController.UnitStats.Armor;
-                _unitController.UnitStats.Armor.ClearValue = 0;
-                _unitController.UnitStats.Health.ClearValue -= Mathf.Clamp(breakThrowDamage, 0,_unitController.UnitStats.Health);
+                int breakThrowDamage = result.Damage - _unitController.Stats.Armor;
+                _unitController.Stats.Armor.ClearValue = 0;
+                _unitController.Stats.Health.ClearValue -= Mathf.Clamp(breakThrowDamage, 0,_unitController.Stats.Health);
             }
         }
         else
         {
-            int breakThrowDamage = result.Damage - _unitController.UnitStats.Armor;
-            _unitController.UnitStats.Armor.ClearValue -= Mathf.Clamp(result.Damage, 0, _unitController.UnitStats.Armor);
-            _unitController.UnitStats.Health.ClearValue -= Mathf.Clamp(breakThrowDamage, 0,_unitController.UnitStats.Health);
+            int breakThrowDamage = result.Damage - _unitController.Stats.Armor;
+            _unitController.Stats.Armor.ClearValue -= Mathf.Clamp(result.Damage, 0, _unitController.Stats.Armor);
+            _unitController.Stats.Health.ClearValue -= Mathf.Clamp(breakThrowDamage, 0,_unitController.Stats.Health);
         }
 
-        if (_unitController.UnitStats.Health <= 0)
+        if (_unitController.Stats.Health <= 0)
         {
             Die(result);
         }
@@ -101,8 +101,8 @@ public class UnitCombat : CombatObject
     public void Die(HitResult lastHit)
     {
         _unitController.State = UnitState.Dead;
-        _unitController.UnitAnimator.DeathAnimation(lastHit.Dealer.Position);
-        _unitController.AgentController.RemoveFromGrid();
+        _unitController.Animator.DeathAnimation(lastHit.Dealer.Position);
+        _unitController.Agent.RemoveFromGrid();
         
         CombatService.UnregisterCombat(this);
         CombatService.TriggerVisibilityReset();

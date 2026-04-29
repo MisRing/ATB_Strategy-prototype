@@ -8,18 +8,15 @@ public class CameraController : MonoBehaviour
     private TacticalCamera _tacticalCamera;
     private AimCamera _aimCamera;
 
-    private void Awake()
+    public void Init()
     {
         _tacticalCamera = GetComponent<TacticalCamera>();
         _aimCamera = GetComponentInChildren<AimCamera>();
-    }
-
-    public void Init(Transform target)
-    {
+        
         _tacticalCamera.enabled = true;
         _aimCamera.enabled = false;
 
-        _tacticalCamera.Init(target);
+        _tacticalCamera.Init();
     }
 
     public void ChangeCameraMod(CameraMod cameraMod)

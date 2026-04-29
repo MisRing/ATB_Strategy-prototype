@@ -40,7 +40,7 @@ public class UIUnitTargets : MonoBehaviour
         
         if (!unit) return;
 
-        for (int i = 0; i < unit.UnitCombat.Targets.Count; i++)
+        for (int i = 0; i < unit.Combat.Targets.Count; i++)
         {
             GameObject targetObject = Instantiate(_targetIconPref, _rectTransform);
             UITargetIcon targetIcon = targetObject.GetComponent<UITargetIcon>();
