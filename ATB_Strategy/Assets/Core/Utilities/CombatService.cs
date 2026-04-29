@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public static class CombatService
 {
@@ -158,7 +159,7 @@ public static class CombatService
              + weapon.Accuracy * distanceFactor
              + (heightAdvantage * HEIGHT_ADVANTAGE_BONUS_ACCURACY))
             * target.VisionPercent
-            - target.Target.Dodge;
+            - target.Target.GetDodge(dealer.Position);
         
         float critChance = Mathf.Clamp01(hitChance - 100) + weapon.CritChance * distanceFactor;
 
@@ -262,6 +263,56 @@ public static class CombatService
         float distanceFactor = Mathf.Lerp(MIN_DISTANCE_FACTOR, MAX_DISTANCE_FACTOR, f);
 
         return distanceFactor;
+    }
+    
+    private static readonly float LOW_COVER_ANGLE_VERTICAL_THRESHHOLD = 45f;
+    private static readonly float FULL_COVER_ANGLE_VERTICAL_THRESHHOLD = 60f;
+
+    private static readonly int LOW_COVER_BONUS_DODGE = 30;
+    private static readonly int FULL_COVER_BONUS_DODGE = 60;
+
+    public static int CalculateCoverDodge(GridTile tile, int targetDodge, Vector3 dealerPos)
+    {
+        Vector3 tilePos = GridParameters.LevelGrid.GetTileWorldPos(tile);
+
+        Vector3 fullDirection = dealerPos - tilePos;
+        Vector3 flatDirection = new Vector3(fullDirection.x, 0, fullDirection.z).normalized;
+        
+        int bestCoverIndex = -1;
+        float bestDot = float.MinValue;
+
+        for (int i = 0; i < GridParameters.COVER_DIRECTIONS.Length; i++)
+        {
+            if (tile.Covers[i] == TileCover.None) continue;
+
+            float dot = Vector3.Dot(flatDirection, GridParameters.COVER_DIRECTIONS[i]);
+
+            if (dot > bestDot)
+            {
+                bestDot = dot;
+                bestCoverIndex = i;
+            }
+        }
+
+        if (bestCoverIndex == -1)
+            return targetDodge;
+
+        TileCover cover = tile.Covers[bestCoverIndex];
+        
+        float verticalAngle = Vector3.Angle(fullDirection, new Vector3(fullDirection.x, 0f, fullDirection.z));
+
+        if (cover == TileCover.Low && verticalAngle > LOW_COVER_ANGLE_VERTICAL_THRESHHOLD)
+            return targetDodge;
+
+        if (cover == TileCover.Full && verticalAngle > FULL_COVER_ANGLE_VERTICAL_THRESHHOLD)
+            return targetDodge;
+
+        return cover switch
+        {
+            TileCover.Low  => targetDodge + LOW_COVER_BONUS_DODGE,
+            TileCover.Full => targetDodge + FULL_COVER_BONUS_DODGE,
+            _ => targetDodge
+        };
     }
 }
 

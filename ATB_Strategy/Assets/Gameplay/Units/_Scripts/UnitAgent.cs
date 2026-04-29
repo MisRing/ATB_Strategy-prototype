@@ -26,6 +26,8 @@ public class UnitAgent : MonoBehaviour, IPathHandler
 
     public event Action<PathData> OnPathChanged;
     public event Action<TileCover, int, float> OnCoverChanged;
+    
+    public bool IsMoving { get { return _pathData != null; } }
 
     private void Awake()
     {

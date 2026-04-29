@@ -18368,7 +18368,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &971150677
 Transform:
   m_ObjectHideFlags: 0
@@ -22391,7 +22391,6 @@ MonoBehaviour:
   _unitsStartDirection: {x: 1, y: 0, z: 0}
   _playerUnits:
   - {fileID: 1816743775}
-  - {fileID: 971150678}
   _playerPositionPreset:
   - {x: 4, y: 1, z: 32}
   - {x: 4, y: 1, z: 35}

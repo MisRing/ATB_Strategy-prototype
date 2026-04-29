@@ -4,12 +4,10 @@ using UnityEngine;
 
 public abstract class CombatObject : MonoBehaviour
 {
-    public virtual Vector3 Position { get => BodyParts.Body.Transform.position; }
+    public virtual Vector3 Position { get => transform.position; }
 
     public virtual CombatBodyParts BodyParts { get; }
-
-    public virtual int Dodge { get => 10; }
-
+    
     public virtual UnitOwner Owner { get => UnitOwner.Enemy; }
 
     private protected virtual void OnEnable()
@@ -20,6 +18,11 @@ public abstract class CombatObject : MonoBehaviour
     private protected virtual void OnDisable()
     {
         CombatService.UnregisterCombat(this);
+    }
+
+    public virtual int GetDodge(Vector3 dealerPosition)
+    {
+        return 0;
     }
 
     public virtual void GetDamage(HitResult result)

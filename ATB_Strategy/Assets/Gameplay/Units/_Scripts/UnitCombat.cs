@@ -10,9 +10,7 @@ public class UnitCombat : CombatObject
     [SerializeField] private CombatBodyParts _bodyParts;
 
     public override UnitOwner Owner { get => _unitController.Owner; }
-
-    public override int Dodge { get => _unitController.UnitStats.Dodge; }
-
+    
     public List<CombatTarget> Targets = new List<CombatTarget>();
     public event Action OnUnitDie;
 
@@ -38,6 +36,17 @@ public class UnitCombat : CombatObject
     {
         base.OnDisable();
         CombatService.OnVisibilityChanged -= SetVisibility;
+    }
+
+    public override int GetDodge(Vector3 dealerPosition)
+    {
+        if (_unitController.AgentController.IsMoving) return _unitController.UnitStats.Dodge;
+        
+        Vector3Int tilePos = _unitController.AgentController.CurrentTile;
+        GridTile tile = GridParameters.LevelGrid.GetTile(tilePos.x, tilePos.z, tilePos.y);
+        int dodge = CombatService.CalculateCoverDodge(tile, _unitController.UnitStats.Dodge, dealerPosition);
+        
+        return dodge;
     }
 
     public void SetVisibility()
