@@ -12,12 +12,12 @@ public abstract class CombatObject : MonoBehaviour
 
     private protected virtual void OnEnable()
     {
-        CombatService.RegisterCombat(this);
+        CombatManager.RegisterCombat(this);
     }
     
     private protected virtual void OnDisable()
     {
-        CombatService.UnregisterCombat(this);
+        CombatManager.UnregisterCombat(this);
     }
 
     public virtual int GetDodge(Vector3 dealerPosition)

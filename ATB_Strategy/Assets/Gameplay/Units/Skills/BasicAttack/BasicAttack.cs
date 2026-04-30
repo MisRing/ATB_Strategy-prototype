@@ -93,7 +93,7 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         
         yield return _skillController.Unit.Animator.Aim(aimDuration, targetTransform);
         
-        float visionPercent = CombatService.GetVisionPercent(
+        float visionPercent = CombatManager.GetVisionPercent(
             _skillController.Unit.Combat.Position + Vector3.up,
             target
             );

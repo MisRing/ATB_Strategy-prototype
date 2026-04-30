@@ -90,7 +90,7 @@ public class TurnManager : MonoBehaviour
     private void EndTurn()
     {
         OnTurnEnded?.Invoke();
-        CombatService.ResetVisibility(); //change this
+        CombatManager.ResetVisibility(); //change this
 
         _currentTurn++;
         _lastTurnPause = false;

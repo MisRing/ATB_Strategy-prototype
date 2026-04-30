@@ -1,150 +1,22 @@
 using UnityEngine;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 
 public static class CombatService
 {
     private static readonly int HEIGHT_ADVANTAGE_BONUS_ACCURACY = 5;
     
-    private static readonly float MELEE_DISTANCE_THRESHHOLD = 5f;
-    private static readonly float MEDIUM_DISTANCE_THRESHHOLD = 15f;
-    private static readonly float RANGE_DISTANCE_THRESHHOLD = 20f;
+    private static readonly float MELEE_DISTANCE_THRESHOLD = 5f;
+    private static readonly float MEDIUM_DISTANCE_THRESHOLD = 15f;
+    private static readonly float RANGE_DISTANCE_THRESHOLD = 20f;
 
     private static readonly float MAX_DISTANCE_FACTOR = 1f;
     private static readonly float MIN_DISTANCE_FACTOR = -0.5f;
     
-    private static readonly List<CombatObject> COMBATS_ON_LEVEL = new List<CombatObject>();
+    private static readonly float LOW_COVER_ANGLE_VERTICAL_THRESHOLD = 45f;
+    private static readonly float FULL_COVER_ANGLE_VERTICAL_THRESHOLD = 60f;
 
-    public static event System.Action OnVisibilityChanged;
-    private static bool _needToResetVisibility = false;
-
-    public static void TriggerVisibilityReset()
-    {
-        _needToResetVisibility = true;
-    }
-
-    public static void ResetVisibility()
-    {
-        if (!_needToResetVisibility) return;
-
-        _needToResetVisibility = false;
-        OnVisibilityChanged?.Invoke();
-    }
+    private static readonly int LOW_COVER_BONUS_DODGE = 30;
+    private static readonly int FULL_COVER_BONUS_DODGE = 60;
     
-    public static void RegisterCombat(CombatObject comb)
-    {
-        if (COMBATS_ON_LEVEL.Contains(comb)) return;
-        COMBATS_ON_LEVEL.Add(comb);
-    }
-    
-    public static void UnregisterCombat(CombatObject comb)
-    {
-        if (!COMBATS_ON_LEVEL.Contains(comb)) return;
-        COMBATS_ON_LEVEL.Remove(comb);
-    }
-    
-    public static List<CombatTarget> GetCombats(CombatObject unitCombat, float range)
-    {
-        return GetCombats(unitCombat, range, UnitOwner.None);
-    }
-    
-    public static List<CombatTarget> GetCombats(CombatObject unitCombat, float range, UnitOwner ally)
-    {
-        float sqrRange = range * range;
-        Vector3 unitPosition = unitCombat.Position;
-
-        List<CombatTarget> combatsOnRange = new List<CombatTarget>();
-
-        foreach (CombatObject comb in COMBATS_ON_LEVEL)
-        {
-            float sqrDist = (comb.Position - unitPosition).sqrMagnitude;
-
-            if (sqrDist <= sqrRange && comb.Owner != ally)
-            {
-                float percent = GetVisionPercent(unitCombat.Position + Vector3.up, comb);
-                if(percent == 0f) continue;
-                CombatTarget target = new CombatTarget(comb, percent);
-                combatsOnRange.Add(target);
-            }
-        }
-
-        combatsOnRange.Sort((a, b) =>
-        {
-            float distA = (a.Target.Position - unitPosition).sqrMagnitude;
-            float distB = (b.Target.Position - unitPosition).sqrMagnitude;
-            return distA.CompareTo(distB);
-        });
-
-        return combatsOnRange;
-    }
-    
-    public static CombatObject GetNearestCombat(Vector3 position, float range, UnitOwner ally)
-    {
-        CombatObject combat = null;
-        float distance = range;
-
-        foreach (CombatObject comb in COMBATS_ON_LEVEL)
-        {
-            if (comb.Owner == ally) continue;
-
-            float newDistance = Vector3.Distance(position, comb.Position);
-
-            if (newDistance <= distance)
-            {
-                distance = newDistance;
-                combat = comb;
-            }
-        }
-
-        return combat;
-    }
-
-    public static float GetVisionPercent(Vector3 fromPos, CombatObject target)
-    {
-        LayerMask mask = LayerMask.GetMask("Grid Environment");
-
-        float percent = 0;
-        if (target.BodyParts.Body.Transform)
-        {
-            percent += HasLineBetween(
-                fromPos,
-                target.BodyParts.Body.Transform.position,
-                mask
-                )
-                ? target.BodyParts.Body.Weight
-                : 0f;
-        }
-        
-        if (target.BodyParts.Head.Transform)
-        {
-            percent += HasLineBetween(
-                fromPos,
-                target.BodyParts.Head.Transform.position,
-                mask
-                )
-                ? target.BodyParts.Head.Weight
-                : 0f;
-        }
-
-        foreach (CombatBodyParts.BodyPart part in target.BodyParts.OtherParts)
-        {
-            percent += HasLineBetween(
-                fromPos,
-                part.Transform.position,
-                mask
-                )
-                ? part.Weight
-                : 0f;
-        }
-
-        return percent;
-    }
-
-    private static bool HasLineBetween(Vector3 point1, Vector3 point2, LayerMask mask)
-    {
-        return !Physics.Linecast(point1, point2, mask);
-    }
-
     public static CombatContext CalculateHitContext(CombatObject dealer, int accuracyPercent, WeaponController weapon, CombatTarget target)
     {
         CombatContext context = new CombatContext();
@@ -181,6 +53,7 @@ public static class CombatService
 
         result = new HitResult();
         result.Dealer = context.Dealer;
+        
         if (random < context.HitChance)
         {
             random = Random.Range(0, 100);
@@ -215,15 +88,17 @@ public static class CombatService
 
     private static float CalculateDistanceFactorMelee(float distance)
     {
-        if (distance <= MELEE_DISTANCE_THRESHHOLD)
+        if (distance <= MELEE_DISTANCE_THRESHOLD)
         {
             return MAX_DISTANCE_FACTOR;
         }
-        if (distance >= MEDIUM_DISTANCE_THRESHHOLD)
+        
+        if (distance >= MEDIUM_DISTANCE_THRESHOLD)
         {
             return MIN_DISTANCE_FACTOR;
         }
-        float f = (distance - MELEE_DISTANCE_THRESHHOLD) / (MEDIUM_DISTANCE_THRESHHOLD - MELEE_DISTANCE_THRESHHOLD);
+        
+        float f = (distance - MELEE_DISTANCE_THRESHOLD) / (MEDIUM_DISTANCE_THRESHOLD - MELEE_DISTANCE_THRESHOLD);
         float distanceFactor = Mathf.Lerp(MAX_DISTANCE_FACTOR, MIN_DISTANCE_FACTOR, f);
 
         return distanceFactor;
@@ -231,16 +106,17 @@ public static class CombatService
     
     private static float CalculateDistanceFactorMedium(float distance)
     {
-        if (distance <= MELEE_DISTANCE_THRESHHOLD)
+        if (distance <= MELEE_DISTANCE_THRESHOLD)
         {
-            float f = distance / MELEE_DISTANCE_THRESHHOLD;
+            float f = distance / MELEE_DISTANCE_THRESHOLD;
             float distanceFactor = Mathf.Lerp(MIN_DISTANCE_FACTOR, MAX_DISTANCE_FACTOR, f);
 
             return distanceFactor;
         }
-        if (distance >= MEDIUM_DISTANCE_THRESHHOLD)
+        
+        if (distance >= MEDIUM_DISTANCE_THRESHOLD)
         {
-            float f = (distance - MEDIUM_DISTANCE_THRESHHOLD) / (RANGE_DISTANCE_THRESHHOLD - MEDIUM_DISTANCE_THRESHHOLD);
+            float f = (distance - MEDIUM_DISTANCE_THRESHOLD) / (RANGE_DISTANCE_THRESHOLD - MEDIUM_DISTANCE_THRESHOLD);
             float distanceFactor = Mathf.Lerp(MAX_DISTANCE_FACTOR, MIN_DISTANCE_FACTOR, f);
 
             return distanceFactor;
@@ -251,25 +127,21 @@ public static class CombatService
     
     private static float CalculateDistanceFactorRange(float distance)
     {
-        if (distance <= MELEE_DISTANCE_THRESHHOLD)
+        if (distance <= MELEE_DISTANCE_THRESHOLD)
         {
             return MIN_DISTANCE_FACTOR;
         }
-        if (distance >= MEDIUM_DISTANCE_THRESHHOLD)
+        
+        if (distance >= MEDIUM_DISTANCE_THRESHOLD)
         {
             return MAX_DISTANCE_FACTOR;
         }
-        float f = (distance - MELEE_DISTANCE_THRESHHOLD) / (MEDIUM_DISTANCE_THRESHHOLD - MELEE_DISTANCE_THRESHHOLD);
+        
+        float f = (distance - MELEE_DISTANCE_THRESHOLD) / (MEDIUM_DISTANCE_THRESHOLD - MELEE_DISTANCE_THRESHOLD);
         float distanceFactor = Mathf.Lerp(MIN_DISTANCE_FACTOR, MAX_DISTANCE_FACTOR, f);
 
         return distanceFactor;
     }
-    
-    private static readonly float LOW_COVER_ANGLE_VERTICAL_THRESHHOLD = 45f;
-    private static readonly float FULL_COVER_ANGLE_VERTICAL_THRESHHOLD = 60f;
-
-    private static readonly int LOW_COVER_BONUS_DODGE = 30;
-    private static readonly int FULL_COVER_BONUS_DODGE = 60;
 
     public static int CalculateCoverDodge(GridTile tile, int targetDodge, Vector3 dealerPos)
     {
@@ -301,10 +173,10 @@ public static class CombatService
         
         float verticalAngle = Vector3.Angle(fullDirection, new Vector3(fullDirection.x, 0f, fullDirection.z));
 
-        if (cover == TileCover.Low && verticalAngle > LOW_COVER_ANGLE_VERTICAL_THRESHHOLD)
+        if (cover == TileCover.Low && verticalAngle > LOW_COVER_ANGLE_VERTICAL_THRESHOLD)
             return targetDodge;
 
-        if (cover == TileCover.Full && verticalAngle > FULL_COVER_ANGLE_VERTICAL_THRESHHOLD)
+        if (cover == TileCover.Full && verticalAngle > FULL_COVER_ANGLE_VERTICAL_THRESHOLD)
             return targetDodge;
 
         return cover switch
@@ -333,16 +205,4 @@ public struct HitResult
     public CombatObject Dealer;
     public int Damage; 
     public bool IsCritical;
-}
-
-public struct CombatTarget
-{
-    public CombatObject Target;
-    public float VisionPercent;
-
-    public CombatTarget(CombatObject target, float visionPercent)
-    {
-        Target = target;
-        VisionPercent = visionPercent;
-    }
 }

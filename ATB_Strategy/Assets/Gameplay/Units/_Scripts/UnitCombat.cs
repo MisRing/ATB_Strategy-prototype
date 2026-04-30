@@ -30,18 +30,18 @@ public class UnitCombat : CombatObject
     private protected override void OnEnable()
     {
         base.OnEnable();
-        CombatService.OnVisibilityChanged += SetVisibility;
+        CombatManager.OnVisibilityChanged += SetVisibility;
     }
 
     private protected override void OnDisable()
     {
         base.OnDisable();
-        CombatService.OnVisibilityChanged -= SetVisibility;
+        CombatManager.OnVisibilityChanged -= SetVisibility;
     }
 
     public void SetVisibility()
     {
-        Targets = CombatService.GetCombats(this, _unit.Stats.VisionRange, _unit.Owner);
+        Targets = CombatManager.GetCombats(this, _unit.Stats.VisionRange, _unit.Owner);
     }
 
     public int CheckTarget(UnitController unit)
@@ -105,8 +105,8 @@ public class UnitCombat : CombatObject
         _unit.Animator.DeathAnimation(lastHit.Dealer.Position);
         _unit.Agent.RemoveFromGrid();
         
-        CombatService.UnregisterCombat(this);
-        CombatService.TriggerVisibilityReset();
+        CombatManager.UnregisterCombat(this);
+        CombatManager.TriggerVisibilityReset();
         OnUnitDie?.Invoke();
     }
 }
