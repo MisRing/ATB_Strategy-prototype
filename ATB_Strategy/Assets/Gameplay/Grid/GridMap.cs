@@ -5,6 +5,7 @@ using UnityEngine;
 public class GridMap : MonoBehaviour
 {
     [SerializeField] private List<TArray<GridTile>> _grid;
+    [SerializeField] private List<GridTile> _tilesWithCover;
 
     public int Floors { get { return _grid.Count; } }
     public int SizeX { get { return _grid[0].Size.x; } }
@@ -18,7 +19,8 @@ public class GridMap : MonoBehaviour
     public void BuildGrid(int sizeX, int sizeZ, int floors)
     {
         _grid = new List<TArray<GridTile>>();
-        GridMapExtension.BuildGrid(ref _grid, sizeX, sizeZ, floors, transform.position, this);
+        _tilesWithCover =  new List<GridTile>();
+        GridMapExtension.BuildGrid(ref _grid, ref _tilesWithCover, sizeX, sizeZ, floors, transform.position, this);
         GridParameters.LevelGrid = this;
     }
 
@@ -82,5 +84,22 @@ public class GridMap : MonoBehaviour
         worldPos += transform.position;
 
         return worldPos;
+    }
+
+    public List<GridTile> GetTilesWithCover(Vector3 position, float range)
+    {
+        List<GridTile> tiles = new List<GridTile>();
+
+        foreach (GridTile tile in _tilesWithCover)
+        {
+            Vector3 tilePos = GetTileWorldPos(tile);
+
+            if (Vector3.Distance(position, tilePos) <= range)
+            {
+                tiles.Add(tile);
+            }
+        }
+
+        return tiles;
     }
 }

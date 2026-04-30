@@ -6,7 +6,7 @@ using UnityEditor.SceneManagement;
 
 public static class GridMapExtension
 {
-    public static void BuildGrid(ref List<TArray<GridTile>> grid, int newX, int newZ, int floorsCount, Vector3 gridOffset, GridMap gridMapObject)
+    public static void BuildGrid(ref List<TArray<GridTile>> grid, ref List<GridTile> tilesWithCover, int newX, int newZ, int floorsCount, Vector3 gridOffset, GridMap gridMapObject)
     {
         for (int f = 0; f < floorsCount; f++)
         {
@@ -28,6 +28,10 @@ public static class GridMapExtension
                     SetTileObstacles(ref newTile, gridOffset);
 
                     SetTileCovers(ref newTile, gridOffset);
+                    if (newTile.Covers[0] > 0 || newTile.Covers[1] > 0 || newTile.Covers[2] > 0 || newTile.Covers[3] > 0)
+                    {
+                        tilesWithCover.Add(newTile);
+                    }
 
                     floorGrid[x, z] = newTile;
                 }

@@ -67,8 +67,13 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
             _skillController.Unit.Combat.Weapon,
             _unitCombat.Targets[_currentTarget]
             );
-        
-        _skillController.Unit.PreviewAnimator.AimToTarget(_unitCombat.Targets[_currentTarget].Target.BodyParts.Body.Transform);
+
+        if (_onPrepare)
+        {
+            _skillController.Unit.PreviewAnimator.AimToTarget(
+                _unitCombat.Targets[_currentTarget].Target.BodyParts.Body.Transform
+                );
+        }
     }
 
     public override bool Execute(ref int cost)

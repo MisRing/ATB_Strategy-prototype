@@ -14,6 +14,7 @@ public class SceneEntryPoint : MonoBehaviour
     [SerializeField] private List<UnitController> _playerUnits = new List<UnitController>();
     [SerializeField] private List<Vector3Int> _playerPositionPreset = new List<Vector3Int>();
     [SerializeField] private List<UnitController> _enemyUnits = new List<UnitController>();
+    private UnitAIController[] _enemyAIControls;
     [SerializeField] private List<Vector3Int> _enemyPositionPreset = new List<Vector3Int>();
 
     private void Awake()
@@ -27,7 +28,7 @@ public class SceneEntryPoint : MonoBehaviour
         SetUnitsOnLevel();
         
         _playerController.Init(_playerUnits);
-        _enemyController.Init(_enemyUnits);
+        _enemyController.Init(_enemyUnits, _enemyAIControls);
         _playerController.CameraController.Init();
 
         Debug.Log("Initializing complete.");
@@ -42,10 +43,13 @@ public class SceneEntryPoint : MonoBehaviour
             _playerUnits[i].gameObject.transform.rotation = startDirection;
         }
         
+        _enemyAIControls = new UnitAIController[_enemyUnits.Count];
         for (int i = 0; i < _enemyUnits.Count; i++)
         {
             _enemyUnits[i].Init(GridParameters.LevelGrid.GetTile(_enemyPositionPreset[i].x, _enemyPositionPreset[i].z, _enemyPositionPreset[i].y));
             _enemyUnits[i].gameObject.transform.rotation = startDirection;
+            _enemyAIControls[i] = _enemyUnits[i].gameObject.AddComponent<UnitAIController>();
+            _enemyAIControls[i].Init();
         }
     }
     

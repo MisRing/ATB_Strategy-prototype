@@ -62863,6 +62863,5559 @@ MonoBehaviour:
       PositionZ: 49
       Floor: 1
       DeltaY: 3.01
+  _tilesWithCover:
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 14
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 15
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 16
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 17
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 18
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 19
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 20
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 21
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 22
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 23
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 31
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 32
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 33
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 34
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 35
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 36
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 37
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 38
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 39
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 40
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 41
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 42
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 43
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 44
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 45
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 46
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 47
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 48
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 49
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 8
+    PositionZ: 14
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 8
+    PositionZ: 23
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 8
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 9
+    PositionZ: 14
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 9
+    PositionZ: 23
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 9
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 10
+    PositionZ: 14
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 10
+    PositionZ: 15
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 10
+    PositionZ: 23
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 10
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000002000000
+    Owner: {fileID: 0}
+    PositionX: 11
+    PositionZ: 14
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 11
+    PositionZ: 15
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 11
+    PositionZ: 16
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 12
+    PositionZ: 14
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 12
+    PositionZ: 15
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 12
+    PositionZ: 16
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000002000000
+    Owner: {fileID: 0}
+    PositionX: 13
+    PositionZ: 14
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 13
+    PositionZ: 15
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 14
+    PositionZ: 0
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 14
+    PositionZ: 1
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 14
+    PositionZ: 2
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 14
+    PositionZ: 3
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 14
+    PositionZ: 4
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 14
+    PositionZ: 5
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 14
+    PositionZ: 6
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 14
+    PositionZ: 7
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 14
+    PositionZ: 8
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 14
+    PositionZ: 9
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 14
+    PositionZ: 10
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 14
+    PositionZ: 11
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 14
+    PositionZ: 12
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 14
+    PositionZ: 13
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 17
+    PositionZ: 41
+    Floor: 0
+    DeltaY: 0.5
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 17
+    PositionZ: 42
+    Floor: 0
+    DeltaY: 0.5
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 17
+    PositionZ: 43
+    Floor: 0
+    DeltaY: 0.5
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 17
+    PositionZ: 44
+    Floor: 0
+    DeltaY: 0.5
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 17
+    PositionZ: 45
+    Floor: 0
+    DeltaY: 0.5
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 18
+    PositionZ: 46
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 19
+    PositionZ: 46
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 20
+    PositionZ: 11
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 20
+    PositionZ: 12
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 20
+    PositionZ: 13
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 20
+    PositionZ: 14
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 20
+    PositionZ: 40
+    Floor: 0
+    DeltaY: 0.5
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 20
+    PositionZ: 46
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 21
+    PositionZ: 11
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 21
+    PositionZ: 12
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 21
+    PositionZ: 13
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 21
+    PositionZ: 14
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 21
+    PositionZ: 40
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 21
+    PositionZ: 46
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 22
+    PositionZ: 11
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 22
+    PositionZ: 12
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 22
+    PositionZ: 13
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 22
+    PositionZ: 14
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 22
+    PositionZ: 27
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 22
+    PositionZ: 28
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 22
+    PositionZ: 29
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 22
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 22
+    PositionZ: 40
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 22
+    PositionZ: 46
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 23
+    PositionZ: 11
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 23
+    PositionZ: 12
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 23
+    PositionZ: 13
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 23
+    PositionZ: 14
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 23
+    PositionZ: 27
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 23
+    PositionZ: 28
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 23
+    PositionZ: 29
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 23
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 23
+    PositionZ: 41
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 23
+    PositionZ: 42
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 23
+    PositionZ: 43
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 23
+    PositionZ: 44
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 23
+    PositionZ: 45
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 24
+    PositionZ: 21
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 24
+    PositionZ: 27
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 24
+    PositionZ: 28
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 24
+    PositionZ: 29
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 24
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 24
+    PositionZ: 39
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 24
+    PositionZ: 40
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 7
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 8
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 9
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 10
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 20
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 22
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 27
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 28
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 29
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 35
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 36
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 37
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 38
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000002000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 39
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 40
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 41
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 42
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 43
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 7
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 8
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 9
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 10
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 20
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 22
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 35
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 36
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 37
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 38
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 39
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 40
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 41
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000002000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 42
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 43
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 44
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 7
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 8
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 9
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 10
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 20
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 22
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 27
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 28
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 29
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 35
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 36
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 37
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 38
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 39
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 40
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 41
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 42
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 43
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 44
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 7
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 8
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 9
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 10
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 21
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 27
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 28
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 29
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 31
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 35
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 36
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 37
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 38
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 39
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 40
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 41
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 42
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 43
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 44
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 29
+    PositionZ: 27
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 29
+    PositionZ: 28
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 29
+    PositionZ: 29
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 29
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 29
+    PositionZ: 31
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 29
+    PositionZ: 41
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 29
+    PositionZ: 42
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 29
+    PositionZ: 43
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 29
+    PositionZ: 44
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 30
+    PositionZ: 27
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 30
+    PositionZ: 28
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 30
+    PositionZ: 29
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 30
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 32
+    PositionZ: 7
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 32
+    PositionZ: 8
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 32
+    PositionZ: 9
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 32
+    PositionZ: 10
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 32
+    PositionZ: 17
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 32
+    PositionZ: 18
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 32
+    PositionZ: 19
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 32
+    PositionZ: 20
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 32
+    PositionZ: 21
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 32
+    PositionZ: 22
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 32
+    PositionZ: 27
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 32
+    PositionZ: 28
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 32
+    PositionZ: 29
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 32
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 33
+    PositionZ: 7
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 33
+    PositionZ: 8
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 33
+    PositionZ: 9
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 33
+    PositionZ: 10
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 33
+    PositionZ: 11
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 33
+    PositionZ: 16
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 33
+    PositionZ: 23
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 33
+    PositionZ: 27
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 33
+    PositionZ: 28
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 33
+    PositionZ: 29
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 33
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 34
+    PositionZ: 7
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 34
+    PositionZ: 8
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 34
+    PositionZ: 9
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 34
+    PositionZ: 10
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 34
+    PositionZ: 11
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 34
+    PositionZ: 17
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 34
+    PositionZ: 18
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 34
+    PositionZ: 19
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 34
+    PositionZ: 20
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 34
+    PositionZ: 21
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 34
+    PositionZ: 22
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 34
+    PositionZ: 27
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 34
+    PositionZ: 28
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 34
+    PositionZ: 29
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 34
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 35
+    PositionZ: 7
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 35
+    PositionZ: 8
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 35
+    PositionZ: 9
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 35
+    PositionZ: 10
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 35
+    PositionZ: 27
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 35
+    PositionZ: 28
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 35
+    PositionZ: 29
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 35
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 37
+    PositionZ: 27
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 37
+    PositionZ: 28
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 37
+    PositionZ: 29
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 37
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 38
+    PositionZ: 27
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 38
+    PositionZ: 28
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 38
+    PositionZ: 29
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 38
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 38
+    PositionZ: 31
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 39
+    PositionZ: 27
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 39
+    PositionZ: 28
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 39
+    PositionZ: 29
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 39
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.05
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 39
+    PositionZ: 31
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 40
+    PositionZ: 2
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 40
+    PositionZ: 12
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 40
+    PositionZ: 27
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 40
+    PositionZ: 28
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 40
+    PositionZ: 29
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 40
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 41
+    PositionZ: 2
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 41
+    PositionZ: 12
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 42
+    PositionZ: 2
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 42
+    PositionZ: 12
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 0
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 1
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 2
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 12
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 13
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 14
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 15
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 16
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 17
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 18
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 19
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 20
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 21
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 22
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 23
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 24
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 25
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 26
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 27
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 28
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 29
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 30
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 31
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 32
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 33
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 34
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 35
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 36
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 37
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 38
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 39
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 40
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 41
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 42
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 43
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 44
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 45
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 46
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 47
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 48
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 43
+    PositionZ: 49
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 2
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 3
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 5
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 6
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 7
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 8
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 9
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 10
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 11
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 12
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 14
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 15
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 16
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 17
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 18
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 19
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 20
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 21
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 22
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 23
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 24
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 25
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 26
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 27
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 28
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 29
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 30
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 31
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 32
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 33
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 34
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 35
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 36
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 37
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 38
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 39
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 40
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 41
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 42
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 43
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 44
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 45
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 46
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 47
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 1
+    PositionZ: 48
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 2
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 2
+    PositionZ: 3
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 2
+    PositionZ: 5
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 2
+    PositionZ: 13
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 2
+    PositionZ: 48
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 3
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 3
+    PositionZ: 4
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 3
+    PositionZ: 13
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 3
+    PositionZ: 48
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 4
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 4
+    PositionZ: 12
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 4
+    PositionZ: 14
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 4
+    PositionZ: 48
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 12
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 14
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 15
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 16
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 17
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 18
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 19
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 20
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 21
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 22
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 23
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 30
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 31
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 32
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 33
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 34
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 35
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 36
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 37
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 38
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 39
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 44
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 45
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 46
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 47
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 5
+    PositionZ: 48
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 6
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 6
+    PositionZ: 12
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 6
+    PositionZ: 24
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 6
+    PositionZ: 29
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 6
+    PositionZ: 40
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 6
+    PositionZ: 43
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 10
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 7
+    PositionZ: 12
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 8
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 8
+    PositionZ: 7
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 8
+    PositionZ: 8
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 8
+    PositionZ: 9
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 8
+    PositionZ: 11
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 8
+    PositionZ: 13
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 9
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 9
+    PositionZ: 6
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 9
+    PositionZ: 11
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 9
+    PositionZ: 13
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 10
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 10
+    PositionZ: 7
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 10
+    PositionZ: 8
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 10
+    PositionZ: 9
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 10
+    PositionZ: 10
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 10
+    PositionZ: 12
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 11
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 11
+    PositionZ: 12
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 11
+    PositionZ: 14
+    Floor: 1
+    DeltaY: 2.55
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 12
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 12
+    PositionZ: 2
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 12
+    PositionZ: 3
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 12
+    PositionZ: 6
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 12
+    PositionZ: 7
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 12
+    PositionZ: 8
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 12
+    PositionZ: 9
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 12
+    PositionZ: 10
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 12
+    PositionZ: 11
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 12
+    PositionZ: 12
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 12
+    PositionZ: 14
+    Floor: 1
+    DeltaY: 2.55
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 13
+    PositionZ: 4
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 13
+    PositionZ: 5
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 39
+    Floor: 1
+    DeltaY: 2.6
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 40
+    Floor: 1
+    DeltaY: 2.55
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 39
+    Floor: 1
+    DeltaY: 2.6
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 40
+    Floor: 1
+    DeltaY: 2.55
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 41
+    Floor: 1
+    DeltaY: 2.55
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 42
+    Floor: 1
+    DeltaY: 2.55
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 39
+    Floor: 1
+    DeltaY: 2.6
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 40
+    Floor: 1
+    DeltaY: 2.55
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 41
+    Floor: 1
+    DeltaY: 2.55
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 42
+    Floor: 1
+    DeltaY: 2.55
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 39
+    Floor: 1
+    DeltaY: 2.55
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 40
+    Floor: 1
+    DeltaY: 2.55
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 28
+    PositionZ: 42
+    Floor: 1
+    DeltaY: 2.55
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 44
+    PositionZ: 3
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 44
+    PositionZ: 11
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 44
+    PositionZ: 42
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 44
+    PositionZ: 45
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000002000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 2
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 12
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 13
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 14
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000002000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 16
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 17
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 18
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 19
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 20
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 21
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 22
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 23
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 24
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 25
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 26
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 27
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 28
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 30
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 31
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 32
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 33
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 34
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 35
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 36
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 37
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 38
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 39
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 40
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 41
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 43
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 44
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 46
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 47
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 45
+    PositionZ: 48
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 46
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 46
+    PositionZ: 14
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 46
+    PositionZ: 16
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 46
+    PositionZ: 28
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 46
+    PositionZ: 30
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 46
+    PositionZ: 48
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 47
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 47
+    PositionZ: 15
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 47
+    PositionZ: 28
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 47
+    PositionZ: 30
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 47
+    PositionZ: 48
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 48
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 48
+    PositionZ: 29
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 48
+    PositionZ: 48
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 49
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 49
+    PositionZ: 48
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 50
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 50
+    PositionZ: 15
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 50
+    PositionZ: 29
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 50
+    PositionZ: 48
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 14
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 16
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 18
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 19
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 20
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 24
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 25
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 26
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 28
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 30
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 31
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 32
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 35
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 36
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 37
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 38
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 39
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 40
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 41
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 42
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 43
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 46
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 47
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 51
+    PositionZ: 48
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 52
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 52
+    PositionZ: 11
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 52
+    PositionZ: 12
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 52
+    PositionZ: 13
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 52
+    PositionZ: 14
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 52
+    PositionZ: 16
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 52
+    PositionZ: 17
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 52
+    PositionZ: 21
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 52
+    PositionZ: 23
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 52
+    PositionZ: 27
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 52
+    PositionZ: 28
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 52
+    PositionZ: 33
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 52
+    PositionZ: 34
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 52
+    PositionZ: 44
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 52
+    PositionZ: 45
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 10
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 16
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 18
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 19
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 21
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 23
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000001000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 25
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 26
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 28
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000002000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 30
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 31
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 32
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 35
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 36
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 37
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 38
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 39
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 40
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 41
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 42
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 43
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 46
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 47
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 53
+    PositionZ: 48
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 54
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 54
+    PositionZ: 10
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 54
+    PositionZ: 16
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 54
+    PositionZ: 20
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 54
+    PositionZ: 24
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 54
+    PositionZ: 28
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 54
+    PositionZ: 30
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 54
+    PositionZ: 32
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 54
+    PositionZ: 33
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 54
+    PositionZ: 34
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 54
+    PositionZ: 35
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 54
+    PositionZ: 38
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 54
+    PositionZ: 39
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 54
+    PositionZ: 40
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 54
+    PositionZ: 41
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 54
+    PositionZ: 48
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 55
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 55
+    PositionZ: 10
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 55
+    PositionZ: 16
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 55
+    PositionZ: 18
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 55
+    PositionZ: 21
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 55
+    PositionZ: 28
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 55
+    PositionZ: 30
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 55
+    PositionZ: 31
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 55
+    PositionZ: 36
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 55
+    PositionZ: 37
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 55
+    PositionZ: 42
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 55
+    PositionZ: 44
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 55
+    PositionZ: 45
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 55
+    PositionZ: 46
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 55
+    PositionZ: 48
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 10
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 16
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 17
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 19
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 20
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 22
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 26
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 27
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 28
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 30
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 32
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 33
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 34
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 35
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 36
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 37
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 38
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 39
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 40
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 41
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 43
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 47
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 56
+    PositionZ: 48
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 11
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 12
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 13
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 14
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 16
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 17
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 19
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 20
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 22
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 25
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 28
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 30
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 31
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 34
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 35
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 39
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 43
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000001000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 45
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 46
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 57
+    PositionZ: 48
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 1
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 2
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 3
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 4
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 5
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 6
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 7
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 8
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 9
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 10
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 11
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 12
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 13
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 14
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 16
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 17
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 19
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 20
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 22
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 23
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 24
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 25
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000020000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 28
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000200000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 30
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 31
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 32
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 33
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 34
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 35
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 36
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 37
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000002000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 38
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 39
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 40
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 41
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 42
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 43
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 44
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 45
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 46
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 47
+    Floor: 1
+    DeltaY: 3.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 02000000020000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 58
+    PositionZ: 48
+    Floor: 1
+    DeltaY: 3.01
 --- !u!4 &1356297844
 Transform:
   m_ObjectHideFlags: 0
