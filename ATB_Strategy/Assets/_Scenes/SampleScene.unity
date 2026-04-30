@@ -2713,6 +2713,118 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 252403612}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &266103562
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 266103563}
+  - component: {fileID: 266103566}
+  - component: {fileID: 266103565}
+  - component: {fileID: 266103564}
+  m_Layer: 6
+  m_Name: Low obstacle (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &266103563
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266103562}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 21, y: 0.5, z: 18.5}
+  m_LocalScale: {x: 1, y: 1, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2074635650}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &266103564
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266103562}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &266103565
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266103562}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 11970e5a4bf49534d91616da2cc47dcc, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &266103566
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266103562}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &275766518
 GameObject:
   m_ObjectHideFlags: 0
@@ -11091,6 +11203,118 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008801341}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1023088689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1023088690}
+  - component: {fileID: 1023088693}
+  - component: {fileID: 1023088692}
+  - component: {fileID: 1023088691}
+  m_Layer: 6
+  m_Name: Low obstacle (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1023088690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023088689}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 30, y: 0.5, z: 15}
+  m_LocalScale: {x: 1, y: 1, z: 3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2074635650}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1023088691
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023088689}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1023088692
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023088689}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 11970e5a4bf49534d91616da2cc47dcc, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1023088693
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023088689}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1035192496
 GameObject:
   m_ObjectHideFlags: 0
@@ -11503,6 +11727,118 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1055271696}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1061367524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1061367525}
+  - component: {fileID: 1061367528}
+  - component: {fileID: 1061367527}
+  - component: {fileID: 1061367526}
+  m_Layer: 6
+  m_Name: Low obstacle (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1061367525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061367524}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 26, y: 0.5, z: 15}
+  m_LocalScale: {x: 3, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2074635650}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1061367526
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061367524}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1061367527
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061367524}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 11970e5a4bf49534d91616da2cc47dcc, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1061367528
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061367524}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1066986440
 GameObject:
@@ -14716,6 +15052,118 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336704708}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1340709456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1340709457}
+  - component: {fileID: 1340709460}
+  - component: {fileID: 1340709459}
+  - component: {fileID: 1340709458}
+  m_Layer: 6
+  m_Name: Low obstacle (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1340709457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340709456}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 20, y: 0.5, z: 24}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2074635650}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1340709458
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340709456}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1340709459
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340709456}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 11970e5a4bf49534d91616da2cc47dcc, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1340709460
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340709456}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1346818123
 GameObject:
@@ -21343,7 +21791,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 01000000000000000000000000000000
       Owner: {fileID: 0}
       PositionX: 30
       PositionZ: 13
@@ -21783,7 +22231,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 01000000000000000000000000000000
       Owner: {fileID: 0}
       PositionX: 25
       PositionZ: 14
@@ -21791,7 +22239,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 01000000000000000000000000000000
       Owner: {fileID: 0}
       PositionX: 26
       PositionZ: 14
@@ -21799,7 +22247,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 01000000000000000000000000000000
       Owner: {fileID: 0}
       PositionX: 27
       PositionZ: 14
@@ -21815,7 +22263,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000010000000000000000000000
       Owner: {fileID: 0}
       PositionX: 29
       PositionZ: 14
@@ -21828,10 +22276,10 @@ MonoBehaviour:
       PositionX: 30
       PositionZ: 14
       Floor: 0
-      DeltaY: 0.01
+      DeltaY: 1
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000000000000000000001000000
       Owner: {fileID: 0}
       PositionX: 31
       PositionZ: 14
@@ -22255,7 +22703,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000010000000000000000000000
       Owner: {fileID: 0}
       PositionX: 24
       PositionZ: 15
@@ -22268,7 +22716,7 @@ MonoBehaviour:
       PositionX: 25
       PositionZ: 15
       Floor: 0
-      DeltaY: 0.01
+      DeltaY: 1
     - IsGround: 1
       IsEmpty: 1
       Covers: 00000000000000000000000000000000
@@ -22276,7 +22724,7 @@ MonoBehaviour:
       PositionX: 26
       PositionZ: 15
       Floor: 0
-      DeltaY: 0.01
+      DeltaY: 1
     - IsGround: 1
       IsEmpty: 1
       Covers: 00000000000000000000000000000000
@@ -22284,10 +22732,10 @@ MonoBehaviour:
       PositionX: 27
       PositionZ: 15
       Floor: 0
-      DeltaY: 0.01
+      DeltaY: 1
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000000000000000000001000000
       Owner: {fileID: 0}
       PositionX: 28
       PositionZ: 15
@@ -22295,7 +22743,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000010000000000000000000000
       Owner: {fileID: 0}
       PositionX: 29
       PositionZ: 15
@@ -22308,10 +22756,10 @@ MonoBehaviour:
       PositionX: 30
       PositionZ: 15
       Floor: 0
-      DeltaY: 0.01
+      DeltaY: 1
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000000000000000000001000000
       Owner: {fileID: 0}
       PositionX: 31
       PositionZ: 15
@@ -22743,7 +23191,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000000000000100000000000000
       Owner: {fileID: 0}
       PositionX: 25
       PositionZ: 16
@@ -22751,7 +23199,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000000000000100000000000000
       Owner: {fileID: 0}
       PositionX: 26
       PositionZ: 16
@@ -22759,7 +23207,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000000000000100000000000000
       Owner: {fileID: 0}
       PositionX: 27
       PositionZ: 16
@@ -22775,7 +23223,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000010000000000000000000000
       Owner: {fileID: 0}
       PositionX: 29
       PositionZ: 16
@@ -22788,10 +23236,10 @@ MonoBehaviour:
       PositionX: 30
       PositionZ: 16
       Floor: 0
-      DeltaY: 0.01
+      DeltaY: 1
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000000000000000000001000000
       Owner: {fileID: 0}
       PositionX: 31
       PositionZ: 16
@@ -23191,7 +23639,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 01000000000000000000000000000000
       Owner: {fileID: 0}
       PositionX: 21
       PositionZ: 17
@@ -23263,7 +23711,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000000000000100000000000000
       Owner: {fileID: 0}
       PositionX: 30
       PositionZ: 17
@@ -23663,7 +24111,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000010000000000000000000000
       Owner: {fileID: 0}
       PositionX: 20
       PositionZ: 18
@@ -23676,10 +24124,10 @@ MonoBehaviour:
       PositionX: 21
       PositionZ: 18
       Floor: 0
-      DeltaY: 0.01
+      DeltaY: 1
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000000000000000000001000000
       Owner: {fileID: 0}
       PositionX: 22
       PositionZ: 18
@@ -24143,7 +24591,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000010000000000000000000000
       Owner: {fileID: 0}
       PositionX: 20
       PositionZ: 19
@@ -24156,10 +24604,10 @@ MonoBehaviour:
       PositionX: 21
       PositionZ: 19
       Floor: 0
-      DeltaY: 0.01
+      DeltaY: 1
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000000000000000000001000000
       Owner: {fileID: 0}
       PositionX: 22
       PositionZ: 19
@@ -24631,7 +25079,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000000000000100000000000000
       Owner: {fileID: 0}
       PositionX: 21
       PositionZ: 20
@@ -25071,7 +25519,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 01000000000000000000000000000000
       Owner: {fileID: 0}
       PositionX: 16
       PositionZ: 21
@@ -25079,7 +25527,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 01000000000000000000000000000000
       Owner: {fileID: 0}
       PositionX: 17
       PositionZ: 21
@@ -25087,7 +25535,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 01000000000000000000000000000000
       Owner: {fileID: 0}
       PositionX: 18
       PositionZ: 21
@@ -25095,7 +25543,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 01000000000000000000000000000000
       Owner: {fileID: 0}
       PositionX: 19
       PositionZ: 21
@@ -25543,7 +25991,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000010000000000000000000000
       Owner: {fileID: 0}
       PositionX: 15
       PositionZ: 22
@@ -25556,7 +26004,7 @@ MonoBehaviour:
       PositionX: 16
       PositionZ: 22
       Floor: 0
-      DeltaY: 0.01
+      DeltaY: 1
     - IsGround: 1
       IsEmpty: 1
       Covers: 00000000000000000000000000000000
@@ -25564,7 +26012,7 @@ MonoBehaviour:
       PositionX: 17
       PositionZ: 22
       Floor: 0
-      DeltaY: 0.01
+      DeltaY: 1
     - IsGround: 1
       IsEmpty: 1
       Covers: 00000000000000000000000000000000
@@ -25572,7 +26020,7 @@ MonoBehaviour:
       PositionX: 18
       PositionZ: 22
       Floor: 0
-      DeltaY: 0.01
+      DeltaY: 1
     - IsGround: 1
       IsEmpty: 1
       Covers: 00000000000000000000000000000000
@@ -25580,10 +26028,10 @@ MonoBehaviour:
       PositionX: 19
       PositionZ: 22
       Floor: 0
-      DeltaY: 0.01
+      DeltaY: 1
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000000000000000000001000000
       Owner: {fileID: 0}
       PositionX: 20
       PositionZ: 22
@@ -26031,7 +26479,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000000000000100000000000000
       Owner: {fileID: 0}
       PositionX: 16
       PositionZ: 23
@@ -26039,7 +26487,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000000000000100000000000000
       Owner: {fileID: 0}
       PositionX: 17
       PositionZ: 23
@@ -26047,7 +26495,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000000000000100000000000000
       Owner: {fileID: 0}
       PositionX: 18
       PositionZ: 23
@@ -26055,7 +26503,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000000000000100000000000000
       Owner: {fileID: 0}
       PositionX: 19
       PositionZ: 23
@@ -26063,7 +26511,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 01000000000000000000000000000000
       Owner: {fileID: 0}
       PositionX: 20
       PositionZ: 23
@@ -26535,7 +26983,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000010000000000000000000000
       Owner: {fileID: 0}
       PositionX: 19
       PositionZ: 24
@@ -26548,10 +26996,10 @@ MonoBehaviour:
       PositionX: 20
       PositionZ: 24
       Floor: 0
-      DeltaY: 0.01
+      DeltaY: 1
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000000000000000000001000000
       Owner: {fileID: 0}
       PositionX: 21
       PositionZ: 24
@@ -27023,7 +27471,7 @@ MonoBehaviour:
       DeltaY: 0.01
     - IsGround: 1
       IsEmpty: 1
-      Covers: 00000000000000000000000000000000
+      Covers: 00000000000000000100000000000000
       Owner: {fileID: 0}
       PositionX: 20
       PositionZ: 25
@@ -63364,6 +63812,46 @@ MonoBehaviour:
     IsEmpty: 1
     Covers: 00000000010000000000000000000000
     Owner: {fileID: 0}
+    PositionX: 15
+    PositionZ: 22
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 16
+    PositionZ: 21
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 16
+    PositionZ: 23
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 17
+    PositionZ: 21
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 17
+    PositionZ: 23
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
     PositionX: 17
     PositionZ: 41
     Floor: 0
@@ -63402,10 +63890,50 @@ MonoBehaviour:
     DeltaY: 0.5
   - IsGround: 1
     IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 18
+    PositionZ: 21
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 18
+    PositionZ: 23
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
     Covers: 00000000000000000200000000000000
     Owner: {fileID: 0}
     PositionX: 18
     PositionZ: 46
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 19
+    PositionZ: 21
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 19
+    PositionZ: 23
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 19
+    PositionZ: 24
     Floor: 0
     DeltaY: 0.01
   - IsGround: 1
@@ -63446,6 +63974,46 @@ MonoBehaviour:
     Owner: {fileID: 0}
     PositionX: 20
     PositionZ: 14
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 20
+    PositionZ: 18
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 20
+    PositionZ: 19
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 20
+    PositionZ: 22
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 20
+    PositionZ: 23
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 20
+    PositionZ: 25
     Floor: 0
     DeltaY: 0.01
   - IsGround: 1
@@ -63498,6 +64066,30 @@ MonoBehaviour:
     DeltaY: 0.01
   - IsGround: 1
     IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 21
+    PositionZ: 17
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 21
+    PositionZ: 20
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 21
+    PositionZ: 24
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
     Covers: 02000000000000000000000000000000
     Owner: {fileID: 0}
     PositionX: 21
@@ -63542,6 +64134,22 @@ MonoBehaviour:
     Owner: {fileID: 0}
     PositionX: 22
     PositionZ: 14
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 22
+    PositionZ: 18
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 22
+    PositionZ: 19
     Floor: 0
     DeltaY: 0.01
   - IsGround: 1
@@ -63694,6 +64302,14 @@ MonoBehaviour:
     Owner: {fileID: 0}
     PositionX: 23
     PositionZ: 45
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 24
+    PositionZ: 15
     Floor: 0
     DeltaY: 0.01
   - IsGround: 1
@@ -63789,6 +64405,22 @@ MonoBehaviour:
     Covers: 01000000000000000000000000000000
     Owner: {fileID: 0}
     PositionX: 25
+    PositionZ: 14
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 25
+    PositionZ: 16
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 25
     PositionZ: 20
     Floor: 0
     DeltaY: 0.01
@@ -63941,6 +64573,22 @@ MonoBehaviour:
     Covers: 01000000000000000000000000000000
     Owner: {fileID: 0}
     PositionX: 26
+    PositionZ: 14
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 26
+    PositionZ: 16
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 26
     PositionZ: 20
     Floor: 0
     DeltaY: 0.01
@@ -64062,6 +64710,22 @@ MonoBehaviour:
     Owner: {fileID: 0}
     PositionX: 27
     PositionZ: 10
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 14
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 27
+    PositionZ: 16
     Floor: 0
     DeltaY: 0.01
   - IsGround: 1
@@ -64229,6 +64893,14 @@ MonoBehaviour:
     Covers: 00000000000000000000000001000000
     Owner: {fileID: 0}
     PositionX: 28
+    PositionZ: 15
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 28
     PositionZ: 21
     Floor: 0
     DeltaY: 0.01
@@ -64354,6 +65026,30 @@ MonoBehaviour:
     DeltaY: 0.01
   - IsGround: 1
     IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 29
+    PositionZ: 14
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 29
+    PositionZ: 15
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000010000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 29
+    PositionZ: 16
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
     Covers: 00000000020000000000000000000000
     Owner: {fileID: 0}
     PositionX: 29
@@ -64426,6 +65122,22 @@ MonoBehaviour:
     DeltaY: 0.01
   - IsGround: 1
     IsEmpty: 1
+    Covers: 01000000000000000000000000000000
+    Owner: {fileID: 0}
+    PositionX: 30
+    PositionZ: 13
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000100000000000000
+    Owner: {fileID: 0}
+    PositionX: 30
+    PositionZ: 17
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
     Covers: 00000000000000000000000002000000
     Owner: {fileID: 0}
     PositionX: 30
@@ -64454,6 +65166,30 @@ MonoBehaviour:
     Owner: {fileID: 0}
     PositionX: 30
     PositionZ: 30
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 31
+    PositionZ: 14
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 31
+    PositionZ: 15
+    Floor: 0
+    DeltaY: 0.01
+  - IsGround: 1
+    IsEmpty: 1
+    Covers: 00000000000000000000000001000000
+    Owner: {fileID: 0}
+    PositionX: 31
+    PositionZ: 16
     Floor: 0
     DeltaY: 0.01
   - IsGround: 1
@@ -71139,6 +71875,118 @@ MonoBehaviour:
   _rectTransform: {fileID: 117857837}
   _preparePanel: {fileID: 984470538}
   _targetAimUI: {fileID: 664367930}
+--- !u!1 &1602256760
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1602256761}
+  - component: {fileID: 1602256764}
+  - component: {fileID: 1602256763}
+  - component: {fileID: 1602256762}
+  m_Layer: 6
+  m_Name: Low obstacle (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1602256761
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602256760}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 17.5, y: 0.5, z: 22}
+  m_LocalScale: {x: 4, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2074635650}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1602256762
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602256760}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1602256763
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602256760}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 11970e5a4bf49534d91616da2cc47dcc, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1602256764
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602256760}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1602364269
 GameObject:
   m_ObjectHideFlags: 0
@@ -75192,6 +76040,11 @@ Transform:
   - {fileID: 966145608}
   - {fileID: 338780343}
   - {fileID: 1439635619}
+  - {fileID: 1061367525}
+  - {fileID: 1023088690}
+  - {fileID: 266103563}
+  - {fileID: 1602256761}
+  - {fileID: 1340709457}
   - {fileID: 1484543905}
   - {fileID: 669288543}
   - {fileID: 1666473329}

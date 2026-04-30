@@ -45,61 +45,66 @@ public class EnemyController : MonoBehaviour
     private void StartUnitAbility(UnitController unit)
     {
         int unitIndex = _units.IndexOf(unit);
-
         if (unitIndex == -1) return;
 
         UnitAIContext context = _unitAIControls[unitIndex].GetDecision();
+
+        bool success = context.Decision switch
+        {
+            UnitAIDecision.Attack   => TryAttack(unit, context),
+            UnitAIDecision.Relocate => TryRelocate(unit),
+            _                       => false
+        };
         
-        bool isInstant;
-
-        if (context.Decision == UnitAIDecision.None)
+        if (!success)
         {
-            if (unit.SkillController.ForceExecuteSkill(3, null, out isInstant))
-            {
-                return;
-            }
+            TryFallback(unit);
         }
-        else if (context.Decision == UnitAIDecision.Relocate)
+    }
+    
+    private bool TryAttack(UnitController unit, UnitAIContext context)
+    {
+        BasicSkill skill = unit.SkillController.GetSkillByIndex(1);
+
+        if (skill is not ITargetSwitchable attackSkill) return false;
+
+        if (context.AttackTargetID < 0) return false;
+
+        attackSkill.Switch(context.AttackTargetID);
+
+        return TryExecute(unit, 1, null);
+    }
+    
+    private bool TryRelocate(UnitController unit)
+    {
+        List<GridTile> tiles = GridParameters.LevelGrid.GetTilesWithCover(unit.transform.position, 10f);
+
+        tiles.Shuffle(); // better choice
+
+        foreach (var tile in tiles)
         {
+            if (tile.Owner != null) continue;
 
-            List<GridTile> tiles = GridParameters.LevelGrid.GetTilesWithCover(unit.transform.position, 10f);
-            tiles.Shuffle();
+            Vector3 pos = GridParameters.LevelGrid.GetTileWorldPos(tile);
 
-            for (int i = 0; i < tiles.Count; i++)
+            PointData data = new PointData
             {
-                if (tiles[i].Owner != null) continue;
+                Position = pos
+            };
 
-                PointData data = new PointData();
-
-                data.Position = GridParameters.LevelGrid.GetTileWorldPos(tiles[i]);
-
-                if (unit.SkillController.ForceExecuteSkill(0, data, out isInstant))
-                {
-                    return;
-                }
-            }
-            
-            if (unit.SkillController.ForceExecuteSkill(3, null, out isInstant))
-            {
-                return;
-            }
+            if (TryExecute(unit, 0, data)) return true;
         }
-        else if (context.Decision == UnitAIDecision.Attack)
-        {
-            BasicSkill skill = unit.SkillController.GetSkillByIndex(1);
-            if (skill is ITargetSwitchable)
-            {
-                ITargetSwitchable attackSkill = skill as ITargetSwitchable;
-                attackSkill.Switch(context.AttackTargetID);
-                if (unit.SkillController.ForceExecuteSkill(1, null, out isInstant))
-                {
-                    return;
-                }
-            }
-            if (unit.SkillController.ForceExecuteSkill(3, null, out isInstant))
-            {
-                return;
-            }
-        }
+
+        return false;
+    }
+    
+    private bool TryExecute(UnitController unit, int skillIndex, SkillData data)
+    {
+        return unit.SkillController.ForceExecuteSkill(skillIndex, data, out bool isInstant);
+    }
+    
+    private void TryFallback(UnitController unit)
+    {
+        TryExecute(unit, 3, null);
     }
 }
