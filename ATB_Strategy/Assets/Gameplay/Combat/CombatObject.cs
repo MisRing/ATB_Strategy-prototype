@@ -8,7 +8,7 @@ public abstract class CombatObject : MonoBehaviour
     
     public virtual Vector3 Position { get => transform.position; }
     
-    public virtual UnitOwner Owner { get => UnitOwner.Enemy; }
+    public virtual UnitOwner Owner { get => UnitOwner.EnemyTeam0; }
 
     private protected virtual void OnEnable()
     {

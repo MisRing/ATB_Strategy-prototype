@@ -7784,7 +7784,7 @@ GameObject:
   - component: {fileID: 723904379}
   - component: {fileID: 723904378}
   m_Layer: 0
-  m_Name: EnemyController
+  m_Name: EnemyController 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13089,7 +13089,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneEntryPoint
   _playerController: {fileID: 742375538}
-  _enemyController: {fileID: 723904378}
+  _enemyTeams:
+  - Owner: 2
+    Controller: {fileID: 723904378}
+    Units:
+    - {fileID: 382496484}
+    - {fileID: 234110440}
+    - {fileID: 1049634543}
+    AIs: []
+    StartPositions:
+    - {x: 27, y: 0, z: 20}
+    - {x: 30, y: 0, z: 18}
+    - {x: 26, y: 0, z: 16}
   _unitsStartDirection: {x: 1, y: 0, z: 0}
   _playerUnits:
   - {fileID: 548278033}
@@ -13098,14 +13109,6 @@ MonoBehaviour:
   - {x: 4, y: 1, z: 32}
   - {x: 4, y: 1, z: 35}
   - {x: 2, y: 1, z: 34}
-  _enemyUnits:
-  - {fileID: 382496484}
-  - {fileID: 234110440}
-  - {fileID: 1049634543}
-  _enemyPositionPreset:
-  - {x: 25, y: 0, z: 18}
-  - {x: 27, y: 0, z: 20}
-  - {x: 28, y: 0, z: 17}
 --- !u!114 &1156684634
 MonoBehaviour:
   m_ObjectHideFlags: 0

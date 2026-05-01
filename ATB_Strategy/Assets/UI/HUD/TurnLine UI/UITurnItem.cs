@@ -17,7 +17,7 @@ public class UITurnItem : MonoBehaviour
 
         RectTransform = GetComponent<RectTransform>();
 
-        _ownerColor.color = unit.Owner == UnitOwner.Player
+        _ownerColor.color = unit.Owner == UnitOwner.PlayerTeam
             ? Color.green
             : Color.red;
     }

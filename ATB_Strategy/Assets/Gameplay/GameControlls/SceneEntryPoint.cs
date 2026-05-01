@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ public class SceneEntryPoint : MonoBehaviour
 {
     [Header("Teams controls")]
     [SerializeField] private PlayerController _playerController;
-    [SerializeField] private EnemyController _enemyController;
+    [SerializeField] private List<TeamControlls> _enemyTeams;
     
     [Header("Start parameters")]
     [SerializeField] private Vector3 _unitsStartDirection = Vector3.right;
@@ -13,13 +14,11 @@ public class SceneEntryPoint : MonoBehaviour
     [Header("Units instance settings")]
     [SerializeField] private List<UnitController> _playerUnits = new List<UnitController>();
     [SerializeField] private List<Vector3Int> _playerPositionPreset = new List<Vector3Int>();
-    [SerializeField] private List<UnitController> _enemyUnits = new List<UnitController>();
-    private UnitAIController[] _enemyAIControls;
-    [SerializeField] private List<Vector3Int> _enemyPositionPreset = new List<Vector3Int>();
 
     private void Awake()
     {
         Debug.Log("Initializing start...");
+
         if(GridParameters.LevelGrid == null)
         {
             GridParameters.LevelGrid = FindFirstObjectByType(typeof(GridMap)) as GridMap;
@@ -27,8 +26,13 @@ public class SceneEntryPoint : MonoBehaviour
         
         SetUnitsOnLevel();
         
-        _playerController.Init(_playerUnits);
-        _enemyController.Init(_enemyUnits, _enemyAIControls);
+        _playerController?.Init(_playerUnits);
+
+        foreach (TeamControlls team in _enemyTeams)
+        {
+            team.Controller.Init(team.Units, team.AIs);
+        }
+
         _playerController.CameraController.Init();
 
         Debug.Log("Initializing complete.");
@@ -42,14 +46,18 @@ public class SceneEntryPoint : MonoBehaviour
             _playerUnits[i].Init(GridParameters.LevelGrid.GetTile(_playerPositionPreset[i].x, _playerPositionPreset[i].z, _playerPositionPreset[i].y));
             _playerUnits[i].gameObject.transform.rotation = startDirection;
         }
-        
-        _enemyAIControls = new UnitAIController[_enemyUnits.Count];
-        for (int i = 0; i < _enemyUnits.Count; i++)
+
+        foreach (TeamControlls team in _enemyTeams)
         {
-            _enemyUnits[i].Init(GridParameters.LevelGrid.GetTile(_enemyPositionPreset[i].x, _enemyPositionPreset[i].z, _enemyPositionPreset[i].y));
-            _enemyUnits[i].gameObject.transform.rotation = startDirection;
-            _enemyAIControls[i] = _enemyUnits[i].gameObject.AddComponent<UnitAIController>();
-            _enemyAIControls[i].Init();
+            team.AIs = new UnitAIController[team.Units.Count];
+            for (int i = 0; i < team.Units.Count; i++)
+            {
+                team.Units[i].Init(GridParameters.LevelGrid.GetTile(team.StartPositions[i].x, team.StartPositions[i].z, team.StartPositions[i].y));
+                team.Units[i].Owner = team.Owner;
+                team.Units[i].gameObject.transform.rotation = startDirection;
+                team.AIs[i] = team.Units[i].gameObject.AddComponent<UnitAIController>();
+                team.AIs[i].Init();
+            }
         }
     }
     
@@ -62,22 +70,38 @@ public class SceneEntryPoint : MonoBehaviour
             GridParameters.LevelGrid = FindFirstObjectByType(typeof(GridMap)) as GridMap;
         }
 
-        foreach(Vector3Int point in _playerPositionPreset)
+        if (_playerController != null)
         {
-            if(GridParameters.LevelGrid.CheckTile(point.x, point.z, point.y))
+            foreach (Vector3Int point in _playerPositionPreset)
             {
-                Gizmos.color = Color.darkGreen;
-                Gizmos.DrawSphere(GridParameters.LevelGrid.GetTileWorldPos(point.x, point.z, point.y), 0.3f);
+                if (GridParameters.LevelGrid.CheckTile(point.x, point.z, point.y))
+                {
+                    Gizmos.color = Color.darkGreen;
+                    Gizmos.DrawSphere(GridParameters.LevelGrid.GetTileWorldPos(point.x, point.z, point.y), 0.3f);
+                }
             }
         }
-        
-        foreach(Vector3Int point in _enemyPositionPreset)
+
+        foreach (TeamControlls team in _enemyTeams)
         {
-            if(GridParameters.LevelGrid.CheckTile(point.x, point.z, point.y))
+            foreach (Vector3Int point in team.StartPositions)
             {
-                Gizmos.color = Color.darkRed;
-                Gizmos.DrawSphere(GridParameters.LevelGrid.GetTileWorldPos(point.x, point.z, point.y), 0.3f);
+                if (GridParameters.LevelGrid.CheckTile(point.x, point.z, point.y))
+                {
+                    Gizmos.color = Color.darkRed;
+                    Gizmos.DrawSphere(GridParameters.LevelGrid.GetTileWorldPos(point.x, point.z, point.y), 0.3f);
+                }
             }
         }
     }
+}
+
+[Serializable]
+public class TeamControlls
+{
+    public UnitOwner Owner;
+    public EnemyController Controller;
+    public List<UnitController> Units;
+    public UnitAIController[] AIs;
+    public List<Vector3Int> StartPositions;
 }

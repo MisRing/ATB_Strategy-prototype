@@ -98,7 +98,7 @@ public class TurnManager : MonoBehaviour
         {
             foreach (UnitController unit in _unitsOnAction[_currentTurn])
             {
-                if (unit.Owner == UnitOwner.Player)
+                if (unit.Owner == UnitOwner.PlayerTeam)
                 {
                     _lastTurnPause = true;
                 }
@@ -130,7 +130,7 @@ public class TurnManager : MonoBehaviour
         {
             foreach (UnitController unit in _unitsOnAction[_currentTurn + 1])
             {
-                if (unit.Owner == UnitOwner.Player)
+                if (unit.Owner == UnitOwner.PlayerTeam)
                 {
                     endSlowdown = Mathf.Clamp01(remainingTime / _timeStopDuration);
                     endSlowdown = 1f - MathF.Pow(1f - endSlowdown, 3);

@@ -78,7 +78,7 @@ public class UITurnLine : MonoBehaviour
 
         _items[turn].Add(item);
 
-        float yPosition = unit.Owner == UnitOwner.Player ? -1 : +1;
+        float yPosition = unit.Owner == UnitOwner.PlayerTeam ? -1 : +1;
 
         yPosition *= _items[turn].Count * _ySpacing;
 

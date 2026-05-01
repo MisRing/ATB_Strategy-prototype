@@ -96,7 +96,7 @@ public class PlayerSelectionManager : MonoBehaviour
     public void SelectUnit(UnitController unit, bool focusView = true)
     {
         if (unit == SelectedUnit) return;
-        if (unit.Owner != UnitOwner.Player)
+        if (unit.Owner != UnitOwner.PlayerTeam)
         {
             TrySelectTarget(unit);
             return;

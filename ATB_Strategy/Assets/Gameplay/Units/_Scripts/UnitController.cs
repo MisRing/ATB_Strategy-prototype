@@ -67,6 +67,8 @@ public enum UnitState
 public enum UnitOwner
 {
     None,
-    Player,
-    Enemy
+    PlayerTeam,
+    EnemyTeam0,
+    EnemyTeam1,
+    EnemyTeam2,
 }
