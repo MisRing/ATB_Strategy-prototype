@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SceneEntryPoint : MonoBehaviour
 {
+    [SerializeField] private CameraController _camera;
     [Header("Teams controls")]
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private List<TeamControlls> _enemyTeams;
@@ -33,7 +34,7 @@ public class SceneEntryPoint : MonoBehaviour
             team.Controller.Init(team.Units, team.AIs);
         }
 
-        _playerController.CameraController.Init();
+        _camera.Init();
 
         Debug.Log("Initializing complete.");
     }

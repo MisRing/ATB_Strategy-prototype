@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour
 {
@@ -47,6 +47,7 @@ public class EnemyController : MonoBehaviour
         int unitIndex = _units.IndexOf(unit);
         if (unitIndex == -1) return;
 
+
         UnitAIContext context = _unitAIControls[unitIndex].GetDecision();
 
         bool success = context.Decision switch
@@ -58,7 +59,10 @@ public class EnemyController : MonoBehaviour
         
         if (!success)
         {
-            TryFallback(unit);
+            if (!TryFallback(unit))
+            {
+                Debug.LogWarning("Fallback Error!");
+            }
         }
     }
     
@@ -103,8 +107,8 @@ public class EnemyController : MonoBehaviour
         return unit.SkillController.ForceExecuteSkill(skillIndex, data, out bool isInstant);
     }
     
-    private void TryFallback(UnitController unit)
+    private bool TryFallback(UnitController unit)
     {
-        TryExecute(unit, 3, null);
+        return TryExecute(unit, 3, null);
     }
 }

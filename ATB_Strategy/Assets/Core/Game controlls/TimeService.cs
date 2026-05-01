@@ -19,6 +19,7 @@ public static class TimeService
 
     private static bool _isPaused = false;
     private static float _savedTimeSpeed;
+
     public static void GamePause(bool pause)
     {
         if(_isPaused == pause) return;
