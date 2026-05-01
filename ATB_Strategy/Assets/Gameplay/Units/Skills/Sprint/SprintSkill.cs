@@ -12,11 +12,12 @@ public class SprintSkill : BasicSkill
         _skillCooldown = 20;
     }
 
-    public override bool Execute(ref int cost)
+    public override bool Execute(out int cost)
     {
+        cost = _skillCost;
+
         if (!CanExecute()) return false;
 
-        cost = _skillCost;
         _skillCooldownTimer = _skillCooldown;
 
         _skillController.Unit.Stats.Speed.RemoveBuff(SpeedBuff);

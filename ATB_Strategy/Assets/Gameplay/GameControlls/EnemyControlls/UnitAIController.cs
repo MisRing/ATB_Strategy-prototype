@@ -1,40 +1,66 @@
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class UnitAIController : MonoBehaviour
 {
     private UnitController _unit;
 
-    private const int BASE_ATTACK_WEIGHT = 20;
-    private const int BASE_RELOCATE_WEIGHT = 20;
+    // ====== BEHAVIOR STATE ======
+    private float _aggression = 0f;   // >0 = агрессивный
+    private float _defensiveness = 0f; // >0 = осторожный
 
-    private const int NO_TARGET_PENALTY = -100;
-    private const int BAD_ATTACK_PENALTY = -40;
+    private const float STATE_DECAY = 1f;
 
-    private const int HIGH_DEFENCE = 80;
-    private const int MID_DEFENCE = 50;
+    // ====== WEIGHTS ======
+    private const int BASE_ATTACK = 20;
+    private const int BASE_MOVE = 10;
 
-    private const int NEED_RELOCATE_BONUS = 100;
-    private const int MID_RELOCATE_BONUS = 50;
-    private const int LOW_RELOCATE_BONUS = 10;
+    private const int RANDOM = 10;
 
-    private const int RANDOM_VARIATION = 10;
+    private const float IDEAL_DISTANCE = 6f;
 
     public void Init()
     {
         _unit = GetComponent<UnitController>();
     }
 
-    public UnitAIContext GetDecision()
+    public UnitAIContext GetDecision(List<CombatTarget> allTargets)
     {
+        DecayState();
+
         int targetID;
+        int attackScore = EvaluateAttack(out targetID);
+        int moveScore = EvaluateMove(out Vector3 movePos, allTargets);
 
-        int attackWeight = EvaluateAttack(out targetID);
-        int relocateWeight = EvaluateRelocate();
+        attackScore += Random.Range(-RANDOM, RANDOM);
+        moveScore += Random.Range(-RANDOM, RANDOM);
 
-        attackWeight += Random.Range(-RANDOM_VARIATION, RANDOM_VARIATION);
-        relocateWeight += Random.Range(-RANDOM_VARIATION, RANDOM_VARIATION);
+        // влияние поведения
+        attackScore += Mathf.RoundToInt(_aggression * 50f);
+        moveScore += Mathf.RoundToInt(_defensiveness * 50f);
 
-        return BuildDecision(attackWeight, relocateWeight, targetID);
+        if (attackScore > moveScore && targetID != -1)
+        {
+            return new UnitAIContext
+            {
+                Decision = UnitAIDecision.Attack,
+                AttackTargetID = targetID
+            };
+        }
+
+        if (movePos != Vector3.zero && moveScore > 0)
+        {
+            return new UnitAIContext
+            {
+                Decision = UnitAIDecision.Relocate,
+                TargetPosition = movePos
+            };
+        }
+
+        return new UnitAIContext
+        {
+            Decision = UnitAIDecision.None
+        };
     }
 
     // ===================== ATTACK =====================
@@ -44,22 +70,21 @@ public class UnitAIController : MonoBehaviour
         bestTargetID = -1;
 
         if (_unit.Combat.Targets.Count == 0)
-            return NO_TARGET_PENALTY;
+            return -100;
 
         BasicSkill skill = _unit.SkillController.GetSkillByIndex(1);
 
         if (skill is not ITargetSwitchable attackSkill)
-            return NO_TARGET_PENALTY;
+            return -100;
 
-        int bestScore = int.MinValue;
+        int bestScore = -999;
 
         for (int i = 0; i < _unit.Combat.Targets.Count; i++)
         {
             attackSkill.Switch(i);
-
             var ctx = attackSkill.SelectedTargetContext;
 
-            int score = CalculateHitScore(ctx);
+            int score = ctx.HitChance + ctx.CritChance * 4;
 
             if (score > bestScore)
             {
@@ -68,93 +93,128 @@ public class UnitAIController : MonoBehaviour
             }
         }
 
-        return BASE_ATTACK_WEIGHT + ScoreAttack(bestScore);
+        return BASE_ATTACK + ScoreAttack(bestScore);
     }
 
-    private int CalculateHitScore(CombatContext ctx)
+    private int ScoreAttack(int hit)
     {
-        return ctx.HitChance + ctx.CritChance * 4;
+        if (hit > 100) return 100;
+        if (hit > 80) return 60;
+        if (hit > 60) return 20;
+        return -40;
     }
 
-    private int ScoreAttack(int hitScore)
+    // ===================== MOVE =====================
+
+    private int EvaluateMove(out Vector3 bestPos, List<CombatTarget> allTargets)
     {
-        if (hitScore > 100) return 100;
-        if (hitScore > 80) return 60;
-        if (hitScore > 60) return 20;
+        bestPos = Vector3.zero;
+        Vector3Int currentTilePos = _unit.Agent.CurrentTile;
+        float radius = _unit.Stats.VisionRange * 0.75f;
+        List<GridTile> tiles = GridParameters.LevelGrid.GetTilesWithCover(_unit.transform.position, radius);
 
-        return BAD_ATTACK_PENALTY;
-    }
+        int bestScore = -999;
 
-    // ===================== RELOCATE =====================
-
-    private int EvaluateRelocate()
-    {
-        if (_unit.Combat.Targets.Count == 0)
-            return 0;
-
-        int weight = BASE_RELOCATE_WEIGHT;
-
-        GridTile tile = GetCurrentTile();
-
-        foreach (var target in _unit.Combat.Targets)
+        foreach (GridTile tile in tiles)
         {
-            int defence = CombatService.CalculateCoverDodge(
-                tile,
-                _unit.Stats.Dodge,
-                target.Target.Position
-            );
+            if (tile.PositionX == currentTilePos.x && tile.PositionZ == currentTilePos.z && tile.DeltaY == currentTilePos.y) continue;
 
-            weight += ScoreRelocate(defence);
+            if (tile.Owner != null) continue;
+
+            Vector3 pos = GridParameters.LevelGrid.GetTileWorldPos(tile);
+
+            int score = EvaluateTile(tile, pos, allTargets);
+
+            if (score > bestScore)
+            {
+                bestScore = score;
+                bestPos = pos;
+            }
         }
 
-        return weight;
+        return BASE_MOVE + bestScore;
     }
 
-    private int ScoreRelocate(int defence)
+    private int EvaluateTile(GridTile tile, Vector3 pos, List<CombatTarget> targets)
     {
-        if (defence <= _unit.Stats.Dodge)
-            return NEED_RELOCATE_BONUS;
+        int score = 0;
 
-        if (defence >= HIGH_DEFENCE)
-            return LOW_RELOCATE_BONUS;
-
-        if (defence >= MID_DEFENCE)
-            return MID_RELOCATE_BONUS;
-
-        return 0;
-    }
-
-    // ===================== FINAL DECISION =====================
-
-    private UnitAIContext BuildDecision(int attackWeight, int relocateWeight, int targetID)
-    {
-        UnitAIContext context = new UnitAIContext
+        foreach (var target in targets)
         {
-            AttackTargetID = targetID,
-            Decision = UnitAIDecision.None
-        };
+            Vector3 enemyPos = target.Target.Position;
 
-        if (attackWeight <= 0 && relocateWeight <= 0)
-            return context;
+            // ===== DEFENCE =====
+            int defence = CombatService.CalculateCoverDodge(tile, _unit.Stats.Dodge, enemyPos);
 
-        if (attackWeight > relocateWeight && targetID != -1)
-        {
-            context.Decision = UnitAIDecision.Attack;
+            if (defence <= _unit.Stats.Dodge)
+                score -= 50;
+            else if (defence > 80)
+                score += 40;
+            else
+                score += 10;
+
+            // ===== DISTANCE =====
+            float dist = Vector3.Distance(pos, enemyPos);
+            float distScore = Mathf.Abs(dist - IDEAL_DISTANCE);
+
+            score -= Mathf.RoundToInt(distScore * 5f);
+
+            // ===== FLANK =====
+            Vector3 toEnemy = (enemyPos - pos).normalized;
+
+            int coverIndex = GetBestCoverIndex(tile, toEnemy);
+
+            if (coverIndex != -1)
+            {
+                Vector3 coverDir = GridParameters.COVER_DIRECTIONS[coverIndex];
+
+                float dot = Vector3.Dot(coverDir, toEnemy);
+
+                if (dot < 0.3f) // плохое совпадение → фланг
+                    score += 30;
+            }
         }
-        else
-        {
-            context.Decision = UnitAIDecision.Relocate;
-        }
 
-        return context;
+        return score;
     }
 
-    // ===================== HELPERS =====================
-
-    private GridTile GetCurrentTile()
+    private int GetBestCoverIndex(GridTile tile, Vector3 dir)
     {
-        Vector3Int pos = _unit.Agent.CurrentTile;
-        return GridParameters.LevelGrid.GetTile(pos.x, pos.z, pos.y);
+        int best = -1;
+        float bestDot = -1f;
+
+        for (int i = 0; i < tile.Covers.Length; i++)
+        {
+            if (tile.Covers[i] == TileCover.None) continue;
+
+            float dot = Vector3.Dot(dir, GridParameters.COVER_DIRECTIONS[i]);
+
+            if (dot > bestDot)
+            {
+                bestDot = dot;
+                best = i;
+            }
+        }
+
+        return best;
+    }
+
+    // ===================== BEHAVIOR CONTROL =====================
+
+    public void ApplyAggression(float value)
+    {
+        _aggression += value;
+    }
+
+    public void ApplyDefensiveness(float value)
+    {
+        _defensiveness += value;
+    }
+
+    private void DecayState()
+    {
+        _aggression = Mathf.MoveTowards(_aggression, 0f, STATE_DECAY * Time.deltaTime);
+        _defensiveness = Mathf.MoveTowards(_defensiveness, 0f, STATE_DECAY * Time.deltaTime);
     }
 }
 

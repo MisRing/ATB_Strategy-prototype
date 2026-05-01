@@ -44,28 +44,26 @@ public class EnemyController : MonoBehaviour
 
     private void StartUnitAbility(UnitController unit)
     {
+        if (!_units.Contains(unit)) return;
+
         int unitIndex = _units.IndexOf(unit);
-        if (unitIndex == -1) return;
 
-
-        UnitAIContext context = _unitAIControls[unitIndex].GetDecision();
+        UnitAIContext context = _unitAIControls[unitIndex].GetDecision(GetAllCombats());
 
         bool success = context.Decision switch
         {
             UnitAIDecision.Attack   => TryAttack(unit, context),
-            UnitAIDecision.Relocate => TryRelocate(unit),
+            UnitAIDecision.Relocate => TryRelocate(unit, context),
             _                       => false
         };
         
         if (!success)
         {
-            if (!TryFallback(unit))
-            {
-                Debug.LogWarning("Fallback Error!");
-            }
+            TryFallback(unit);
+            Debug.LogWarning("Fallback Error! < " + unit.name + " | Team: " + unit.Owner + " | Decision: " + context.Decision + " >");
         }
     }
-    
+
     private bool TryAttack(UnitController unit, UnitAIContext context)
     {
         BasicSkill skill = unit.SkillController.GetSkillByIndex(1);
@@ -78,26 +76,16 @@ public class EnemyController : MonoBehaviour
 
         return TryExecute(unit, 1, null);
     }
-    
-    private bool TryRelocate(UnitController unit)
+
+    private bool TryRelocate(UnitController unit, UnitAIContext context)
     {
-        List<GridTile> tiles = GridParameters.LevelGrid.GetTilesWithCover(unit.transform.position, 10f);
 
-        tiles.Shuffle(); // better choice
-
-        foreach (var tile in tiles)
+        PointData data = new PointData
         {
-            if (tile.Owner != null) continue;
+            Position = context.TargetPosition
+        };
 
-            Vector3 pos = GridParameters.LevelGrid.GetTileWorldPos(tile);
-
-            PointData data = new PointData
-            {
-                Position = pos
-            };
-
-            if (TryExecute(unit, 0, data)) return true;
-        }
+        if (TryExecute(unit, 0, data)) return true;
 
         return false;
     }
@@ -110,5 +98,22 @@ public class EnemyController : MonoBehaviour
     private bool TryFallback(UnitController unit)
     {
         return TryExecute(unit, 3, null);
+    }
+
+    private List<CombatTarget> GetAllCombats()
+    {
+        List<CombatTarget> allCombats = new List<CombatTarget>();
+
+        foreach (UnitController unit in _units)
+        {
+            foreach(CombatTarget target in unit.Combat.Targets)
+            {
+                if (allCombats.Contains(target)) continue;
+
+                allCombats.Add(target);
+            }
+        }
+
+        return allCombats;
     }
 }

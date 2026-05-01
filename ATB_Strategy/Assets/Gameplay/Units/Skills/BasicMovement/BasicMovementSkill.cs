@@ -32,12 +32,13 @@ public class BasicMovementSkill : BasicSkill
         _agent.CalculatePath((_skillData as PointData).Position);
     }
 
-    public override bool Execute(ref int cost)
+    public override bool Execute(out int cost)
     {
+        cost = 0;
         if (!CanExecute()) return false;
-        if (!_agent.StartMove()) return false;
-        
-        cost = _agent.PathData.TurnsCost;
+        if (!_agent.StartMove(out cost)) return false;
+
+        //cost = _agent.PathData.TurnsCost;
 
         return true;
     }

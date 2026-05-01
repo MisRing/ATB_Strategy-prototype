@@ -76,11 +76,11 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         }
     }
 
-    public override bool Execute(ref int cost)
+    public override bool Execute(out int cost)
     {
-        if (!CanExecute()) return false;
-
         cost = _skillCost;
+
+        if (!CanExecute()) return false;
         
         StartCoroutine(Fire(_unitCombat.Targets[_currentTarget].Target));
 

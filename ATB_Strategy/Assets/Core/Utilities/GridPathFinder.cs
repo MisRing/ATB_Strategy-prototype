@@ -123,7 +123,7 @@ public static class GridPathFinder
         return bestCovers;
     }
 
-    public static bool CalculatePath(ref PathData pathData, Vector3 agentPoisition, Vector3 targetPosition)
+    public static bool CalculatePath(out PathData pathData, Vector3 agentPoisition, Vector3 targetPosition)
     {
         pathData = new PathData();
         NavMeshPath path = new NavMeshPath();

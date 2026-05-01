@@ -19,8 +19,8 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     public Vector3 Velocity { get { return _velocity; } }
     private Vector3 _velocity = Vector3.zero;
 
-    public PathData PathData { get { return _pathData; } }
-    private PathData _pathData;
+    //public PathData PathData { get { return _pathData; } }
+    [SerializeField] private PathData _pathData;
     private bool _showPath;
     private UnitController _unit;
 
@@ -81,18 +81,13 @@ public class UnitAgent : MonoBehaviour, IPathHandler
 
     public void CalculatePath(Vector3 targetPosition)
     {
-        _pathData = new PathData();
-        if (GridPathFinder.CalculatePath(ref _pathData, transform.position, targetPosition))
+        if (GridPathFinder.CalculatePath(out _pathData, transform.position, targetPosition))
         {
             _pathData.Duration = CalculateDuration(_pathData.Distance, _unit.Stats.Speed);
 
             float realTurnsCost = Mathf.Round((_pathData.Duration / TurnManager.TurnTime) * 100f) / 100f;
             
             _pathData.TurnsCost = Mathf.CeilToInt(realTurnsCost);
-        }
-        else
-        {
-            _pathData = null;
         }
 
         OnPathChanged?.Invoke(_showPath ? _pathData : null);
@@ -118,8 +113,9 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         return time;
     }
 
-    public bool StartMove()
+    public bool StartMove(out int moveCost)
     {
+        moveCost = 0;
         if (_pathData == null) return false;
 
         //?????????????????????????????
@@ -127,6 +123,8 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         GridParameters.LevelGrid.GetTileByWorldPos(ref finalTile, _pathData.Points[_pathData.Points.Count - 1]);
         SetAgentTile(finalTile);
         //?????????????????????????????
+
+        moveCost = _pathData.TurnsCost;
 
         StartCoroutine(Move());
         return true;
@@ -257,6 +255,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     }
 }
 
+[Serializable]
 public class PathData
 {
     public List<Vector3> Points;

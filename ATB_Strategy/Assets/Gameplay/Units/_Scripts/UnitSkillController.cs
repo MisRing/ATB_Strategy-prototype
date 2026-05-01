@@ -71,8 +71,8 @@ public class UnitSkillController : MonoBehaviour
         isInstant = false;
         if (!_currentSkill) return false;
         
-        int cost = 0;
-        if (_currentSkill.Execute(ref cost))
+        int cost;
+        if (_currentSkill.Execute(out cost))
         {
             if (cost > 0)
             {
@@ -95,12 +95,11 @@ public class UnitSkillController : MonoBehaviour
         isInstant = false;
 
         BasicSkill skill = GetSkillByIndex(index);
-        
         if (!skill) return false;
 
         skill.UpdateData(data);
-        int cost = 0;
-        if (skill.Execute(ref cost))
+        int cost;
+        if (skill.Execute(out cost))
         {
             if (cost > 0)
             {
@@ -113,7 +112,6 @@ public class UnitSkillController : MonoBehaviour
             }
             return true;
         }
-
         return false;
     }
 
@@ -141,6 +139,7 @@ public class UnitSkillController : MonoBehaviour
     {
         Unit.State = UnitState.WaitingForOrder;
         Unit.Combat.SetVisibility();
+
         OnSkillFinished?.Invoke(Unit);
     }
 }
