@@ -37,7 +37,21 @@ public static class CombatManager
         
         COMBATS_ON_LEVEL.Remove(comb);
     }
-    
+
+    public static List<CombatTarget> GetAllCombats(UnitOwner ally)
+    {
+        List<CombatTarget> combats = new List<CombatTarget>();
+        foreach (CombatObject comb in COMBATS_ON_LEVEL)
+        {
+            if (comb.Owner == ally) continue;
+
+            CombatTarget target = new CombatTarget(comb, 0);
+            combats.Add(target);
+        }
+        return combats;
+    }
+
+
     public static List<CombatTarget> GetCombats(CombatObject unitCombat, float range, UnitOwner ally)
     {
         float sqrRange = range * range;

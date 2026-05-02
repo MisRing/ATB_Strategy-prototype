@@ -1,17 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    private UnitOwner _teamOwner;
     private List<UnitController> _units = new List<UnitController>();
     private UnitAIController[] _unitAIControls;
 
+    private Dictionary<CombatTarget, AITarget> _allTargets;
 
-    public void Init(List<UnitController> units, UnitAIController[] unitAIs)
+    public void Init(UnitOwner owner, List<UnitController> units, UnitAIController[] unitAIs)
     {
+        _teamOwner = owner;
         _units = units;
         _unitAIControls = unitAIs;
     }
@@ -36,6 +40,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        SetTargets();
         for (int i = 0; i < _units.Count; i++)
         {
             StartUnitAbility(_units[i]);
@@ -46,9 +51,11 @@ public class EnemyController : MonoBehaviour
     {
         if (!_units.Contains(unit)) return;
 
+        UpdateTargets();
+
         int unitIndex = _units.IndexOf(unit);
 
-        UnitAIContext context = _unitAIControls[unitIndex].GetDecision(GetAllCombats());
+        UnitAIContext context = _unitAIControls[unitIndex].GetDecision(_allTargets.Values.ToList());
 
         bool success = context.Decision switch
         {
@@ -100,12 +107,43 @@ public class EnemyController : MonoBehaviour
         return TryExecute(unit, 3, null);
     }
 
-    private List<CombatTarget> GetAllCombats()
+    private void SetTargets()
+    {
+        List<CombatTarget> combats = CombatManager.GetAllCombats(_teamOwner);
+
+        _allTargets = new Dictionary<CombatTarget, AITarget>();
+        foreach (CombatTarget combat in combats)
+        {
+            _allTargets.Add(combat, new AITarget(combat.Target.Position));
+        }
+    }
+
+    private void UpdateTargets()
+    {
+        foreach (AITarget target in _allTargets.Values)
+        {
+            target.IsVisible = false;
+        }
+
+        List<CombatTarget> visibleCombats = GetAllVisibleCombats();
+
+        foreach(CombatTarget visibleTarget in visibleCombats)
+        {
+            if (!_allTargets.ContainsKey(visibleTarget)) continue;
+
+            _allTargets[visibleTarget].IsVisible = true;
+            _allTargets[visibleTarget].Position = visibleTarget.Target.Position;
+        }    
+    }
+
+    private List<CombatTarget> GetAllVisibleCombats()
     {
         List<CombatTarget> allCombats = new List<CombatTarget>();
 
         foreach (UnitController unit in _units)
         {
+            if (unit.State == UnitState.Dead) continue;
+
             foreach(CombatTarget target in unit.Combat.Targets)
             {
                 if (allCombats.Contains(target)) continue;
@@ -115,5 +153,17 @@ public class EnemyController : MonoBehaviour
         }
 
         return allCombats;
+    }
+}
+
+public class AITarget
+{
+    public bool IsVisible = false;
+    public Vector3 Position;
+    public int Priority = 5;
+
+    public AITarget(Vector3 position)
+    {
+        Position = position;
     }
 }

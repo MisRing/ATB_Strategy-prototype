@@ -15,7 +15,7 @@ public class UnitAIController : MonoBehaviour
     private const int BASE_ATTACK = 10;
     private const int BASE_MOVE = 20;
 
-    private const int RANDOM = 10;
+    private const int RANDOM = 20;
 
     private const float IDEAL_DISTANCE = 6f;
 
@@ -24,23 +24,25 @@ public class UnitAIController : MonoBehaviour
         _unit = GetComponent<UnitController>();
     }
 
-    public UnitAIContext GetDecision(List<CombatTarget> allTargets)
+    public UnitAIContext GetDecision(List<AITarget> allTargets)
     {
         DecayState();
 
         int targetID;
-        int attackScore = -100;
+        int attackScore = -1000000;
         EvaluateAttack(out targetID); // off
         int moveScore = EvaluateMove(out Vector3 movePos, allTargets);
 
-        attackScore += Random.Range(-RANDOM, RANDOM);
-        moveScore += Random.Range(-RANDOM, RANDOM);
+        //attackScore += Random.Range(-RANDOM, RANDOM);
+        //moveScore += Random.Range(-RANDOM, RANDOM);
 
         // влияние поведения
         attackScore += Mathf.RoundToInt(_aggression * 50f);
         moveScore += Mathf.RoundToInt(_defensiveness * 50f);
 
-        if (attackScore > moveScore && targetID != -1 && attackScore > 0)
+        Debug.LogWarning(moveScore);
+
+        if (attackScore > moveScore && targetID != -1)
         {
             return new UnitAIContext
             {
@@ -49,7 +51,7 @@ public class UnitAIController : MonoBehaviour
             };
         }
 
-        if (movePos != Vector3.zero && moveScore > 0)
+        if (movePos != Vector3.zero)
         {
             return new UnitAIContext
             {
@@ -108,7 +110,7 @@ public class UnitAIController : MonoBehaviour
 
     // ===================== MOVE =====================
 
-    private int EvaluateMove(out Vector3 bestPos, List<CombatTarget> allTargets)
+    private int EvaluateMove(out Vector3 bestPos, List<AITarget> allTargets)
     {
         bestPos = Vector3.zero;
         float radius = _unit.Stats.VisionRange * 0.75f;
@@ -117,11 +119,17 @@ public class UnitAIController : MonoBehaviour
 
         int bestScore = -999;
 
+        Vector3Int currentTilePos = _unit.Agent.CurrentTile;
+        GridTile currentTile = GridParameters.LevelGrid.GetTile(currentTilePos.x, currentTilePos.z, currentTilePos.y);
+        Vector3 tilePos = GridParameters.LevelGrid.GetTileWorldPos(currentTile);
+        int currentScore = EvaluateTile(currentTile, tilePos, allTargets);
+
         foreach (GridTile tile in tiles)
         {
             if (tile.Owner != null) continue;
 
             Vector3 pos = GridParameters.LevelGrid.GetTileWorldPos(tile);
+            if (tilePos == pos) continue;
 
             int score = EvaluateTile(tile, pos, allTargets);
 
@@ -131,11 +139,6 @@ public class UnitAIController : MonoBehaviour
                 bestPos = pos;
             }
         }
-
-        Vector3Int currentTilePos = _unit.Agent.CurrentTile;
-        GridTile currentTile = GridParameters.LevelGrid.GetTile(currentTilePos.x, currentTilePos.z, currentTilePos.y);
-        Vector3 tilePos = GridParameters.LevelGrid.GetTileWorldPos(currentTile);
-        int currentScore = EvaluateTile(currentTile, tilePos, allTargets);
 
         if(currentScore < bestScore)
         {
@@ -150,23 +153,27 @@ public class UnitAIController : MonoBehaviour
         return BASE_MOVE + bestScore;
     }
 
-    private int EvaluateTile(GridTile tile, Vector3 pos, List<CombatTarget> targets)
+    private int EvaluateTile(GridTile tile, Vector3 pos, List<AITarget> targets)
     {
         int score = 0;
 
         foreach (var target in targets)
         {
-            Vector3 enemyPos = target.Target.Position;
+            Vector3 enemyPos = target.Position;
 
             // ===== DEFENCE =====
             int defence = CombatService.CalculateCoverDodge(tile, _unit.Stats.Dodge, enemyPos);
 
             if (defence <= _unit.Stats.Dodge)
-                score -= 100;
+                score -= 200;
             else if (defence > 80)
                 score += 40;
+            else if (defence > 60)
+                score -= 100;
+            else if (defence > 40)
+                score -= 800;
             else
-                score += 10;
+                score -= -1200;
 
             // ===== DISTANCE =====
             float dist = Vector3.Distance(pos, enemyPos);

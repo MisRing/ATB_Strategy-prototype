@@ -31,7 +31,7 @@ public class SceneEntryPoint : MonoBehaviour
 
         foreach (TeamControlls team in _enemyTeams)
         {
-            team.Controller.Init(team.Units, team.AIs);
+            team.Controller.Init(team.Owner, team.Units, team.AIs);
         }
 
         _camera.Init();
