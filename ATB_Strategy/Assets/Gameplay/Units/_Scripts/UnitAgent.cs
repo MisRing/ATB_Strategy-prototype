@@ -117,10 +117,20 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     {
         moveCost = 0;
         if (_pathData == null) return false;
+        if (_pathData.TurnsCost <= 0)
+        {
+            string dataErrorLog =
+                $"From ({_pathData.Points[0]}), To ({_pathData.Points[^1]}), Points count ({_pathData.Points.Count})";
+            Debug.LogWarning($"Path is invalid: [{_unit.name} - {_unit.Owner}; Path data: {dataErrorLog}");
+            return false;
+        }
 
         //?????????????????????????????
         GridTile finalTile = new GridTile();
-        GridParameters.LevelGrid.GetTileByWorldPos(ref finalTile, _pathData.Points[_pathData.Points.Count - 1]);
+        if (!GridParameters.LevelGrid.GetTileByWorldPos(ref finalTile, _pathData.Points[_pathData.Points.Count - 1]) || finalTile.Owner != null)
+        {
+            return false;
+        }
         SetAgentTile(finalTile);
         //?????????????????????????????
 
@@ -140,6 +150,8 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         float distanceToCover = _coverDistance < _pathData.Distance ? _coverDistance : _pathData.Distance;
 
         int visibilityResetTimer = 0;
+
+        //Debug.Log(_pathData.Distance.ToString());
 
         while (currentPassedDistance < _pathData.Distance)
         {

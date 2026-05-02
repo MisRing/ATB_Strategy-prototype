@@ -159,7 +159,7 @@ public static class CombatService
 
             float dot = Vector3.Dot(flatDirection, GridParameters.COVER_DIRECTIONS[i]);
 
-            if (dot > bestDot)
+            if (dot >= 0.5f && (bestCoverIndex == -1 || tile.Covers[i] >= tile.Covers[bestCoverIndex]))
             {
                 bestDot = dot;
                 bestCoverIndex = i;

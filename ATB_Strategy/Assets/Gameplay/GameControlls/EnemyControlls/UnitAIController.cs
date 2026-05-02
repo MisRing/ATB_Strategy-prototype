@@ -12,8 +12,8 @@ public class UnitAIController : MonoBehaviour
     private const float STATE_DECAY = 1f;
 
     // ====== WEIGHTS ======
-    private const int BASE_ATTACK = 20;
-    private const int BASE_MOVE = 10;
+    private const int BASE_ATTACK = 10;
+    private const int BASE_MOVE = 20;
 
     private const int RANDOM = 10;
 
@@ -29,7 +29,8 @@ public class UnitAIController : MonoBehaviour
         DecayState();
 
         int targetID;
-        int attackScore = EvaluateAttack(out targetID);
+        int attackScore = -100;
+        EvaluateAttack(out targetID); // off
         int moveScore = EvaluateMove(out Vector3 movePos, allTargets);
 
         attackScore += Random.Range(-RANDOM, RANDOM);
@@ -39,7 +40,7 @@ public class UnitAIController : MonoBehaviour
         attackScore += Mathf.RoundToInt(_aggression * 50f);
         moveScore += Mathf.RoundToInt(_defensiveness * 50f);
 
-        if (attackScore > moveScore && targetID != -1)
+        if (attackScore > moveScore && targetID != -1 && attackScore > 0)
         {
             return new UnitAIContext
             {
@@ -100,7 +101,8 @@ public class UnitAIController : MonoBehaviour
     {
         if (hit > 100) return 100;
         if (hit > 80) return 60;
-        if (hit > 60) return 20;
+        if (hit > 60) return 40;
+        if (hit > 40) return 20;
         return -40;
     }
 
@@ -109,16 +111,14 @@ public class UnitAIController : MonoBehaviour
     private int EvaluateMove(out Vector3 bestPos, List<CombatTarget> allTargets)
     {
         bestPos = Vector3.zero;
-        Vector3Int currentTilePos = _unit.Agent.CurrentTile;
         float radius = _unit.Stats.VisionRange * 0.75f;
         List<GridTile> tiles = GridParameters.LevelGrid.GetTilesWithCover(_unit.transform.position, radius);
+        tiles.Shuffle();
 
         int bestScore = -999;
 
         foreach (GridTile tile in tiles)
         {
-            if (tile.PositionX == currentTilePos.x && tile.PositionZ == currentTilePos.z && tile.DeltaY == currentTilePos.y) continue;
-
             if (tile.Owner != null) continue;
 
             Vector3 pos = GridParameters.LevelGrid.GetTileWorldPos(tile);
@@ -130,6 +130,21 @@ public class UnitAIController : MonoBehaviour
                 bestScore = score;
                 bestPos = pos;
             }
+        }
+
+        Vector3Int currentTilePos = _unit.Agent.CurrentTile;
+        GridTile currentTile = GridParameters.LevelGrid.GetTile(currentTilePos.x, currentTilePos.z, currentTilePos.y);
+        Vector3 tilePos = GridParameters.LevelGrid.GetTileWorldPos(currentTile);
+        int currentScore = EvaluateTile(currentTile, tilePos, allTargets);
+
+        if(currentScore < bestScore)
+        {
+            return BASE_MOVE;
+        }
+
+        if(currentScore < 10)
+        {
+            bestScore += 100;
         }
 
         return BASE_MOVE + bestScore;
@@ -147,7 +162,7 @@ public class UnitAIController : MonoBehaviour
             int defence = CombatService.CalculateCoverDodge(tile, _unit.Stats.Dodge, enemyPos);
 
             if (defence <= _unit.Stats.Dodge)
-                score -= 50;
+                score -= 100;
             else if (defence > 80)
                 score += 40;
             else
@@ -158,45 +173,9 @@ public class UnitAIController : MonoBehaviour
             float distScore = Mathf.Abs(dist - IDEAL_DISTANCE);
 
             score -= Mathf.RoundToInt(distScore * 5f);
-
-            // ===== FLANK =====
-            Vector3 toEnemy = (enemyPos - pos).normalized;
-
-            int coverIndex = GetBestCoverIndex(tile, toEnemy);
-
-            if (coverIndex != -1)
-            {
-                Vector3 coverDir = GridParameters.COVER_DIRECTIONS[coverIndex];
-
-                float dot = Vector3.Dot(coverDir, toEnemy);
-
-                if (dot < 0.3f) // плохое совпадение → фланг
-                    score += 30;
-            }
         }
 
         return score;
-    }
-
-    private int GetBestCoverIndex(GridTile tile, Vector3 dir)
-    {
-        int best = -1;
-        float bestDot = -1f;
-
-        for (int i = 0; i < tile.Covers.Length; i++)
-        {
-            if (tile.Covers[i] == TileCover.None) continue;
-
-            float dot = Vector3.Dot(dir, GridParameters.COVER_DIRECTIONS[i]);
-
-            if (dot > bestDot)
-            {
-                bestDot = dot;
-                best = i;
-            }
-        }
-
-        return best;
     }
 
     // ===================== BEHAVIOR CONTROL =====================
