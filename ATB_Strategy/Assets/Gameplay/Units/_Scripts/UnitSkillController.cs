@@ -137,6 +137,10 @@ public class UnitSkillController : MonoBehaviour
 
     public void FinishSkill()
     {
+        if(Unit.Agent.IsMoving)
+        {
+            Unit.Agent.EndMove();
+        }
         Unit.State = UnitState.WaitingForOrder;
         Unit.Combat.SetVisibility();
 

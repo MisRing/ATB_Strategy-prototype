@@ -49,7 +49,7 @@ public class EnemyController : MonoBehaviour
 
     private void StartUnitAbility(UnitController unit)
     {
-        if (!_units.Contains(unit)) return;
+        if (!_units.Contains(unit) || unit.State != UnitState.WaitingForOrder) return;
 
         UpdateTargets();
 
@@ -86,7 +86,9 @@ public class EnemyController : MonoBehaviour
 
     private bool TryRelocate(UnitController unit, UnitAIContext context)
     {
-
+        string dataErrorLog =
+                $"From ({unit.transform.position}), To ({context.TargetPosition})";
+        Debug.LogWarning($"Relocate debug: [{unit.name} - {unit.Owner}; Path data: {dataErrorLog}");
         PointData data = new PointData
         {
             Position = context.TargetPosition

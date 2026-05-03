@@ -26,8 +26,8 @@ public class UnitAgent : MonoBehaviour, IPathHandler
 
     public event Action<PathData> OnPathChanged;
     public event Action<TileCover, int, float> OnCoverChanged;
-    
-    public bool IsMoving { get { return _pathData != null; } }
+
+    public bool IsMoving = false;
 
     public void Init(UnitController unit, GridTile startTile)
     {
@@ -153,11 +153,10 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         //?????????????????????????????
 
         moveCost = _pathData.TurnsCost;
-
+        IsMoving = true;
         StartCoroutine(Move());
         return true;
     }
-
     private IEnumerator Move()
     {
         float currentPassedDistance = 0f;
@@ -169,10 +168,11 @@ public class UnitAgent : MonoBehaviour, IPathHandler
 
         int visibilityResetTimer = 0;
 
-        //Debug.Log(_pathData.Distance.ToString());
-
         while (currentPassedDistance < _pathData.Distance)
         {
+            if (!IsMoving) break;
+            yield return null;
+
             float remainingDistance = _pathData.Distance - currentPassedDistance;
             float velocity = GetAcceleration(currentPassedDistance, remainingDistance);
 
@@ -226,11 +226,16 @@ public class UnitAgent : MonoBehaviour, IPathHandler
                 CombatManager.TriggerVisibilityReset();
                 CombatManager.ResetVisibility();
             }
-
-            yield return null;
         }
 
-        EndMove();
+    }
+
+    public void EndMove()
+    {
+        IsMoving = false;
+        _velocity = Vector3.zero;
+        transform.position = _pathData.Points.Last();
+        _pathData = null;
     }
 
     private float GetAcceleration(float passedDistance, float remainingDistance)
@@ -275,13 +280,6 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         direction = direction.normalized;
         Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, t);
-    }
-
-    private void EndMove()
-    {
-        _velocity = Vector3.zero;
-        transform.position = _pathData.Points.Last();
-        _pathData = null;
     }
 }
 
