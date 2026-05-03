@@ -93,6 +93,24 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         OnPathChanged?.Invoke(_showPath ? _pathData : null);
     }
 
+    public bool CheckPath(Vector3 targetPosition, out int cost)
+    {
+        PathData data = new PathData();
+        if (GridPathFinder.CalculatePath(out data, transform.position, targetPosition))
+        {
+            data.Duration = CalculateDuration(data.Distance, _unit.Stats.Speed);
+
+            float realTurnsCost = Mathf.Round((data.Duration / TurnManager.TurnTime) * 100f) / 100f;
+
+            data.TurnsCost = Mathf.CeilToInt(realTurnsCost);
+            cost = data.TurnsCost;
+            return true;
+        }
+
+        cost = int.MaxValue;
+        return false;
+    }
+
     private float CalculateDuration(float fullDistance, float normalSpeed, float timeStep = 0.05f)
     {
         float time = 0f;

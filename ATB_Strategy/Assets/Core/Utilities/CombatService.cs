@@ -74,7 +74,7 @@ public static class CombatService
         return false;
     }
 
-    private static float CalculateDistanceFactor(float distance, WeaponRangeType type)
+    public static float CalculateDistanceFactor(float distance, WeaponRangeType type)
     {
         switch (type)
         {

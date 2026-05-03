@@ -102,4 +102,29 @@ public class GridMap : MonoBehaviour
 
         return tiles;
     }
+
+    public List<GridTile> GetTilesAround(Vector3 position, float range)
+    {
+        List<GridTile> tiles = new List<GridTile>();
+
+        foreach (TArray<GridTile> floor in _grid)
+        {
+            for(int x = 0; x < floor.Size.x; x++)
+            {
+                for (int z = 0; z < floor.Size.y; z++)
+                {
+                    Vector3 tilePos = GetTileWorldPos(floor[x, z]);
+
+                    if (Vector3.Distance(position, tilePos) <= range)
+                    {
+                        tiles.Add(floor[x, z]);
+                    }
+                }
+            }
+        }
+
+
+
+        return tiles;
+    }
 }

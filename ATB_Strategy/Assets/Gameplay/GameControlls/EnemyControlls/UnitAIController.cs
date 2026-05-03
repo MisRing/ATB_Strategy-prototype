@@ -6,8 +6,8 @@ public class UnitAIController : MonoBehaviour
     private UnitController _unit;
 
     // ====== BEHAVIOR STATE ======
-    private float _aggression = 0f;   // >0 = агрессивный
-    private float _defensiveness = 0f; // >0 = осторожный
+    private int _agression = 1;
+    private int _deffensive = 1;
 
     private const float STATE_DECAY = 1f;
 
@@ -26,32 +26,20 @@ public class UnitAIController : MonoBehaviour
 
     public UnitAIContext GetDecision(List<AITarget> allTargets)
     {
-        DecayState();
-
-        int targetID;
-        int attackScore = -1000000;
-        EvaluateAttack(out targetID); // off
+        //int targetID;
+        //int attackScore = EvaluateAttack(out targetID);
         int moveScore = EvaluateMove(out Vector3 movePos, allTargets);
 
-        //attackScore += Random.Range(-RANDOM, RANDOM);
-        //moveScore += Random.Range(-RANDOM, RANDOM);
+        //if (attackScore > moveScore && targetID != -1)
+        //{
+        //    return new UnitAIContext
+        //    {
+        //        Decision = UnitAIDecision.Attack,
+        //        AttackTargetID = targetID
+        //    };
+        //}
 
-        // влияние поведения
-        attackScore += Mathf.RoundToInt(_aggression * 50f);
-        moveScore += Mathf.RoundToInt(_defensiveness * 50f);
-
-        Debug.LogWarning(moveScore);
-
-        if (attackScore > moveScore && targetID != -1)
-        {
-            return new UnitAIContext
-            {
-                Decision = UnitAIDecision.Attack,
-                AttackTargetID = targetID
-            };
-        }
-
-        if (movePos != Vector3.zero)
+        if (moveScore > 0)
         {
             return new UnitAIContext
             {
@@ -66,141 +54,126 @@ public class UnitAIController : MonoBehaviour
         };
     }
 
-    // ===================== ATTACK =====================
-
-    private int EvaluateAttack(out int bestTargetID)
+    private int EvaluateMove(out Vector3 movePos, List<AITarget> allTargets)
     {
-        bestTargetID = -1;
-
-        if (_unit.Combat.Targets.Count == 0)
-            return -100;
-
-        BasicSkill skill = _unit.SkillController.GetSkillByIndex(1);
-
-        if (skill is not ITargetSwitchable attackSkill)
-            return -100;
-
-        int bestScore = -999;
-
-        for (int i = 0; i < _unit.Combat.Targets.Count; i++)
-        {
-            attackSkill.Switch(i);
-            var ctx = attackSkill.SelectedTargetContext;
-
-            int score = ctx.HitChance + ctx.CritChance * 4;
-
-            if (score > bestScore)
-            {
-                bestScore = score;
-                bestTargetID = i;
-            }
-        }
-
-        return BASE_ATTACK + ScoreAttack(bestScore);
-    }
-
-    private int ScoreAttack(int hit)
-    {
-        if (hit > 100) return 100;
-        if (hit > 80) return 60;
-        if (hit > 60) return 40;
-        if (hit > 40) return 20;
-        return -40;
-    }
-
-    // ===================== MOVE =====================
-
-    private int EvaluateMove(out Vector3 bestPos, List<AITarget> allTargets)
-    {
-        bestPos = Vector3.zero;
-        float radius = _unit.Stats.VisionRange * 0.75f;
-        List<GridTile> tiles = GridParameters.LevelGrid.GetTilesWithCover(_unit.transform.position, radius);
-        tiles.Shuffle();
-
-        int bestScore = -999;
+        movePos = Vector3.zero;
+        float range = _unit.Stats.VisionRange * 0.75f;
+        List<GridTile> tiles = GridParameters.LevelGrid.GetTilesAround(transform.position, range);
 
         Vector3Int currentTilePos = _unit.Agent.CurrentTile;
         GridTile currentTile = GridParameters.LevelGrid.GetTile(currentTilePos.x, currentTilePos.z, currentTilePos.y);
-        Vector3 tilePos = GridParameters.LevelGrid.GetTileWorldPos(currentTile);
-        int currentScore = EvaluateTile(currentTile, tilePos, allTargets);
+        int score = EvaluateCurrentTile(currentTile, out movePos, allTargets);
+        bool stay = true;
 
         foreach (GridTile tile in tiles)
         {
-            if (tile.Owner != null) continue;
+            Vector3 tilePos;
+            int newScore = EvaluateTile(tile, out tilePos, allTargets);
 
-            Vector3 pos = GridParameters.LevelGrid.GetTileWorldPos(tile);
-            if (tilePos == pos) continue;
-
-            int score = EvaluateTile(tile, pos, allTargets);
-
-            if (score > bestScore)
+            if(newScore > score)
             {
-                bestScore = score;
-                bestPos = pos;
+                score = newScore;
+                movePos = tilePos;
+                stay = false;
             }
         }
-
-        if(currentScore < bestScore)
+        if(stay)
         {
-            return BASE_MOVE;
-        }
-
-        if(currentScore < 10)
-        {
-            bestScore += 100;
-        }
-
-        return BASE_MOVE + bestScore;
-    }
-
-    private int EvaluateTile(GridTile tile, Vector3 pos, List<AITarget> targets)
-    {
-        int score = 0;
-
-        foreach (var target in targets)
-        {
-            Vector3 enemyPos = target.Position;
-
-            // ===== DEFENCE =====
-            int defence = CombatService.CalculateCoverDodge(tile, _unit.Stats.Dodge, enemyPos);
-
-            if (defence <= _unit.Stats.Dodge)
-                score -= 200;
-            else if (defence > 80)
-                score += 40;
-            else if (defence > 60)
-                score -= 100;
-            else if (defence > 40)
-                score -= 800;
-            else
-                score -= -1200;
-
-            // ===== DISTANCE =====
-            float dist = Vector3.Distance(pos, enemyPos);
-            float distScore = Mathf.Abs(dist - IDEAL_DISTANCE);
-
-            score -= Mathf.RoundToInt(distScore * 5f);
+            return -100;
         }
 
         return score;
     }
 
-    // ===================== BEHAVIOR CONTROL =====================
-
-    public void ApplyAggression(float value)
+    private int EvaluateCurrentTile(GridTile tile, out Vector3 tilePos, List<AITarget> allTargets)
     {
-        _aggression += value;
+        tilePos = GridParameters.LevelGrid.GetTileWorldPos(tile);
+
+        int deffenceScore = EvaluateTileDeffence(tile, tilePos, allTargets);
+        int attackScore = EvaluateTileDistanceFactor(tile, tilePos, allTargets);
+
+        deffenceScore *= _deffensive;
+        attackScore *= _agression;
+
+        int score = Mathf.CeilToInt((deffenceScore + attackScore) * 2);
+        return score;
     }
 
-    public void ApplyDefensiveness(float value)
+    private int EvaluateTile(GridTile tile, out Vector3 tilePos, List<AITarget> allTargets)
     {
-        _defensiveness += value;
+        tilePos = GridParameters.LevelGrid.GetTileWorldPos(tile);
+        int pathCost;
+        if (!_unit.Agent.CheckPath(tilePos, out pathCost)) return -999999;
+        if (pathCost == 0) return -999999;
+
+        int deffenceScore = EvaluateTileDeffence(tile, tilePos, allTargets);
+        int attackScore = EvaluateTileDistanceFactor(tile, tilePos, allTargets);
+
+        deffenceScore *= _deffensive;
+        attackScore *= _agression;
+
+        int score = Mathf.CeilToInt((deffenceScore + attackScore) * (8f / (float)pathCost));
+        return score;
     }
 
-    private void DecayState()
+    private int EvaluateTileDeffence(GridTile tile, Vector3 tilePos, List<AITarget> allTargets)
     {
-        _aggression = Mathf.MoveTowards(_aggression, 0f, STATE_DECAY * Time.deltaTime);
-        _defensiveness = Mathf.MoveTowards(_defensiveness, 0f, STATE_DECAY * Time.deltaTime);
+        int score = 0;
+
+        foreach(AITarget target in allTargets)
+        {
+            int deffence = CombatService.CalculateCoverDodge(tile, _unit.Stats.Dodge, target.Position);
+            int deffenceScore = GetDeffenceScore(deffence);
+            if(Vector3.Distance(tilePos, target.Position) > _unit.Stats.VisionRange)
+            {
+                deffenceScore /= 2;
+            }
+            score += deffenceScore;
+        }
+
+        return score;
+    }
+
+    private int EvaluateTileDistanceFactor(GridTile tile, Vector3 tilePos, List<AITarget> allTargets)
+    {
+        int score = 0;
+
+        foreach (AITarget target in allTargets)
+        {
+            if (Vector3.Distance(tilePos, target.Position) > _unit.Stats.VisionRange) continue;
+
+            float distance = Vector3.Distance(tilePos, target.Position);
+            float distanceFactor = CombatService.CalculateDistanceFactor(distance, _unit.Combat.Weapon.RangeType);
+            score += Mathf.CeilToInt(50 * distanceFactor) * target.Priority;
+        }
+
+        return score;
+    }
+
+    private int GetDeffenceScore(int deffence)
+    {
+        if(deffence >= 100)
+        {
+            return +100;
+        }
+        if(deffence >= 80)
+        {
+            return +50;
+        }
+        if (deffence >= 60)
+        {
+            return +20;
+        }
+        if (deffence >= 40)
+        {
+            return +0;
+        }
+        if (deffence >= 20)
+        {
+            return -40;
+        }
+
+        return -100;
     }
 }
 
