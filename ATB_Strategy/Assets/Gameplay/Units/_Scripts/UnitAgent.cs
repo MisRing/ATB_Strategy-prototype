@@ -154,29 +154,29 @@ public class UnitAgent : MonoBehaviour, IPathHandler
 
         moveCost = _pathData.TurnsCost;
         IsMoving = true;
-        StartCoroutine(Move());
+        StartCoroutine(Move(_pathData));
         return true;
     }
-    private IEnumerator Move()
+    private IEnumerator Move(PathData path)
     {
         float currentPassedDistance = 0f;
         int nextPointIndex = 1;
-        float nextPointDistance = Vector3.Distance(_pathData.Points[0], _pathData.Points[1]);
+        float nextPointDistance = Vector3.Distance(path.Points[0], path.Points[1]);
 
         bool coverSet = false;
-        float distanceToCover = _coverDistance < _pathData.Distance ? _coverDistance : _pathData.Distance;
+        float distanceToCover = _coverDistance < path.Distance ? _coverDistance : path.Distance;
 
         int visibilityResetTimer = 0;
 
-        while (currentPassedDistance < _pathData.Distance)
+        while (currentPassedDistance < path.Distance)
         {
-            if (!IsMoving) break;
             yield return null;
+            if (!IsMoving) break;
 
-            float remainingDistance = _pathData.Distance - currentPassedDistance;
+            float remainingDistance = path.Distance - currentPassedDistance;
             float velocity = GetAcceleration(currentPassedDistance, remainingDistance);
 
-            Vector3 direction = (_pathData.Points[nextPointIndex] - transform.position).normalized * velocity;
+            Vector3 direction = (path.Points[nextPointIndex] - transform.position).normalized * velocity;
 
             float step = _unit.Stats.Speed * TimeService.TimeSpeedDelta;
 
@@ -188,10 +188,10 @@ public class UnitAgent : MonoBehaviour, IPathHandler
                 if (!coverSet)
                 {
                     GridTile finalTile = new GridTile();
-                    GridParameters.LevelGrid.GetTileByWorldPos(ref finalTile, _pathData.Points[_pathData.Points.Count - 1]);
-                    _pathData.Cover = GridPathFinder.GetTileCover(
-                        ref _pathData.FinalDirection,
-                        out _pathData.CoverLook,
+                    GridParameters.LevelGrid.GetTileByWorldPos(ref finalTile, path.Points[path.Points.Count - 1]);
+                    path.Cover = GridPathFinder.GetTileCover(
+                        ref path.FinalDirection,
+                        out path.CoverLook,
                         finalTile,
                         _unit.Combat.Targets
                         );
@@ -199,9 +199,9 @@ public class UnitAgent : MonoBehaviour, IPathHandler
                     coverSet = true;
                 }
                 float percent = 1f - (remainingDistance / distanceToCover);
-                OnCoverChanged?.Invoke(_pathData.Cover, _pathData.CoverLook, percent);
+                OnCoverChanged?.Invoke(path.Cover, path.CoverLook, percent);
 
-                LerpRotate(_pathData.FinalDirection, percent);
+                LerpRotate(path.FinalDirection, percent);
             }
             else
             {
@@ -210,11 +210,11 @@ public class UnitAgent : MonoBehaviour, IPathHandler
 
             if (currentPassedDistance >= nextPointDistance)
             {
-                if (nextPointIndex + 1 >= _pathData.Points.Count) break;
+                if (nextPointIndex + 1 >= path.Points.Count) break;
 
                 nextPointDistance += Vector3.Distance(
-                    _pathData.Points[nextPointIndex],
-                    _pathData.Points[nextPointIndex + 1]
+                    path.Points[nextPointIndex],
+                    path.Points[nextPointIndex + 1]
                     );
 
                 nextPointIndex++;

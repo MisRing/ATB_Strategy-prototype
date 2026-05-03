@@ -6,18 +6,8 @@ public class UnitAIController : MonoBehaviour
     private UnitController _unit;
 
     // ====== BEHAVIOR STATE ======
-    private int _agression = 1;
+    private int _agression = 5;
     private int _deffensive = 1;
-
-    private const float STATE_DECAY = 1f;
-
-    // ====== WEIGHTS ======
-    private const int BASE_ATTACK = 10;
-    private const int BASE_MOVE = 20;
-
-    private const int RANDOM = 20;
-
-    private const float IDEAL_DISTANCE = 6f;
 
     public void Init()
     {
@@ -89,13 +79,30 @@ public class UnitAIController : MonoBehaviour
     {
         tilePos = GridParameters.LevelGrid.GetTileWorldPos(tile);
 
-        int deffenceScore = EvaluateTileDeffence(tile, tilePos, allTargets);
-        int attackScore = EvaluateTileDistanceFactor(tile, tilePos, allTargets);
+        int deffenceScore = 0;
+        int attackScore = 0;
+
+        foreach (AITarget target in allTargets)
+        {
+            int deffence = CombatService.CalculateCoverDodge(tile, _unit.Stats.Dodge, target.Position);
+            int tiledeffenceScore = GetDeffenceScore(deffence);
+            if (Vector3.Distance(tilePos, target.Position) > _unit.Stats.VisionRange)
+            {
+                tiledeffenceScore /= 2;
+            }
+            deffenceScore += tiledeffenceScore;
+
+            if (Vector3.Distance(tilePos, target.Position) > _unit.Stats.VisionRange) continue;
+
+            float distance = Vector3.Distance(tilePos, target.Position);
+            float distanceFactor = CombatService.CalculateDistanceFactor(distance, _unit.Combat.Weapon.RangeType);
+            attackScore += Mathf.CeilToInt(50 * distanceFactor) * target.Priority;
+        }
 
         deffenceScore *= _deffensive;
         attackScore *= _agression;
 
-        int score = Mathf.CeilToInt((deffenceScore + attackScore) * 2);
+        int score = Mathf.CeilToInt((deffenceScore + attackScore));// * 2);
         return score;
     }
 
@@ -106,47 +113,30 @@ public class UnitAIController : MonoBehaviour
         if (!_unit.Agent.CheckPath(tilePos, out pathCost)) return -999999;
         if (pathCost == 0) return -999999;
 
-        int deffenceScore = EvaluateTileDeffence(tile, tilePos, allTargets);
-        int attackScore = EvaluateTileDistanceFactor(tile, tilePos, allTargets);
-
-        deffenceScore *= _deffensive;
-        attackScore *= _agression;
-
-        int score = Mathf.CeilToInt((deffenceScore + attackScore) * (8f / (float)pathCost));
-        return score;
-    }
-
-    private int EvaluateTileDeffence(GridTile tile, Vector3 tilePos, List<AITarget> allTargets)
-    {
-        int score = 0;
-
-        foreach(AITarget target in allTargets)
-        {
-            int deffence = CombatService.CalculateCoverDodge(tile, _unit.Stats.Dodge, target.Position);
-            int deffenceScore = GetDeffenceScore(deffence);
-            if(Vector3.Distance(tilePos, target.Position) > _unit.Stats.VisionRange)
-            {
-                deffenceScore /= 2;
-            }
-            score += deffenceScore;
-        }
-
-        return score;
-    }
-
-    private int EvaluateTileDistanceFactor(GridTile tile, Vector3 tilePos, List<AITarget> allTargets)
-    {
-        int score = 0;
+        int deffenceScore = 0;
+        int attackScore = 0;
 
         foreach (AITarget target in allTargets)
         {
+            int deffence = CombatService.CalculateCoverDodge(tile, _unit.Stats.Dodge, target.Position);
+            int tiledeffenceScore = GetDeffenceScore(deffence);
+            if (Vector3.Distance(tilePos, target.Position) > _unit.Stats.VisionRange)
+            {
+                tiledeffenceScore /= 2;
+            }
+            deffenceScore += tiledeffenceScore;
+
             if (Vector3.Distance(tilePos, target.Position) > _unit.Stats.VisionRange) continue;
 
             float distance = Vector3.Distance(tilePos, target.Position);
             float distanceFactor = CombatService.CalculateDistanceFactor(distance, _unit.Combat.Weapon.RangeType);
-            score += Mathf.CeilToInt(50 * distanceFactor) * target.Priority;
+            attackScore += Mathf.CeilToInt(50 * distanceFactor) * target.Priority;
         }
 
+        deffenceScore *= _deffensive;
+        attackScore *= _agression;
+
+        int score = Mathf.CeilToInt((deffenceScore + attackScore));// * (8f / (float)pathCost));
         return score;
     }
 

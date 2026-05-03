@@ -105,25 +105,44 @@ public class GridMap : MonoBehaviour
 
     public List<GridTile> GetTilesAround(Vector3 position, float range)
     {
+        position -= transform.position;
+
+        int xCenter = Mathf.RoundToInt(position.x / GridParameters.TILE_SIZE);
+        int zCenter = Mathf.RoundToInt(position.z / GridParameters.TILE_SIZE);
+        int floorCenter = Mathf.FloorToInt(position.y / GridParameters.LEVEL_HEIGHT);
+
+        int rangeInTiles = Mathf.CeilToInt(range / GridParameters.TILE_SIZE);
+        int rangeInFloors = Mathf.CeilToInt(range / GridParameters.LEVEL_HEIGHT);
+
+        float sqrtRange = range * range;
+
         List<GridTile> tiles = new List<GridTile>();
 
-        foreach (TArray<GridTile> floor in _grid)
+        for(int f = floorCenter - rangeInFloors; f <= floorCenter + rangeInFloors; f++)
         {
-            for(int x = 0; x < floor.Size.x; x++)
-            {
-                for (int z = 0; z < floor.Size.y; z++)
-                {
-                    Vector3 tilePos = GetTileWorldPos(floor[x, z]);
+            if (f < 0) f = 0;
+            if (f >= _grid.Count) break;
 
-                    if (Vector3.Distance(position, tilePos) <= range)
+            for(int x = xCenter - rangeInTiles; x <= xCenter + rangeInTiles; x++)
+            {
+                if (x < 0) x = 0;
+                if (x >= _grid[f].Size.x) break;
+
+                for (int z = zCenter - rangeInTiles; z <= zCenter + rangeInTiles; z++)
+                {
+                    if (z < 0) z = 0;
+                    if (z >= _grid[f].Size.y) break;
+
+                    Vector3 tileWorldPos = GetTileWorldPos(x, z, f);
+                    float sqrtDistance = (position - tileWorldPos).sqrMagnitude;
+
+                    if(sqrtDistance <= sqrtRange)
                     {
-                        tiles.Add(floor[x, z]);
+                        tiles.Add(GetTile(x, z, f));
                     }
                 }
             }
         }
-
-
 
         return tiles;
     }
