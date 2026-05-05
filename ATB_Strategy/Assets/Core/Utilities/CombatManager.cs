@@ -38,15 +38,14 @@ public static class CombatManager
         COMBATS_ON_LEVEL.Remove(comb);
     }
 
-    public static List<CombatTarget> GetAllCombats(UnitOwner ally)
+    public static List<CombatObject> GetAllCombats(UnitOwner ally)
     {
-        List<CombatTarget> combats = new List<CombatTarget>();
+        List<CombatObject> combats = new List<CombatObject>();
         foreach (CombatObject comb in COMBATS_ON_LEVEL)
         {
             if (comb.Owner == ally) continue;
 
-            CombatTarget target = new CombatTarget(comb, 0);
-            combats.Add(target);
+            combats.Add(comb);
         }
         return combats;
     }

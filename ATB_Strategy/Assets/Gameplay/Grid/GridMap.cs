@@ -5,7 +5,7 @@ using UnityEngine;
 public class GridMap : MonoBehaviour
 {
     [SerializeField] private List<TArray<GridTile>> _grid;
-    [SerializeField] private List<GridTile> _tilesWithCover;
+    [SerializeField] private List<Vector3Int> _tilesWithCover;
 
     public int Floors { get { return _grid.Count; } }
     public int SizeX { get { return _grid[0].Size.x; } }
@@ -19,7 +19,7 @@ public class GridMap : MonoBehaviour
     public void BuildGrid(int sizeX, int sizeZ, int floors)
     {
         _grid = new List<TArray<GridTile>>();
-        _tilesWithCover =  new List<GridTile>();
+        _tilesWithCover =  new List<Vector3Int>();
         GridMapExtension.BuildGrid(ref _grid, ref _tilesWithCover, sizeX, sizeZ, floors, transform.position, this);
         GridParameters.LevelGrid = this;
     }
@@ -61,40 +61,34 @@ public class GridMap : MonoBehaviour
 
         return true;
     }
-
-    public Vector3 GetTileWorldPos(GridTile tile)
-    {
-        Vector3 worldPos = new Vector3(tile.PositionX * GridParameters.TILE_SIZE,
-            tile.DeltaY,
-            tile.PositionZ * GridParameters.TILE_SIZE);
-
-        worldPos += transform.position;
-
-        return worldPos;
-    }
+    
+    // public Vector3 GetTileWorldPos(GridTile tile)
+    // {
+    //     Vector3 worldPos = new Vector3(tile.PositionX * GridParameters.TILE_SIZE,
+    //         tile.DeltaY,
+    //         tile.PositionZ * GridParameters.TILE_SIZE);
+    //
+    //     worldPos += transform.position;
+    //
+    //     return worldPos;
+    // }
 
     public Vector3 GetTileWorldPos(int x, int z, int floor)
     {
         GridTile tile = _grid[floor][x, z];
 
-        Vector3 worldPos = new Vector3(tile.PositionX* GridParameters.TILE_SIZE,
-            tile.DeltaY,
-            tile.PositionZ * GridParameters.TILE_SIZE);
-
-        worldPos += transform.position;
-
-        return worldPos;
+        return tile.WorldPosition;
     }
 
     public List<GridTile> GetTilesWithCover(Vector3 position, float range)
     {
         List<GridTile> tiles = new List<GridTile>();
 
-        foreach (GridTile tile in _tilesWithCover)
+        foreach (Vector3Int tilePos in _tilesWithCover)
         {
-            Vector3 tilePos = GetTileWorldPos(tile);
+            GridTile tile = _grid[tilePos.y][tilePos.x, tilePos.z];
 
-            if (Vector3.Distance(position, tilePos) <= range)
+            if ((position - tile.WorldPosition).sqrMagnitude <= range * range)
             {
                 tiles.Add(tile);
             }
@@ -103,8 +97,10 @@ public class GridMap : MonoBehaviour
         return tiles;
     }
 
+    private List<GridTile> _tilesAround = new List<GridTile>();
     public List<GridTile> GetTilesAround(Vector3 position, float range)
     {
+        _tilesAround.Clear();
         position -= transform.position;
 
         int xCenter = Mathf.RoundToInt(position.x / GridParameters.TILE_SIZE);
@@ -115,35 +111,36 @@ public class GridMap : MonoBehaviour
         int rangeInFloors = Mathf.CeilToInt(range / GridParameters.LEVEL_HEIGHT);
 
         float sqrtRange = range * range;
+        
+        int minX = Mathf.Max(0, xCenter - rangeInTiles);
+        int maxX = Mathf.Min(_grid[0].Size.x - 1, xCenter + rangeInTiles);
 
-        List<GridTile> tiles = new List<GridTile>();
+        int minZ = Mathf.Max(0, zCenter - rangeInTiles);
+        int maxZ = Mathf.Min(_grid[0].Size.y - 1, zCenter + rangeInTiles);
 
-        for(int f = floorCenter - rangeInFloors; f <= floorCenter + rangeInFloors; f++)
+        int minF = Mathf.Max(0, floorCenter - rangeInFloors);
+        int maxF = Mathf.Min(_grid.Count - 1, floorCenter + rangeInFloors);
+
+        for(int f = minF; f <= maxF; f++)
         {
-            if (f < 0) f = 0;
-            if (f >= _grid.Count) break;
-
-            for(int x = xCenter - rangeInTiles; x <= xCenter + rangeInTiles; x++)
+            for(int x = minX; x <= maxX; x++)
             {
-                if (x < 0) x = 0;
-                if (x >= _grid[f].Size.x) break;
-
-                for (int z = zCenter - rangeInTiles; z <= zCenter + rangeInTiles; z++)
+                for (int z = minZ; z <= maxZ; z++)
                 {
-                    if (z < 0) z = 0;
-                    if (z >= _grid[f].Size.y) break;
-
-                    Vector3 tileWorldPos = GetTileWorldPos(x, z, f);
-                    float sqrtDistance = (position - tileWorldPos).sqrMagnitude;
+                    GridTile tile =  _grid[f][x, z];
+                    if(!tile.IsGround) continue;
+                    if(tile.Owner != null) continue;
+                    float sqrtDistance = (position - tile.WorldPosition).sqrMagnitude;
 
                     if(sqrtDistance <= sqrtRange)
                     {
-                        tiles.Add(GetTile(x, z, f));
+                        _tilesAround.Add(tile);
                     }
                 }
             }
         }
+        Debug.Log(_tilesAround.Count);
 
-        return tiles;
+        return _tilesAround;
     }
 }

@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
     private List<UnitController> _units = new List<UnitController>();
     private UnitAIController[] _unitAIControls;
 
-    private Dictionary<CombatTarget, AITarget> _allTargets;
+    private Dictionary<CombatObject, AITarget> _allTargets;
 
     public void Init(UnitOwner owner, List<UnitController> units, UnitAIController[] unitAIs)
     {
@@ -67,7 +67,12 @@ public class EnemyController : MonoBehaviour
         if (!success)
         {
             TryFallback(unit);
-            Debug.LogWarning("Fallback Error! < " + unit.name + " | Team: " + unit.Owner + " | Decision: " + context.Decision + " >");
+            if (context.Decision != UnitAIDecision.None)
+            {
+                Debug.LogWarning(
+                    "Fallback Error! < " + unit.name + " | Team: " + unit.Owner + " | Decision: " + context.Decision + " >"
+                    );
+            }
         }
     }
 
@@ -86,9 +91,7 @@ public class EnemyController : MonoBehaviour
 
     private bool TryRelocate(UnitController unit, UnitAIContext context)
     {
-        string dataErrorLog =
-                $"From ({unit.transform.position}), To ({context.TargetPosition})";
-        Debug.LogWarning($"Relocate debug: [{unit.name} - {unit.Owner}; Path data: {dataErrorLog}");
+
         PointData data = new PointData
         {
             Position = context.TargetPosition
@@ -96,6 +99,10 @@ public class EnemyController : MonoBehaviour
 
         if (TryExecute(unit, 0, data)) return true;
 
+        string dataErrorLog =
+            $"From ({unit.transform.position}), To ({context.TargetPosition})";
+        Debug.LogWarning($"Relocate debug: [{unit.name} - {unit.Owner}; Path data: {dataErrorLog}");
+        
         return false;
     }
     
@@ -111,12 +118,12 @@ public class EnemyController : MonoBehaviour
 
     private void SetTargets()
     {
-        List<CombatTarget> combats = CombatManager.GetAllCombats(_teamOwner);
+        List<CombatObject> combats = CombatManager.GetAllCombats(_teamOwner);
 
-        _allTargets = new Dictionary<CombatTarget, AITarget>();
-        foreach (CombatTarget combat in combats)
+        _allTargets = new Dictionary<CombatObject, AITarget>();
+        foreach (CombatObject combat in combats)
         {
-            _allTargets.Add(combat, new AITarget(combat.Target.Position));
+            _allTargets.Add(combat, new AITarget(combat, combat.Position));
         }
     }
 
@@ -127,20 +134,20 @@ public class EnemyController : MonoBehaviour
             target.IsVisible = false;
         }
 
-        List<CombatTarget> visibleCombats = GetAllVisibleCombats();
+        List<CombatObject> visibleCombats = GetAllVisibleCombats();
 
-        foreach(CombatTarget visibleTarget in visibleCombats)
+        foreach(CombatObject visibleTarget in visibleCombats)
         {
             if (!_allTargets.ContainsKey(visibleTarget)) continue;
 
             _allTargets[visibleTarget].IsVisible = true;
-            _allTargets[visibleTarget].Position = visibleTarget.Target.Position;
+            _allTargets[visibleTarget].Position = visibleTarget.Position;
         }    
     }
 
-    private List<CombatTarget> GetAllVisibleCombats()
+    private List<CombatObject> GetAllVisibleCombats()
     {
-        List<CombatTarget> allCombats = new List<CombatTarget>();
+        List<CombatObject> allCombats = new List<CombatObject>();
 
         foreach (UnitController unit in _units)
         {
@@ -148,9 +155,9 @@ public class EnemyController : MonoBehaviour
 
             foreach(CombatTarget target in unit.Combat.Targets)
             {
-                if (allCombats.Contains(target)) continue;
+                if (allCombats.Contains(target.Target)) continue;
 
-                allCombats.Add(target);
+                allCombats.Add(target.Target);
             }
         }
 
@@ -160,12 +167,14 @@ public class EnemyController : MonoBehaviour
 
 public class AITarget
 {
+    public CombatObject Target;
     public bool IsVisible = false;
     public Vector3 Position;
     public int Priority = 5;
 
-    public AITarget(Vector3 position)
+    public AITarget(CombatObject target, Vector3 position)
     {
+        Target = target;
         Position = position;
     }
 }

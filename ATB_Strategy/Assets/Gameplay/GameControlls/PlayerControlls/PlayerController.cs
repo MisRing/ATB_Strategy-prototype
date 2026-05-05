@@ -147,7 +147,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAbilityPointData()
     {
-        if (!PlayerSelectionManager.SelectedUnit || PlayerSelectionManager.SelectedUnit.State == UnitState.Engaged) return;
+        if (!PlayerSelectionManager.SelectedUnit || PlayerSelectionManager.SelectedUnit.State != UnitState.WaitingForOrder) return;
 
         PointData data = new PointData();
         data.Position = CursorController.CursorPosition;

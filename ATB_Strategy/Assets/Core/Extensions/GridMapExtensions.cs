@@ -6,7 +6,7 @@ using UnityEditor.SceneManagement;
 
 public static class GridMapExtension
 {
-    public static void BuildGrid(ref List<TArray<GridTile>> grid, ref List<GridTile> tilesWithCover, int newX, int newZ, int floorsCount, Vector3 gridOffset, GridMap gridMapObject)
+    public static void BuildGrid(ref List<TArray<GridTile>> grid, ref List<Vector3Int> tilesWithCover, int newX, int newZ, int floorsCount, Vector3 gridOffset, GridMap gridMapObject)
     {
         for (int f = 0; f < floorsCount; f++)
         {
@@ -28,9 +28,11 @@ public static class GridMapExtension
                     SetTileObstacles(ref newTile, gridOffset);
 
                     SetTileCovers(ref newTile, gridOffset);
+                    
                     if (newTile.Covers[0] > 0 || newTile.Covers[1] > 0 || newTile.Covers[2] > 0 || newTile.Covers[3] > 0)
                     {
-                        tilesWithCover.Add(newTile);
+                        Vector3Int tileGridPos = new Vector3Int(newTile.PositionX, newTile.Floor, newTile.PositionZ);
+                        tilesWithCover.Add(tileGridPos);
                     }
 
                     floorGrid[x, z] = newTile;
@@ -96,6 +98,14 @@ public static class GridMapExtension
 
             tile.IsGround = false;
         }
+        
+        Vector3 worldPos = new Vector3(tile.PositionX * GridParameters.TILE_SIZE,
+            tile.DeltaY,
+            tile.PositionZ * GridParameters.TILE_SIZE);
+
+        worldPos += gridOffset;
+
+        tile.WorldPosition = worldPos;
     }
 
     private static void SetTileObstacles(ref GridTile tile, Vector3 gridOffset)

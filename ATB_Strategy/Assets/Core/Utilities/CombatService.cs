@@ -145,9 +145,7 @@ public static class CombatService
 
     public static int CalculateCoverDodge(GridTile tile, int targetDodge, Vector3 dealerPos)
     {
-        Vector3 tilePos = GridParameters.LevelGrid.GetTileWorldPos(tile);
-
-        Vector3 fullDirection = dealerPos - tilePos;
+        Vector3 fullDirection = dealerPos - tile.WorldPosition;
         Vector3 flatDirection = new Vector3(fullDirection.x, 0, fullDirection.z).normalized;
         
         int bestCoverIndex = -1;

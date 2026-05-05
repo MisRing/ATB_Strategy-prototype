@@ -15,4 +15,6 @@ public struct GridTile
     public int PositionZ;
     public int Floor;
     public float DeltaY;
+    
+    public Vector3 WorldPosition;
 }

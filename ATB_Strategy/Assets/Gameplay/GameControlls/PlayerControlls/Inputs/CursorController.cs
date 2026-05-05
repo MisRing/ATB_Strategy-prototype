@@ -65,7 +65,7 @@ public class CursorController : MonoBehaviour
         if(cursorOnTile)
         {
             _cursorTile = tile;
-            Vector3 tileWorldPos = GridParameters.LevelGrid.GetTileWorldPos(tile);
+            Vector3 tileWorldPos = tile.WorldPosition;
             UpdateCursorPosition(tileWorldPos);
         }
         else

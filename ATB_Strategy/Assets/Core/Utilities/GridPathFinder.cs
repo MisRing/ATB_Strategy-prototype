@@ -13,7 +13,7 @@ public static class GridPathFinder
     {
         if (targets != null && targets.Count > 0)
         {
-            Vector3 tilePos = GridParameters.LevelGrid.GetTileWorldPos(tile);
+            Vector3 tilePos = tile.WorldPosition;
             
             CombatTarget closestTarget = targets[0];
             float closestTargetDistance = Vector3.Distance(tilePos, closestTarget.Target.Position);
@@ -123,12 +123,12 @@ public static class GridPathFinder
         return bestCovers;
     }
 
-    public static bool CalculatePath(out PathData pathData, Vector3 agentPoisition, Vector3 targetPosition)
+    public static bool CalculatePath(out PathData pathData, Vector3 agentPosition, Vector3 targetPosition)
     {
         pathData = new PathData();
         NavMeshPath path = new NavMeshPath();
 
-        if (NavMesh.CalculatePath(agentPoisition, targetPosition, NavMesh.AllAreas, path))
+        if (NavMesh.CalculatePath(agentPosition, targetPosition, NavMesh.AllAreas, path))
         {
             pathData.Points = new List<Vector3>();
             pathData.Points.AddRange(path.corners);
