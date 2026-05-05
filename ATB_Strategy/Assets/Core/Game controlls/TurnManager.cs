@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using System.Collections;
+using System.Linq;
 
 public class TurnManager : MonoBehaviour
 {
@@ -49,6 +50,18 @@ public class TurnManager : MonoBehaviour
         if (_freeUnits.Count == 0)
         {
             TimeService.SetTimeSpeed(_minTimeSpeed);
+        }
+    }
+
+    public static void RemoveUnitFromBusyQ(UnitController unit)
+    {
+        foreach (var kvp in _unitsOnAction)
+        {
+            if (kvp.Value.Contains(unit))
+            {
+                kvp.Value.Remove(unit);
+                return;
+            }
         }
     }
 

@@ -131,6 +131,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         return time;
     }
 
+    private Coroutine movement;
     public bool StartMove(out int moveCost)
     {
         moveCost = 0;
@@ -141,6 +142,11 @@ public class UnitAgent : MonoBehaviour, IPathHandler
                 $"From ({_pathData.Points[0]}), To ({_pathData.Points[^1]}), Points count ({_pathData.Points.Count})";
             Debug.LogWarning($"Path is invalid: [{_unit.name} - {_unit.Owner}; Path data: {dataErrorLog}");
             return false;
+        }
+        
+        if (movement != null)
+        {
+            StopCoroutine(movement);
         }
 
         //?????????????????????????????
@@ -154,7 +160,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
 
         moveCost = _pathData.TurnsCost;
         IsMoving = true;
-        StartCoroutine(Move(_pathData));
+        movement = StartCoroutine(Move(_pathData));
         return true;
     }
     private IEnumerator Move(PathData path)
@@ -235,6 +241,15 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         IsMoving = false;
         _velocity = Vector3.zero;
         transform.position = _pathData.Points.Last();
+        _pathData = null;
+    }
+
+    public void InterruptMovement()
+    {
+        StopCoroutine(movement);
+        movement = null;
+        IsMoving = false;
+        _velocity = Vector3.zero;
         _pathData = null;
     }
 

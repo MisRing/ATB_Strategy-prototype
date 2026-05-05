@@ -109,7 +109,6 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
             HitResult hit;
             if (CombatService.CalculateHit(SelectedTargetContext, out hit))
             {
-                hit.Damage = 0;//!!!!!!!!!
                 target.GetDamage(hit);
                 GameLogService.ShowMessage((hit.IsCritical ? "Critical! " : "") + "-" + hit.Damage, target.BodyParts.Body.Transform);
             }

@@ -103,7 +103,9 @@ public class UnitCombat : CombatObject
     {
         _unit.State = UnitState.Dead;
         _unit.Animator.DeathAnimation(lastHit.Dealer.Position);
+        _unit.Agent.InterruptMovement();
         _unit.Agent.RemoveFromGrid();
+        TurnManager.RemoveUnitFromBusyQ(_unit);
         
         CombatManager.UnregisterCombat(this);
         CombatManager.TriggerVisibilityReset();
