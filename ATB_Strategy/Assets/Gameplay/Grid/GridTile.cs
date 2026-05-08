@@ -18,3 +18,27 @@ public struct GridTile
     
     public Vector3 WorldPosition;
 }
+
+[Serializable]
+public class GridTileDemo
+{
+    public bool IsGround;
+    public bool IsEmpty;
+    public TileCover[] Covers;
+    public GridTileDemo[] Neighbours;
+
+    public UnitController Owner;
+
+    public readonly int PositionX;
+    public readonly int PositionZ;
+    public readonly int Floor;
+
+    public Vector3 WorldPosition;
+
+    public GridTileDemo(int x, int z, int floor)
+    {
+        PositionX = x;
+        PositionZ = z;
+        Floor = floor;
+    }
+}

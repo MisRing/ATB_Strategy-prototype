@@ -1,9 +1,11 @@
-using TArrayExtensions;
+using System;
 using System.Collections.Generic;
+using TArrayExtensions;
 using UnityEngine;
 
 public class GridMap : MonoBehaviour
 {
+    [SerializeField] private FloorData<RowData<GridTileDemo>>[] _demogrid;
     [SerializeField] private List<TArray<GridTile>> _grid;
     [SerializeField] private List<Vector3Int> _tilesWithCover;
 
@@ -143,4 +145,16 @@ public class GridMap : MonoBehaviour
 
         return _tilesAround;
     }
+}
+
+[Serializable]
+public struct RowData<T>
+{
+    public T[] Columns;
+}
+
+[Serializable]
+public struct FloorData<T>
+{
+    public T[] Rows;
 }
