@@ -143,7 +143,7 @@ public static class CombatService
         return distanceFactor;
     }
 
-    public static int CalculateCoverDodge(GridTileDemo tile, int targetDodge, Vector3 dealerPos)
+    public static int CalculateCoverDodge(GridTile tile, int targetDodge, Vector3 dealerPos)
     {
         Vector3 fullDirection = dealerPos - tile.WorldPosition;
         Vector3 flatDirection = new Vector3(fullDirection.x, 0, fullDirection.z).normalized;

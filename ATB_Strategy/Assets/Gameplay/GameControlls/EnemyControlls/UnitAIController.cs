@@ -83,42 +83,43 @@ public class UnitAIController : MonoBehaviour
     {
         bestPosition = transform.position;
 
-        //float range = _unit.Stats.VisionRange * 0.75f;
-        //List<GridTileDemo> candidates = GridParameters.LevelGrid.GetTilesWithCover(transform.position, range); //?
+        float range = _unit.Stats.VisionRange * 0.75f;
+        List<GridTile> candidates = GridParameters.LevelGrid.GetTilesAround(_unit.Agent.CurrentTile, range, true); //?
+        Debug.Log(candidates.Count);
+        //return 0;
 
-        //int bestScore = EvaluateTileScore(_unit.Agent.CurrentTile, _unit.Agent.CurrentTile.WorldPosition, targets, ignorePath: true);
+        int bestScore = EvaluateTileScore(_unit.Agent.CurrentTile, _unit.Agent.CurrentTile.WorldPosition, targets, ignorePath: true);
 
-        //foreach (var tile in candidates)
-        //{
-        //    if (tile.Owner != null) continue;
+        foreach (var tile in candidates)
+        {
+            if (tile.Owner != null) continue;
+            if (!tile.IsGround) continue;
 
-        //    Vector3 pos = tile.WorldPosition;
+            Vector3 pos = tile.WorldPosition;
 
-        //    if (!_unit.Agent.CheckPath(pos, out int pathCost))
-        //        continue;
+            if (!_unit.Agent.CheckPath(pos, out int pathCost))
+                continue;
 
-        //    if (pathCost <= 0 || pathCost > 30)
-        //        continue;
+            if (pathCost <= 0 || pathCost > 30)
+                continue;
 
-        //    int score = EvaluateTileScore(tile, pos, targets, ignorePath: false);
+            int score = EvaluateTileScore(tile, pos, targets, ignorePath: false);
 
-        //    if (score > bestScore)
-        //    {
-        //        bestScore = score;
-        //        bestPosition = pos;
-        //    }
-        //}
+            if (score > bestScore)
+            {
+                bestScore = score;
+                bestPosition = pos;
+            }
+        }
 
-        //if (bestPosition == _unit.Agent.CurrentTile.WorldPosition)
-        //    return -100;
+        if (bestPosition == _unit.Agent.CurrentTile.WorldPosition)
+            return -100;
 
-        //return bestScore;
-
-        return 0;
+        return bestScore;
     }
 
 
-    private int EvaluateTileScore(GridTileDemo tile, Vector3 tilePos, List<AITarget> targets, bool ignorePath)
+    private int EvaluateTileScore(GridTile tile, Vector3 tilePos, List<AITarget> targets, bool ignorePath)
     {
         int defenceScore = 0;
         int attackScore = 0;

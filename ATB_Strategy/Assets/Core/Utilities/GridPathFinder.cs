@@ -9,7 +9,7 @@ public static class GridPathFinder
     private static readonly float RAYCAST_HEIGHT = 0.4f;
     private static readonly float MAX_COVER_ANGLE = 90f;
 
-    public static TileCover GetTileCover(ref Vector3 direction, out int coverLook, GridTileDemo tile, List<CombatTarget> targets)
+    public static TileCover GetTileCover(ref Vector3 direction, out int coverLook, GridTile tile, List<CombatTarget> targets)
     {
         if (targets != null && targets.Count > 0)
         {

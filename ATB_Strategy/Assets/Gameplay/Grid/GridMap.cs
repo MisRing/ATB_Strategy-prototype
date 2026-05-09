@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using TArrayExtensions;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -26,7 +26,7 @@ public class GridMap : MonoBehaviour
         GridParameters.LevelGrid = this;
     }
 
-    public GridTileDemo GetTile(int x, int z, int floor)
+    public GridTile GetTile(int x, int z, int floor)
     {
         return _grid[floor][x][z];
     }
@@ -41,7 +41,7 @@ public class GridMap : MonoBehaviour
         return true;
     }
 
-    public GridTileDemo GetTileByWorldPos(Vector3 worldPos)
+    public GridTile GetTileByWorldPos(Vector3 worldPos)
     {
         worldPos -= transform.position;
 
@@ -53,7 +53,7 @@ public class GridMap : MonoBehaviour
 
         return _grid[floor][x][z];
     }
-    
+
     // public Vector3 GetTileWorldPos(GridTile tile)
     // {
     //     Vector3 worldPos = new Vector3(tile.PositionX * GridParameters.TILE_SIZE,
@@ -64,14 +64,81 @@ public class GridMap : MonoBehaviour
     //
     //     return worldPos;
     // }
+
+    private static readonly Vector3Int[] TileSides =
+        {
+            new Vector3Int( 1,  0,  0),
+            new Vector3Int(-1,  0,  0),
+
+            new Vector3Int( 0,  0,  1),
+            new Vector3Int( 0,  0, -1),
+
+            //new Vector3Int( 0,  1,  0),
+            //new Vector3Int( 0, -1,  0),
+        };
+
+    public List<GridTile> GetTilesAround(GridTile startTile, float range, bool onlyGrounded)
+    {
+        List<GridTile> result = new List<GridTile>();
+        HashSet<GridTile> visited = new HashSet<GridTile>();
+
+        float sqrRange = range * range;
+        Vector3 center = startTile.WorldPosition;
+
+        Stack<GridTile> stack = new Stack<GridTile>();
+        stack.Push(startTile);
+
+        while (stack.Count > 0)
+        {
+            GridTile tile = stack.Pop();
+
+            if (tile == null)
+                continue;
+
+            if (onlyGrounded && !tile.IsGround)
+                continue;
+
+            if ((tile.WorldPosition - center).sqrMagnitude > sqrRange)
+                continue;
+
+            if (!visited.Add(tile))
+                continue;
+
+            result.Add(tile);
+
+            int x = tile.PositionX;
+            int y = tile.Floor;
+            int z = tile.PositionZ;
+
+            for (int i = 0; i < TileSides.Length; i++)
+            {
+                Vector3Int dir = TileSides[i];
+
+                int nx = x + dir.x;
+                int ny = y + dir.y;
+                int nz = z + dir.z;
+
+                if (nx < 0 || nz < 0 || ny < 0)
+                    continue;
+
+                if (nx >= SizeX || nz >= SizeZ || ny >= Floors)
+                    continue;
+
+                stack.Push(_grid[ny][nx][nz]);
+            }
+        }
+
+        return result;
+    }
+
 }
 
 [Serializable]
 public class RowData
 {
-    public GridTileDemo[] Columns;
+    public GridTile[] Columns;
 
-    public GridTileDemo this[int index]
+    public GridTile this[int index]
     {
         get => Columns[index];
         set => Columns[index] = value;
@@ -81,7 +148,7 @@ public class RowData
 
     public RowData(int count)
     {
-        Columns = new GridTileDemo[count];
+        Columns = new GridTile[count];
     }
 }
 

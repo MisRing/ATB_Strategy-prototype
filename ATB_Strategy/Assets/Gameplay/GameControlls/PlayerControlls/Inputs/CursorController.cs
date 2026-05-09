@@ -13,7 +13,7 @@ public class CursorController : MonoBehaviour
     [SerializeField] private float _rayDistance = 100f;
     [SerializeField] private float _maxRayNormalAngle = 60f;
 
-    private GridTileDemo _cursorTile;
+    private GridTile _cursorTile;
     private Vector3 _cursorPosition;
     public Vector3 CursorPosition { get => _cursorPosition; }
 
@@ -38,7 +38,7 @@ public class CursorController : MonoBehaviour
 
         bool cursorOnTile = false;
 
-        GridTileDemo tile = null;
+        GridTile tile = null;
 
         if (!RaycastExtensions.IsPointerOverUIObject())
         {
@@ -70,7 +70,7 @@ public class CursorController : MonoBehaviour
         }
     }
 
-    private void UpdateCursorPosition(GridTileDemo tile)
+    private void UpdateCursorPosition(GridTile tile)
     {
 
         if (_cursorTile != tile)

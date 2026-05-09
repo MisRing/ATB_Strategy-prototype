@@ -21,7 +21,7 @@ public class TileCursor : MonoBehaviour
         }
     }
 
-    public void SetTileCursor(GridTileDemo tile)
+    public void SetTileCursor(GridTile tile)
     {
         if(tile == null)
         {

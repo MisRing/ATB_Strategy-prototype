@@ -431,7 +431,7 @@ MonoBehaviour:
   MaxArmor:
     _value: 3
   VisionRange:
-    _value: 18
+    _value: 15
   Accuracy:
     _value: 80
   Dodge:
@@ -455,7 +455,6 @@ MonoBehaviour:
   _skills:
   - {fileID: 2068780972087786568}
   - {fileID: 5779690048134464434}
-  CurrentSkill: {fileID: 0}
   Unit: {fileID: 0}
 --- !u!114 &9125137939366540471
 MonoBehaviour:
@@ -503,7 +502,23 @@ MonoBehaviour:
   _rotationSpeed: 36
   _coverDistance: 2
   _visibilityResetTriggerDistance: 2
-  CurrentTile: {x: 0, y: 0, z: 0}
+  CurrentTile:
+    IsGround: 0
+    IsEmpty: 0
+    Covers: 
+    PositionX: 0
+    PositionZ: 0
+    Floor: 0
+    WorldPosition: {x: 0, y: 0, z: 0}
+  _pathData:
+    Points: []
+    TurnsCost: 0
+    Duration: 0
+    Distance: 0
+    Cover: 0
+    CoverLook: 0
+    FinalDirection: {x: 0, y: 0, z: 0}
+  IsMoving: 0
 --- !u!114 &2044782951743425589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,6 +552,7 @@ MonoBehaviour:
   _previewWeaponIK: {fileID: 150898823701702239}
   _previewModel: {fileID: 5143895108805978381}
   _targetDuration: 0.3
+  _weaponAimAngle: 60
 --- !u!136 &5813577155602040603
 CapsuleCollider:
   m_ObjectHideFlags: 0

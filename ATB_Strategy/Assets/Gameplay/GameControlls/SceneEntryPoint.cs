@@ -78,7 +78,7 @@ public class SceneEntryPoint : MonoBehaviour
                 if (GridParameters.LevelGrid.CheckTile(point.x, point.z, point.y))
                 {
                     Gizmos.color = Color.darkGreen;
-                    GridTileDemo tile = GridParameters.LevelGrid.GetTile(point.x, point.z, point.y);
+                    GridTile tile = GridParameters.LevelGrid.GetTile(point.x, point.z, point.y);
                     if (tile != null)
                     {
                         Gizmos.DrawSphere(tile.WorldPosition, 0.3f);
@@ -94,7 +94,7 @@ public class SceneEntryPoint : MonoBehaviour
                 if (GridParameters.LevelGrid.CheckTile(point.x, point.z, point.y))
                 {
                     Gizmos.color = Color.darkRed;
-                    GridTileDemo tile = GridParameters.LevelGrid.GetTile(point.x, point.z, point.y);
+                    GridTile tile = GridParameters.LevelGrid.GetTile(point.x, point.z, point.y);
                     if (tile != null)
                     {
                         Gizmos.DrawSphere(tile.WorldPosition, 0.3f);

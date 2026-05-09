@@ -13,7 +13,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     
     [SerializeField] private float _visibilityResetTriggerDistance = 2f;
 
-    public GridTileDemo CurrentTile;
+    public GridTile CurrentTile;
     
     public Vector3 Velocity { get { return _velocity; } }
     private Vector3 _velocity = Vector3.zero;
@@ -28,7 +28,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
 
     public bool IsMoving = false;
 
-    public void Init(UnitController unit, GridTileDemo startTile)
+    public void Init(UnitController unit, GridTile startTile)
     {
         _unit = unit;
         CurrentTile = startTile;
@@ -49,7 +49,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         WarpAgentToTile(CurrentTile);
     }
 
-    private void WarpAgentToTile(GridTileDemo tile)
+    private void WarpAgentToTile(GridTile tile)
     {
         CurrentTile = tile;
 
@@ -57,7 +57,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         CurrentTile.Owner = _unit;
     }
     
-    private void SetAgentTile(GridTileDemo tile)
+    private void SetAgentTile(GridTile tile)
     {
         if (CurrentTile != null)
         {
@@ -154,7 +154,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         }
 
         //?????????????????????????????
-        GridTileDemo finalTile = GridParameters.LevelGrid.GetTileByWorldPos(_pathData.Points[_pathData.Points.Count - 1]);
+        GridTile finalTile = GridParameters.LevelGrid.GetTileByWorldPos(_pathData.Points[_pathData.Points.Count - 1]);
         if (finalTile == null || finalTile.Owner != null)
         {
             return false;
@@ -197,7 +197,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
             {
                 if (!coverSet)
                 {
-                    GridTileDemo finalTile = GridParameters.LevelGrid.GetTileByWorldPos(path.Points[path.Points.Count - 1]);
+                    GridTile finalTile = GridParameters.LevelGrid.GetTileByWorldPos(path.Points[path.Points.Count - 1]);
                     path.Cover = GridPathFinder.GetTileCover(
                         ref path.FinalDirection,
                         out path.CoverLook,

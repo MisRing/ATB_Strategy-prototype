@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using TArrayExtensions;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
@@ -18,7 +17,7 @@ public static class GridMapExtension
                 grid[f][x] = new RowData(newZ);
                 for (int z = 0; z < newZ; z++)
                 {
-                    GridTileDemo newTile = new GridTileDemo(x, z, f);
+                    GridTile newTile = new GridTile(x, z, f);
 
                     SetTileGround(ref newTile, gridOffset);
 
@@ -45,7 +44,7 @@ public static class GridMapExtension
         EditorUtility.SetDirty(gridMapObject);
     }
 
-    private static void SetTileGround(ref GridTileDemo tile, Vector3 gridOffset)
+    private static void SetTileGround(ref GridTile tile, Vector3 gridOffset)
     {
         Vector3 rayOrigin = new Vector3(tile.PositionX * GridParameters.TILE_SIZE,
             GridParameters.LEVEL_HEIGHT * (tile.Floor + 1),
@@ -109,7 +108,7 @@ public static class GridMapExtension
         tile.WorldPosition = worldPos;
     }
 
-    private static void SetTileObstacles(ref GridTileDemo tile)
+    private static void SetTileObstacles(ref GridTile tile)
     {
         Vector3 tileSize = new Vector3(GridParameters.TILE_SIZE, GridParameters.LEVEL_HEIGHT, GridParameters.TILE_SIZE) * 0.8f;
 
@@ -125,7 +124,7 @@ public static class GridMapExtension
         }
     }
     
-    private static void SetTileCovers(ref GridTileDemo tile)
+    private static void SetTileCovers(ref GridTile tile)
     {
         tile.Covers = new TileCover[4];
         

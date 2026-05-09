@@ -23,7 +23,7 @@ public class GridMapDebug
             {
                 for (int z = 0; z < gridMap.SizeZ; z++)
                 {
-                    GridTileDemo tile = gridMap.GetTile(x, z, f);
+                    GridTile tile = gridMap.GetTile(x, z, f);
 
                     if (!tile.IsGround)
                     {
