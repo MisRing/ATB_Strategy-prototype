@@ -23,7 +23,7 @@ public class GridMapDebug
             {
                 for (int z = 0; z < gridMap.SizeZ; z++)
                 {
-                    GridTile tile = gridMap.GetTile(x, z, f);
+                    GridTileDemo tile = gridMap.GetTile(x, z, f);
 
                     if (!tile.IsGround)
                     {
@@ -39,23 +39,21 @@ public class GridMapDebug
                         Handles.color = GridMapEditor.DefaultColor;
                     }
 
-                    Vector3 tilePos = new Vector3(tile.PositionX, tile.DeltaY, tile.PositionZ) + gridMap.transform.position;
-
-                    Vector3 point1 = new Vector3(debugOffset, 0, debugOffset) + tilePos;
-                    Vector3 point2 = new Vector3(debugOffset, 0, -debugOffset) + tilePos;
-                    Vector3 point3 = new Vector3(-debugOffset, 0, -debugOffset) + tilePos;
-                    Vector3 point4 = new Vector3(-debugOffset, 0, debugOffset) + tilePos;
+                    Vector3 point1 = new Vector3(debugOffset, 0, debugOffset) + tile.WorldPosition;
+                    Vector3 point2 = new Vector3(debugOffset, 0, -debugOffset) + tile.WorldPosition;
+                    Vector3 point3 = new Vector3(-debugOffset, 0, -debugOffset) + tile.WorldPosition;
+                    Vector3 point4 = new Vector3(-debugOffset, 0, debugOffset) + tile.WorldPosition;
 
                     Handles.DrawLine(point1, point2, lineThickdess);
                     Handles.DrawLine(point2, point3, lineThickdess);
                     Handles.DrawLine(point3, point4, lineThickdess);
                     Handles.DrawLine(point4, point1, lineThickdess);
 
-                    if (IsSceneViewCameraInRange(tilePos, 7f))
+                    if (IsSceneViewCameraInRange(tile.WorldPosition, 7f))
                     {
                         GUIStyle style = new GUIStyle();
                         style.normal.textColor = Color.black;
-                        Handles.Label(tilePos + new Vector3(-debugOffset * 0.55f, 0f, -debugOffset * 0.55f), "floor_" + tile.Floor, style);
+                        Handles.Label(tile.WorldPosition + new Vector3(-debugOffset * 0.55f, 0f, -debugOffset * 0.55f), "floor_" + tile.Floor, style);
                     }
 
                     for (int i = 0; i < 4; i++)
@@ -74,10 +72,10 @@ public class GridMapDebug
                         }
                         else continue;
 
-                        Vector3 cPoint1 = new Vector3(_directions[i][0], 0, _directions[i][1]) + tilePos;
-                        Vector3 cPoint2 = new Vector3(_directions[i][0], height, _directions[i][1]) + tilePos;
-                        Vector3 cPoint3 = new Vector3(_directions[i][2], height, _directions[i][3]) + tilePos;
-                        Vector3 cPoint4 = new Vector3(_directions[i][2], 0, _directions[i][3]) + tilePos;
+                        Vector3 cPoint1 = new Vector3(_directions[i][0], 0, _directions[i][1]) + tile.WorldPosition;
+                        Vector3 cPoint2 = new Vector3(_directions[i][0], height, _directions[i][1]) + tile.WorldPosition;
+                        Vector3 cPoint3 = new Vector3(_directions[i][2], height, _directions[i][3]) + tile.WorldPosition;
+                        Vector3 cPoint4 = new Vector3(_directions[i][2], 0, _directions[i][3]) + tile.WorldPosition;
 
                         Handles.DrawLine(cPoint1, cPoint2, lineThickdess);
                         Handles.DrawLine(cPoint2, cPoint3, lineThickdess);

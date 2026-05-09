@@ -78,7 +78,11 @@ public class SceneEntryPoint : MonoBehaviour
                 if (GridParameters.LevelGrid.CheckTile(point.x, point.z, point.y))
                 {
                     Gizmos.color = Color.darkGreen;
-                    Gizmos.DrawSphere(GridParameters.LevelGrid.GetTileWorldPos(point.x, point.z, point.y), 0.3f);
+                    GridTileDemo tile = GridParameters.LevelGrid.GetTile(point.x, point.z, point.y);
+                    if (tile != null)
+                    {
+                        Gizmos.DrawSphere(tile.WorldPosition, 0.3f);
+                    }
                 }
             }
         }
@@ -90,7 +94,11 @@ public class SceneEntryPoint : MonoBehaviour
                 if (GridParameters.LevelGrid.CheckTile(point.x, point.z, point.y))
                 {
                     Gizmos.color = Color.darkRed;
-                    Gizmos.DrawSphere(GridParameters.LevelGrid.GetTileWorldPos(point.x, point.z, point.y), 0.3f);
+                    GridTileDemo tile = GridParameters.LevelGrid.GetTile(point.x, point.z, point.y);
+                    if (tile != null)
+                    {
+                        Gizmos.DrawSphere(tile.WorldPosition, 0.3f);
+                    }
                 }
             }
         }

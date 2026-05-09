@@ -13,8 +13,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     
     [SerializeField] private float _visibilityResetTriggerDistance = 2f;
 
-    public Vector3Int CurrentTile { get { return _currentTile; } }
-    private Vector3Int _currentTile;
+    public GridTileDemo CurrentTile;
     
     public Vector3 Velocity { get { return _velocity; } }
     private Vector3 _velocity = Vector3.zero;
@@ -29,10 +28,10 @@ public class UnitAgent : MonoBehaviour, IPathHandler
 
     public bool IsMoving = false;
 
-    public void Init(UnitController unit, GridTile startTile)
+    public void Init(UnitController unit, GridTileDemo startTile)
     {
         _unit = unit;
-        _currentTile = new Vector3Int(startTile.PositionX, startTile.Floor, startTile.PositionZ);
+        CurrentTile = startTile;
     }
 
     private void OnEnable()
@@ -47,30 +46,35 @@ public class UnitAgent : MonoBehaviour, IPathHandler
 
     private void Start()
     {
-        WarpAgentToTile(_currentTile);
+        WarpAgentToTile(CurrentTile);
     }
 
-    private void WarpAgentToTile(Vector3Int tilePos)
+    private void WarpAgentToTile(GridTileDemo tile)
     {
-        _currentTile = tilePos;
+        CurrentTile = tile;
 
-        transform.position = GridParameters.LevelGrid.GetTileWorldPos(_currentTile.x, _currentTile.z, _currentTile.y);
-        GridParameters.LevelGrid.SetTileOwner(_currentTile.x, _currentTile.z, _currentTile.y, _unit);
+        transform.position = CurrentTile.WorldPosition;
+        CurrentTile.Owner = _unit;
     }
     
-    private void SetAgentTile(GridTile tile)
+    private void SetAgentTile(GridTileDemo tile)
     {
-        GridParameters.LevelGrid.SetTileOwner(_currentTile.x, _currentTile.z, _currentTile.y, null);
+        if (CurrentTile != null)
+        {
+            CurrentTile.Owner = null;
+        }
 
-        _currentTile = new Vector3Int(tile.PositionX, tile.Floor, tile.PositionZ);
+        CurrentTile = tile;
 
-        GridParameters.LevelGrid.SetTileOwner(_currentTile.x, _currentTile.z, _currentTile.y, _unit);
+        CurrentTile.Owner = _unit;
     }
 
     public void RemoveFromGrid()
     {
-        GridParameters.LevelGrid.SetTileOwner(_currentTile.x, _currentTile.z, _currentTile.y, null);
-        _currentTile = Vector3Int.zero;
+        if (CurrentTile == null) return;
+
+        CurrentTile.Owner = null;
+        CurrentTile = null;
     }
 
     public void ShowPath(bool show)
@@ -150,8 +154,8 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         }
 
         //?????????????????????????????
-        GridTile finalTile = new GridTile();
-        if (!GridParameters.LevelGrid.GetTileByWorldPos(ref finalTile, _pathData.Points[_pathData.Points.Count - 1]) || finalTile.Owner != null)
+        GridTileDemo finalTile = GridParameters.LevelGrid.GetTileByWorldPos(_pathData.Points[_pathData.Points.Count - 1]);
+        if (finalTile == null || finalTile.Owner != null)
         {
             return false;
         }
@@ -193,8 +197,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
             {
                 if (!coverSet)
                 {
-                    GridTile finalTile = new GridTile();
-                    GridParameters.LevelGrid.GetTileByWorldPos(ref finalTile, path.Points[path.Points.Count - 1]);
+                    GridTileDemo finalTile = GridParameters.LevelGrid.GetTileByWorldPos(path.Points[path.Points.Count - 1]);
                     path.Cover = GridPathFinder.GetTileCover(
                         ref path.FinalDirection,
                         out path.CoverLook,

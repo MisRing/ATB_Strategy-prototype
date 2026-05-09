@@ -21,10 +21,16 @@ public class TileCursor : MonoBehaviour
         }
     }
 
-    public void SetTileCursor(Vector3 tileWorldPos, GridTile tile)
+    public void SetTileCursor(GridTileDemo tile)
     {
+        if(tile == null)
+        {
+            _spriteObject.SetActive(false);
+            return;
+        }
+
         _spriteObject.SetActive(true);
-        transform.position = tileWorldPos + _offset;
+        transform.position = tile.WorldPosition + _offset;
 
         for (int i = 0; i < 4; i++)
         {

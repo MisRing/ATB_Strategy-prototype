@@ -13,7 +13,7 @@ public class CursorController : MonoBehaviour
     [SerializeField] private float _rayDistance = 100f;
     [SerializeField] private float _maxRayNormalAngle = 60f;
 
-    private GridTile _cursorTile;
+    private GridTileDemo _cursorTile;
     private Vector3 _cursorPosition;
     public Vector3 CursorPosition { get => _cursorPosition; }
 
@@ -38,7 +38,7 @@ public class CursorController : MonoBehaviour
 
         bool cursorOnTile = false;
 
-        GridTile tile = new GridTile();
+        GridTileDemo tile = null;
 
         if (!RaycastExtensions.IsPointerOverUIObject())
         {
@@ -50,12 +50,10 @@ public class CursorController : MonoBehaviour
                     float normalAngle = Vector3.Angle(hit.normal, Vector3.up);
                     if (normalAngle <= _maxRayNormalAngle)
                     {
-                        if (GridParameters.LevelGrid.GetTileByWorldPos(ref tile, realPoint))
+                        tile = GridParameters.LevelGrid.GetTileByWorldPos(realPoint);
+                        if (tile != null && !tile.Owner)
                         {
-                            if (!tile.Owner)
-                            {
-                                cursorOnTile = true;
-                            }
+                            cursorOnTile = true;
                         }
                     }
                 }
@@ -64,9 +62,7 @@ public class CursorController : MonoBehaviour
 
         if(cursorOnTile)
         {
-            _cursorTile = tile;
-            Vector3 tileWorldPos = tile.WorldPosition;
-            UpdateCursorPosition(tileWorldPos);
+            UpdateCursorPosition(tile);
         }
         else
         {
@@ -74,12 +70,14 @@ public class CursorController : MonoBehaviour
         }
     }
 
-    private void UpdateCursorPosition(Vector3 tileWorldPos)
+    private void UpdateCursorPosition(GridTileDemo tile)
     {
-        if (_cursorPosition != tileWorldPos)
+
+        if (_cursorTile != tile)
         {
-            _cursorPosition = tileWorldPos;
-            _tileCursor.SetTileCursor(_cursorPosition, _cursorTile);
+            _cursorTile = tile;
+            _cursorPosition = _cursorTile.WorldPosition;
+            _tileCursor.SetTileCursor(_cursorTile);
             OnPositionChanged?.Invoke();
         }
     }

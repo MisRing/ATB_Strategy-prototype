@@ -23,7 +23,7 @@ public class UnitController : MonoBehaviour
     public UnitState State;
     public UnitOwner Owner;
 
-    public void Init(GridTile tile)
+    public void Init(GridTileDemo tile)
     {        
         Stats = GetComponent<UnitStats>();
         SkillController = GetComponent<UnitSkillController>();

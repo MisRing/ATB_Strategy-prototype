@@ -6,52 +6,53 @@ using UnityEditor.SceneManagement;
 
 public static class GridMapExtension
 {
-    public static void BuildGrid(ref List<TArray<GridTile>> grid, ref List<Vector3Int> tilesWithCover, int newX, int newZ, int floorsCount, Vector3 gridOffset, GridMap gridMapObject)
+    public static void BuildGrid(ref FloorData[] grid, int newX, int newZ, int floorsCount, Vector3 gridOffset, GridMap gridMapObject)
     {
+        grid = new FloorData[floorsCount];
         for (int f = 0; f < floorsCount; f++)
         {
-            TArray<GridTile> floorGrid = new GridTile[newX, newZ];
+            grid[f] = new FloorData(newX);
 
             for (int x = 0; x < newX; x++)
             {
+                grid[f][x] = new RowData(newZ);
                 for (int z = 0; z < newZ; z++)
                 {
-                    GridTile newTile = new GridTile();
-
-                    newTile.Floor = f;
-
-                    newTile.PositionX = x;
-                    newTile.PositionZ = z;
+                    GridTileDemo newTile = new GridTileDemo(x, z, f);
 
                     SetTileGround(ref newTile, gridOffset);
 
-                    SetTileObstacles(ref newTile, gridOffset);
+                    SetTileObstacles(ref newTile);
 
-                    SetTileCovers(ref newTile, gridOffset);
-                    
-                    if (newTile.Covers[0] > 0 || newTile.Covers[1] > 0 || newTile.Covers[2] > 0 || newTile.Covers[3] > 0)
-                    {
-                        Vector3Int tileGridPos = new Vector3Int(newTile.PositionX, newTile.Floor, newTile.PositionZ);
-                        tilesWithCover.Add(tileGridPos);
-                    }
+                    SetTileCovers(ref newTile);
 
-                    floorGrid[x, z] = newTile;
+                    //if(x > 0)
+                    //{
+                    //    newTile.Neighbours[3] = grid[f][x - 1][z];
+                    //}
+
+                    //if (z > 0)
+                    //{
+                    //    newTile.Neighbours[2] = grid[f][x][z - 1];
+                    //}
+
+                    grid[f][x][z] = newTile;
                 }
             }
-
-            grid.Add(floorGrid);
         }
 
         EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
         EditorUtility.SetDirty(gridMapObject);
     }
 
-    private static void SetTileGround(ref GridTile tile, Vector3 gridOffset)
+    private static void SetTileGround(ref GridTileDemo tile, Vector3 gridOffset)
     {
         Vector3 rayOrigin = new Vector3(tile.PositionX * GridParameters.TILE_SIZE,
             GridParameters.LEVEL_HEIGHT * (tile.Floor + 1),
             tile.PositionZ * GridParameters.TILE_SIZE)
             + gridOffset;
+
+        float tileY = 0;
 
         RaycastHit hit;
         if (Physics.Raycast(rayOrigin,
@@ -88,19 +89,19 @@ public static class GridMapExtension
                 }
             }
 
-            tile.DeltaY = height - gridOffset.y;
+            tileY = height - gridOffset.y;
 
             tile.IsGround = true;
         }
         else
         {
-            tile.DeltaY = GridParameters.LEVEL_HEIGHT * tile.Floor;
+            tileY = GridParameters.LEVEL_HEIGHT * tile.Floor;
 
             tile.IsGround = false;
         }
         
         Vector3 worldPos = new Vector3(tile.PositionX * GridParameters.TILE_SIZE,
-            tile.DeltaY,
+            tileY,
             tile.PositionZ * GridParameters.TILE_SIZE);
 
         worldPos += gridOffset;
@@ -108,13 +109,11 @@ public static class GridMapExtension
         tile.WorldPosition = worldPos;
     }
 
-    private static void SetTileObstacles(ref GridTile tile, Vector3 gridOffset)
+    private static void SetTileObstacles(ref GridTileDemo tile)
     {
         Vector3 tileSize = new Vector3(GridParameters.TILE_SIZE, GridParameters.LEVEL_HEIGHT, GridParameters.TILE_SIZE) * 0.8f;
 
-        Vector3 castCenter = new Vector3(tile.PositionX * GridParameters.TILE_SIZE,
-            tile.DeltaY + tileSize.y * 0.5f + 0.1f,
-            tile.PositionZ * GridParameters.TILE_SIZE) + gridOffset;
+        Vector3 castCenter = tile.WorldPosition + Vector3.up * (GridParameters.LEVEL_HEIGHT * 0.5f + 0.1f);
 
         if (Physics.CheckBox(castCenter, tileSize * 0.5f, Quaternion.identity, GridParameters.ENVIRONMENT_MASK))
         {
@@ -126,23 +125,18 @@ public static class GridMapExtension
         }
     }
     
-    private static void SetTileCovers(ref GridTile tile, Vector3 gridOffset)
+    private static void SetTileCovers(ref GridTileDemo tile)
     {
         tile.Covers = new TileCover[4];
         
         if (!tile.IsEmpty || !tile.IsGround) return;
-        
-        Vector3 position = new Vector3(tile.PositionX * GridParameters.TILE_SIZE,
-            tile.DeltaY,
-            tile.PositionZ * GridParameters.TILE_SIZE)
-            + gridOffset;
 
         for (int i = 0; i < 4; i++)
         {
-            if (Physics.Raycast(position + Vector3.up * GridParameters.LOW_COVER_HEIGHT, GridParameters.COVER_DIRECTIONS[i], GridParameters.TILE_SIZE * 0.55f))
+            if (Physics.Raycast(tile.WorldPosition + Vector3.up * GridParameters.LOW_COVER_HEIGHT, GridParameters.COVER_DIRECTIONS[i], GridParameters.TILE_SIZE * 0.55f))
             {
 
-                if (Physics.Raycast(position + Vector3.up * GridParameters.FULL_COVER_HEIGHT, GridParameters.COVER_DIRECTIONS[i], GridParameters.TILE_SIZE * 0.55f))
+                if (Physics.Raycast(tile.WorldPosition + Vector3.up * GridParameters.FULL_COVER_HEIGHT, GridParameters.COVER_DIRECTIONS[i], GridParameters.TILE_SIZE * 0.55f))
                 {
                     tile.Covers[i] = TileCover.Full;
                 }

@@ -2,22 +2,22 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-[Serializable]
-public struct GridTile
-{
-    public bool IsGround;
-    public bool IsEmpty;
-    public TileCover[] Covers;
+//[Serializable]
+//public struct GridTile
+//{
+//    public bool IsGround;
+//    public bool IsEmpty;
+//    public TileCover[] Covers;
 
-    public UnitController Owner;
+//    public UnitController Owner;
 
-    public int PositionX;
-    public int PositionZ;
-    public int Floor;
-    public float DeltaY;
+//    public int PositionX;
+//    public int PositionZ;
+//    public int Floor;
+//    public float DeltaY;
     
-    public Vector3 WorldPosition;
-}
+//    public Vector3 WorldPosition;
+//}
 
 [Serializable]
 public class GridTileDemo
@@ -25,9 +25,9 @@ public class GridTileDemo
     public bool IsGround;
     public bool IsEmpty;
     public TileCover[] Covers;
-    public GridTileDemo[] Neighbours;
+    //[NonSerialized] public GridTileDemo[] Neighbours;
 
-    public UnitController Owner;
+    [NonSerialized] public UnitController Owner;
 
     public readonly int PositionX;
     public readonly int PositionZ;
@@ -40,5 +40,7 @@ public class GridTileDemo
         PositionX = x;
         PositionZ = z;
         Floor = floor;
+        Covers = new TileCover[4];
+        //Neighbours = new GridTileDemo[4];
     }
 }

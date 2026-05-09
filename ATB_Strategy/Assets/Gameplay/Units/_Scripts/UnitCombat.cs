@@ -64,9 +64,7 @@ public class UnitCombat : CombatObject
     {
         if (_unit.Agent.IsMoving) return _unit.Stats.Dodge;
         
-        Vector3Int tilePos = _unit.Agent.CurrentTile;
-        GridTile tile = GridParameters.LevelGrid.GetTile(tilePos.x, tilePos.z, tilePos.y);
-        int dodge = CombatService.CalculateCoverDodge(tile, _unit.Stats.Dodge, dealerPosition);
+        int dodge = CombatService.CalculateCoverDodge(_unit.Agent.CurrentTile, _unit.Stats.Dodge, dealerPosition);
         
         return dodge;
     }

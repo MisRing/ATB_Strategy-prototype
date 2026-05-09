@@ -8,8 +8,6 @@ public class UnitAIController : MonoBehaviour
     [SerializeField] private int _aggression = 5;
     [SerializeField] private int _defensive = 1;
 
-    private const int INVALID_SCORE = -999999;
-
     public void Init()
     {
         _unit = GetComponent<UnitController>();
@@ -20,7 +18,7 @@ public class UnitAIController : MonoBehaviour
         int moveScore = EvaluateMove(targets, out Vector3 movePos);
         int attackScore = EvaluateAttack(targets, out int targetID);
         
-        Debug.Log("Decision: move = " + moveScore + " | attack = " + attackScore);
+        //Debug.Log("Decision: move = " + moveScore + " | attack = " + attackScore);
 
         if (moveScore > 0 && attackScore < moveScore)
         {
@@ -31,7 +29,7 @@ public class UnitAIController : MonoBehaviour
             };
         }
         
-        if (attackScore > 0 && attackScore >= moveScore)
+        if (attackScore > 0 && attackScore >= moveScore && targetID != -1)
         {
             return new UnitAIContext
             {
@@ -85,41 +83,42 @@ public class UnitAIController : MonoBehaviour
     {
         bestPosition = transform.position;
 
-        float range = _unit.Stats.VisionRange * 0.75f;
-        List<GridTile> candidates = GridParameters.LevelGrid.GetTilesWithCover(transform.position, range); //?
+        //float range = _unit.Stats.VisionRange * 0.75f;
+        //List<GridTileDemo> candidates = GridParameters.LevelGrid.GetTilesWithCover(transform.position, range); //?
 
-        GridTile currentTile = GetCurrentTile();
-        int bestScore = EvaluateTileScore(currentTile, currentTile.WorldPosition, targets, ignorePath: true);
+        //int bestScore = EvaluateTileScore(_unit.Agent.CurrentTile, _unit.Agent.CurrentTile.WorldPosition, targets, ignorePath: true);
 
-        foreach (var tile in candidates)
-        {
-            if (tile.Owner != null) continue;
+        //foreach (var tile in candidates)
+        //{
+        //    if (tile.Owner != null) continue;
 
-            Vector3 pos = tile.WorldPosition;
+        //    Vector3 pos = tile.WorldPosition;
 
-            if (!_unit.Agent.CheckPath(pos, out int pathCost))
-                continue;
+        //    if (!_unit.Agent.CheckPath(pos, out int pathCost))
+        //        continue;
 
-            if (pathCost <= 0 || pathCost > 30)
-                continue;
+        //    if (pathCost <= 0 || pathCost > 30)
+        //        continue;
 
-            int score = EvaluateTileScore(tile, pos, targets, ignorePath: false);
+        //    int score = EvaluateTileScore(tile, pos, targets, ignorePath: false);
 
-            if (score > bestScore)
-            {
-                bestScore = score;
-                bestPosition = pos;
-            }
-        }
+        //    if (score > bestScore)
+        //    {
+        //        bestScore = score;
+        //        bestPosition = pos;
+        //    }
+        //}
 
-        if (bestPosition == currentTile.WorldPosition)
-            return -100;
+        //if (bestPosition == _unit.Agent.CurrentTile.WorldPosition)
+        //    return -100;
 
-        return bestScore;
+        //return bestScore;
+
+        return 0;
     }
 
 
-    private int EvaluateTileScore(GridTile tile, Vector3 tilePos, List<AITarget> targets, bool ignorePath)
+    private int EvaluateTileScore(GridTileDemo tile, Vector3 tilePos, List<AITarget> targets, bool ignorePath)
     {
         int defenceScore = 0;
         int attackScore = 0;
@@ -153,14 +152,6 @@ public class UnitAIController : MonoBehaviour
         attackScore *= _aggression;
 
         return defenceScore + attackScore;
-    }
-
-    // ===================== HELPERS =====================
-
-    private GridTile GetCurrentTile()
-    {
-        Vector3Int pos = _unit.Agent.CurrentTile;
-        return GridParameters.LevelGrid.GetTile(pos.x, pos.z, pos.y);
     }
 
     private int GetDefenceScore(int defence)
