@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(UnitStats))]
@@ -54,6 +56,27 @@ public class UnitController : MonoBehaviour
 
         _isSelected = false;
         OnSelectionChanged?.Invoke(_isSelected);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (!Application.isPlaying) return;
+        if (State == UnitState.Dead) return;
+
+        Handles.color = Color.yellow;
+        Handles.DrawWireDisc(transform.position, Vector3.up, Stats.VisionRange);
+
+        if (Agent.PathData != null && Agent.PathData.Points != null && Agent.PathData.Points.Count >= 2)
+        {
+            Handles.color = Color.blue;
+            Handles.DrawLine(transform.position, Agent.PathData.Points.Last());
+        }
+
+        Handles.color = Color.red;
+        foreach (CombatTarget target in Combat.Targets)
+        {
+            Handles.DrawLine(transform.position, target.Target.Position);
+        }
     }
 }
 

@@ -18,7 +18,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
     public Vector3 Velocity { get { return _velocity; } }
     private Vector3 _velocity = Vector3.zero;
 
-    //public PathData PathData { get { return _pathData; } }
+    public PathData PathData { get { return _pathData; } }
     [SerializeField] private PathData _pathData;
     private bool _showPath;
     private UnitController _unit;
@@ -249,8 +249,11 @@ public class UnitAgent : MonoBehaviour, IPathHandler
 
     public void InterruptMovement()
     {
-        StopCoroutine(movement);
-        movement = null;
+        if (movement != null)
+        {
+            StopCoroutine(movement);
+            movement = null;
+        }
         IsMoving = false;
         _velocity = Vector3.zero;
         _pathData = null;
