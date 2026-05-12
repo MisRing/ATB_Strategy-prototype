@@ -31,19 +31,19 @@ public class GridMap : MonoBehaviour
         return _grid[floor][x][z];
     }
 
-    public void InitializeVisibility(int teamsCount)
-    {
-        for (int f = 0; f < Floors; f++)
-        {
-            for (int x = 0; x < SizeX; x++)
-            {
-                for (int z = 0; z < SizeZ; z++)
-                {
-                    _grid[f][x][z].Visibility = new TileVisibility[teamsCount];
-                }
-            }
-        }
-    }
+    // public void InitializeVisibility(int teamsCount)
+    // {
+    //     for (int f = 0; f < Floors; f++)
+    //     {
+    //         for (int x = 0; x < SizeX; x++)
+    //         {
+    //             for (int z = 0; z < SizeZ; z++)
+    //             {
+    //                 _grid[f][x][z].Visibility = new TileVisibility[teamsCount];
+    //             }
+    //         }
+    //     }
+    // }
 
     public bool CheckTile(int x, int z, int floor)
     {
@@ -79,18 +79,6 @@ public class GridMap : MonoBehaviour
     //     return worldPos;
     // }
 
-    private static readonly Vector3Int[] TileSides =
-        {
-            new Vector3Int( 1,  0,  0),
-            new Vector3Int(-1,  0,  0),
-
-            new Vector3Int( 0,  0,  1),
-            new Vector3Int( 0,  0, -1),
-
-            //new Vector3Int( 0,  1,  0),
-            //new Vector3Int( 0, -1,  0),
-        };
-
     public List<GridTile> GetTilesAround(GridTile startTile, float range, bool onlyGrounded)
     {
         List<GridTile> result = new List<GridTile>();
@@ -124,9 +112,9 @@ public class GridMap : MonoBehaviour
             int y = tile.Floor;
             int z = tile.PositionZ;
 
-            for (int i = 0; i < TileSides.Length; i++)
+            for (int i = 0; i < GridParameters.TILE_SIDES.Length; i++)
             {
-                Vector3Int dir = TileSides[i];
+                Vector3Int dir = GridParameters.TILE_SIDES[i];
 
                 int nx = x + dir.x;
                 int ny = y + dir.y;
@@ -144,7 +132,6 @@ public class GridMap : MonoBehaviour
 
         return result;
     }
-
 }
 
 [Serializable]
