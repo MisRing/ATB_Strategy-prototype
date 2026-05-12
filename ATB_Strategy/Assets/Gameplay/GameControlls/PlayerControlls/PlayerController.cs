@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
 
         AbilitySwitchTarget(targetID);
 
-        Vector3 targetPosition = (ability as ITargetSwitchable).SelectedTargetContext.Target.Target.BodyParts.Body.Transform.position;
+        Vector3 targetPosition = (ability as ITargetSwitchable).SelectedTargetContext.Target.BodyParts.Body.position;
 
         CameraController.AimTarget(unit.transform, targetPosition);
     }
@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
         
         ITargetSwitchable targetSwitchable = PlayerSelectionManager.SelectedUnit.SkillController.CurrentSkill as ITargetSwitchable;
         targetSwitchable.Switch(index);
-        CameraController.AimTarget(PlayerSelectionManager.SelectedUnit.transform, targetSwitchable.SelectedTargetContext.Target.Target.BodyParts.Body.Transform.position);
+        CameraController.AimTarget(PlayerSelectionManager.SelectedUnit.transform, targetSwitchable.SelectedTargetContext.Target.BodyParts.Body.position);
         OnTargetSwitched?.Invoke(index);
     }
 

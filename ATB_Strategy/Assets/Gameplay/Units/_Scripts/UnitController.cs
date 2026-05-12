@@ -73,9 +73,9 @@ public class UnitController : MonoBehaviour
         }
 
         Handles.color = Color.red;
-        foreach (CombatTarget target in Combat.Targets)
+        foreach (CombatObject target in Combat.Targets)
         {
-            Handles.DrawLine(transform.position, target.Target.Position);
+            Handles.DrawLine(transform.position, target.Position);
         }
     }
 }

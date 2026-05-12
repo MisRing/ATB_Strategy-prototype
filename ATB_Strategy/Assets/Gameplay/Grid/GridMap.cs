@@ -31,6 +31,20 @@ public class GridMap : MonoBehaviour
         return _grid[floor][x][z];
     }
 
+    public void InitializeVisibility(int teamsCount)
+    {
+        for (int f = 0; f < Floors; f++)
+        {
+            for (int x = 0; x < SizeX; x++)
+            {
+                for (int z = 0; z < SizeZ; z++)
+                {
+                    _grid[f][x][z].Visibility = new TileVisibility[teamsCount];
+                }
+            }
+        }
+    }
+
     public bool CheckTile(int x, int z, int floor)
     {
         if(_grid.Length == 0 || _grid[0].Length == 0 || _grid[0][0].Length == 0) return false;

@@ -16,6 +16,8 @@ public class GridTile
     public int Floor;
 
     public Vector3 WorldPosition;
+    
+    public TileVisibility[] Visibility;
 
     public GridTile(int x, int z, int floor)
     {
@@ -24,4 +26,11 @@ public class GridTile
         Floor = floor;
         Covers = new TileCover[4];
     }
+}
+
+public enum TileVisibility
+{
+    Hidden,
+    Explored,
+    Visible
 }

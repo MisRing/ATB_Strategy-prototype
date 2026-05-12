@@ -34,14 +34,6 @@ public abstract class CombatObject : MonoBehaviour
 [Serializable]
 public struct CombatBodyParts
 {
-    public BodyPart Body;
-    public BodyPart Head;
-    public BodyPart[] OtherParts;
-        
-    [Serializable]
-    public struct BodyPart
-    {
-        public Transform Transform;
-        [Range(0f,1f)] public float Weight;
-    }
+    public Transform Body;
+    public Transform Head;
 }

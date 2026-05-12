@@ -153,11 +153,11 @@ public class EnemyController : MonoBehaviour
         {
             if (unit.State == UnitState.Dead) continue;
 
-            foreach(CombatTarget target in unit.Combat.Targets)
+            foreach(CombatObject target in unit.Combat.Targets)
             {
-                if (allCombats.Contains(target.Target)) continue;
+                if (allCombats.Contains(target)) continue;
 
-                allCombats.Add(target.Target);
+                allCombats.Add(target);
             }
         }
 

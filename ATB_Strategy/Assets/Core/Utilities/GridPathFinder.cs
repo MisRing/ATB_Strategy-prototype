@@ -9,17 +9,17 @@ public static class GridPathFinder
     private static readonly float RAYCAST_HEIGHT = 0.4f;
     private static readonly float MAX_COVER_ANGLE = 90f;
 
-    public static TileCover GetTileCover(ref Vector3 direction, out int coverLook, GridTile tile, List<CombatTarget> targets)
+    public static TileCover GetTileCover(ref Vector3 direction, out int coverLook, GridTile tile, List<CombatObject> targets)
     {
         if (targets != null && targets.Count > 0)
         {
             Vector3 tilePos = tile.WorldPosition;
             
-            CombatTarget closestTarget = targets[0];
-            float closestTargetDistance = Vector3.Distance(tilePos, closestTarget.Target.Position);
+            CombatObject closestTarget = targets[0];
+            float closestTargetDistance = Vector3.Distance(tilePos, closestTarget.Position);
             for (int i = 1; i < targets.Count; i++)
             {
-                float distance = Vector3.Distance(tilePos, targets[i].Target.Position);
+                float distance = Vector3.Distance(tilePos, targets[i].Position);
                 if (distance < closestTargetDistance)
                 {
                     closestTargetDistance = distance;
@@ -27,7 +27,7 @@ public static class GridPathFinder
                 }
             }
             
-            Vector3 directionToTarget = closestTarget.Target.Position - tilePos;
+            Vector3 directionToTarget = closestTarget.Position - tilePos;
             directionToTarget = new Vector3(directionToTarget.x, 0f, directionToTarget.z).normalized;
 
             int closestCoverID = -1;

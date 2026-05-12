@@ -51,12 +51,12 @@ public static class CombatManager
     }
 
 
-    public static List<CombatTarget> GetCombats(CombatObject unitCombat, float range, UnitOwner ally)
+    public static List<CombatObject> GetCombats(CombatObject unitCombat, float range, UnitOwner ally)
     {
         float sqrRange = range * range;
         Vector3 unitPosition = unitCombat.Position;
 
-        List<CombatTarget> combatsOnRange = new List<CombatTarget>();
+        List<CombatObject> combatsOnRange = new List<CombatObject>();
 
         foreach (CombatObject comb in COMBATS_ON_LEVEL)
         {
@@ -64,79 +64,24 @@ public static class CombatManager
 
             if (sqrDist > sqrRange || comb.Owner == ally) continue;
 
-            float percent = GetVisionPercent(unitCombat.Position + Vector3.up, comb);
-
-            if (percent == 0f) continue;
+            //add visibility
             
-            CombatTarget target = new CombatTarget(comb, percent);
-            combatsOnRange.Add(target);
+            combatsOnRange.Add(comb);
 
         }
 
         combatsOnRange.Sort((a, b) =>
         {
-            float distA = (a.Target.Position - unitPosition).sqrMagnitude;
-            float distB = (b.Target.Position - unitPosition).sqrMagnitude;
+            float distA = (a.Position - unitPosition).sqrMagnitude;
+            float distB = (b.Position - unitPosition).sqrMagnitude;
             return distA.CompareTo(distB);
         });
 
         return combatsOnRange;
     }
 
-    public static float GetVisionPercent(Vector3 fromPos, CombatObject target)
-    {
-        float percent = 0;
-        
-        if (target.BodyParts.Body.Transform)
-        {
-            percent += HasLineBetween(
-                fromPos,
-                target.BodyParts.Body.Transform.position,
-                ENVIRONMENT_MASK
-                )
-                ? target.BodyParts.Body.Weight
-                : 0f;
-        }
-        
-        if (target.BodyParts.Head.Transform)
-        {
-            percent += HasLineBetween(
-                fromPos,
-                target.BodyParts.Head.Transform.position,
-                ENVIRONMENT_MASK
-                )
-                ? target.BodyParts.Head.Weight
-                : 0f;
-        }
-
-        foreach (CombatBodyParts.BodyPart part in target.BodyParts.OtherParts)
-        {
-            percent += HasLineBetween(
-                fromPos,
-                part.Transform.position,
-                ENVIRONMENT_MASK
-                )
-                ? part.Weight
-                : 0f;
-        }
-
-        return percent;
-    }
-
     private static bool HasLineBetween(Vector3 point1, Vector3 point2, LayerMask mask)
     {
         return !Physics.Linecast(point1, point2, mask);
-    }
-}
-
-public struct CombatTarget
-{
-    public CombatObject Target;
-    public float VisionPercent;
-
-    public CombatTarget(CombatObject target, float visionPercent)
-    {
-        Target = target;
-        VisionPercent = visionPercent;
     }
 }

@@ -17,21 +17,21 @@ public static class CombatService
     private static readonly int LOW_COVER_BONUS_DODGE = 30;
     private static readonly int FULL_COVER_BONUS_DODGE = 60;
     
-    public static CombatContext CalculateHitContext(CombatObject dealer, int accuracyPercent, WeaponController weapon, CombatTarget target)
+    public static CombatContext CalculateHitContext(CombatObject dealer, int accuracyPercent, WeaponController weapon, CombatObject target)
     {
         CombatContext context = new CombatContext();
 
-        float distance = Vector3.Distance(target.Target.Position, dealer.Position);
+        float distance = Vector3.Distance(target.Position, dealer.Position);
         float distanceFactor = CalculateDistanceFactor(distance, weapon.RangeType);
-        float heightDiff = dealer.Position.y - target.Target.Position.y;
+        float heightDiff = dealer.Position.y - target.Position.y;
         int heightAdvantage = Mathf.FloorToInt(Mathf.Abs(heightDiff)) * (int)Mathf.Sign(heightDiff);
         
         float hitChance =
             (accuracyPercent
              + weapon.Accuracy * distanceFactor
              + (heightAdvantage * HEIGHT_ADVANTAGE_BONUS_ACCURACY))
-            * target.VisionPercent
-            - target.Target.GetDodge(dealer.Position);
+            //* target.VisionPercent - change to other system
+            - target.GetDodge(dealer.Position);
         
         float critChance = Mathf.Clamp01(hitChance - 100) + weapon.CritChance * distanceFactor;
 
@@ -189,7 +189,7 @@ public static class CombatService
 public struct CombatContext
 {
     public CombatObject Dealer;
-    public CombatTarget Target;
+    public CombatObject Target;
 
     public int HitChance;
     public int CritChance;

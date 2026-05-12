@@ -71,7 +71,7 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         if (_onPrepare)
         {
             _skillController.Unit.PreviewAnimator.AimToTarget(
-                _unitCombat.Targets[_currentTarget].Target.BodyParts.Body.Transform
+                _unitCombat.Targets[_currentTarget].BodyParts.Body
                 );
         }
     }
@@ -82,7 +82,7 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
 
         if (!CanExecute()) return false;
         
-        StartCoroutine(Fire(_unitCombat.Targets[_currentTarget].Target));
+        StartCoroutine(Fire(_unitCombat.Targets[_currentTarget]));
 
         return true;
     }
@@ -94,15 +94,11 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         float shootDuration = duration * 0.45f;
         float endDuration = duration * 0.35f;
         
-        Transform targetTransform = target.BodyParts.Body.Transform;
+        Transform targetTransform = target.BodyParts.Body;
         
         yield return _skillController.Unit.Animator.Aim(aimDuration, targetTransform);
         
-        float visionPercent = CombatManager.GetVisionPercent(
-            _skillController.Unit.Combat.Position + Vector3.up,
-            target
-            );
-        bool shoot = target != null && visionPercent > 0f;
+        bool shoot = target != null && _unitCombat.Targets.Contains(target);
 
         if (shoot)
         {
@@ -110,16 +106,16 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
             if (CombatService.CalculateHit(SelectedTargetContext, out hit))
             {
                 target.GetDamage(hit);
-                GameLogService.ShowMessage((hit.IsCritical ? "Critical! " : "") + "-" + hit.Damage, target.BodyParts.Body.Transform);
+                GameLogService.ShowMessage((hit.IsCritical ? "Critical! " : "") + "-" + hit.Damage, target.BodyParts.Body);
             }
             else
             {
-                GameLogService.ShowMessage("Miss!", target.BodyParts.Body.Transform);
+                GameLogService.ShowMessage("Miss!", target.BodyParts.Body);
             }
         }
         else
         {
-            GameLogService.ShowMessage("Target out of vision!", _skillController.Unit.Combat.BodyParts.Body.Transform);
+            GameLogService.ShowMessage("Target out of vision!", _skillController.Unit.Combat.BodyParts.Body);
         }
         
         yield return _skillController.Unit.Animator.Shoot(shootDuration, targetTransform, shoot);

@@ -33,6 +33,8 @@ public class SceneEntryPoint : MonoBehaviour
         {
             team.Controller.Init(team.Owner, team.Units, team.AIs);
         }
+        
+        GridParameters.LevelGrid.InitializeVisibility(_enemyTeams.Count + (_playerController != null ? 1 : 0));
 
         _camera.Init();
 

@@ -11,7 +11,7 @@ public class UnitCombat : CombatObject
 
     public override UnitOwner Owner { get => _unit.Owner; }
     
-    public List<CombatTarget> Targets = new List<CombatTarget>();
+    public List<CombatObject> Targets = new List<CombatObject>();
     
     public event Action OnUnitDie;
 
@@ -48,9 +48,9 @@ public class UnitCombat : CombatObject
     {
         for (int i = 0; i < Targets.Count; i++)
         {
-            if (Targets[i].Target.gameObject.layer == LayerMask.NameToLayer("Unit"))
+            if (Targets[i].gameObject.layer == LayerMask.NameToLayer("Unit"))
             {
-                if (Targets[i].Target.gameObject == unit.gameObject)
+                if (Targets[i].gameObject == unit.gameObject)
                 {
                     return i;
                 }

@@ -62,7 +62,7 @@ public class UnitAIController : MonoBehaviour
 
             targetScore += context.CritChance * 5;
 
-            int priority = targets.Find(x => x.Target == _unit.Combat.Targets[i].Target).Priority;
+            int priority = targets.Find(x => x.Target == _unit.Combat.Targets[i]).Priority;
             
             targetScore *= priority;
 

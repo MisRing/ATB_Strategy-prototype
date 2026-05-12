@@ -24,7 +24,7 @@ public class SprintSkill : BasicSkill
         SpeedBuff = new FloatStat.FloatStutBuff("Spring", _skillController.Unit.Stats.Speed * 0.5f);
         _skillController.Unit.Stats.Speed.SetBuff(SpeedBuff);
 
-        GameLogService.ShowMessage("Sprint!", _skillController.Unit.Combat.BodyParts.Body.Transform);
+        GameLogService.ShowMessage("Sprint!", _skillController.Unit.Combat.BodyParts.Body);
 
         _skillController.OnSkillFinished += RemoveBuff;
 

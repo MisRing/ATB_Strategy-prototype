@@ -62,7 +62,7 @@ public class UIAbilityPreparePanel : MonoBehaviour
         }
         CombatContext combatContext = _targetSwitchable.SelectedTargetContext;
         _targetAimUI.gameObject.SetActive(true);
-        _targetAimUI.SetTarget(combatContext.Target.Target.BodyParts.Body.Transform, combatContext.HitChance, combatContext.CritChance);
+        _targetAimUI.SetTarget(combatContext.Target.BodyParts.Body, combatContext.HitChance, combatContext.CritChance);
     }
 
     private void Execute()
