@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
         if (newAbility.RequiredDataType == typeof(TargetData))
         {
-            HandleTargetAbility(newAbility, isSame, targetID, unit);
+            if (HandleTargetAbility(newAbility, isSame, targetID, unit)) return;
             FinalizeSelection(newAbility, index, canExecute);
             return;
         }
@@ -90,12 +90,12 @@ public class PlayerController : MonoBehaviour
         FinalizeSelection(newAbility, index, canExecute);
     }
     
-    private void HandleTargetAbility(BasicSkill ability, bool isSame, int targetID, UnitController unit)
+    private bool HandleTargetAbility(BasicSkill ability, bool isSame, int targetID, UnitController unit)
     {
         if (isSame)
         {
             ExecuteAbility();
-            return;
+            return true;
         }
 
         AbilitySwitchTarget(targetID);
@@ -103,6 +103,8 @@ public class PlayerController : MonoBehaviour
         Vector3 targetPosition = (ability as ITargetSwitchable).SelectedTargetContext.Target.BodyParts.Body.position;
 
         CameraController.AimTarget(unit.transform, targetPosition);
+
+        return false;
     }
     
     private void FinalizeSelection(BasicSkill ability, int index, bool canExecute)
