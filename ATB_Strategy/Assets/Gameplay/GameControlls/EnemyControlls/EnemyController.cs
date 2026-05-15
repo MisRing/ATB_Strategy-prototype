@@ -13,6 +13,8 @@ public class EnemyController : MonoBehaviour
 
     private Dictionary<CombatObject, AITarget> _allTargets;
 
+    private bool _squadSleeping = true;
+    
     public void Init(UnitOwner owner, List<UnitController> units, UnitAIController[] unitAIs)
     {
         _teamOwner = owner;
@@ -51,7 +53,13 @@ public class EnemyController : MonoBehaviour
     {
         if (!_units.Contains(unit) || unit.State != UnitState.WaitingForOrder) return;
 
-        UpdateTargets();
+        if (!UpdateTargets() && _squadSleeping)
+        {
+            TryFallback(unit);
+            return;
+        }
+
+        _squadSleeping = false;
 
         int unitIndex = _units.IndexOf(unit);
 
@@ -127,7 +135,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void UpdateTargets()
+    private bool UpdateTargets()
     {
         foreach (AITarget target in _allTargets.Values)
         {
@@ -136,13 +144,17 @@ public class EnemyController : MonoBehaviour
 
         List<CombatObject> visibleCombats = GetAllVisibleCombats();
 
+        if (visibleCombats.Count == 0) return false;
+        
         foreach(CombatObject visibleTarget in visibleCombats)
         {
             if (!_allTargets.ContainsKey(visibleTarget)) continue;
 
             _allTargets[visibleTarget].IsVisible = true;
             _allTargets[visibleTarget].Position = visibleTarget.Position;
-        }    
+        }
+
+        return true;
     }
 
     private List<CombatObject> GetAllVisibleCombats()
