@@ -229,7 +229,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
                 nextPointIndex++;
             }
 
-            if (visibilityResetTimer >= currentPassedDistance / _visibilityResetTriggerDistance)
+            if (visibilityResetTimer <= currentPassedDistance / _visibilityResetTriggerDistance)
             {
                 visibilityResetTimer++;
                 CombatManager.TriggerVisibilityReset();

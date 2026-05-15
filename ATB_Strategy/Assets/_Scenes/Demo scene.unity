@@ -3957,6 +3957,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vanguart T 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6038549465500857701, guid: 8fb0d6f44aab1cd4196a101264605688, type: 3}
+      propertyPath: VisionRange._value
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8633316925009809707, guid: 8fb0d6f44aab1cd4196a101264605688, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

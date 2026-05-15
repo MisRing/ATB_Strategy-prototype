@@ -39,24 +39,23 @@ public class UnitCombat : CombatObject
         CombatManager.OnVisibilityChanged -= SetVisibility;
     }
 
-    //public List<GridTile> VisibleTiles = new List<GridTile>();
+    public List<GridTile> VisibleTiles = new List<GridTile>();
     public void SetVisibility()
     {
-        //GridTile positionTile = GridParameters.LevelGrid.GetTileByWorldPos(transform.position);
-        //VisibleTiles = CombatManager.GetVisibleTiles(positionTile, VisibleTiles, _unit.Stats.VisionRange, _unit.Owner);
+        VisibleTiles = FogOfWarUtility.GetVisibleTiles(transform.position, _unit.Stats.VisionRange);
         
-        Targets = CombatManager.GetCombats(this, _unit.Stats.VisionRange, _unit.Owner);
+        Targets = CombatManager.GetCombats(this, VisibleTiles, _unit.Owner);
     }
 
-    // public void OnDrawGizmosSelected()
-    // {
-    //     if(!Application.isPlaying) return;
-    //     foreach (GridTile tile in VisibleTiles)
-    //     {
-    //         Gizmos.color = Color.green;
-    //         Gizmos.DrawCube(tile.WorldPosition, Vector3.one * 0.75f);
-    //     }
-    // }
+    public void OnDrawGizmosSelected()
+    {
+        if(!Application.isPlaying) return;
+        foreach (GridTile tile in VisibleTiles)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawCube(tile.WorldPosition, Vector3.one * 0.75f);
+        }
+    }
 
     public int CheckTarget(UnitController unit)
     {
