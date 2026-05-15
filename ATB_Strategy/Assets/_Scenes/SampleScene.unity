@@ -3730,7 +3730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   _positionOffset: {x: 0, y: 0.5, z: 0}
-  _cameraPitch: 40
+  _cameraPitch: 35
   _transitionMoveSmooth: 0.15
   _transitionRotSpeed: 5
   _moveSpeedMaxZoom: 7.5
@@ -3741,8 +3741,8 @@ MonoBehaviour:
   _rotationAngle: -90
   _startAngle: 135
   _rotationSpeed: 10
-  _maxZoom: 3
-  _minZoom: 10
+  _maxZoom: 2
+  _minZoom: 8
   _zoomSpeed: 0.2
   _zoomSmoothTime: 0.15
   _extraZoomPercent: 1.2
