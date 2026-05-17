@@ -1466,7 +1466,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &196820878
 Transform:
   m_ObjectHideFlags: 0
@@ -1962,7 +1962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &319984227
 Transform:
   m_ObjectHideFlags: 0
@@ -2056,6 +2056,75 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319984226}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &328089895
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4057332214047127339, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_Name
+      value: Oxy_ballon (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 28.020136
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.916
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12.022492
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
 --- !u!1 &329324666
 GameObject:
   m_ObjectHideFlags: 0
@@ -2084,7 +2153,7 @@ Transform:
   m_GameObject: {fileID: 329324666}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 35.5, y: 0.9, z: 3.5}
+  m_LocalPosition: {x: 35.5, y: 0.9, z: 4}
   m_LocalScale: {x: 2, y: 1.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3083,6 +3152,67 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 447273624}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &449999643
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2290684113315285561, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_Name
+      value: Oxy_agregate (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.87475
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 25.728352
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.248
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 24.080748
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
 --- !u!1 &479419675
 GameObject:
   m_ObjectHideFlags: 0
@@ -3440,7 +3570,7 @@ Transform:
   m_GameObject: {fileID: 514910974}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 29.5, y: 0.9, z: 22.5}
+  m_LocalPosition: {x: 29.5, y: 0.9, z: 22}
   m_LocalScale: {x: 2, y: 1.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4040,7 +4170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &557159744
 Transform:
   m_ObjectHideFlags: 0
@@ -4281,6 +4411,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 566753605}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &578030631
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1371137992905326, guid: 150a843925f3594408e88f5356e93525, type: 3}
+      propertyPath: m_Name
+      value: Container_Big
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071871990506472, guid: 150a843925f3594408e88f5356e93525, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 21.008102
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071871990506472, guid: 150a843925f3594408e88f5356e93525, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.348
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071871990506472, guid: 150a843925f3594408e88f5356e93525, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 11.972666
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071871990506472, guid: 150a843925f3594408e88f5356e93525, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071871990506472, guid: 150a843925f3594408e88f5356e93525, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071871990506472, guid: 150a843925f3594408e88f5356e93525, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071871990506472, guid: 150a843925f3594408e88f5356e93525, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071871990506472, guid: 150a843925f3594408e88f5356e93525, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071871990506472, guid: 150a843925f3594408e88f5356e93525, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071871990506472, guid: 150a843925f3594408e88f5356e93525, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 150a843925f3594408e88f5356e93525, type: 3}
 --- !u!1 &581355121
 GameObject:
   m_ObjectHideFlags: 0
@@ -4757,7 +4944,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &719681436
 Transform:
   m_ObjectHideFlags: 0
@@ -5217,7 +5404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &772257995
 Transform:
   m_ObjectHideFlags: 0
@@ -5423,6 +5610,75 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 779445939}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &808003502
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1733028346558438, guid: 1243e0861322e4340b06b4b1b96cc269, type: 3}
+      propertyPath: m_Name
+      value: ore_container
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147626917454302, guid: 1243e0861322e4340b06b4b1b96cc269, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147626917454302, guid: 1243e0861322e4340b06b4b1b96cc269, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147626917454302, guid: 1243e0861322e4340b06b4b1b96cc269, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147626917454302, guid: 1243e0861322e4340b06b4b1b96cc269, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147626917454302, guid: 1243e0861322e4340b06b4b1b96cc269, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147626917454302, guid: 1243e0861322e4340b06b4b1b96cc269, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.237
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147626917454302, guid: 1243e0861322e4340b06b4b1b96cc269, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147626917454302, guid: 1243e0861322e4340b06b4b1b96cc269, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147626917454302, guid: 1243e0861322e4340b06b4b1b96cc269, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147626917454302, guid: 1243e0861322e4340b06b4b1b96cc269, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147626917454302, guid: 1243e0861322e4340b06b4b1b96cc269, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147626917454302, guid: 1243e0861322e4340b06b4b1b96cc269, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147626917454302, guid: 1243e0861322e4340b06b4b1b96cc269, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1243e0861322e4340b06b4b1b96cc269, type: 3}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -5862,7 +6118,7 @@ Transform:
   m_GameObject: {fileID: 883309493}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.5, y: 0.9, z: 31.5}
+  m_LocalPosition: {x: 11, y: 0.9, z: 31}
   m_LocalScale: {x: 1, y: 1.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6062,6 +6318,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c349060e617d4d34b94510ee6e876ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitComponent
+--- !u!1001 &901778903
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2290684113315285561, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_Name
+      value: Oxy_agregate
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 20.721712
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.010000706
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 19.990814
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290684113315285562, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9d3d7e6d5cafba44e977fc9cf466ab4e, type: 3}
 --- !u!1 &909733174
 GameObject:
   m_ObjectHideFlags: 0
@@ -6529,7 +6842,7 @@ Transform:
   m_GameObject: {fileID: 953225141}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 37.5, y: 0.5, z: 26.5}
+  m_LocalPosition: {x: 37.5, y: 0.5, z: 27}
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6641,7 +6954,7 @@ Transform:
   m_GameObject: {fileID: 961575882}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 37.5, y: 0.9, z: 14.5}
+  m_LocalPosition: {x: 37.5, y: 0.9, z: 14}
   m_LocalScale: {x: 2, y: 1.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6725,6 +7038,71 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961575882}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &966540990
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1078601217194440, guid: eb78f0b05c9799b48a3da95f40152af7, type: 3}
+      propertyPath: m_Name
+      value: Supply_box
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656224359884820, guid: eb78f0b05c9799b48a3da95f40152af7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656224359884820, guid: eb78f0b05c9799b48a3da95f40152af7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656224359884820, guid: eb78f0b05c9799b48a3da95f40152af7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656224359884820, guid: eb78f0b05c9799b48a3da95f40152af7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.807
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656224359884820, guid: eb78f0b05c9799b48a3da95f40152af7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 23.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656224359884820, guid: eb78f0b05c9799b48a3da95f40152af7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656224359884820, guid: eb78f0b05c9799b48a3da95f40152af7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656224359884820, guid: eb78f0b05c9799b48a3da95f40152af7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656224359884820, guid: eb78f0b05c9799b48a3da95f40152af7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656224359884820, guid: eb78f0b05c9799b48a3da95f40152af7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656224359884820, guid: eb78f0b05c9799b48a3da95f40152af7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656224359884820, guid: eb78f0b05c9799b48a3da95f40152af7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb78f0b05c9799b48a3da95f40152af7, type: 3}
 --- !u!1 &984470534
 GameObject:
   m_ObjectHideFlags: 0
@@ -6935,6 +7313,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 995844133}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1009215452
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1334102657782902, guid: fa2bc414ff40df84e980e1f63c2491f4, type: 3}
+      propertyPath: m_Name
+      value: Geo_base
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745712697277102, guid: fa2bc414ff40df84e980e1f63c2491f4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 17.442705
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745712697277102, guid: fa2bc414ff40df84e980e1f63c2491f4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745712697277102, guid: fa2bc414ff40df84e980e1f63c2491f4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 31.132364
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745712697277102, guid: fa2bc414ff40df84e980e1f63c2491f4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745712697277102, guid: fa2bc414ff40df84e980e1f63c2491f4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745712697277102, guid: fa2bc414ff40df84e980e1f63c2491f4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745712697277102, guid: fa2bc414ff40df84e980e1f63c2491f4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745712697277102, guid: fa2bc414ff40df84e980e1f63c2491f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745712697277102, guid: fa2bc414ff40df84e980e1f63c2491f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745712697277102, guid: fa2bc414ff40df84e980e1f63c2491f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fa2bc414ff40df84e980e1f63c2491f4, type: 3}
 --- !u!1 &1024767578
 GameObject:
   m_ObjectHideFlags: 0
@@ -7159,6 +7594,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029857946}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1030996956
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4057332214047127339, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_Name
+      value: Oxy_ballon (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.080416
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.757
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 31.061848
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
 --- !u!1 &1031380158
 GameObject:
   m_ObjectHideFlags: 0
@@ -7177,7 +7669,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1031380159
 Transform:
   m_ObjectHideFlags: 0
@@ -7370,7 +7862,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1052412017
 Transform:
   m_ObjectHideFlags: 0
@@ -8115,6 +8607,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1124936872}
   m_CullTransparentMesh: 1
+--- !u!1001 &1125313051
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1081925447564050, guid: b2c02a3a41a00c44ca9f886586c13ff5, type: 3}
+      propertyPath: m_Name
+      value: Ore_Holder_exp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150178578579674, guid: b2c02a3a41a00c44ca9f886586c13ff5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150178578579674, guid: b2c02a3a41a00c44ca9f886586c13ff5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2488999
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150178578579674, guid: b2c02a3a41a00c44ca9f886586c13ff5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150178578579674, guid: b2c02a3a41a00c44ca9f886586c13ff5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150178578579674, guid: b2c02a3a41a00c44ca9f886586c13ff5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150178578579674, guid: b2c02a3a41a00c44ca9f886586c13ff5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150178578579674, guid: b2c02a3a41a00c44ca9f886586c13ff5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150178578579674, guid: b2c02a3a41a00c44ca9f886586c13ff5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150178578579674, guid: b2c02a3a41a00c44ca9f886586c13ff5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150178578579674, guid: b2c02a3a41a00c44ca9f886586c13ff5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150178578579674, guid: b2c02a3a41a00c44ca9f886586c13ff5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150178578579674, guid: b2c02a3a41a00c44ca9f886586c13ff5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150178578579674, guid: b2c02a3a41a00c44ca9f886586c13ff5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b2c02a3a41a00c44ca9f886586c13ff5, type: 3}
 --- !u!1 &1134532268
 GameObject:
   m_ObjectHideFlags: 0
@@ -8336,7 +8897,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1167742294
 Transform:
   m_ObjectHideFlags: 0
@@ -8866,6 +9427,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1184009886}
   m_CullTransparentMesh: 1
+--- !u!1001 &1186750630
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1181796843363928, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_Name
+      value: Container_small
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.307
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.669
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
 --- !u!1 &1214783284
 GameObject:
   m_ObjectHideFlags: 0
@@ -9314,6 +9932,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1242189416}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1265771287
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4057332214047127339, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_Name
+      value: Oxy_ballon (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.939384
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.803
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 30.039364
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
 --- !u!1 &1269753005
 GameObject:
   m_ObjectHideFlags: 0
@@ -9566,7 +10241,7 @@ Transform:
   m_GameObject: {fileID: 1294172529}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.5, y: 0.9, z: 32.5}
+  m_LocalPosition: {x: 10, y: 0.9, z: 33}
   m_LocalScale: {x: 1, y: 1.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9918,6 +10593,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328315788}
   m_CullTransparentMesh: 1
+--- !u!1001 &1333781509
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1303781000943784, guid: 5ee38cac5d0088a43bd714d0fc62eb84, type: 3}
+      propertyPath: m_Name
+      value: Data Caps
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684311418634222, guid: 5ee38cac5d0088a43bd714d0fc62eb84, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684311418634222, guid: 5ee38cac5d0088a43bd714d0fc62eb84, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684311418634222, guid: 5ee38cac5d0088a43bd714d0fc62eb84, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684311418634222, guid: 5ee38cac5d0088a43bd714d0fc62eb84, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.524
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684311418634222, guid: 5ee38cac5d0088a43bd714d0fc62eb84, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684311418634222, guid: 5ee38cac5d0088a43bd714d0fc62eb84, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684311418634222, guid: 5ee38cac5d0088a43bd714d0fc62eb84, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684311418634222, guid: 5ee38cac5d0088a43bd714d0fc62eb84, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684311418634222, guid: 5ee38cac5d0088a43bd714d0fc62eb84, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684311418634222, guid: 5ee38cac5d0088a43bd714d0fc62eb84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684311418634222, guid: 5ee38cac5d0088a43bd714d0fc62eb84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684311418634222, guid: 5ee38cac5d0088a43bd714d0fc62eb84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5ee38cac5d0088a43bd714d0fc62eb84, type: 3}
 --- !u!1 &1335437231
 GameObject:
   m_ObjectHideFlags: 0
@@ -10962,7 +11703,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000010000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 2
         PositionZ: 32
         Floor: 0
@@ -11283,11 +12024,11 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 01000000000000000000000000000000
         PositionX: 3
         PositionZ: 32
         Floor: 0
-        WorldPosition: {x: 3, y: 1, z: 32}
+        WorldPosition: {x: 3, y: 0.01, z: 32}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -11315,7 +12056,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 00000000000000000100000000000000
         PositionX: 3
         PositionZ: 36
         Floor: 0
@@ -11604,7 +12345,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000001000000
+        Covers: 00000000000000000000000000000000
         PositionX: 4
         PositionZ: 32
         Floor: 0
@@ -12712,7 +13453,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 02000000020000000000000000000000
+        Covers: 02000000010000000000000000000000
         PositionX: 8
         PositionZ: 10
         Floor: 0
@@ -13025,7 +13766,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 02000000000000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 9
         PositionZ: 9
         Floor: 0
@@ -13033,11 +13774,11 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 01000000000000000000000000000000
+        Covers: 02000000000000000000000000000000
         PositionX: 9
         PositionZ: 10
         Floor: 0
-        WorldPosition: {x: 9, y: 1.8, z: 10}
+        WorldPosition: {x: 9, y: 1.1066135, z: 10}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 0
@@ -13045,7 +13786,7 @@ MonoBehaviour:
         PositionX: 9
         PositionZ: 11
         Floor: 0
-        WorldPosition: {x: 9, y: 0.01, z: 11}
+        WorldPosition: {x: 9, y: 0.87987953, z: 11}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -13213,15 +13954,15 @@ MonoBehaviour:
         PositionX: 9
         PositionZ: 32
         Floor: 0
-        WorldPosition: {x: 9, y: 1.8, z: 32}
+        WorldPosition: {x: 9, y: 0.01, z: 32}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 00000000020000000000000000000000
         PositionX: 9
         PositionZ: 33
         Floor: 0
-        WorldPosition: {x: 9, y: 1.8, z: 33}
+        WorldPosition: {x: 9, y: 0.01, z: 33}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -13354,7 +14095,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 02000000000000000000000002000000
+        Covers: 02000000000000000000000000000000
         PositionX: 10
         PositionZ: 10
         Floor: 0
@@ -13522,19 +14263,19 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 00000000020000000000000000000000
         PositionX: 10
         PositionZ: 31
         Floor: 0
-        WorldPosition: {x: 10, y: 1.8, z: 31}
+        WorldPosition: {x: 10, y: 0.01, z: 31}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 02000000000000000000000000000000
         PositionX: 10
         PositionZ: 32
         Floor: 0
-        WorldPosition: {x: 10, y: 1.8, z: 32}
+        WorldPosition: {x: 10, y: 0.01, z: 32}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -13546,7 +14287,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 00000000000000000200000000000000
         PositionX: 10
         PositionZ: 34
         Floor: 0
@@ -13835,7 +14576,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 02000000000000000000000000000000
         PositionX: 11
         PositionZ: 30
         Floor: 0
@@ -13851,15 +14592,15 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 00000000000000000200000000000000
         PositionX: 11
         PositionZ: 32
         Floor: 0
-        WorldPosition: {x: 11, y: 1.8, z: 32}
+        WorldPosition: {x: 11, y: 0.01, z: 32}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 00000000000000000000000002000000
         PositionX: 11
         PositionZ: 33
         Floor: 0
@@ -14164,7 +14905,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 00000000000000000000000002000000
         PositionX: 12
         PositionZ: 31
         Floor: 0
@@ -14590,7 +15331,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000020000000000000000000000
+        Covers: 00000000010000000000000000000000
         PositionX: 14
         PositionZ: 4
         Floor: 0
@@ -14622,7 +15363,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000010000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 14
         PositionZ: 8
         Floor: 0
@@ -14670,7 +15411,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000010000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 14
         PositionZ: 14
         Floor: 0
@@ -14806,14 +15547,14 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000010000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 14
         PositionZ: 31
         Floor: 0
         WorldPosition: {x: 14, y: 0.01, z: 31}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
-        IsEmpty: 1
+        IsEmpty: 0
         Covers: 00000000000000000000000000000000
         PositionX: 14
         PositionZ: 32
@@ -14903,7 +15644,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 02000000000000000000000000000000
+        Covers: 01000000000000000000000000000000
         PositionX: 15
         PositionZ: 3
         Floor: 0
@@ -14915,11 +15656,11 @@ MonoBehaviour:
         PositionX: 15
         PositionZ: 4
         Floor: 0
-        WorldPosition: {x: 15, y: 1.8, z: 4}
+        WorldPosition: {x: 15, y: 1.0305562, z: 4}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000200000000000000
+        Covers: 00000000000000000100000000000000
         PositionX: 15
         PositionZ: 5
         Floor: 0
@@ -14935,7 +15676,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 01000000000000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 15
         PositionZ: 7
         Floor: 0
@@ -14947,7 +15688,7 @@ MonoBehaviour:
         PositionX: 15
         PositionZ: 8
         Floor: 0
-        WorldPosition: {x: 15, y: 1, z: 8}
+        WorldPosition: {x: 15, y: 1.1300579, z: 8}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -14983,7 +15724,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 01000000000000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 15
         PositionZ: 13
         Floor: 0
@@ -14995,11 +15736,11 @@ MonoBehaviour:
         PositionX: 15
         PositionZ: 14
         Floor: 0
-        WorldPosition: {x: 15, y: 1, z: 14}
+        WorldPosition: {x: 15, y: 0.58405817, z: 14}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000100000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 15
         PositionZ: 15
         Floor: 0
@@ -15063,7 +15804,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000020000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 15
         PositionZ: 23
         Floor: 0
@@ -15111,7 +15852,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 02000000000000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 15
         PositionZ: 29
         Floor: 0
@@ -15123,23 +15864,23 @@ MonoBehaviour:
         PositionX: 15
         PositionZ: 30
         Floor: 0
-        WorldPosition: {x: 15, y: 1.8, z: 30}
+        WorldPosition: {x: 15, y: 1.8012835, z: 30}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000100000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 15
         PositionZ: 31
         Floor: 0
-        WorldPosition: {x: 15, y: 1, z: 31}
+        WorldPosition: {x: 15, y: 1.7552836, z: 31}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000100000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 15
         PositionZ: 32
         Floor: 0
-        WorldPosition: {x: 15, y: 0.01, z: 32}
+        WorldPosition: {x: 15, y: 1.2207664, z: 32}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -15232,7 +15973,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000002000000
+        Covers: 00000000000000000000000001000000
         PositionX: 16
         PositionZ: 4
         Floor: 0
@@ -15256,7 +15997,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 01000000000000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 16
         PositionZ: 7
         Floor: 0
@@ -15268,7 +16009,7 @@ MonoBehaviour:
         PositionX: 16
         PositionZ: 8
         Floor: 0
-        WorldPosition: {x: 16, y: 1, z: 8}
+        WorldPosition: {x: 16, y: 1.1300579, z: 8}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -15304,7 +16045,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 01000000000000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 16
         PositionZ: 13
         Floor: 0
@@ -15316,11 +16057,11 @@ MonoBehaviour:
         PositionX: 16
         PositionZ: 14
         Floor: 0
-        WorldPosition: {x: 16, y: 1, z: 14}
+        WorldPosition: {x: 16, y: 0.5840582, z: 14}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000100000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 16
         PositionZ: 15
         Floor: 0
@@ -15388,23 +16129,23 @@ MonoBehaviour:
         PositionX: 16
         PositionZ: 23
         Floor: 0
-        WorldPosition: {x: 16, y: 1.8, z: 23}
+        WorldPosition: {x: 16, y: 1.9323875, z: 23}
+        Visibility: 0000000000000000000000000000000000000000
+      - IsGround: 1
+        IsEmpty: 0
+        Covers: 00000000000000000000000000000000
+        PositionX: 16
+        PositionZ: 24
+        Floor: 0
+        WorldPosition: {x: 16, y: 1.8454791, z: 24}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
         Covers: 00000000000000000000000000000000
         PositionX: 16
-        PositionZ: 24
-        Floor: 0
-        WorldPosition: {x: 16, y: 1.8, z: 24}
-        Visibility: 0000000000000000000000000000000000000000
-      - IsGround: 1
-        IsEmpty: 1
-        Covers: 00000000000000000200000000000000
-        PositionX: 16
         PositionZ: 25
         Floor: 0
-        WorldPosition: {x: 16, y: 0.01, z: 25}
+        WorldPosition: {x: 16, y: 1.8059547, z: 25}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -15440,11 +16181,11 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 01000000000000000000000002000000
+        Covers: 00000000000000000000000000000000
         PositionX: 16
         PositionZ: 30
         Floor: 0
-        WorldPosition: {x: 16, y: 0.01, z: 30}
+        WorldPosition: {x: 16, y: 1.2207664, z: 30}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -15452,15 +16193,15 @@ MonoBehaviour:
         PositionX: 16
         PositionZ: 31
         Floor: 0
-        WorldPosition: {x: 16, y: 1, z: 31}
+        WorldPosition: {x: 16, y: 1.2207664, z: 31}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000100000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 16
         PositionZ: 32
         Floor: 0
-        WorldPosition: {x: 16, y: 0.01, z: 32}
+        WorldPosition: {x: 16, y: 1.2207664, z: 32}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -15577,7 +16318,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 01000000000000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 17
         PositionZ: 7
         Floor: 0
@@ -15589,7 +16330,7 @@ MonoBehaviour:
         PositionX: 17
         PositionZ: 8
         Floor: 0
-        WorldPosition: {x: 17, y: 1, z: 8}
+        WorldPosition: {x: 17, y: 1.1300579, z: 8}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -15625,23 +16366,23 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 01000000000000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 17
         PositionZ: 13
         Floor: 0
         WorldPosition: {x: 17, y: 0.01, z: 13}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
-        IsEmpty: 1
+        IsEmpty: 0
         Covers: 00000000000000000000000000000000
         PositionX: 17
         PositionZ: 14
         Floor: 0
-        WorldPosition: {x: 17, y: 1, z: 14}
+        WorldPosition: {x: 17, y: 0.5840584, z: 14}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000100000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 17
         PositionZ: 15
         Floor: 0
@@ -15704,28 +16445,28 @@ MonoBehaviour:
         WorldPosition: {x: 17, y: 0.01, z: 22}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
-        IsEmpty: 1
+        IsEmpty: 0
         Covers: 00000000000000000000000000000000
         PositionX: 17
         PositionZ: 23
         Floor: 0
-        WorldPosition: {x: 17, y: 1.8, z: 23}
+        WorldPosition: {x: 17, y: 1.8921039, z: 23}
+        Visibility: 0000000000000000000000000000000000000000
+      - IsGround: 1
+        IsEmpty: 0
+        Covers: 00000000000000000000000000000000
+        PositionX: 17
+        PositionZ: 24
+        Floor: 0
+        WorldPosition: {x: 17, y: 1.8059547, z: 24}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
         Covers: 00000000000000000000000000000000
         PositionX: 17
-        PositionZ: 24
-        Floor: 0
-        WorldPosition: {x: 17, y: 1.8, z: 24}
-        Visibility: 0000000000000000000000000000000000000000
-      - IsGround: 1
-        IsEmpty: 1
-        Covers: 00000000000000000200000000000000
-        PositionX: 17
         PositionZ: 25
         Floor: 0
-        WorldPosition: {x: 17, y: 0.01, z: 25}
+        WorldPosition: {x: 17, y: 1.8059547, z: 25}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -15761,11 +16502,11 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 01000000000000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 17
         PositionZ: 30
         Floor: 0
-        WorldPosition: {x: 17, y: 0.01, z: 30}
+        WorldPosition: {x: 17, y: 1.2207664, z: 30}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -15773,15 +16514,15 @@ MonoBehaviour:
         PositionX: 17
         PositionZ: 31
         Floor: 0
-        WorldPosition: {x: 17, y: 1, z: 31}
+        WorldPosition: {x: 17, y: 1.2207664, z: 31}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000100000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 17
         PositionZ: 32
         Floor: 0
-        WorldPosition: {x: 17, y: 0.01, z: 32}
+        WorldPosition: {x: 17, y: 1.2207664, z: 32}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -15954,7 +16695,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000001000000
+        Covers: 00000000000000000000000000000000
         PositionX: 18
         PositionZ: 14
         Floor: 0
@@ -16025,28 +16766,28 @@ MonoBehaviour:
         WorldPosition: {x: 18, y: 0.01, z: 22}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
-        IsEmpty: 1
+        IsEmpty: 0
         Covers: 00000000000000000000000000000000
         PositionX: 18
         PositionZ: 23
         Floor: 0
-        WorldPosition: {x: 18, y: 1.8, z: 23}
+        WorldPosition: {x: 18, y: 1.8424788, z: 23}
+        Visibility: 0000000000000000000000000000000000000000
+      - IsGround: 1
+        IsEmpty: 0
+        Covers: 00000000000000000000000000000000
+        PositionX: 18
+        PositionZ: 24
+        Floor: 0
+        WorldPosition: {x: 18, y: 1.8424788, z: 24}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
         Covers: 00000000000000000000000000000000
         PositionX: 18
-        PositionZ: 24
-        Floor: 0
-        WorldPosition: {x: 18, y: 1.8, z: 24}
-        Visibility: 0000000000000000000000000000000000000000
-      - IsGround: 1
-        IsEmpty: 1
-        Covers: 00000000000000000200000000000000
-        PositionX: 18
         PositionZ: 25
         Floor: 0
-        WorldPosition: {x: 18, y: 0.01, z: 25}
+        WorldPosition: {x: 18, y: 1.8059547, z: 25}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -16082,27 +16823,27 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 01000000000000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 18
         PositionZ: 30
         Floor: 0
-        WorldPosition: {x: 18, y: 0.01, z: 30}
+        WorldPosition: {x: 18, y: 1.2207664, z: 30}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000010000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 18
         PositionZ: 31
         Floor: 0
-        WorldPosition: {x: 18, y: 1, z: 31}
+        WorldPosition: {x: 18, y: 1.2207664, z: 31}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000100000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 18
         PositionZ: 32
         Floor: 0
-        WorldPosition: {x: 18, y: 0.01, z: 32}
+        WorldPosition: {x: 18, y: 1.2207664, z: 32}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -16323,7 +17064,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000010000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 19
         PositionZ: 20
         Floor: 0
@@ -16347,7 +17088,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000002000000
+        Covers: 00000000000000000000000000000000
         PositionX: 19
         PositionZ: 23
         Floor: 0
@@ -16403,11 +17144,11 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 02000000000000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 19
         PositionZ: 30
         Floor: 0
-        WorldPosition: {x: 19, y: 0.01, z: 30}
+        WorldPosition: {x: 19, y: 1.2207664, z: 30}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -16415,15 +17156,15 @@ MonoBehaviour:
         PositionX: 19
         PositionZ: 31
         Floor: 0
-        WorldPosition: {x: 19, y: 1.8, z: 31}
+        WorldPosition: {x: 19, y: 1.2207664, z: 31}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000200000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 19
         PositionZ: 32
         Floor: 0
-        WorldPosition: {x: 19, y: 0.01, z: 32}
+        WorldPosition: {x: 19, y: 1.2207664, z: 32}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -16580,7 +17321,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000010000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 20
         PositionZ: 12
         Floor: 0
@@ -16636,7 +17377,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 01000000000000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 20
         PositionZ: 19
         Floor: 0
@@ -16644,15 +17385,15 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000010000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 20
         PositionZ: 20
         Floor: 0
-        WorldPosition: {x: 20, y: 1, z: 20}
+        WorldPosition: {x: 20, y: 0.40644792, z: 20}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000100000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 20
         PositionZ: 21
         Floor: 0
@@ -16732,7 +17473,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000002000000
+        Covers: 00000000000000000000000000000000
         PositionX: 20
         PositionZ: 31
         Floor: 0
@@ -16905,11 +17646,11 @@ MonoBehaviour:
         PositionX: 21
         PositionZ: 12
         Floor: 0
-        WorldPosition: {x: 21, y: 1, z: 12}
+        WorldPosition: {x: 21, y: 0.6950107, z: 12}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000100000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 21
         PositionZ: 13
         Floor: 0
@@ -16957,7 +17698,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 02000000000000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 21
         PositionZ: 19
         Floor: 0
@@ -16969,11 +17710,11 @@ MonoBehaviour:
         PositionX: 21
         PositionZ: 20
         Floor: 0
-        WorldPosition: {x: 21, y: 1.8, z: 20}
+        WorldPosition: {x: 21, y: 0.40644792, z: 20}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000200000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 21
         PositionZ: 21
         Floor: 0
@@ -17286,11 +18027,11 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000002000000
+        Covers: 00000000000000000000000000000000
         PositionX: 22
         PositionZ: 20
         Floor: 0
-        WorldPosition: {x: 22, y: 0.01, z: 20}
+        WorldPosition: {x: 22, y: 0.40644792, z: 20}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -17952,7 +18693,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000020000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 24
         PositionZ: 23
         Floor: 0
@@ -17960,7 +18701,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000020000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 24
         PositionZ: 24
         Floor: 0
@@ -18277,7 +19018,7 @@ MonoBehaviour:
         PositionX: 25
         PositionZ: 23
         Floor: 0
-        WorldPosition: {x: 25, y: 1.8, z: 23}
+        WorldPosition: {x: 25, y: 0.01, z: 23}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -18285,11 +19026,11 @@ MonoBehaviour:
         PositionX: 25
         PositionZ: 24
         Floor: 0
-        WorldPosition: {x: 25, y: 1.8, z: 24}
+        WorldPosition: {x: 25, y: 0.94158435, z: 24}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 00000000000000000100000000000000
         PositionX: 25
         PositionZ: 25
         Floor: 0
@@ -18598,7 +19339,7 @@ MonoBehaviour:
         PositionX: 26
         PositionZ: 23
         Floor: 0
-        WorldPosition: {x: 26, y: 1.8, z: 23}
+        WorldPosition: {x: 26, y: 0.01, z: 23}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -18606,11 +19347,11 @@ MonoBehaviour:
         PositionX: 26
         PositionZ: 24
         Floor: 0
-        WorldPosition: {x: 26, y: 1.8, z: 24}
+        WorldPosition: {x: 26, y: 0.94158435, z: 24}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 00000000000000000100000000000000
         PositionX: 26
         PositionZ: 25
         Floor: 0
@@ -18826,12 +19567,12 @@ MonoBehaviour:
         WorldPosition: {x: 27, y: 0.01, z: 11}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
-        IsEmpty: 1
+        IsEmpty: 0
         Covers: 00000000000000000000000000000000
         PositionX: 27
         PositionZ: 12
         Floor: 0
-        WorldPosition: {x: 27, y: 1.8, z: 12}
+        WorldPosition: {x: 27, y: 0.01, z: 12}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -18915,7 +19656,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000002000000
+        Covers: 00000000000000000000000000000000
         PositionX: 27
         PositionZ: 23
         Floor: 0
@@ -18923,11 +19664,11 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000002000000
+        Covers: 00000000000000000000000000000000
         PositionX: 27
         PositionZ: 24
         Floor: 0
-        WorldPosition: {x: 27, y: 0.01, z: 24}
+        WorldPosition: {x: 27, y: 0.94158435, z: 24}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -19147,12 +19888,12 @@ MonoBehaviour:
         WorldPosition: {x: 28, y: 0.01, z: 11}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
-        IsEmpty: 1
+        IsEmpty: 0
         Covers: 00000000000000000000000000000000
         PositionX: 28
         PositionZ: 12
         Floor: 0
-        WorldPosition: {x: 28, y: 1.8, z: 12}
+        WorldPosition: {x: 28, y: 0.01, z: 12}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -19236,7 +19977,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000020000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 28
         PositionZ: 23
         Floor: 0
@@ -19541,7 +20282,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 02000000000000000000000000000000
         PositionX: 29
         PositionZ: 21
         Floor: 0
@@ -19557,11 +20298,11 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 00000000000000000200000000000000
         PositionX: 29
         PositionZ: 23
         Floor: 0
-        WorldPosition: {x: 29, y: 1.8, z: 23}
+        WorldPosition: {x: 29, y: 0.01, z: 23}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -19862,7 +20603,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 02000000000000000000000000000000
         PositionX: 30
         PositionZ: 21
         Floor: 0
@@ -19878,11 +20619,11 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 00000000000000000200000000000000
         PositionX: 30
         PositionZ: 23
         Floor: 0
-        WorldPosition: {x: 30, y: 1.8, z: 23}
+        WorldPosition: {x: 30, y: 0.01, z: 23}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -20199,7 +20940,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000020000000000000002000000
+        Covers: 00000000020000000000000000000000
         PositionX: 31
         PositionZ: 23
         Floor: 0
@@ -20825,7 +21566,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000002000000
+        Covers: 01000000000000000000000002000000
         PositionX: 33
         PositionZ: 21
         Floor: 0
@@ -20841,11 +21582,11 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000002000000
+        Covers: 00000000000000000100000002000000
         PositionX: 33
         PositionZ: 23
         Floor: 0
-        WorldPosition: {x: 33, y: 1, z: 23}
+        WorldPosition: {x: 33, y: 0.01, z: 23}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -21002,7 +21743,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000020000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 34
         PositionZ: 3
         Floor: 0
@@ -21146,7 +21887,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 01000000000000000000000000000000
         PositionX: 34
         PositionZ: 21
         Floor: 0
@@ -21162,11 +21903,11 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 00000000000000000100000000000000
         PositionX: 34
         PositionZ: 23
         Floor: 0
-        WorldPosition: {x: 34, y: 1, z: 23}
+        WorldPosition: {x: 34, y: 0.01, z: 23}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -21323,11 +22064,11 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 02000000000000000000000000000000
         PositionX: 35
         PositionZ: 3
         Floor: 0
-        WorldPosition: {x: 35, y: 1.8, z: 3}
+        WorldPosition: {x: 35, y: 0.01, z: 3}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -21339,7 +22080,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 00000000000000000200000000000000
         PositionX: 35
         PositionZ: 5
         Floor: 0
@@ -21483,7 +22224,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000001000000
+        Covers: 00000000000000000000000000000000
         PositionX: 35
         PositionZ: 23
         Floor: 0
@@ -21644,11 +22385,11 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 02000000000000000000000000000000
         PositionX: 36
         PositionZ: 3
         Floor: 0
-        WorldPosition: {x: 36, y: 1.8, z: 3}
+        WorldPosition: {x: 36, y: 0.01, z: 3}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -21660,7 +22401,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 00000000000000000200000000000000
         PositionX: 36
         PositionZ: 5
         Floor: 0
@@ -21740,7 +22481,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000020000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 36
         PositionZ: 15
         Floor: 0
@@ -21828,7 +22569,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000010000000000000000000000
+        Covers: 00000000000000000000000000000000
         PositionX: 36
         PositionZ: 26
         Floor: 0
@@ -21965,7 +22706,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000002000000
+        Covers: 00000000000000000000000000000000
         PositionX: 37
         PositionZ: 3
         Floor: 0
@@ -22045,7 +22786,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 02000000000000000000000000000000
         PositionX: 37
         PositionZ: 13
         Floor: 0
@@ -22061,11 +22802,11 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 00000000000000000200000000000000
         PositionX: 37
         PositionZ: 15
         Floor: 0
-        WorldPosition: {x: 37, y: 1.8, z: 15}
+        WorldPosition: {x: 37, y: 0.01, z: 15}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -22149,11 +22890,11 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 01000000000000000000000000000000
         PositionX: 37
         PositionZ: 26
         Floor: 0
-        WorldPosition: {x: 37, y: 1, z: 26}
+        WorldPosition: {x: 37, y: 0.01, z: 26}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -22165,7 +22906,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000000000000000000000000000
+        Covers: 00000000000000000100000000000000
         PositionX: 37
         PositionZ: 28
         Floor: 0
@@ -22366,7 +23107,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000020000000000000000000000
+        Covers: 02000000020000000000000000000000
         PositionX: 38
         PositionZ: 13
         Floor: 0
@@ -22382,11 +23123,11 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000010000000000000000000000
+        Covers: 00000000020000000200000000000000
         PositionX: 38
         PositionZ: 15
         Floor: 0
-        WorldPosition: {x: 38, y: 1.8, z: 15}
+        WorldPosition: {x: 38, y: 0.01, z: 15}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -22470,11 +23211,11 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000020000000000000000000000
+        Covers: 01000000020000000000000000000000
         PositionX: 38
         PositionZ: 26
         Floor: 0
-        WorldPosition: {x: 38, y: 1, z: 26}
+        WorldPosition: {x: 38, y: 0.01, z: 26}
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
@@ -22486,7 +23227,7 @@ MonoBehaviour:
         Visibility: 0000000000000000000000000000000000000000
       - IsGround: 1
         IsEmpty: 1
-        Covers: 00000000020000000000000000000000
+        Covers: 00000000020000000100000000000000
         PositionX: 38
         PositionZ: 28
         Floor: 0
@@ -23804,7 +24545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1569123970
 Transform:
   m_ObjectHideFlags: 0
@@ -24732,6 +25473,120 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1668909702}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1672267777
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1067124891137074, guid: b23b67369615e9b4d94cda00ba74bb4b, type: 3}
+      propertyPath: m_Name
+      value: Vents
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301662790870662, guid: b23b67369615e9b4d94cda00ba74bb4b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 17.090132
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301662790870662, guid: b23b67369615e9b4d94cda00ba74bb4b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.521
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301662790870662, guid: b23b67369615e9b4d94cda00ba74bb4b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 13.926427
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301662790870662, guid: b23b67369615e9b4d94cda00ba74bb4b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301662790870662, guid: b23b67369615e9b4d94cda00ba74bb4b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301662790870662, guid: b23b67369615e9b4d94cda00ba74bb4b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301662790870662, guid: b23b67369615e9b4d94cda00ba74bb4b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301662790870662, guid: b23b67369615e9b4d94cda00ba74bb4b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301662790870662, guid: b23b67369615e9b4d94cda00ba74bb4b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301662790870662, guid: b23b67369615e9b4d94cda00ba74bb4b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b23b67369615e9b4d94cda00ba74bb4b, type: 3}
+--- !u!1001 &1689410095
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1181796843363928, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_Name
+      value: Container_small (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.259589
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861587243735292, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 767a1075f1ec4394d88256559f7c8d1c, type: 3}
 --- !u!1001 &1735491465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24939,7 +25794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1744589594
 Transform:
   m_ObjectHideFlags: 0
@@ -25051,7 +25906,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1774336068
 Transform:
   m_ObjectHideFlags: 0
@@ -25258,6 +26113,75 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1787350476}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1793265839
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4057332214047127339, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_Name
+      value: Oxy_ballon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 26.962397
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.941
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12.022492
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057332214047127340, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 02faec155a85efb468ab0ff9d5424a0d, type: 3}
 --- !u!1 &1799715898
 GameObject:
   m_ObjectHideFlags: 0
@@ -25276,7 +26200,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1799715899
 Transform:
   m_ObjectHideFlags: 0
@@ -25388,7 +26312,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1812519535
 Transform:
   m_ObjectHideFlags: 0
@@ -26162,7 +27086,7 @@ Transform:
   m_GameObject: {fileID: 1955987369}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 33.5, y: 0.5, z: 22.5}
+  m_LocalPosition: {x: 33.5, y: 0.5, z: 22}
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26781,7 +27705,7 @@ Transform:
   m_GameObject: {fileID: 2040122180}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 0.5, z: 33.5}
+  m_LocalPosition: {x: 3, y: 0.5, z: 34}
   m_LocalScale: {x: 1, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26975,3 +27899,18 @@ SceneRoots:
   - {fileID: 723904379}
   - {fileID: 121519928}
   - {fileID: 1356297844}
+  - {fileID: 578030631}
+  - {fileID: 1125313051}
+  - {fileID: 1333781509}
+  - {fileID: 1793265839}
+  - {fileID: 328089895}
+  - {fileID: 1186750630}
+  - {fileID: 808003502}
+  - {fileID: 901778903}
+  - {fileID: 1689410095}
+  - {fileID: 1672267777}
+  - {fileID: 966540990}
+  - {fileID: 449999643}
+  - {fileID: 1009215452}
+  - {fileID: 1265771287}
+  - {fileID: 1030996956}
