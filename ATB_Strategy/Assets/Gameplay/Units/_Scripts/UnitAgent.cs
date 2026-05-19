@@ -232,8 +232,8 @@ public class UnitAgent : MonoBehaviour, IPathHandler
             if (visibilityResetTimer <= currentPassedDistance / _visibilityResetTriggerDistance)
             {
                 visibilityResetTimer++;
-                CombatManager.TriggerVisibilityReset();
-                CombatManager.ResetVisibility();
+                FogOfWarUtility.TriggerVisibilityReset();
+                FogOfWarUtility.ResetVisibility();
             }
         }
 

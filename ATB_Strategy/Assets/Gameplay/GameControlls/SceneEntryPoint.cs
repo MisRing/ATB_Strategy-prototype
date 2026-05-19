@@ -16,6 +16,10 @@ public class SceneEntryPoint : MonoBehaviour
     [SerializeField] private List<UnitController> _playerUnits = new List<UnitController>();
     [SerializeField] private List<Vector3Int> _playerPositionPreset = new List<Vector3Int>();
 
+    [Header("Fog of War settings")]
+    [SerializeField] private FogOfWarRenderer _fogOfWarRenderer;
+
+
     private void Awake()
     {
         Debug.Log("Initializing start...");
@@ -37,6 +41,9 @@ public class SceneEntryPoint : MonoBehaviour
         //GridParameters.LevelGrid.InitializeVisibility(_enemyTeams.Count + (_playerController != null ? 1 : 0));
 
         _camera.Init();
+        
+        _fogOfWarRenderer.Initialize();
+        FogOfWarUtility.Renderer = _fogOfWarRenderer;
 
         Debug.Log("Initializing complete.");
     }

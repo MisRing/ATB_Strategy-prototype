@@ -103,7 +103,7 @@ public class TurnManager : MonoBehaviour
     private void EndTurn()
     {
         OnTurnEnded?.Invoke();
-        CombatManager.ResetVisibility(); //change this
+        FogOfWarUtility.ResetVisibility(); //change this
 
         _currentTurn++;
         _lastTurnPause = false;

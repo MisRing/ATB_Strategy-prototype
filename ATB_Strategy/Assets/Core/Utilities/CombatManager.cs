@@ -7,23 +7,6 @@ public static class CombatManager
     private static readonly List<CombatObject> COMBATS_ON_LEVEL = new List<CombatObject>();
     private static readonly LayerMask ENVIRONMENT_MASK = LayerMask.GetMask("Grid Environment");
     
-    private static bool _needToResetVisibility = false;
-
-    public static event Action OnVisibilityChanged;
-    
-    public static void TriggerVisibilityReset()
-    {
-        _needToResetVisibility = true;
-    }
-
-    public static void ResetVisibility()
-    {
-        if (!_needToResetVisibility) return;
-
-        _needToResetVisibility = false;
-        OnVisibilityChanged?.Invoke();
-    }
-    
     public static void RegisterCombat(CombatObject comb)
     {
         if (COMBATS_ON_LEVEL.Contains(comb)) return;

@@ -24,19 +24,30 @@ public class UnitCombat : CombatObject
 
     public void Start()
     {
-        SetVisibility();
+        FogOfWarUtility.ResetVisibility();
+        FogOfWarUtility.TriggerVisibilityReset();
     }
 
     private protected override void OnEnable()
     {
         base.OnEnable();
-        CombatManager.OnVisibilityChanged += SetVisibility;
+        FogOfWarUtility.OnVisibilityChanged += SetVisibility;
+
+        if (_unit.Owner == UnitOwner.PlayerTeam && !FogOfWarUtility.UnitsOfVisionReset.Contains(this))
+        {
+            FogOfWarUtility.UnitsOfVisionReset.Add(this);
+        }
     }
 
     private protected override void OnDisable()
     {
         base.OnDisable();
-        CombatManager.OnVisibilityChanged -= SetVisibility;
+        FogOfWarUtility.OnVisibilityChanged -= SetVisibility;
+        
+        if (FogOfWarUtility.UnitsOfVisionReset.Contains(this))
+        {
+            FogOfWarUtility.UnitsOfVisionReset.Add(this);
+        }
     }
 
     public List<GridTile> VisibleTiles = new List<GridTile>();
@@ -119,7 +130,7 @@ public class UnitCombat : CombatObject
         TurnManager.RemoveUnitFromBusyQ(_unit);
         
         CombatManager.UnregisterCombat(this);
-        CombatManager.TriggerVisibilityReset();
+        FogOfWarUtility.TriggerVisibilityReset();
         OnUnitDie?.Invoke();
     }
 }

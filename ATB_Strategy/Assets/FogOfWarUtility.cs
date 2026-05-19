@@ -1,8 +1,76 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public static class FogOfWarUtility
 {
+    public static FogOfWarRenderer Renderer;
+    
+    private static bool _needToResetVisibility;
+
+    public static event Action OnVisibilityChanged;
+
+    public static readonly List<UnitCombat> UnitsOfVisionReset = new List<UnitCombat>();
+
+    private static readonly HashSet<GridTile> _exploredTiles = new HashSet<GridTile>();
+    private static readonly HashSet<GridTile> _visibleTiles = new HashSet<GridTile>();
+
+    public static void TriggerVisibilityReset()
+    {
+        _needToResetVisibility = true;
+    }
+
+    public static void ResetVisibility()
+    {
+        if (!_needToResetVisibility)
+            return;
+
+        _needToResetVisibility = false;
+        
+        OnVisibilityChanged?.Invoke();
+
+        // =====================================================
+        // OLD VISIBLE -> EXPLORED
+        // =====================================================
+
+        foreach (GridTile tile in _visibleTiles)
+        {
+            tile.Visibility = TileVisibility.Explored;
+            _exploredTiles.Add(tile);
+        }
+
+        _visibleTiles.Clear();
+
+        // =====================================================
+        // COLLECT NEW VISIBLE
+        // =====================================================
+
+        foreach (UnitCombat combat in UnitsOfVisionReset)
+        {
+            if (combat == null)
+                continue;
+
+            foreach (GridTile tile in combat.VisibleTiles)
+            {
+                if (tile == null)
+                    continue;
+
+                _visibleTiles.Add(tile);
+            }
+        }
+
+        // =====================================================
+        // APPLY NEW VISIBLE
+        // =====================================================
+
+        foreach (GridTile tile in _visibleTiles)
+        {
+            tile.Visibility = TileVisibility.Visible;
+        }
+        
+        Renderer.UpdateFog(GridParameters.LevelGrid.GetFloorData(0));
+    }
+    
     // =========================================================
     // PUBLIC
     // =========================================================

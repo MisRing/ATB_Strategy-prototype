@@ -17,7 +17,7 @@ public class GridTile
 
     public Vector3 WorldPosition;
     
-    public TileVisibility[] Visibility = new TileVisibility[5];
+    public TileVisibility Visibility = TileVisibility.Hidden;
 
     public GridTile(int x, int z, int floor)
     {

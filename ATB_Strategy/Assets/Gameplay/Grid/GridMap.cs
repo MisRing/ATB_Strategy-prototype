@@ -26,6 +26,11 @@ public class GridMap : MonoBehaviour
         GridParameters.LevelGrid = this;
     }
 
+    public FloorData GetFloorData(int floor)
+    {
+        return _grid[floor];
+    }
+
     public GridTile GetTile(int x, int z, int floor)
     {
         return _grid[floor][x][z];
