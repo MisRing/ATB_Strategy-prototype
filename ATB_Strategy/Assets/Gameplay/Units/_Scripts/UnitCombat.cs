@@ -31,7 +31,7 @@ public class UnitCombat : CombatObject
     private protected override void OnEnable()
     {
         base.OnEnable();
-        FogOfWarUtility.OnVisibilityChanged += SetVisibility;
+        FogOfWarUtility.OnResetVisibility += SetResetVisibility;
 
         if (_unit.Owner == UnitOwner.PlayerTeam && !FogOfWarUtility.UnitsOfVisionReset.Contains(this))
         {
@@ -42,7 +42,7 @@ public class UnitCombat : CombatObject
     private protected override void OnDisable()
     {
         base.OnDisable();
-        FogOfWarUtility.OnVisibilityChanged -= SetVisibility;
+        FogOfWarUtility.OnResetVisibility -= SetResetVisibility;
         
         if (FogOfWarUtility.UnitsOfVisionReset.Contains(this))
         {
@@ -51,7 +51,7 @@ public class UnitCombat : CombatObject
     }
 
     public List<GridTile> VisibleTiles = new List<GridTile>();
-    public void SetVisibility()
+    public void SetResetVisibility()
     {
         VisibleTiles = FogOfWarUtility.GetVisibleTiles(transform.position, _unit.Stats.VisionRange);
         

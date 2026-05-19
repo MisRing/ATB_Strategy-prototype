@@ -8,6 +8,7 @@ public static class FogOfWarUtility
     
     private static bool _needToResetVisibility;
 
+    public static event Action OnResetVisibility;
     public static event Action OnVisibilityChanged;
 
     public static readonly List<UnitCombat> UnitsOfVisionReset = new List<UnitCombat>();
@@ -27,7 +28,7 @@ public static class FogOfWarUtility
 
         _needToResetVisibility = false;
         
-        OnVisibilityChanged?.Invoke();
+        OnResetVisibility?.Invoke();
 
         // =====================================================
         // OLD VISIBLE -> EXPLORED
@@ -69,6 +70,8 @@ public static class FogOfWarUtility
         }
         
         Renderer.UpdateFog(GridParameters.LevelGrid.GetFloorData(0));
+        
+        OnVisibilityChanged?.Invoke();
     }
     
     // =========================================================

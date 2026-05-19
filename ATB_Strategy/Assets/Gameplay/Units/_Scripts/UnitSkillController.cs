@@ -142,7 +142,7 @@ public class UnitSkillController : MonoBehaviour
             Unit.Agent.EndMove();
         }
         Unit.State = UnitState.WaitingForOrder;
-        Unit.Combat.SetVisibility();
+        Unit.Combat.SetResetVisibility();
 
         OnSkillFinished?.Invoke(Unit);
     }
