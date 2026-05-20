@@ -99,29 +99,46 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         yield return _skillController.Unit.Animator.Aim(aimDuration, targetTransform);
         
         bool shoot = target != null && _unitCombat.Targets.Contains(target);
-        bool hit = false;
 
+        yield return _skillController.Unit.Animator.PrepareShoot(shootDuration / 3f, targetTransform);
+        
         if (shoot)
         {
             HitResult hitResult;
-            hit = CombatService.CalculateHit(SelectedTargetContext, out hitResult);
-            if (hit)
-            {
-                target.GetDamage(hitResult);
-                GameLogService.ShowMessage((hitResult.IsCritical ? "Critical! " : "") + "-" + hitResult.Damage, target.BodyParts.Body);
-            }
-            else
-            {
-                GameLogService.ShowMessage("Miss!", target.BodyParts.Body);
-            }
+            bool hit = CombatService.CalculateHit(SelectedTargetContext, out hitResult);
+            
+            float timeToHit = _unitCombat.Weapon.WeaponAnimator.FireAnimation(targetTransform, hit);
+
+            StartCoroutine(DealDamage(target, hitResult, hit, timeToHit));
         }
         else
         {
             GameLogService.ShowMessage("Target out of vision!", _skillController.Unit.Combat.BodyParts.Body);
         }
         
-        yield return _skillController.Unit.Animator.Shoot(shootDuration, targetTransform, hit, shoot);
+        yield return _skillController.Unit.Animator.Shoot(shootDuration / 3f, targetTransform, shoot);
+        
+        yield return _skillController.Unit.Animator.EndShoot(shootDuration / 3f, targetTransform);
         yield return _skillController.Unit.Animator.EndAim(endDuration, targetTransform);
     }
 
+    private IEnumerator DealDamage(CombatObject target, HitResult hitResult, bool hit, float delay)
+    {
+        float time = 0;
+        while (time < delay)
+        {
+            time += TimeService.TimeSpeedDelta;
+            yield return null;
+        }
+        
+        if (hit)
+        {
+            target.GetDamage(hitResult);
+            GameLogService.ShowMessage((hitResult.IsCritical ? "Critical! " : "") + "-" + hitResult.Damage, target.BodyParts.Body);
+        }
+        else
+        {
+            GameLogService.ShowMessage("Miss!", target.BodyParts.Body);
+        }
+    }
 }

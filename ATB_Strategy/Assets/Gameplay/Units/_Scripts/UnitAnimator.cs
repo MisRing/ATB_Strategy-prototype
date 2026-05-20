@@ -7,9 +7,7 @@ public class UnitAnimator : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private WeaponIKController _weaponIK;
     [SerializeField] private Transform _unitModel;
-
-    [SerializeField] private WeaponAnimator _weaponAnimator;
-
+    
     private TileCover _coverState;
     private int _coverLook;
     
@@ -109,19 +107,25 @@ public class UnitAnimator : MonoBehaviour
             );
     }
     
-    public IEnumerator Shoot(float duration, Transform target, bool hit, bool shoot)
+    public IEnumerator PrepareShoot(float duration, Transform target)
     {
         float aimDuration = duration * _shootingStartWaitRatio;
-        float shootDuration = duration * _shootingRatio;
-        float waitDelay = duration * _shootingEndWaitRatio;
-        
         yield return WaitWithAim(aimDuration, target);
+    }
+    public IEnumerator Shoot(float duration, Transform target, bool shoot)
+    {
+        float shootDuration = duration * _shootingRatio;
+        
         if (shoot)
         {
             _animator.SetTrigger(SHOOT_ID);
-            _weaponAnimator.FireAnimation(target, hit);
         }
-        yield return WaitWithAim(shootDuration, target); // for animation time
+
+        yield return WaitWithAim(shootDuration, target);
+    }
+    public IEnumerator EndShoot(float duration, Transform target)
+    {
+        float waitDelay = duration * _shootingEndWaitRatio;
         yield return WaitWithAim(waitDelay, target);
     }
     

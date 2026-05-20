@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
@@ -8,6 +9,13 @@ public class WeaponController : MonoBehaviour
     public RangeIntStat CritDamage = new RangeIntStat(4, 6);
     public IntStat Accuracy = new IntStat(20);
     public WeaponRangeType RangeType = WeaponRangeType.Medium;
+
+    [HideInInspector] public WeaponAnimator WeaponAnimator;
+
+    private void Awake()
+    {
+        WeaponAnimator = GetComponent<WeaponAnimator>();
+    }
 }
 
 public enum WeaponRangeType

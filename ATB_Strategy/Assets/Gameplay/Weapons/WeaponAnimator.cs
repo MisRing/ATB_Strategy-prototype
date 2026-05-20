@@ -21,10 +21,14 @@ public class WeaponAnimator : MonoBehaviour
         TimeService.OnTimeSpeedChanged -= UpdateAnimationSpeed;
     }
 
-    public void FireAnimation(Transform target, bool hit)
+    public float FireAnimation(Transform target, bool hit)
     {
         _animator.SetTrigger(FIRE);
         StartCoroutine(ShootBullet(5f, target, hit));
+
+        float timeToHit = (transform.position - target.position).magnitude / _bulletSpeed;
+
+        return timeToHit;
     }
 
     private IEnumerator ShootBullet(float bulletTime, Transform target,  bool hit)
