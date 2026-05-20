@@ -99,14 +99,16 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         yield return _skillController.Unit.Animator.Aim(aimDuration, targetTransform);
         
         bool shoot = target != null && _unitCombat.Targets.Contains(target);
+        bool hit = false;
 
         if (shoot)
         {
-            HitResult hit;
-            if (CombatService.CalculateHit(SelectedTargetContext, out hit))
+            HitResult hitResult;
+            hit = CombatService.CalculateHit(SelectedTargetContext, out hitResult);
+            if (hit)
             {
-                target.GetDamage(hit);
-                GameLogService.ShowMessage((hit.IsCritical ? "Critical! " : "") + "-" + hit.Damage, target.BodyParts.Body);
+                target.GetDamage(hitResult);
+                GameLogService.ShowMessage((hitResult.IsCritical ? "Critical! " : "") + "-" + hitResult.Damage, target.BodyParts.Body);
             }
             else
             {
@@ -118,7 +120,7 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
             GameLogService.ShowMessage("Target out of vision!", _skillController.Unit.Combat.BodyParts.Body);
         }
         
-        yield return _skillController.Unit.Animator.Shoot(shootDuration, targetTransform, shoot);
+        yield return _skillController.Unit.Animator.Shoot(shootDuration, targetTransform, hit, shoot);
         yield return _skillController.Unit.Animator.EndAim(endDuration, targetTransform);
     }
 

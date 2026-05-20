@@ -7,6 +7,7 @@ public class WeaponAnimator : MonoBehaviour
     [SerializeField] private Transform _barrelTransform;
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private float _bulletSpeed = 20f;
+    [SerializeField] private float _missOffset = 1f;
 
     public static readonly int FIRE = Animator.StringToHash("Fire");
 
@@ -20,14 +21,22 @@ public class WeaponAnimator : MonoBehaviour
         TimeService.OnTimeSpeedChanged -= UpdateAnimationSpeed;
     }
 
-    public void FireAnimation()
+    public void FireAnimation(Transform target, bool hit)
     {
         _animator.SetTrigger(FIRE);
-        StartCoroutine(ShootBullet(10f));
+        StartCoroutine(ShootBullet(5f, target, hit));
     }
 
-    private IEnumerator ShootBullet(float bulletTime)
+    private IEnumerator ShootBullet(float bulletTime, Transform target,  bool hit)
     {
+        Vector3 offset = hit
+            ? Vector3.zero
+            : new Vector3(
+                _missOffset * (Random.Range(0, 1) * 2 - 1),
+                _missOffset * (Random.Range(0, 1) * 2 - 1),
+                _missOffset * (Random.Range(0, 1) * 2 - 1)
+                );
+        
         GameObject bullet = Instantiate(_bulletPrefab);
         bullet.transform.position = _barrelTransform.position;
         bullet.transform.rotation = _barrelTransform.rotation;
@@ -37,8 +46,8 @@ public class WeaponAnimator : MonoBehaviour
         while (time < bulletTime)
         {
             time += TimeService.TimeSpeedDelta;
-            
-            bullet.transform.position += bullet.transform.forward * TimeService.TimeSpeedDelta * _bulletSpeed;
+            Vector3 direction = (target.position + offset - transform.position).normalized;
+            bullet.transform.position += direction * TimeService.TimeSpeedDelta * _bulletSpeed;
 
             yield return null;
         }

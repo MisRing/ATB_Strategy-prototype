@@ -109,7 +109,7 @@ public class UnitAnimator : MonoBehaviour
             );
     }
     
-    public IEnumerator Shoot(float duration, Transform target, bool shoot = true)
+    public IEnumerator Shoot(float duration, Transform target, bool hit, bool shoot)
     {
         float aimDuration = duration * _shootingStartWaitRatio;
         float shootDuration = duration * _shootingRatio;
@@ -119,7 +119,7 @@ public class UnitAnimator : MonoBehaviour
         if (shoot)
         {
             _animator.SetTrigger(SHOOT_ID);
-            _weaponAnimator.FireAnimation();
+            _weaponAnimator.FireAnimation(target, hit);
         }
         yield return WaitWithAim(shootDuration, target); // for animation time
         yield return WaitWithAim(waitDelay, target);

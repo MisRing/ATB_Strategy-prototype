@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework.Constraints;
 using Unity.VisualScripting;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    [SerializeField] private bool _doNothing = false;
     private UnitOwner _teamOwner;
     private List<UnitController> _units = new List<UnitController>();
     private UnitAIController[] _unitAIControls;
@@ -53,7 +55,7 @@ public class EnemyController : MonoBehaviour
     {
         if (!_units.Contains(unit) || unit.State != UnitState.WaitingForOrder) return;
 
-        if (!UpdateTargets() && _squadSleeping)
+        if (_doNothing || (!UpdateTargets() && _squadSleeping))
         {
             TryFallback(unit);
             return;

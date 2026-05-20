@@ -381,6 +381,7 @@ MonoBehaviour:
     Body: {fileID: 2893259610239587687}
     Head: {fileID: 8053318704263043595}
   Targets: []
+  _hitVFX: {fileID: 5848053464770407953, guid: 789014966ae778845a81824e2b87f23c, type: 3}
   VisibleTiles: []
 --- !u!114 &3546768984183535445
 MonoBehaviour:
@@ -4747,6 +4748,10 @@ PrefabInstance:
     - target: {fileID: 2050766619830890967, guid: 7ebf63501135a88499ac50968ae41a10, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3251415272181989622, guid: 7ebf63501135a88499ac50968ae41a10, type: 3}
+      propertyPath: _bulletSpeed
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8367590097974464533, guid: 7ebf63501135a88499ac50968ae41a10, type: 3}
       propertyPath: m_Name

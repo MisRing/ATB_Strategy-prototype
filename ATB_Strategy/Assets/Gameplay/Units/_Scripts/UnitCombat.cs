@@ -17,6 +17,8 @@ public class UnitCombat : CombatObject
 
     private UnitController _unit;
 
+    [SerializeField] private GameObject _hitVFX;
+
     public void Init(UnitController unit)
     {
         _unit = unit;
@@ -114,6 +116,9 @@ public class UnitCombat : CombatObject
             _unit.Stats.Armor.ClearValue -= Mathf.Clamp(result.Damage, 0, _unit.Stats.Armor);
             _unit.Stats.Health.ClearValue -= Mathf.Clamp(breakThrowDamage, 0,_unit.Stats.Health);
         }
+        
+        HitVFX hitVFX = Instantiate(_hitVFX).GetComponent<HitVFX>();
+        hitVFX.Play(_bodyParts.Body.position, (_bodyParts.Body.position - result.Dealer.Position).normalized);
 
         if (_unit.Stats.Health <= 0)
         {
