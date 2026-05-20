@@ -1,13 +1,13 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Message : MonoBehaviour
 {
     [Header("Main Settings")]
     [SerializeField] private float _maxY = 1.5f;
     [SerializeField] private float _lifeTime = 2f;
-    [SerializeField] private Text _text;
+    [SerializeField] private TextMeshPro _text;
 
     public void SetMessage(string message, Transform target)
     {
@@ -20,15 +20,13 @@ public class Message : MonoBehaviour
     private IEnumerator Move(Transform target)
     {
         float time = 0;
-        
-        Vector3 endPosition = new Vector3(0, _maxY, 0);
-
         float yPos = 0;
 
         while (time < _lifeTime)
         {
             transform.rotation = Camera.main.transform.rotation;
-            yPos = Mathf.Lerp(yPos, _maxY, (time / _lifeTime));
+            float t = Mathf.SmoothStep(0f, 1f, time / _lifeTime);
+            yPos = Mathf.Lerp(yPos, _maxY, t);
             transform.position = target.position + new Vector3(0, yPos, 0);
             
             time += Time.deltaTime;
