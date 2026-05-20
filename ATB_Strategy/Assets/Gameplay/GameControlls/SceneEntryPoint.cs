@@ -28,9 +28,9 @@ public class SceneEntryPoint : MonoBehaviour
         {
             GridParameters.LevelGrid = FindFirstObjectByType(typeof(GridMap)) as GridMap;
         }
-        
+
         SetUnitsOnLevel();
-        
+
         _playerController?.Init(_playerUnits);
 
         foreach (TeamControlls team in _enemyTeams)

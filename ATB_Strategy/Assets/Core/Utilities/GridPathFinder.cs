@@ -5,9 +5,9 @@ using UnityEngine.AI;
 
 public static class GridPathFinder
 {
-    private static readonly float LINE_CUT_STEP = 0.5f;
-    private static readonly float RAYCAST_HEIGHT = 0.4f;
-    private static readonly float MAX_COVER_ANGLE = 90f;
+    private const float LINE_CUT_STEP = 0.5f;
+    private const float RAYCAST_HEIGHT = 0.4f;
+    private const float MAX_COVER_ANGLE = 90f;
 
     public static TileCover GetTileCover(ref Vector3 direction, out int coverLook, GridTile tile, List<CombatObject> targets)
     {
@@ -170,9 +170,9 @@ public static class GridPathFinder
 
             int newDotsCount = Mathf.FloorToInt(Vector3.Distance(path[i], path[i + 1]) / LINE_CUT_STEP);
 
-            while (Vector3.Distance(newPath[newPath.Count - 1], path[i + 1]) >= LINE_CUT_STEP)
+            while (Vector3.Distance(newPath[^1], path[i + 1]) >= LINE_CUT_STEP)
             {
-                Vector3 p1 = newPath[newPath.Count - 1];
+                Vector3 p1 = newPath[^1];
                 Vector3 p2 = path[i + 1];
                 float t = LINE_CUT_STEP / Vector3.Distance(p1, p2);
                 Vector3 newDot = p1 + (p2 - p1) * t;

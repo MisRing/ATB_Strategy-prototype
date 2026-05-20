@@ -1,11 +1,9 @@
-using System;
 using UnityEngine;
 using System.Collections.Generic;
 
 public static class CombatManager
 {
     private static readonly List<CombatObject> COMBATS_ON_LEVEL = new List<CombatObject>();
-    private static readonly LayerMask ENVIRONMENT_MASK = LayerMask.GetMask("Grid Environment");
     
     public static void RegisterCombat(CombatObject comb)
     {
@@ -42,8 +40,6 @@ public static class CombatManager
 
         foreach (CombatObject comb in COMBATS_ON_LEVEL)
         {
-            float sqrDist = (comb.Position - unitPosition).sqrMagnitude;
-
             if (comb.Owner == ally) continue;
 
             GridTile combTile = GridParameters.LevelGrid.GetTileByWorldPos(comb.transform.position);

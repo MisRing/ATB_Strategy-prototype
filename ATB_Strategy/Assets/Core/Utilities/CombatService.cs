@@ -149,7 +149,6 @@ public static class CombatService
         Vector3 flatDirection = new Vector3(fullDirection.x, 0, fullDirection.z).normalized;
         
         int bestCoverIndex = -1;
-        float bestDot = float.MinValue;
 
         for (int i = 0; i < GridParameters.COVER_DIRECTIONS.Length; i++)
         {
@@ -159,7 +158,6 @@ public static class CombatService
 
             if (dot >= 0.5f && (bestCoverIndex == -1 || tile.Covers[i] >= tile.Covers[bestCoverIndex]))
             {
-                bestDot = dot;
                 bestCoverIndex = i;
             }
         }

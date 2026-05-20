@@ -18,12 +18,7 @@ public class FogOfWarRenderer : MonoBehaviour
 
     private Texture2DArray _fogTextureArray;
 
-    // One color buffer per floor
     private Color[][] _buffers;
-
-    // =====================================================
-    // INITIALIZE
-    // =====================================================
 
     public void Initialize()
     {
@@ -69,11 +64,7 @@ public class FogOfWarRenderer : MonoBehaviour
             GridParameters.LevelGrid.transform.position - Vector3.forward * 0.5f - Vector3.right * 0.5f
             );
     }
-
-    // =====================================================
-    // UPDATE FOG
-    // =====================================================
-
+    
     public void UpdateFog(FloorData[] gridData)
     {
         for (int f = 0; f < _floors; f++)
@@ -85,10 +76,6 @@ public class FogOfWarRenderer : MonoBehaviour
                 for (int z = 0; z < _sizeZ; z++)
                 {
                     int index = x + z * _sizeX;
-
-                    // =====================================
-                    // OUT OF RANGE
-                    // =====================================
 
                     if (f >= gridData.Length ||
                         x >= gridData[f].Length ||
@@ -104,16 +91,11 @@ public class FogOfWarRenderer : MonoBehaviour
                 }
             }
 
-            // Upload floor buffer
             _fogTextureArray.SetPixels(buffer, f);
         }
 
         _fogTextureArray.Apply(false, false);
     }
-
-    // =====================================================
-    // CLEAR
-    // =====================================================
 
     private void ClearTexture()
     {
@@ -133,10 +115,6 @@ public class FogOfWarRenderer : MonoBehaviour
 
         _fogTextureArray.Apply(false, false);
     }
-
-    // =====================================================
-    // COLORS
-    // =====================================================
 
     private Color GetVisibilityColor(TileVisibility visibility)
     {
