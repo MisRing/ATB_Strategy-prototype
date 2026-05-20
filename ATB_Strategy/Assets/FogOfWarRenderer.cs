@@ -1,87 +1,162 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class FogOfWarRenderer : MonoBehaviour
 {
-    private int _sizeX = 128;
-    private int _sizeZ = 128;
-
-    private Texture2D _fogTexture;
+    private static readonly int FOG_TEXTURE_ARRAY = Shader.PropertyToID("_FogTextureArray");
+    private static readonly int TILE_SIZE = Shader.PropertyToID("_TileSize");
+    private static readonly int GRID_SIZE = Shader.PropertyToID("_GridSize");
+    private static readonly int GRID_OFFSET = Shader.PropertyToID("_GridOffset");
 
     [Header("Visibility")]
     [SerializeField] private float _noVision = 0f;
     [SerializeField] private float _explored = 0.1f;
     [SerializeField] private float _visible = 1f;
     
+    private int _sizeX;
+    private int _sizeZ;
+    private int _floors;
+
+    private Texture2DArray _fogTextureArray;
+
+    // One color buffer per floor
+    private Color[][] _buffers;
+
+    // =====================================================
+    // INITIALIZE
+    // =====================================================
+
     public void Initialize()
-    { 
+    {
         _sizeX = GridParameters.LevelGrid.SizeX;
         _sizeZ = GridParameters.LevelGrid.SizeZ;
-        _fogTexture = new Texture2D(_sizeX, _sizeZ, TextureFormat.RGBA32, false);
+        _floors = GridParameters.LevelGrid.Floors;
 
-        _fogTexture.filterMode = FilterMode.Bilinear;
-        _fogTexture.wrapMode = TextureWrapMode.Clamp;
+        _fogTextureArray = new Texture2DArray(
+            _sizeX,
+            _sizeZ,
+            _floors,
+            TextureFormat.RGBA32,
+            false,
+            true);
+
+        _fogTextureArray.filterMode = FilterMode.Bilinear;
+        _fogTextureArray.wrapMode = TextureWrapMode.Clamp;
+        
+        _buffers = new Color[_floors][];
+
+        for (int f = 0; f < _floors; f++)
+        {
+            _buffers[f] = new Color[_sizeX * _sizeZ];
+        }
 
         ClearTexture();
 
-        Shader.SetGlobalTexture("_Fog_Texture", _fogTexture);
-        Shader.SetGlobalVector("_TileSize", new Vector4(GridParameters.TILE_SIZE,  GridParameters.LEVEL_HEIGHT, GridParameters.TILE_SIZE));
-        Shader.SetGlobalVector("_GridOffset", GridParameters.LevelGrid.transform.position);
+        Shader.SetGlobalTexture(FOG_TEXTURE_ARRAY, _fogTextureArray);
 
+        Shader.SetGlobalVector(
+            TILE_SIZE,
+            new Vector4(
+                GridParameters.TILE_SIZE,
+                GridParameters.LEVEL_HEIGHT,
+                GridParameters.TILE_SIZE
+                )
+            );
+
+        Shader.SetGlobalVector(GRID_SIZE, new Vector3(_sizeX, _floors, _sizeZ));
+
+        Shader.SetGlobalVector(
+            GRID_OFFSET,
+            GridParameters.LevelGrid.transform.position - Vector3.forward * 0.5f - Vector3.right * 0.5f
+            );
     }
 
     // =====================================================
-    // UPDATE
+    // UPDATE FOG
     // =====================================================
 
-    public void UpdateFog(FloorData floorData)
+    public void UpdateFog(FloorData[] gridData)
     {
-        for (int x = 0; x < _sizeX; x++)
+        for (int f = 0; f < _floors; f++)
         {
-            for (int z = 0; z < _sizeZ; z++)
+            Color[] buffer = _buffers[f];
+
+            for (int x = 0; x < _sizeX; x++)
             {
-                if (x >= floorData.Length || z >= floorData[x].Length)
+                for (int z = 0; z < _sizeZ; z++)
                 {
-                    _fogTexture.SetPixel(x, z, new Vector4(0f, 0f, 0f, _noVision));
-                    continue;
+                    int index = x + z * _sizeX;
+
+                    // =====================================
+                    // OUT OF RANGE
+                    // =====================================
+
+                    if (f >= gridData.Length ||
+                        x >= gridData[f].Length ||
+                        z >= gridData[f][x].Length)
+                    {
+                        buffer[index] = HiddenColor();
+                        continue;
+                    }
+
+                    GridTile tile = gridData[f][x][z];
+
+                    buffer[index] = GetVisibilityColor(tile.Visibility);
                 }
-                GridTile tile = floorData[x][z];
-
-                Color color = GetVisibilityColor(tile.Visibility);
-
-                _fogTexture.SetPixel(x, z, color);
             }
+
+            // Upload floor buffer
+            _fogTextureArray.SetPixels(buffer, f);
         }
 
-        _fogTexture.Apply();
+        _fogTextureArray.Apply(false, false);
     }
 
     // =====================================================
-    // HELPERS
+    // CLEAR
+    // =====================================================
+
+    private void ClearTexture()
+    {
+        Color hidden = HiddenColor();
+
+        for (int f = 0; f < _floors; f++)
+        {
+            Color[] buffer = _buffers[f];
+
+            for (int i = 0; i < buffer.Length; i++)
+            {
+                buffer[i] = hidden;
+            }
+
+            _fogTextureArray.SetPixels(buffer, f);
+        }
+
+        _fogTextureArray.Apply(false, false);
+    }
+
+    // =====================================================
+    // COLORS
     // =====================================================
 
     private Color GetVisibilityColor(TileVisibility visibility)
     {
         return visibility switch
         {
-            TileVisibility.Hidden => new Vector4(0f, 0f, 0f, _noVision),
-            TileVisibility.Explored => new Vector4(0.5f, 0.5f, 0.5f, _explored),
-            TileVisibility.Visible => new Vector4(1f, 1f, 1f, _visible),
+            TileVisibility.Hidden =>
+                HiddenColor(),
+
+            TileVisibility.Explored =>
+                new Color(0.5f, 0.5f, 0.5f, _explored),
+
+            TileVisibility.Visible =>
+                new Color(1f, 1f, 1f, _visible),
+
             _ => Color.magenta
         };
     }
 
-    private void ClearTexture()
+    private Color HiddenColor()
     {
-        Color[] pixels = new Color[_sizeX * _sizeZ];
-
-        for (int i = 0; i < pixels.Length; i++)
-        {
-            pixels[i] = new Vector4(0f, 0f, 0f, _noVision);
-        }
-
-        _fogTexture.SetPixels(pixels);
-
-        _fogTexture.Apply();
+        return new Color(0f, 0f, 0f, _noVision);
     }
 }

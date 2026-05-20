@@ -1,20 +1,36 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public static class FogOfWarUtility
 {
     public static FogOfWarRenderer Renderer;
-    
+
+    // =====================================================
+    // EVENTS
+    // =====================================================
+
     private static bool _needToResetVisibility;
 
     public static event Action OnResetVisibility;
     public static event Action OnVisibilityChanged;
 
-    public static readonly List<UnitCombat> UnitsOfVisionReset = new List<UnitCombat>();
+    // =====================================================
+    // DATA
+    // =====================================================
 
-    private static readonly HashSet<GridTile> _exploredTiles = new HashSet<GridTile>();
-    private static readonly HashSet<GridTile> _visibleTiles = new HashSet<GridTile>();
+    public static readonly List<UnitCombat> UnitsOfVisionReset =
+        new();
+
+    private static readonly HashSet<GridTile> _visibleTiles =
+        new();
+
+    private static readonly HashSet<GridTile> _exploredTiles =
+        new();
+
+    // =====================================================
+    // RESET
+    // =====================================================
 
     public static void TriggerVisibilityReset()
     {
@@ -27,24 +43,27 @@ public static class FogOfWarUtility
             return;
 
         _needToResetVisibility = false;
-        
+
         OnResetVisibility?.Invoke();
 
-        // =====================================================
+        // =============================================
         // OLD VISIBLE -> EXPLORED
-        // =====================================================
+        // =============================================
 
         foreach (GridTile tile in _visibleTiles)
         {
+            if (tile == null)
+                continue;
+
             tile.Visibility = TileVisibility.Explored;
             _exploredTiles.Add(tile);
         }
 
         _visibleTiles.Clear();
 
-        // =====================================================
-        // COLLECT NEW VISIBLE
-        // =====================================================
+        // =============================================
+        // NEW VISIBLE
+        // =============================================
 
         foreach (UnitCombat combat in UnitsOfVisionReset)
         {
@@ -60,120 +79,140 @@ public static class FogOfWarUtility
             }
         }
 
-        // =====================================================
-        // APPLY NEW VISIBLE
-        // =====================================================
+        // =============================================
+        // APPLY
+        // =============================================
 
         foreach (GridTile tile in _visibleTiles)
         {
             tile.Visibility = TileVisibility.Visible;
         }
-        
-        Renderer.UpdateFog(GridParameters.LevelGrid.GetFloorData(0));
-        
+
+        Renderer.UpdateFog(
+            GridParameters.LevelGrid.GetGrid());
+
         OnVisibilityChanged?.Invoke();
     }
-    
-    // =========================================================
-    // PUBLIC
-    // =========================================================
 
-    public static List<GridTile> GetVisibleTiles(Vector3 worldPosition, float range)
+    // =====================================================
+    // VISIBILITY
+    // =====================================================
+
+    public static List<GridTile> GetVisibleTiles(
+        Vector3 worldPosition,
+        float range)
     {
-        List<GridTile> visibleTiles = new List<GridTile>();
+        List<GridTile> result = new();
 
-        GridTile origin = GridParameters.LevelGrid.GetTileByWorldPos(worldPosition);
+        GridTile origin =
+            GridParameters.LevelGrid.GetTileByWorldPos(worldPosition);
 
         if (origin == null)
-            return visibleTiles;
+            return result;
 
-        int radius = Mathf.CeilToInt(range);
-        float sqrRange = range * range;
+        int maxDistance = Mathf.CeilToInt(range);
 
-        // =====================================================
-        // SCAN CIRCLE
-        // =====================================================
+        Queue<GridTile> queue = new();
+        Dictionary<GridTile, int> distanceMap = new();
 
-        for (int x = origin.PositionX - radius; x <= origin.PositionX + radius; x++)
+        queue.Enqueue(origin);
+        distanceMap[origin] = 0;
+
+        // =============================================
+        // BFS
+        // =============================================
+
+        while (queue.Count > 0)
         {
-            for (int z = origin.PositionZ - radius; z <= origin.PositionZ + radius; z++)
+            GridTile current = queue.Dequeue();
+
+            int currentDistance = distanceMap[current];
+
+            // =========================================
+            // REAL LOS CHECK
+            // =========================================
+
+            if (HasLineOfSight(origin, current, range))
             {
-                // =============================================
-                // BOUNDS
-                // =============================================
+                result.Add(current);
+            }
 
-                if (!IsInsideGrid(x, z, origin.Floor))
+            if (currentDistance >= maxDistance)
+                continue;
+
+            // =========================================
+            // PROPAGATE
+            // =========================================
+
+            foreach (Vector3Int dir in GridParameters.TILE_SIDES)
+            {
+                int nx = current.PositionX + dir.x;
+                int nz = current.PositionZ + dir.z;
+                int nf = current.Floor + dir.y;
+                
+
+                if (!IsInsideGrid(nx, nz, nf))
                     continue;
 
-                GridTile target = GridParameters.LevelGrid.GetTile(x, z, origin.Floor);
+                GridTile next =
+                    GridParameters.LevelGrid.GetTile(nx, nz, nf);
 
-                if (target == null)
+                if (next == null)
                     continue;
-
-                // =============================================
-                // RANGE CHECK
-                // =============================================
-
-                Vector3 delta = target.WorldPosition - worldPosition;
-
-                if (delta.sqrMagnitude > sqrRange)
-                    continue;
-
-                // =============================================
-                // LOS CHECK
-                // =============================================
-
-                if (HasLineOfSight(origin, target))
+                
+                if (dir.y != 0)
                 {
-                    visibleTiles.Add(target);
+                    if (!CanPropagateBetween(current, next))
+                        continue;
+
+                    if (!next.IsEmpty)
+                        continue;
                 }
+
+                if (distanceMap.ContainsKey(next))
+                    continue;
+
+                // =====================================
+                // FLOOR RULES
+                // =====================================
+
+                if (!CanPropagateBetween(current, next))
+                    continue;
+
+                distanceMap[next] = currentDistance + 1;
+
+                // =====================================
+                // STOP AT WALL
+                // =====================================
+
+                if (!next.IsEmpty)
+                    continue;
+
+                queue.Enqueue(next);
             }
         }
 
-        return visibleTiles;
+        return result;
     }
 
-    // =========================================================
+    // =====================================================
     // LOS
-    // =========================================================
+    // =====================================================
 
-    public static bool HasLineOfSight(GridTile from, GridTile to)
+    private static bool HasLineOfSight(
+        GridTile from,
+        GridTile to,
+        float maxRange)
     {
-        List<GridTile> line = GetLine(from, to);
+        Vector3 fromPos = from.WorldPosition;
+        Vector3 toPos = to.WorldPosition;
 
-        // skip first tile (origin)
-        for (int i = 1; i < line.Count; i++)
-        {
-            GridTile tile = line[i];
-
-            if (tile == null)
-                return false;
-
-            // =============================================
-            // HIT WALL
-            // =============================================
-
-            if (!tile.IsEmpty)
-            {
-                // target wall itself is visible
-                return tile == to;
-            }
-        }
-
-        return true;
-    }
-
-    // =========================================================
-    // BRESENHAM LINE
-    // =========================================================
-
-    public static List<GridTile> GetLine(GridTile from, GridTile to)
-    {
-        List<GridTile> line = new List<GridTile>();
+        // RANGE
+        if ((toPos - fromPos).sqrMagnitude > maxRange * maxRange)
+            return false;
 
         int x0 = from.PositionX;
         int z0 = from.PositionZ;
-
         int x1 = to.PositionX;
         int z1 = to.PositionZ;
 
@@ -183,44 +222,85 @@ public static class FogOfWarUtility
         int sx = x0 < x1 ? 1 : -1;
         int sz = z0 < z1 ? 1 : -1;
 
+        int steps = Mathf.Max(dx, dz);
+
         int err = dx - dz;
 
-        while (true)
-        {
-            if (IsInsideGrid(x0, z0, from.Floor))
-            {
-                GridTile tile = GridParameters.LevelGrid.GetTile(x0, z0, from.Floor);
+        int currentX = x0;
+        int currentZ = z0;
 
-                if (tile != null)
-                    line.Add(tile);
+        for (int i = 0; i <= steps; i++)
+        {
+            float t = steps == 0 ? 0f : (float)i / steps;
+
+            // 🔥 интерполяция "высоты взгляда"
+            float floorF = Mathf.Lerp(from.Floor, to.Floor, t);
+            int floor = Mathf.RoundToInt(floorF);
+
+            GridTile tile =
+                GridParameters.LevelGrid.GetTile(currentX, currentZ, floor);
+
+            if (tile != null && tile != from && tile != to)
+            {
+                if (!tile.IsEmpty)
+                    return false;
             }
 
-            if (x0 == x1 && z0 == z1)
-                break;
-
+            // Bresenham step
             int e2 = err * 2;
 
             if (e2 > -dz)
             {
                 err -= dz;
-                x0 += sx;
+                currentX += sx;
             }
 
             if (e2 < dx)
             {
                 err += dx;
-                z0 += sz;
+                currentZ += sz;
             }
         }
 
-        return line;
+        return true;
     }
 
-    // =========================================================
-    // HELPERS
-    // =========================================================
+    // =====================================================
+    // PROPAGATION RULES
+    // =====================================================
 
-    private static bool IsInsideGrid(int x, int z, int floor)
+    private static bool CanPropagateBetween(
+        GridTile from,
+        GridTile to)
+    {
+        // same floor
+        if (from.Floor == to.Floor)
+            return true;
+
+        // =============================================
+        // FLOOR CHECK
+        // =============================================
+
+        GridTile highest =
+            from.Floor > to.Floor
+                ? from
+                : to;
+
+        // blocked by ceiling/floor
+        if (highest.IsGround)
+            return false;
+
+        return true;
+    }
+
+    // =====================================================
+    // HELPERS
+    // =====================================================
+
+    private static bool IsInsideGrid(
+        int x,
+        int z,
+        int floor)
     {
         return
             x >= 0 &&
