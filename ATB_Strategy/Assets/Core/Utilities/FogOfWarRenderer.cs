@@ -6,6 +6,9 @@ public class FogOfWarRenderer : MonoBehaviour
     private static readonly int TILE_SIZE = Shader.PropertyToID("_TileSize");
     private static readonly int GRID_SIZE = Shader.PropertyToID("_GridSize");
     private static readonly int GRID_OFFSET = Shader.PropertyToID("_GridOffset");
+    
+    [Header("Main Settings")]
+    [SerializeField] private float _updateSpeed = 3f;
 
     [Header("Visibility")]
     [SerializeField] private float _noVision = 0f;
@@ -19,6 +22,7 @@ public class FogOfWarRenderer : MonoBehaviour
     private Texture2DArray _fogTextureArray;
 
     private Color[][] _buffers;
+    private Color[][] _finalBuffers;
 
     public void Initialize()
     {
@@ -38,10 +42,12 @@ public class FogOfWarRenderer : MonoBehaviour
         _fogTextureArray.wrapMode = TextureWrapMode.Clamp;
         
         _buffers = new Color[_floors][];
+        _finalBuffers = new Color[_floors][];
 
         for (int f = 0; f < _floors; f++)
         {
             _buffers[f] = new Color[_sizeX * _sizeZ];
+            _finalBuffers[f] = new Color[_sizeX * _sizeZ];
         }
 
         ClearTexture();
@@ -90,8 +96,28 @@ public class FogOfWarRenderer : MonoBehaviour
                     buffer[index] = GetVisibilityColor(tile.Visibility);
                 }
             }
+        }
+    }
 
-            _fogTextureArray.SetPixels(buffer, f);
+    private float _accum;
+
+    private void Update()
+    {
+        _accum += Time.deltaTime;
+
+        if (_accum < 0.033f) // ~30 FPS update
+            return;
+
+        _accum = 0f;
+
+        for (int f = 0; f < _floors; f++)
+        {
+            for (int k = 0; k < _finalBuffers[f].Length; k++)
+            {
+                _finalBuffers[f][k] = Color.Lerp(_finalBuffers[f][k], _buffers[f][k], _updateSpeed * Time.deltaTime);
+            }
+
+            _fogTextureArray.SetPixels(_finalBuffers[f], f);
         }
 
         _fogTextureArray.Apply(false, false);
