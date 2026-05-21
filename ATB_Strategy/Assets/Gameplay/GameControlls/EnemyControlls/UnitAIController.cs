@@ -84,7 +84,7 @@ public class UnitAIController : MonoBehaviour
         bestPosition = transform.position;
 
         float range = _unit.Stats.VisionRange * 0.75f;
-        List<GridTile> candidates = GridParameters.LevelGrid.GetTilesAround(_unit.Agent.CurrentTile, range, true); //?
+        List<GridTile> candidates = _unit.Combat.VisibleTiles;
         //Debug.Log(candidates.Count);
         //return 0;
 

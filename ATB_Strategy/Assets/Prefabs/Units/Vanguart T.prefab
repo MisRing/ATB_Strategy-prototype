@@ -329,7 +329,7 @@ MonoBehaviour:
   Name: Unit 1
   Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   Speed:
-    _value: 8
+    _value: 5
   Health:
     _value: 5
   MaxHealth:
@@ -433,7 +433,6 @@ MonoBehaviour:
   _animator: {fileID: 8064635374057911806}
   _weaponIK: {fileID: 1602000520102995300}
   _unitModel: {fileID: 4110515357720555396}
-  _weaponAnimator: {fileID: 5438052013042389484}
 --- !u!114 &4431963065905266007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4807,17 +4806,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2784254429146540031, guid: 7ebf63501135a88499ac50968ae41a10, type: 3}
   m_PrefabInstance: {fileID: 7379305807764869402}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5438052013042389484 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3251415272181989622, guid: 7ebf63501135a88499ac50968ae41a10, type: 3}
-  m_PrefabInstance: {fileID: 7379305807764869402}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 334835ddc9f30254e9bbed4dbb23792c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponAnimator
 --- !u!23 &6521574864314370540 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 4389257297467955446, guid: 7ebf63501135a88499ac50968ae41a10, type: 3}

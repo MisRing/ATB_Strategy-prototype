@@ -7,6 +7,7 @@ public class AimCamera : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 5f;
     [SerializeField] private Vector3 _aimOffset = new Vector3(0.25f, 2f, 0f);
     [SerializeField] private float _aimDistance = 2f;
+    [SerializeField] private LayerMask _visionBlockMask;
     
     private Vector3 _targetPosition;
     private Quaternion _targetRotation;
@@ -17,7 +18,7 @@ public class AimCamera : MonoBehaviour
     {
         SmoothAim();
     }
-
+    
     public void SetAim(Transform target, Vector3 aimTargetPosition)
     {
         if (!target) return;
@@ -27,12 +28,35 @@ public class AimCamera : MonoBehaviour
 
         Vector3 right = Vector3.Cross(Vector3.up, flatLookDirection);
 
+        Vector3 aimOffset = _aimOffset;
+
         Vector3 offset =
             -lookDirection * _aimDistance +
-            right * _aimOffset.x +
-            Vector3.up * _aimOffset.y;
+            right * aimOffset.x +
+            Vector3.up * aimOffset.y;
 
-        _targetPosition = target.position + offset;
+        Vector3 cameraPosition = target.position + offset;
+
+        Vector3 rayDirection = cameraPosition - aimTargetPosition;
+        float rayDistance = rayDirection.magnitude;
+
+        if (Physics.Raycast(
+                aimTargetPosition,
+                rayDirection.normalized,
+                rayDistance,
+                _visionBlockMask))
+        {
+            aimOffset.x = -aimOffset.x;
+
+            offset =
+                -lookDirection * _aimDistance +
+                right * aimOffset.x +
+                Vector3.up * aimOffset.y;
+
+            cameraPosition = target.position + offset;
+        }
+
+        _targetPosition = cameraPosition;
 
         _targetRotation = Quaternion.LookRotation(aimTargetPosition - _targetPosition);
     }
