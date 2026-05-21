@@ -55,14 +55,31 @@ public class EnemyController : MonoBehaviour
     {
         if (!_units.Contains(unit) || unit.State != UnitState.WaitingForOrder) return;
 
-        if (_doNothing || (!UpdateTargets() && _squadSleeping))
+        if (!UpdateTargets() && _squadSleeping)
         {
             TryFallback(unit);
             return;
         }
 
-        _squadSleeping = false;
+        if (_squadSleeping)
+        {
+            List<GridTile> unitTiles = new List<GridTile>();
 
+            foreach (UnitController unitController in _units)
+            {
+                unitTiles.Add(unitController.Agent.CurrentTile);
+            }
+            FogOfWarUtility.ForceVisibility(unitTiles, 1f);
+            
+            _squadSleeping = false;
+        }
+        
+        if (_doNothing)
+        {
+            TryFallback(unit);
+            return;
+        }
+        
         int unitIndex = _units.IndexOf(unit);
 
         UnitAIContext context = _unitAIControls[unitIndex].GetDecision(_allTargets.Values.ToList());

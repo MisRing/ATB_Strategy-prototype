@@ -113,7 +113,7 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         }
         else
         {
-            GameLogService.ShowMessage("Target out of vision!", _skillController.Unit.Combat.BodyParts.Body);
+            GameLogService.ShowMessage("Target out of vision!", _skillController.Unit.Combat.BodyParts.Body, 0f, 0, -1f);
         }
         
         yield return _skillController.Unit.Animator.Shoot(shootDuration / 3f, targetTransform, shoot);
@@ -124,21 +124,31 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
 
     private IEnumerator DealDamage(CombatObject target, HitResult hitResult, bool hit, float delay)
     {
-        float time = 0;
-        while (time < delay)
-        {
-            time += TimeService.TimeSpeedDelta;
-            yield return null;
-        }
-        
         if (hit)
         {
-            target.GetDamage(hitResult);
-            GameLogService.ShowMessage((hitResult.IsCritical ? "Critical! " : "") + "-" + hitResult.Damage, target.BodyParts.Body);
+            GameLogService.ShowMessage(
+                (hitResult.IsCritical ? "Critical! " : "") + "-" + hitResult.Damage,
+                target.BodyParts.Body,
+                delay,
+                5,
+                2f,
+                true
+                );
         }
         else
         {
-            GameLogService.ShowMessage("Miss!", target.BodyParts.Body);
+            GameLogService.ShowMessage("Miss!", target.BodyParts.Body, delay, 3, 1f, true);
+        }
+        
+        while (delay > 0)
+        {
+            delay -= TimeService.TimeSpeedDelta;
+            yield return null;
+        }
+
+        if (hit)
+        {
+            target.GetDamage(hitResult);
         }
     }
 }

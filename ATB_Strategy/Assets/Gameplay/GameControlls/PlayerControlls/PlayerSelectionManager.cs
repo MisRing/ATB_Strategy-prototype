@@ -48,7 +48,7 @@ public class PlayerSelectionManager : MonoBehaviour
     {
         if(Units.Count == 0) return;
         SelectUnit(Units[0]);
-        _playerController.CameraController.FocusTarget(SelectedUnit.transform, true);
+        _playerController.CameraController.FocusTarget(SelectedUnit.transform, 5, -1f, true);
     }
 
     private void PointLeftClick()
@@ -112,7 +112,7 @@ public class PlayerSelectionManager : MonoBehaviour
         OnSelectionChanged?.Invoke(oldUnit, SelectedUnit);
         if (focusView)
         {
-            _playerController.CameraController.FocusTarget(SelectedUnit.transform);
+            _playerController.CameraController.FocusTarget(SelectedUnit.transform, 5, -1f);
         }
     }
 

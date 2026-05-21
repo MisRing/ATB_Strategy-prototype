@@ -46,6 +46,8 @@ public class TacticalCamera : MonoBehaviour
     [SerializeField] private float _focusSmoothTime = 0.2f;
     private Vector3 _focusVelocity;
     private Transform _focusTarget;
+    private int _focusPriority;
+    private float _focusTime = -1f;
 
     private void OnEnable()
     {
@@ -125,9 +127,14 @@ public class TacticalCamera : MonoBehaviour
         transform.position = targetPosition;
     }
 
-    public void EnterFocusMode(Transform target, bool instantly = false)
+    public void EnterFocusMode(Transform target, int focusPriority, float focusTime = -1f, bool instantly = false)
     {
-        _focusTarget = target;
+        if (focusPriority > _focusPriority || _focusTarget == null || _focusTime < 0f)
+        {
+            _focusTarget = target;
+            _focusPriority = focusPriority;
+            _focusTime = focusTime;
+        }
 
         if(instantly || Vector3.Distance(_position, _focusTarget.position) >= _focusMaxDistance)
         {
@@ -142,6 +149,8 @@ public class TacticalCamera : MonoBehaviour
         _moveSmoothVelocity = Vector3.zero;
         _focusVelocity = Vector3.zero;
         _focusTarget = null;
+        _focusPriority = -1;
+        _focusTime = -1f;
     }
 
     public void SetExtraZoom(bool value) => _extraZoom = value;
@@ -195,6 +204,8 @@ public class TacticalCamera : MonoBehaviour
     private void MoveToTarget()
     {
         if (!_focusTarget) return;
+        
+        _focusTime -= Time.deltaTime;
 
         _position = Vector3.SmoothDamp(
             _position,

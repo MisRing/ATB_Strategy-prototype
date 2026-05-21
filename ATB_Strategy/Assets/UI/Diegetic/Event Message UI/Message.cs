@@ -9,25 +9,26 @@ public class Message : MonoBehaviour
     [SerializeField] private float _lifeTime = 2f;
     [SerializeField] private TextMeshPro _text;
 
-    public void SetMessage(string message, Transform target)
+    public void SetMessage(string message, Vector3 point)
     {
         _text.text = message;
-        transform.position = target.position;
+        transform.position = point;
 
-        StartCoroutine(Move(target));
+        StartCoroutine(Move());
     }
 
-    private IEnumerator Move(Transform target)
+    private IEnumerator Move()
     {
         float time = 0;
         float yPos = 0;
+        Vector3 point = transform.position;
 
         while (time < _lifeTime)
         {
             transform.rotation = Camera.main.transform.rotation;
             float t = Mathf.SmoothStep(0f, 1f, time / _lifeTime);
             yPos = Mathf.Lerp(yPos, _maxY, t);
-            transform.position = target.position + new Vector3(0, yPos, 0);
+            transform.position = point + new Vector3(0, yPos, 0);
             
             time += Time.deltaTime;
             yield return null;

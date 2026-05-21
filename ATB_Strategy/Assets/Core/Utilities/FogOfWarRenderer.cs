@@ -103,6 +103,8 @@ public class FogOfWarRenderer : MonoBehaviour
 
     private void Update()
     {
+        FogOfWarUtility.CheckForced();
+        
         _accum += Time.deltaTime;
 
         if (_accum < 0.033f) // ~30 FPS update

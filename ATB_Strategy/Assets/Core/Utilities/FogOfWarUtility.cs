@@ -6,31 +6,24 @@ public static class FogOfWarUtility
 {
     public static FogOfWarRenderer Renderer;
 
-    // =====================================================
-    // EVENTS
-    // =====================================================
-
     private static bool _needToResetVisibility;
 
     public static event Action OnResetVisibility;
     public static event Action OnVisibilityChanged;
 
-    // =====================================================
-    // DATA
-    // =====================================================
+    public static readonly List<UnitCombat> UnitsOfVisionReset = new List<UnitCombat>();
 
-    public static readonly List<UnitCombat> UnitsOfVisionReset =
-        new();
+    private static readonly HashSet<GridTile> _visibleTiles = new HashSet<GridTile>();
 
-    private static readonly HashSet<GridTile> _visibleTiles =
-        new();
+    private static readonly HashSet<GridTile> _exploredTiles = new HashSet<GridTile>();
 
-    private static readonly HashSet<GridTile> _exploredTiles =
-        new();
-
-    // =====================================================
-    // RESET
-    // =====================================================
+    private static readonly List<ForcedVisibility> _forcedVisibility = new List<ForcedVisibility>();
+    
+    private struct ForcedVisibility
+    {
+        public GridTile Tile;
+        public float Time;
+    }
 
     public static void TriggerVisibilityReset()
     {
@@ -46,10 +39,6 @@ public static class FogOfWarUtility
 
         OnResetVisibility?.Invoke();
 
-        // =============================================
-        // OLD VISIBLE -> EXPLORED
-        // =============================================
-
         foreach (GridTile tile in _visibleTiles)
         {
             if (tile == null)
@@ -60,10 +49,6 @@ public static class FogOfWarUtility
         }
 
         _visibleTiles.Clear();
-
-        // =============================================
-        // NEW VISIBLE
-        // =============================================
 
         foreach (UnitCombat combat in UnitsOfVisionReset)
         {
@@ -79,13 +64,14 @@ public static class FogOfWarUtility
             }
         }
 
-        // =============================================
-        // APPLY
-        // =============================================
-
         foreach (GridTile tile in _visibleTiles)
         {
             tile.Visibility = TileVisibility.Visible;
+        }
+        
+        foreach (ForcedVisibility forcedTile in _forcedVisibility)
+        {
+            forcedTile.Tile.Visibility = TileVisibility.Visible;
         }
 
         Renderer.UpdateFog(
@@ -94,15 +80,47 @@ public static class FogOfWarUtility
         OnVisibilityChanged?.Invoke();
     }
 
-    // =====================================================
-    // VISIBILITY
-    // =====================================================
+    public static void CheckForced()
+    {
+        for(int i = 0; i < _forcedVisibility.Count; i++)
+        {
+            ForcedVisibility forcedTile = _forcedVisibility[i];
+            forcedTile.Time -= Time.deltaTime;
+
+            if (forcedTile.Time <= 0)
+            {
+                _forcedVisibility.RemoveAt(i);
+                i--;
+                continue;
+            }
+            
+            _forcedVisibility[i] = forcedTile;
+        }
+    }
+    
+    public static void ForceVisibility(List<GridTile> tiles, float time)
+    {
+        foreach (GridTile tile in tiles)
+        {
+            ForceVisibility(tile, time);
+        }
+    }
+
+    public static void ForceVisibility(GridTile tile, float time)
+    {
+        ForcedVisibility forced = new ForcedVisibility()
+        {
+            Tile = tile,
+            Time = time
+        };
+        _forcedVisibility.Add(forced);
+    }
 
     public static List<GridTile> GetVisibleTiles(
         Vector3 worldPosition,
         float range)
     {
-        List<GridTile> result = new();
+        List<GridTile> result = new List<GridTile>();
 
         GridTile origin =
             GridParameters.LevelGrid.GetTileByWorldPos(worldPosition);
@@ -112,25 +130,17 @@ public static class FogOfWarUtility
 
         int maxDistance = Mathf.CeilToInt(range);
 
-        Queue<GridTile> queue = new();
-        Dictionary<GridTile, int> distanceMap = new();
+        Queue<GridTile> queue = new Queue<GridTile>();
+        Dictionary<GridTile, int> distanceMap = new Dictionary<GridTile, int>();
 
         queue.Enqueue(origin);
         distanceMap[origin] = 0;
-
-        // =============================================
-        // BFS
-        // =============================================
-
+        
         while (queue.Count > 0)
         {
             GridTile current = queue.Dequeue();
 
             int currentDistance = distanceMap[current];
-
-            // =========================================
-            // REAL LOS CHECK
-            // =========================================
 
             if (HasLineOfSight(origin, current, range))
             {
@@ -139,10 +149,6 @@ public static class FogOfWarUtility
 
             if (currentDistance >= maxDistance)
                 continue;
-
-            // =========================================
-            // PROPAGATE
-            // =========================================
 
             foreach (Vector3Int dir in GridParameters.TILE_SIDES)
             {
@@ -172,19 +178,11 @@ public static class FogOfWarUtility
                 if (distanceMap.ContainsKey(next))
                     continue;
 
-                // =====================================
-                // FLOOR RULES
-                // =====================================
-
                 if (!CanPropagateBetween(current, next))
                     continue;
 
                 distanceMap[next] = currentDistance + 1;
-
-                // =====================================
-                // STOP AT WALL
-                // =====================================
-
+                
                 if (!next.IsEmpty)
                     continue;
 
@@ -194,11 +192,7 @@ public static class FogOfWarUtility
 
         return result;
     }
-
-    // =====================================================
-    // LOS
-    // =====================================================
-
+    
     private static bool HasLineOfSight(
         GridTile from,
         GridTile to,
@@ -206,8 +200,7 @@ public static class FogOfWarUtility
     {
         Vector3 fromPos = from.WorldPosition;
         Vector3 toPos = to.WorldPosition;
-
-        // RANGE
+        
         if ((toPos - fromPos).sqrMagnitude > maxRange * maxRange)
             return false;
 
@@ -232,8 +225,7 @@ public static class FogOfWarUtility
         for (int i = 0; i <= steps; i++)
         {
             float t = steps == 0 ? 0f : (float)i / steps;
-
-            // 🔥 интерполяция "высоты взгляда"
+            
             float floorF = Mathf.Lerp(from.Floor, to.Floor, t);
             int floor = Mathf.RoundToInt(floorF);
 
@@ -245,8 +237,7 @@ public static class FogOfWarUtility
                 if (!tile.IsEmpty)
                     return false;
             }
-
-            // Bresenham step
+            
             int e2 = err * 2;
 
             if (e2 > -dz)
@@ -255,47 +246,28 @@ public static class FogOfWarUtility
                 currentX += sx;
             }
 
-            if (e2 < dx)
-            {
-                err += dx;
-                currentZ += sz;
-            }
+            if (e2 >= dx) continue;
+            err += dx;
+            currentZ += sz;
         }
 
         return true;
     }
-
-    // =====================================================
-    // PROPAGATION RULES
-    // =====================================================
-
+    
     private static bool CanPropagateBetween(
         GridTile from,
         GridTile to)
     {
-        // same floor
         if (from.Floor == to.Floor)
             return true;
-
-        // =============================================
-        // FLOOR CHECK
-        // =============================================
 
         GridTile highest =
             from.Floor > to.Floor
                 ? from
                 : to;
 
-        // blocked by ceiling/floor
-        if (highest.IsGround)
-            return false;
-
-        return true;
+        return !highest.IsGround;
     }
-
-    // =====================================================
-    // HELPERS
-    // =====================================================
 
     private static bool IsInsideGrid(
         int x,

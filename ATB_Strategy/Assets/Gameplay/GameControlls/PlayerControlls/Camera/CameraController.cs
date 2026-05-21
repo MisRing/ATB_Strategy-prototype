@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(TacticalCamera))]
@@ -17,6 +18,16 @@ public class CameraController : MonoBehaviour
         _aimCamera.enabled = false;
 
         _tacticalCamera.Init();
+    }
+
+    private void OnEnable()
+    {
+        GameLogService.OnMessageFocus += FocusEvent;
+    }
+
+    private void OnDisable()
+    {
+        GameLogService.OnMessageFocus -= FocusEvent;
     }
 
     public void ChangeCameraMod(CameraMod cameraMod)
@@ -43,11 +54,18 @@ public class CameraController : MonoBehaviour
         _tacticalCamera.SetExtraZoom(value);
     }
 
-    public void FocusTarget(Transform target, bool instantly = false)
+    private void FocusEvent(Transform target, int focusPriority, float focusTime)
+    {
+        if(_cameraMod != CameraMod.Tactical) return;
+        
+        _tacticalCamera.EnterFocusMode(target, focusPriority, focusTime, false);
+    }
+
+    public void FocusTarget(Transform target, int focusPriority, float focusTime = -1f,  bool instantly = false)
     {
         ChangeCameraMod(CameraMod.Tactical);
         
-        _tacticalCamera.EnterFocusMode(target, instantly);
+        _tacticalCamera.EnterFocusMode(target, focusPriority, focusTime, instantly);
     }
 
     public void AimTarget(Transform target, Vector3 aimPosition)
@@ -63,3 +81,13 @@ public enum CameraMod
     Tactical,
     Aim
 }
+
+///----------------------------------
+///
+///         Focus priority:
+///         -1 = none
+///         0 = simple
+///         1 = better
+///         5 = best
+/// 
+///---------------------------------
