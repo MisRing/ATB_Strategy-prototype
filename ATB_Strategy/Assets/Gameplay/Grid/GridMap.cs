@@ -15,12 +15,13 @@ public class GridMap : MonoBehaviour
     {
         GridParameters.LevelGrid = this;
     }
-
+#if UNITY_EDITOR
     public void BuildGrid(int sizeX, int sizeZ, int floors)
     {
         GridMapExtension.BuildGrid(ref _grid, sizeX, sizeZ, floors, transform.position, this);
         GridParameters.LevelGrid = this;
     }
+#endif
 
     public FloorData[] GetGrid()
     {
