@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -24,16 +23,6 @@ public static class GridMapExtension
                     SetTileObstacles(ref newTile);
 
                     SetTileCovers(ref newTile);
-
-                    //if(x > 0)
-                    //{
-                    //    newTile.Neighbours[3] = grid[f][x - 1][z];
-                    //}
-
-                    //if (z > 0)
-                    //{
-                    //    newTile.Neighbours[2] = grid[f][x][z - 1];
-                    //}
 
                     grid[f][x][z] = newTile;
                 }
@@ -70,9 +59,8 @@ public static class GridMapExtension
                     tile.PositionZ * GridParameters.TILE_SIZE)
                     + gridOffset;
 
-                rayOrigin = rayOrigin
-                    + (GridParameters.COVER_DIRECTIONS[i] + GridParameters.COVER_DIRECTIONS[(i + 1) % 4])
-                    * GridParameters.TILE_SIZE * 0.45f;
+                rayOrigin += (GridParameters.COVER_DIRECTIONS[i] + GridParameters.COVER_DIRECTIONS[(i + 1) % 4])
+                             * GridParameters.TILE_SIZE * 0.45f;
 
                 if (Physics.Raycast(rayOrigin,
                     Vector3.down,

@@ -85,8 +85,6 @@ public class UnitAIController : MonoBehaviour
 
         float range = _unit.Stats.VisionRange * 0.75f;
         List<GridTile> candidates = _unit.Combat.VisibleTiles;
-        //Debug.Log(candidates.Count);
-        //return 0;
 
         int bestScore = EvaluateTileScore(_unit.Agent.CurrentTile, _unit.Agent.CurrentTile.WorldPosition, targets, ignorePath: true);
 

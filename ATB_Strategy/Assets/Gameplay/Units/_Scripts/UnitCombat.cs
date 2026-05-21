@@ -128,6 +128,7 @@ public class UnitCombat : CombatObject
 
     public void Die(HitResult lastHit)
     {
+        GetComponent<CapsuleCollider>().enabled = false;
         _unit.State = UnitState.Dead;
         _unit.Animator.DeathAnimation(lastHit.Dealer.Position);
         _unit.Agent.InterruptMovement();

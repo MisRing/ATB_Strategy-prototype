@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -15,13 +14,11 @@ public class UIUnitTargets : MonoBehaviour
     {
         _rectTransform = GetComponent<RectTransform>();
         _playerController = playerController;
-        
-        _playerController.OnTargetSwitched += SwitchTarget; //!
     }
 
     private void OnEnable()
     {
-        //_playerController.OnTargetSwitched += SelectTarget;
+        _playerController.OnTargetSwitched += SwitchTarget;
     }
 
     private void OnDisable()

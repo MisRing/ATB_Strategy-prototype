@@ -142,9 +142,11 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         if (_pathData == null) return false;
         if (_pathData.TurnsCost <= 0)
         {
+#if UNITY_EDITOR
             string dataErrorLog =
                 $"From ({_pathData.Points[0]}), To ({_pathData.Points[^1]}), Points count ({_pathData.Points.Count})";
             Debug.LogWarning($"Path is invalid: [{_unit.name} - {_unit.Owner}; Path data: {dataErrorLog}");
+#endif
             return false;
         }
         
@@ -154,7 +156,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
         }
 
         //?????????????????????????????
-        GridTile finalTile = GridParameters.LevelGrid.GetTileByWorldPos(_pathData.Points[_pathData.Points.Count - 1]);
+        GridTile finalTile = GridParameters.LevelGrid.GetTileByWorldPos(_pathData.Points[^1]);
         if (finalTile == null || finalTile.Owner != null)
         {
             return false;
@@ -197,7 +199,7 @@ public class UnitAgent : MonoBehaviour, IPathHandler
             {
                 if (!coverSet)
                 {
-                    GridTile finalTile = GridParameters.LevelGrid.GetTileByWorldPos(path.Points[path.Points.Count - 1]);
+                    GridTile finalTile = GridParameters.LevelGrid.GetTileByWorldPos(path.Points[^1]);
                     path.Cover = GridPathFinder.GetTileCover(
                         ref path.FinalDirection,
                         out path.CoverLook,

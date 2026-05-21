@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class UnitAnimator : MonoBehaviour
@@ -11,12 +10,10 @@ public class UnitAnimator : MonoBehaviour
     private TileCover _coverState;
     private int _coverLook;
     
-    //Aim start parameters
     private Quaternion _aimStartRotation;
     private TileCover _coverBeforeAim;
     private int _coverLookBeforeAim;
     
-    //Shooting time rations
     private float _aimWaitRatio = 0.2f;
     private float _aimRotateRatio = 0.8f;
     

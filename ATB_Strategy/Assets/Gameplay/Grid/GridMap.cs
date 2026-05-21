@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class GridMap : MonoBehaviour
 {
     [SerializeField] private FloorData[] _grid;
-    //[SerializeField] private List<TArray<GridTile>> _grid;
-    //[SerializeField] private List<Vector3Int> _tilesWithCover;
+
 
     public int Floors { get { return _grid.Length; } }
     public int SizeX { get { return _grid[0].Length; } }
@@ -21,7 +18,6 @@ public class GridMap : MonoBehaviour
 
     public void BuildGrid(int sizeX, int sizeZ, int floors)
     {
-        //_grid = new FloorData[floors];
         GridMapExtension.BuildGrid(ref _grid, sizeX, sizeZ, floors, transform.position, this);
         GridParameters.LevelGrid = this;
     }
@@ -35,20 +31,6 @@ public class GridMap : MonoBehaviour
     {
         return _grid[floor][x][z];
     }
-
-    // public void InitializeVisibility(int teamsCount)
-    // {
-    //     for (int f = 0; f < Floors; f++)
-    //     {
-    //         for (int x = 0; x < SizeX; x++)
-    //         {
-    //             for (int z = 0; z < SizeZ; z++)
-    //             {
-    //                 _grid[f][x][z].Visibility = new TileVisibility[teamsCount];
-    //             }
-    //         }
-    //     }
-    // }
 
     public bool CheckTile(int x, int z, int floor)
     {
@@ -72,17 +54,6 @@ public class GridMap : MonoBehaviour
 
         return _grid[floor][x][z];
     }
-
-    // public Vector3 GetTileWorldPos(GridTile tile)
-    // {
-    //     Vector3 worldPos = new Vector3(tile.PositionX * GridParameters.TILE_SIZE,
-    //         tile.DeltaY,
-    //         tile.PositionZ * GridParameters.TILE_SIZE);
-    //
-    //     worldPos += transform.position;
-    //
-    //     return worldPos;
-    // }
 
     public List<GridTile> GetTilesAround(GridTile startTile, float range, bool onlyGrounded)
     {

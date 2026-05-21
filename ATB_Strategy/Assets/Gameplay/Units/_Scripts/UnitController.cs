@@ -58,6 +58,7 @@ public class UnitController : MonoBehaviour
         OnSelectionChanged?.Invoke(_isSelected);
     }
 
+#if  UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (!Application.isPlaying) return;
@@ -78,6 +79,7 @@ public class UnitController : MonoBehaviour
             Handles.DrawLine(transform.position, target.Position);
         }
     }
+#endif
 }
 
 public enum UnitState

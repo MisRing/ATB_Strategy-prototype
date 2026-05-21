@@ -107,7 +107,7 @@ public class FogOfWarRenderer : MonoBehaviour
         
         _accum += Time.deltaTime;
 
-        if (_accum < 0.033f) // ~30 FPS update
+        if (_accum < 0.033f)
             return;
 
         _accum = 0f;

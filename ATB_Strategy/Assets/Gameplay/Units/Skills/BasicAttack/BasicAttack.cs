@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using System.Collections.Generic;
 
 public class BasicAttack : BasicSkill, ITargetSwitchable
 {

@@ -37,9 +37,7 @@ public class BasicMovementSkill : BasicSkill
         cost = 0;
         if (!CanExecute()) return false;
         if (!_agent.StartMove(out cost)) return false;
-
-        //cost = _agent.PathData.TurnsCost;
-
+        
         return true;
     }
 }

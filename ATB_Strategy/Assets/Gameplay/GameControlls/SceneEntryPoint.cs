@@ -7,7 +7,7 @@ public class SceneEntryPoint : MonoBehaviour
     [SerializeField] private CameraController _camera;
     [Header("Teams controls")]
     [SerializeField] private PlayerController _playerController;
-    [SerializeField] private List<TeamControlls> _enemyTeams;
+    [SerializeField] private List<TeamControls> _enemyTeams;
     
     [Header("Start parameters")]
     [SerializeField] private Vector3 _unitsStartDirection = Vector3.right;
@@ -33,13 +33,11 @@ public class SceneEntryPoint : MonoBehaviour
 
         _playerController?.Init(_playerUnits);
 
-        foreach (TeamControlls team in _enemyTeams)
+        foreach (TeamControls team in _enemyTeams)
         {
             team.Controller.Init(team.Owner, team.Units, team.AIs);
         }
         
-        //GridParameters.LevelGrid.InitializeVisibility(_enemyTeams.Count + (_playerController != null ? 1 : 0));
-
         _camera.Init();
         
         _fogOfWarRenderer.Initialize();
@@ -57,7 +55,7 @@ public class SceneEntryPoint : MonoBehaviour
             _playerUnits[i].gameObject.transform.rotation = startDirection;
         }
 
-        foreach (TeamControlls team in _enemyTeams)
+        foreach (TeamControls team in _enemyTeams)
         {
             team.AIs = new UnitAIController[team.Units.Count];
             for (int i = 0; i < team.Units.Count; i++)
@@ -72,7 +70,7 @@ public class SceneEntryPoint : MonoBehaviour
     }
     
     //-------------------------------DEBUG-GIZMO------------------------------------
-    
+#if  UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if(GridParameters.LevelGrid == null)
@@ -96,7 +94,7 @@ public class SceneEntryPoint : MonoBehaviour
             }
         }
 
-        foreach (TeamControlls team in _enemyTeams)
+        foreach (TeamControls team in _enemyTeams)
         {
             foreach (Vector3Int point in team.StartPositions)
             {
@@ -112,10 +110,11 @@ public class SceneEntryPoint : MonoBehaviour
             }
         }
     }
+#endif
 }
 
 [Serializable]
-public class TeamControlls
+public class TeamControls
 {
     public UnitOwner Owner;
     public EnemyController Controller;
