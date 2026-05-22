@@ -9,9 +9,10 @@ public class Message : MonoBehaviour
     [SerializeField] private float _lifeTime = 2f;
     [SerializeField] private TextMeshPro _text;
 
-    public void SetMessage(string message, Vector3 point)
+    public void SetMessage(string message, Color color, Vector3 point)
     {
         _text.text = message;
+        _text.color = color;
         transform.position = point;
 
         StartCoroutine(Move());

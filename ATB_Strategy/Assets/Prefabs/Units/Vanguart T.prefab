@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   Name: Unit 1
-  Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  Icon: {fileID: 21300000, guid: 31917dc0a37580840adb7ac534fcdb9c, type: 3}
   Speed:
     _value: 5
   Health:

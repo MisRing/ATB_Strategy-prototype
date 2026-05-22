@@ -138,5 +138,7 @@ public class UnitCombat : CombatObject
         CombatManager.UnregisterCombat(this);
         FogOfWarUtility.TriggerVisibilityReset();
         OnUnitDie?.Invoke();
+        
+        GameLogService.ShowMessageDeath(transform);
     }
 }

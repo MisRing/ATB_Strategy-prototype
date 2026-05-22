@@ -7,15 +7,16 @@ public class GameLogService : MonoBehaviour
 {
     private static GameLogService _instance;
     [SerializeField] private GameObject _messagePrefab;
-    private static float _massageQueueDelay = 0.1f;
+    private const float MassageQueueDelay = 0.2f;
     private static float _massageQueueTime = 0f;
     private static Queue<MessageData> _queue;
 
     public static event Action<Transform, int, float> OnMessageFocus;
-    
-    private struct MessageData
+
+    public struct MessageData
     {
         public string message;
+        public Color color;
         public Transform target;
         public float delay;
         public int priority;
@@ -37,10 +38,10 @@ public class GameLogService : MonoBehaviour
 
         if (_queue.Count <= 0) return;
 
-        _massageQueueTime = _massageQueueDelay;
+        _massageQueueTime = MassageQueueDelay;
         MessageData data = _queue.Dequeue();
         
-        StartCoroutine(ShowMassageCoroutine(data.message, data.target, data.delay, data.priority, data.focusTime, data.focusCamera));
+        StartCoroutine(ShowMassageCoroutine(data));
     }
 
     public static void ShowMessage(string message, Transform target, float delay, int priority, float focusTime, bool focusCamera = false)
@@ -48,6 +49,7 @@ public class GameLogService : MonoBehaviour
         MessageData data = new MessageData()
         {
             message = message,
+            color = Color.aliceBlue,
             target = target,
             delay = delay,
             priority = priority,
@@ -57,22 +59,48 @@ public class GameLogService : MonoBehaviour
         
         _queue.Enqueue(data);
     }
-
-    public IEnumerator ShowMassageCoroutine(string message, Transform target, float delay, int priority, float focusTime, bool focusCamera)
+    
+    public static void ShowMessageDeath(Transform target)
     {
-        if (focusCamera)
+        MessageData data = new MessageData()
         {
-            OnMessageFocus?.Invoke(target, priority, focusTime);
+            message = "DEAD",
+            color = Color.red,
+            target = target,
+            delay = 0,
+            priority = 5,
+            focusTime = 2f,
+            focusCamera = true
+        };
+        
+        _queue.Enqueue(data);
+    }
+
+    private IEnumerator ShowMassageCoroutine(MessageData data)
+    {
+        if (data.focusCamera)
+        {
+            OnMessageFocus?.Invoke(data.target, data.priority, data.focusTime);
+        }
+        if (data.delay > 0)
+        {
+            GridTile tile = GridParameters.LevelGrid.GetTileByWorldPos(data.target.position);
+            if (tile != null)
+            {
+                FogOfWarUtility.ForceVisibility(tile, data.focusTime);
+            }
+            
+            TurnManager.SetEventSlowdown(data.focusTime, 0.25f);
         }
 
-        while (delay > 0)
+        while (data.delay > 0)
         {
-            delay -= TimeService.TimeSpeedDelta;
+            data.delay -= TimeService.TimeSpeedDelta;
 
             yield return null;
         }
         
         GameObject messageObj = Instantiate(_messagePrefab);
-        messageObj.GetComponent<Message>().SetMessage(message, target.position);
+        messageObj.GetComponent<Message>().SetMessage(data.message, data.color, data.target.position);
     }
 }

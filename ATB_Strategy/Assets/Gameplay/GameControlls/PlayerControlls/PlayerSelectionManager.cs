@@ -95,7 +95,11 @@ public class PlayerSelectionManager : MonoBehaviour
     
     public void SelectUnit(UnitController unit, bool focusView = true)
     {
-        if (unit == SelectedUnit) return;
+        if (unit == SelectedUnit)
+        {
+            _playerController.CameraController.FocusTarget(SelectedUnit.transform, 2, -1f);
+            return;
+        }
         if (unit.Owner != UnitOwner.PlayerTeam)
         {
             TrySelectTarget(unit);
@@ -112,7 +116,7 @@ public class PlayerSelectionManager : MonoBehaviour
         OnSelectionChanged?.Invoke(oldUnit, SelectedUnit);
         if (focusView)
         {
-            _playerController.CameraController.FocusTarget(SelectedUnit.transform, 5, -1f);
+            _playerController.CameraController.FocusTarget(SelectedUnit.transform, 2, -1f);
         }
     }
 

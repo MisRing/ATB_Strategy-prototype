@@ -2132,7 +2132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   _positionOffset: {x: 0, y: 0.5, z: 0}
-  _cameraPitch: 40
+  _cameraPitch: 50
   _transitionMoveSmooth: 0.15
   _transitionRotSpeed: 5
   _moveSpeedMaxZoom: 7.5
@@ -2148,7 +2148,7 @@ MonoBehaviour:
   _zoomSpeed: 0.2
   _zoomSmoothTime: 0.15
   _extraZoomPercent: 1.2
-  _focusMaxDistance: 15
+  _focusMaxDistance: 30
   _focusSmoothTime: 0.2
 --- !u!114 &330585549
 MonoBehaviour:
@@ -3763,6 +3763,10 @@ PrefabInstance:
       value: Vanguart T 1
       objectReference: {fileID: 0}
     - target: {fileID: 6038549465500857701, guid: 8fb0d6f44aab1cd4196a101264605688, type: 3}
+      propertyPath: Name
+      value: Cpt. Greg
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038549465500857701, guid: 8fb0d6f44aab1cd4196a101264605688, type: 3}
       propertyPath: VisionRange._value
       value: 15
       objectReference: {fileID: 0}
@@ -4822,7 +4826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6038549465500857701, guid: 8fb0d6f44aab1cd4196a101264605688, type: 3}
       propertyPath: Name
-      value: Unit 3
+      value: Pvt. Sanders
       objectReference: {fileID: 0}
     - target: {fileID: 8633316925009809707, guid: 8fb0d6f44aab1cd4196a101264605688, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6089,7 +6093,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 10
+  m_Spacing: 30
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -9579,7 +9583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6038549465500857701, guid: 8fb0d6f44aab1cd4196a101264605688, type: 3}
       propertyPath: Name
-      value: Unit 4
+      value: Pvt. Kayn
       objectReference: {fileID: 0}
     - target: {fileID: 8633316925009809707, guid: 8fb0d6f44aab1cd4196a101264605688, type: 3}
       propertyPath: m_LocalPosition.x
@@ -37370,7 +37374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6038549465500857701, guid: 8fb0d6f44aab1cd4196a101264605688, type: 3}
       propertyPath: Name
-      value: Unit 2
+      value: Pvt. Oliver
       objectReference: {fileID: 0}
     - target: {fileID: 8633316925009809707, guid: 8fb0d6f44aab1cd4196a101264605688, type: 3}
       propertyPath: m_LocalPosition.x

@@ -1,10 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIBar : MonoBehaviour
 {
     [SerializeField] private RectTransform _bar;
-    [SerializeField] private Text _text;
+    [SerializeField] private TextMeshProUGUI _text;
 
     public void SetValue(float value, float maxValue)
     {

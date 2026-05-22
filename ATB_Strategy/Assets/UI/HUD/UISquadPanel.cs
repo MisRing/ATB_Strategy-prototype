@@ -15,10 +15,10 @@ public class UISquadPanel : MonoBehaviour
         _rectTransform = GetComponent<RectTransform>();
 
         _unitPanels = new List<UIUnitPanel>();
-        foreach(UnitController unit in _selectionManager.Units)
+        for(int i = 0; i < _selectionManager.Units.Count; i++)
         {
             UIUnitPanel panel = Instantiate(_unitPanelPrefab, _rectTransform).GetComponent<UIUnitPanel>();
-            panel.Init(unit, this);
+            panel.Init(_selectionManager.Units[i], i + 1, this);
             _unitPanels.Add(panel);
         }
 

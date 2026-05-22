@@ -85,7 +85,7 @@ public static class FogOfWarUtility
         for(int i = 0; i < _forcedVisibility.Count; i++)
         {
             ForcedVisibility forcedTile = _forcedVisibility[i];
-            forcedTile.Time -= Time.deltaTime;
+            forcedTile.Time -= TimeService.TimeSpeedDelta;
 
             if (forcedTile.Time <= 0)
             {
@@ -128,27 +128,30 @@ public static class FogOfWarUtility
         if (origin == null)
             return result;
 
-        int maxDistance = Mathf.CeilToInt(range);
+        //int maxDistance = Mathf.CeilToInt(range);
+        float sqrRange = range * range;
 
         Queue<GridTile> queue = new Queue<GridTile>();
-        Dictionary<GridTile, int> distanceMap = new Dictionary<GridTile, int>();
-
+        //Dictionary<GridTile, int> distanceMap = new Dictionary<GridTile, int>();
+        HashSet<GridTile> visited = new HashSet<GridTile>();
         queue.Enqueue(origin);
-        distanceMap[origin] = 0;
+        //distanceMap[origin] = 0;
         
         while (queue.Count > 0)
         {
             GridTile current = queue.Dequeue();
 
-            int currentDistance = distanceMap[current];
+            //int currentDistance = distanceMap[current];
+            float currentSqrDistance = (origin.WorldPosition - current.WorldPosition).sqrMagnitude;
 
             if (HasLineOfSight(origin, current, range))
             {
                 result.Add(current);
             }
 
-            if (currentDistance >= maxDistance)
-                continue;
+            //if (currentDistance >= maxDistance)
+            //    continue;
+            if(currentSqrDistance > sqrRange) continue;
 
             foreach (Vector3Int dir in GridParameters.TILE_SIDES)
             {
@@ -175,13 +178,14 @@ public static class FogOfWarUtility
                         continue;
                 }
 
-                if (distanceMap.ContainsKey(next))
-                    continue;
+                //if (distanceMap.ContainsKey(next))
+                //    continue;
+                if(!visited.Add(next)) continue;
 
                 if (!CanPropagateBetween(current, next))
                     continue;
 
-                distanceMap[next] = currentDistance + 1;
+                //distanceMap[next] = currentDistance + 1;
                 
                 if (!next.IsEmpty)
                     continue;

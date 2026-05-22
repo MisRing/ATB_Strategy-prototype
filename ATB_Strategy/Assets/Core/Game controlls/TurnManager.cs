@@ -125,7 +125,7 @@ public class TurnManager : MonoBehaviour
     private void SetTimeSlowdown()
     {
         if (TimeService.TimeSpeed == 0f) return;
-
+        
         float passedTime = _currentTurnTime;
         float remainingTime = TurnTime - _currentTurnTime;
 
@@ -153,14 +153,71 @@ public class TurnManager : MonoBehaviour
 
         float slowdown = Mathf.Min(startSlowdown, endSlowdown);
         slowdown *= TimeService.DefaultTimeSpeed;
+        
+        float eventSlowdown = EventSlowdown();
+        eventSlowdown *= TimeService.DefaultTimeSpeed;
 
-        TimeService.SetTimeSpeed(Mathf.Max(slowdown, _minTimeSpeed));
+        float finalSlowdown = Mathf.Min(slowdown, eventSlowdown);
+
+        TimeService.SetTimeSpeed(Mathf.Max(finalSlowdown, _minTimeSpeed));
     }
 
-    void OnGUI()
+    private float EventSlowdown()
     {
-        GUILayout.BeginArea(new Rect(Screen.width - 400, 0, 400, Screen.height));
-        GUILayout.Label("Current Time: " + _currentTime + "\n Current Turn: " + _currentTurn + "\n Current Time Speed: " + TimeService.TimeSpeed);
-        GUILayout.EndArea();
+        float eventSlowdown = 1;
+
+        for(int i = 0; i < _slowdowns.Count; i++)
+        {
+            if (_slowdowns[i].EndTime < _currentTime)
+            {
+                _slowdowns.RemoveAt(i);
+                i--;
+                continue;
+            }
+            
+            float halfDuration = (_slowdowns[i].EndTime - _slowdowns[i].StartTime) * 0.5f;
+            if (halfDuration <= 0.0001f) continue;
+            
+            float delta = Mathf.Abs(halfDuration - _currentTime);
+            
+            float t = delta / (_slowdowns[i].EndTime - halfDuration);
+            t = Mathf.Pow(t, 2);
+            float slow = Mathf.Lerp(_slowdowns[i].TimeSpeed, 1f, t);
+            
+            if(slow < eventSlowdown)
+            {
+                eventSlowdown = slow;
+            }
+        }
+
+        return eventSlowdown;
     }
+    
+    private static List<Slowdown> _slowdowns = new List<Slowdown>();
+    
+    public struct Slowdown
+    {
+        public float StartTime;
+        public float EndTime;
+        public float TimeSpeed;
+    }
+
+    public static void SetEventSlowdown(float duration, float middleSlowdown)
+    {
+        Slowdown slowdown = new Slowdown()
+        {
+            StartTime = _currentTime,
+            EndTime = _currentTime + duration,
+            TimeSpeed = middleSlowdown
+        };
+        
+        _slowdowns.Add(slowdown);
+    }
+
+    // void OnGUI()
+    // {
+    //     GUILayout.BeginArea(new Rect(Screen.width - 400, 0, 400, Screen.height));
+    //     GUILayout.Label("Current Time: " + _currentTime + "\n Current Turn: " + _currentTurn + "\n Current Time Speed: " + TimeService.TimeSpeed);
+    //     GUILayout.EndArea();
+    // }
 }
