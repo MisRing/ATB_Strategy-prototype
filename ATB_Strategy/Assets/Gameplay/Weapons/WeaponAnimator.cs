@@ -43,7 +43,7 @@ public class WeaponAnimator : MonoBehaviour
         
         GameObject bullet = Instantiate(_bulletPrefab);
         bullet.transform.position = _barrelTransform.position;
-        bullet.transform.rotation = _barrelTransform.rotation;
+        bullet.transform.LookAt(target.position + offset);
 
         float time = 0;
 
