@@ -17,7 +17,7 @@ public class TurnManager : MonoBehaviour
     private static readonly float _timeStopDuration = 0.3f;
 
 
-    public static readonly float TurnTime = 0.125f * 2f;
+    public static readonly float TurnTime = 0.25f;
     
     private static readonly List<UnitController> _freeUnits = new List<UnitController>();
     

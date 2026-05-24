@@ -16,20 +16,21 @@ public class UITurnLine : MonoBehaviour
     [SerializeField] private Text _currentTurnText;
 
     private readonly Dictionary<int, List<UITurnItem>> _items = new Dictionary<int, List<UITurnItem>>();
-    private readonly List<RectTransform> _turnLines = new List<RectTransform>();
+    private readonly List<UITurnLineStand> _turnLines = new List<UITurnLineStand>();
 
     private int _cachedTurn;
 
     private void Awake()
     {
-        float size = _container.sizeDelta.x;
+        float size = _container.rect.size.x;
         _spacing = size / _turnsToVisualize;
         for (int i = 0; i < _turnsToVisualize; i++)
         {
             GameObject obj = Instantiate(_turnPrefab, _container);
-            RectTransform  rect = obj.GetComponent<RectTransform>();
-            rect.anchoredPosition = new Vector2(i * _spacing, 0);
-            _turnLines.Add(rect);
+            UITurnLineStand stand = obj.GetComponent<UITurnLineStand>();
+            stand.Init( (i + 1) * TurnManager.TurnTime % 1f == 0);
+            stand.SetXPosition((i + 1) * _spacing);
+            _turnLines.Add(stand);
         }
     }
 
@@ -50,13 +51,14 @@ public class UITurnLine : MonoBehaviour
         if (TimeService.TimeSpeed == 0) return;
         
         int currentTurn = TurnManager.CurrentTurn;
-        float turnTime = TurnManager.CurrentTurnTime / TurnManager.TurnTime;
+        float currentTurnTime = TurnManager.CurrentTurnTime / TurnManager.TurnTime;
         
         for (int i = 0; i < _turnLines.Count; i++)
         {
-            float positionX = (i + 1 - turnTime);
-            positionX *= _spacing;
-            _turnLines[i].anchoredPosition = new Vector2(positionX, 0);
+            float x = Mathf.Repeat(i - (currentTurn + currentTurnTime),
+                _turnLines.Count - 1f) + 1f;
+            float positionX  = x * _spacing;
+            _turnLines[i].SetXPosition(positionX);
         }
 
         UpdateAllPositions();
