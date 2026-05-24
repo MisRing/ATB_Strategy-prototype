@@ -86,12 +86,21 @@ public class UnitCombat : CombatObject
         return -1;
     }
     
-    public override int GetDodge(Vector3 dealerPosition)
+    public override int GetFullDodge(Vector3 dealerPosition)
     {
         if (_unit.Agent.IsMoving) return _unit.Stats.Dodge;
         
         int dodge = CombatService.CalculateCoverDodge(_unit.Agent.CurrentTile, _unit.Stats.Dodge, dealerPosition);
         
+        return dodge;
+    }
+
+    public override int GetBonusDodge(Vector3 dealerPosition)
+    {
+        if (_unit.Agent.IsMoving) return 0;
+
+        int dodge = CombatService.CalculateCoverDodge(_unit.Agent.CurrentTile, 0, dealerPosition);
+
         return dodge;
     }
 

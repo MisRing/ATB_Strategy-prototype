@@ -31,7 +31,7 @@ public static class CombatService
              + weapon.Accuracy * distanceFactor
              + (heightAdvantage * HEIGHT_ADVANTAGE_BONUS_ACCURACY))
             //* target.VisionPercent - change to other system
-            - target.GetDodge(dealer.Position);
+            - target.GetFullDodge(dealer.Position);
         
         float critChance = Mathf.Clamp01(hitChance - 100) + weapon.CritChance * distanceFactor;
 

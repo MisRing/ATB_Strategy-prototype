@@ -41,7 +41,7 @@ public class UIUnitTargets : MonoBehaviour
         {
             GameObject targetObject = Instantiate(_targetIconPref, _rectTransform);
             UITargetIcon targetIcon = targetObject.GetComponent<UITargetIcon>();
-            targetIcon.Init(this, i);
+            targetIcon.Init(this, i, unit.Combat.Targets[i].GetBonusDodge(unit.Combat.Position) > 0);
             _targetIcons.Add(targetIcon);
         }
     }

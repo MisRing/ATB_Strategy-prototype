@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.47058824}
+  m_Color: {r: 1, g: 0.29411766, b: 0.29411766, a: 0.47058824}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.40744036, g: 0.78282744, b: 0.7924528, a: 1}
+  m_Color: {r: 0, g: 0.6509804, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0.14786863, a: 1}
+  m_Color: {r: 1, g: 0.29411766, b: 0.29411766, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.40744036, g: 0.78282744, b: 0.7924528, a: 1}
+  m_Color: {r: 0, g: 0.6509804, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.40744036, g: 0.78282744, b: 0.7924528, a: 1}
+  m_Color: {r: 0, g: 0.6509804, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -434,7 +434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.40744036, g: 0.78282744, b: 0.7924528, a: 1}
+  m_Color: {r: 0, g: 0.6509804, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -511,8 +511,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f13274c425f344cb19d2aa76252ca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UITargetIcon
+  _icon: {fileID: 294484329068073716}
+  _lightningImage: {fileID: 620008258435797299}
   _selectorObject: {fileID: 6087702964783864082}
   _lightning: {fileID: 5530900439143961299}
+  _defaultColor: {r: 1, g: 0.1490565, b: 0.1490565, a: 1}
+  _unprotectedColor: {r: 1, g: 0.8295019, b: 0.19433957, a: 1}
 --- !u!1 &7948183850548640825
 GameObject:
   m_ObjectHideFlags: 0

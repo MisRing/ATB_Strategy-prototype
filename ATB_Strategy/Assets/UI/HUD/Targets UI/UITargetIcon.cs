@@ -1,18 +1,27 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class UITargetIcon : MonoBehaviour, IPointerClickHandler
 {
+    [SerializeField] private Image _icon;
+    [SerializeField] private Image _lightningImage;
     [SerializeField] private RectTransform _selectorObject;
     [SerializeField] private RectTransform _lightning;
-    
+    [SerializeField] private Color _defaultColor = Color.red;
+    [SerializeField] private Color _unprotectedColor = Color.yellow;
+
     private UIUnitTargets _uiUnitTargets;
     private int _targetID;
 
-    public void Init(UIUnitTargets uiUnitTargets, int targetID)
+    public void Init(UIUnitTargets uiUnitTargets, int targetID, bool targetProtected)
     {
         _uiUnitTargets = uiUnitTargets;
         _targetID = targetID;
+
+        _icon.color = targetProtected ? _defaultColor : _unprotectedColor;
+        //_lightningImage.color = targetProtected ? _defaultColor : _unprotectedColor;
+
         _selectorObject.gameObject.SetActive(false);
         _lightning.gameObject.SetActive(false);
     }

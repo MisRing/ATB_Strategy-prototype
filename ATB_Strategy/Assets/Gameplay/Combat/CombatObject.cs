@@ -19,7 +19,12 @@ public abstract class CombatObject : MonoBehaviour
         CombatManager.UnregisterCombat(this);
     }
 
-    public virtual int GetDodge(Vector3 dealerPosition)
+    public virtual int GetFullDodge(Vector3 dealerPosition)
+    {
+        return 0;
+    }
+
+    public virtual int GetBonusDodge(Vector3 dealerPosition)
     {
         return 0;
     }
