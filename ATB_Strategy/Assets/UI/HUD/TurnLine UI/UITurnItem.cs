@@ -11,6 +11,7 @@ public class UITurnItem : MonoBehaviour
 
     [SerializeField] private Image _icon;
     [SerializeField] private Image _background;
+    [SerializeField] private Image _skillIcon;
     [SerializeField] private Image _turn;
     [SerializeField] private TextMeshProUGUI _id;
     
@@ -25,7 +26,7 @@ public class UITurnItem : MonoBehaviour
     private RectTransform _turnRect;
     //[SerializeField] private Image _ownerColor;
 
-    public void Init(UnitController unit, int turn, int inRow)
+    public void Init(UnitController unit, int turn)
     {
         Turn = turn;
         _backgroundRect = _background.GetComponent<RectTransform>();
@@ -33,6 +34,9 @@ public class UITurnItem : MonoBehaviour
         _turn.color = unit.Owner == UnitOwner.PlayerTeam ? _playerColor : _enemyColor;
 
         RectTransform = GetComponent<RectTransform>();
+
+        _skillIcon.sprite = unit.SkillController.CurrentSkill.SkillIcon;
+        _skillIcon.color = unit.Owner == UnitOwner.PlayerTeam ? _playerColor : _enemyColor;
 
         _background.color = unit.Owner == UnitOwner.PlayerTeam ? Color.white : _backgroundColor;
         _icon.sprite = unit.Stats.Icon;

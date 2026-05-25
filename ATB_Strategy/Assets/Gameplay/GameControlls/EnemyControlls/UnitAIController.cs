@@ -5,9 +5,9 @@ public class UnitAIController : MonoBehaviour
 {
     private UnitController _unit;
 
-    [SerializeField] private int _aggression = 5;
-    [SerializeField] private int _defensive = 1;
-
+    [SerializeField] private int _aggression = 0;
+    [SerializeField] private int _defensive = 10;
+    
     public void Init()
     {
         _unit = GetComponent<UnitController>();
@@ -22,6 +22,8 @@ public class UnitAIController : MonoBehaviour
 
         if (moveScore > 0 && attackScore < moveScore)
         {
+            _aggression = 3;
+            _defensive = 1;
             return new UnitAIContext
             {
                 Decision = UnitAIDecision.Relocate,
@@ -31,13 +33,16 @@ public class UnitAIController : MonoBehaviour
         
         if (attackScore > 0 && attackScore >= moveScore && targetID != -1)
         {
+            _aggression = 1;
+            _defensive = 3;
             return new UnitAIContext
             {
                 Decision = UnitAIDecision.Attack,
                 AttackTargetID = targetID
             };
         }
-
+        _aggression = 1;
+        _defensive = 1;
         return UnitAIContext.None;
     }
     
@@ -57,10 +62,10 @@ public class UnitAIController : MonoBehaviour
             CombatContext context = attack.SelectedTargetContext;
 
             int targetScore = 0;
-            if(context.HitChance >= 60) targetScore += context.HitChance * 4;
+            if(context.HitChance >= 60) targetScore += context.HitChance * 2;
             else continue;
 
-            targetScore += context.CritChance * 5;
+            targetScore += context.CritChance * 3;
 
             int priority = targets.Find(x => x.Target == _unit.Combat.Targets[i]).Priority;
             
@@ -157,7 +162,7 @@ public class UnitAIController : MonoBehaviour
     {
         if (defence >= 100) return 100;
         if (defence >= 80) return 50;
-        if (defence >= 60) return 20;
+        if (defence >= 60) return 0;
         if (defence >= 40) return -100;
 
         return -200;

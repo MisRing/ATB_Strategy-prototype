@@ -79,7 +79,7 @@ public class UITurnLine : MonoBehaviour
         GameObject obj = Instantiate(_itemPrefab, _container);
         UITurnItem item = obj.GetComponent<UITurnItem>();
 
-        item.Init(unit, turn, _items[turn].IndexOf(item));
+        item.Init(unit, turn);
 
         _items[turn].Add(item);
         

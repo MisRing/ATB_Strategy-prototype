@@ -110,6 +110,7 @@ public class UnitSkillController : MonoBehaviour
             {
                 isInstant = true;
             }
+            _currentSkill = skill;
             return true;
         }
         return false;

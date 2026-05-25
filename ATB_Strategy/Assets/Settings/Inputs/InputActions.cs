@@ -343,6 +343,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DebugMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""380f475e-f41f-4eb7-955d-163104f3a9ad"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -653,6 +662,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Utility12"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c71f7cc-e010-473d-9e4b-951e88b4ec51"",
+                    ""path"": ""<Keyboard>/f3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DebugMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -906,6 +926,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_Utility10 = m_Player.FindAction("Utility10", throwIfNotFound: true);
         m_Player_Utility11 = m_Player.FindAction("Utility11", throwIfNotFound: true);
         m_Player_Utility12 = m_Player.FindAction("Utility12", throwIfNotFound: true);
+        m_Player_DebugMode = m_Player.FindAction("DebugMode", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Move = m_Camera.FindAction("Move", throwIfNotFound: true);
@@ -1020,6 +1041,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Utility10;
     private readonly InputAction m_Player_Utility11;
     private readonly InputAction m_Player_Utility12;
+    private readonly InputAction m_Player_DebugMode;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1144,6 +1166,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Utility12 => m_Wrapper.m_Player_Utility12;
         /// <summary>
+        /// Provides access to the underlying input action "Player/DebugMode".
+        /// </summary>
+        public InputAction @DebugMode => m_Wrapper.m_Player_DebugMode;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1253,6 +1279,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Utility12.started += instance.OnUtility12;
             @Utility12.performed += instance.OnUtility12;
             @Utility12.canceled += instance.OnUtility12;
+            @DebugMode.started += instance.OnDebugMode;
+            @DebugMode.performed += instance.OnDebugMode;
+            @DebugMode.canceled += instance.OnDebugMode;
         }
 
         /// <summary>
@@ -1348,6 +1377,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Utility12.started -= instance.OnUtility12;
             @Utility12.performed -= instance.OnUtility12;
             @Utility12.canceled -= instance.OnUtility12;
+            @DebugMode.started -= instance.OnDebugMode;
+            @DebugMode.performed -= instance.OnDebugMode;
+            @DebugMode.canceled -= instance.OnDebugMode;
         }
 
         /// <summary>
@@ -1767,6 +1799,13 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUtility12(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DebugMode" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDebugMode(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Camera" which allows adding and removing callbacks.

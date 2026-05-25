@@ -729,7 +729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f3c1da0cfa0504488a40346feac7bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FPSDisplay
-  fpsText: {fileID: 773683963924454686}
+  _fpsText: {fileID: 773683963924454686}
 --- !u!1 &1909423641394114308
 GameObject:
   m_ObjectHideFlags: 0
@@ -1776,7 +1776,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6962399654298571717
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2856,7 +2856,7 @@ GameObject:
   - component: {fileID: 4510558665707395349}
   - component: {fileID: 5142403567652710077}
   - component: {fileID: 7930403732260293832}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}

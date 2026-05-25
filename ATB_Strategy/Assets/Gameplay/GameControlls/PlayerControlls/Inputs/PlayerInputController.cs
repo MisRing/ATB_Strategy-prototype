@@ -27,6 +27,8 @@ public class PlayerInputController : MonoBehaviour
 
     public static StackAction Cancel = new StackAction();
     
+    public static event Action DebugMode;
+    
     private void Awake()
     {
         _inputActions = new InputActions();
@@ -67,6 +69,8 @@ public class PlayerInputController : MonoBehaviour
         _inputActions.Player.Escape.started += CancelEscInput;
 
         _inputActions.Camera.Rotate.started += RotateCameraInput;
+        
+        _inputActions.Player.DebugMode.started += DebugModeInput;
     }
 
     private void OnDisable()
@@ -104,6 +108,8 @@ public class PlayerInputController : MonoBehaviour
         _inputActions.Player.Escape.started -= CancelEscInput;
 
         _inputActions.Camera.Rotate.started -= RotateCameraInput;
+
+        _inputActions.Player.DebugMode.started -= DebugModeInput;
     }
 
     private static void SelectObjectInput(InputAction.CallbackContext context)
@@ -168,6 +174,9 @@ public class PlayerInputController : MonoBehaviour
 
     private static void RotateCameraInput(InputAction.CallbackContext context)
         => RotateCamera?.Invoke(context.ReadValue<float>());
+    
+    private static void DebugModeInput(InputAction.CallbackContext context)
+        => DebugMode?.Invoke();
 }
 
 public class StackAction

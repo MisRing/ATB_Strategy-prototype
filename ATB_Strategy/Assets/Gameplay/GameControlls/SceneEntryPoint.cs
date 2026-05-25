@@ -51,11 +51,11 @@ public class SceneEntryPoint : MonoBehaviour
         Quaternion startDirection = Quaternion.LookRotation(_unitsStartDirection);
         for (int i = 0; i < _playerUnits.Count; i++)
         {
-            _playerUnits[i].Init(GridParameters.LevelGrid.GetTile(_playerPositionPreset[i].x, _playerPositionPreset[i].z, _playerPositionPreset[i].y), i);
+            _playerUnits[i].Init(GridParameters.LevelGrid.GetTile(_playerPositionPreset[i].x, _playerPositionPreset[i].z, _playerPositionPreset[i].y), i + 1);
             _playerUnits[i].gameObject.transform.rotation = startDirection;
         }
 
-        int enemyID = 0;
+        int enemyID = 1;
         foreach (TeamControls team in _enemyTeams)
         {
             team.AIs = new UnitAIController[team.Units.Count];

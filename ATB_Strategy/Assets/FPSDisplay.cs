@@ -1,21 +1,37 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Use this if you are using TextMeshPro
+using TMPro;
 
 public class FPSDisplay : MonoBehaviour
 {
-    public TextMeshProUGUI fpsText; // Assign your UI Text element here
-    private float deltaTime = 0.0f;
+    [SerializeField] private TextMeshProUGUI _fpsText;
+    private float _deltaTime = 0.0f;
+    private bool _show = false;
+
+    private void OnEnable()
+    {
+        PlayerInputController.DebugMode += Show;
+    }
+
+    private void OnDisable()
+    {
+        PlayerInputController.DebugMode -= Show;
+    }
+
+    private void Show()
+    {
+        _show = !_show;
+        
+        _fpsText.gameObject.SetActive(_show);
+    }
 
     void Update()
     {
-        // Calculate the smooth delta time
-        deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.2f;
+        _deltaTime += (Time.unscaledDeltaTime - _deltaTime) * 0.2f;
+        float fps = 1.0f / _deltaTime;
         
-        // Calculate FPS
-        float fps = 1.0f / deltaTime;
-        
-        // Update the UI text
-        fpsText.text = string.Format("{0:0.} FPS", fps);
+        if (!_show) return;
+        _fpsText.text = string.Format("{0:0.} FPS", fps);
     }
 }
