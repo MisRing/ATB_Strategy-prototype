@@ -480,13 +480,13 @@ MonoBehaviour:
   Speed:
     _value: 5
   Health:
-    _value: 5
+    _value: 4
   MaxHealth:
-    _value: 5
+    _value: 4
   Armor:
-    _value: 3
+    _value: 2
   MaxArmor:
-    _value: 3
+    _value: 2
   VisionRange:
     _value: 15
   Accuracy:

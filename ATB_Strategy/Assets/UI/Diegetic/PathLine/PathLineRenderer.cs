@@ -27,6 +27,7 @@ public class PathLineRenderer : MonoBehaviour
 
     public void UnsetPathLine()
     {
+        _lineRenderer.positionCount = 0;
         _lineRenderer.enabled = false;
     }
 }

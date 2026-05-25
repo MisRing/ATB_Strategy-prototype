@@ -34518,6 +34518,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 3784942474756938777, guid: a8ae7338e52048f4a8a2d246dd32c242, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4325359217648776427, guid: a8ae7338e52048f4a8a2d246dd32c242, type: 3}
       propertyPath: _playerController
       value: 
