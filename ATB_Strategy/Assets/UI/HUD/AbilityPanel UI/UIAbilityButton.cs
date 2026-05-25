@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,9 +6,9 @@ public class UIAbilityButton : MonoBehaviour
 {
     [SerializeField] private Button _button;
     [SerializeField] private Image _buttonImage;
-    [SerializeField] private Text _idText;
+    [SerializeField] private TextMeshProUGUI _idText;
     [SerializeField] private Image _cooldownImage;
-    [SerializeField] private Text _cooldownText;
+    [SerializeField] private TextMeshProUGUI _cooldownText;
 
     private BasicSkill _ability;
     private int _abilityIndex = -1;

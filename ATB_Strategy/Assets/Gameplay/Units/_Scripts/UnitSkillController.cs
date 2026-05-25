@@ -70,11 +70,12 @@ public class UnitSkillController : MonoBehaviour
         if (!_currentSkill) return false;
         
         int cost;
-        if (_currentSkill.Execute(out cost))
+        UnitState state = UnitState.Other;
+        if (_currentSkill.Execute(out cost, ref state))
         {
             if (cost > 0)
             {
-                Unit.State = UnitState.Engaged;
+                Unit.State = state;
                 TurnManager.EnterBusyQ(Unit, cost);
             }
             else
@@ -97,11 +98,12 @@ public class UnitSkillController : MonoBehaviour
 
         skill.UpdateData(data);
         int cost;
-        if (skill.Execute(out cost))
+        UnitState state = UnitState.Other;
+        if (skill.Execute(out cost, ref state))
         {
             if (cost > 0)
             {
-                Unit.State = UnitState.Engaged;
+                Unit.State = state;
                 TurnManager.EnterBusyQ(Unit, cost);
             }
             else

@@ -20,7 +20,7 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
     public override void Init(UnitSkillController skillController)
     {
         base.Init(skillController);
-        SkillName = "Basic attack";
+        //SkillName = "Basic attack";
         RequiredDataType = typeof(TargetData);
         _unitCombat = skillController.Unit.Combat;
         _skillCost = 4;
@@ -74,12 +74,12 @@ public class BasicAttack : BasicSkill, ITargetSwitchable
         }
     }
 
-    public override bool Execute(out int cost)
+    public override bool Execute(out int cost, ref UnitState state)
     {
         cost = _skillCost;
 
         if (!CanExecute()) return false;
-        
+        state = UnitState.Shooting;
         StartCoroutine(Fire(_unitCombat.Targets[_currentTarget]));
 
         return true;

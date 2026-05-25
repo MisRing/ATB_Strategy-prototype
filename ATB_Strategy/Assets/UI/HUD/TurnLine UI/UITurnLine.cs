@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,14 +7,14 @@ public class UITurnLine : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private int _turnsToVisualize = 10;
-    [SerializeField] private float _ySpacing = 10f;
+    [SerializeField] private float _ySpacing = 50f;
     private float _spacing = 0;
 
     [Header("References")]
     [SerializeField] private RectTransform _container;
     [SerializeField] private GameObject _turnPrefab;
     [SerializeField] private GameObject _itemPrefab;
-    [SerializeField] private Text _currentTurnText;
+    [SerializeField] private TextMeshProUGUI _currentTurnText;
 
     private readonly Dictionary<int, List<UITurnItem>> _items = new Dictionary<int, List<UITurnItem>>();
     private readonly List<UITurnLineStand> _turnLines = new List<UITurnLineStand>();
@@ -28,8 +29,8 @@ public class UITurnLine : MonoBehaviour
         {
             GameObject obj = Instantiate(_turnPrefab, _container);
             UITurnLineStand stand = obj.GetComponent<UITurnLineStand>();
-            stand.Init( (i + 1) * TurnManager.TurnTime % 1f == 0);
-            stand.SetXPosition((i + 1) * _spacing);
+            stand.Init( (i + 1) * TurnManager.TurnTime % 1f == 0, i + 1);
+            stand.SetXPosition((i + 1) * _spacing, i + 1);
             _turnLines.Add(stand);
         }
     }
@@ -48,26 +49,28 @@ public class UITurnLine : MonoBehaviour
 
     private void Update()
     {
+        _currentTurnText.text = TurnManager.CurrentTurn.ToString();
         if (TimeService.TimeSpeed == 0) return;
         
         int currentTurn = TurnManager.CurrentTurn;
-        float currentTurnTime = TurnManager.CurrentTurnTime / TurnManager.TurnTime;
+        float currentTurnTime = Mathf.Round((TurnManager.CurrentTurnTime / TurnManager.TurnTime) * 100f) / 100f;
         
         for (int i = 0; i < _turnLines.Count; i++)
         {
-            float x = Mathf.Repeat(i - (currentTurn + currentTurnTime),
-                _turnLines.Count - 1f) + 1f;
-            float positionX  = x * _spacing;
-            _turnLines[i].SetXPosition(positionX);
+            float x = Mathf.Repeat(i + 1 - (currentTurn + currentTurnTime),
+                _turnLines.Count);
+            x = x == 0 ? _turnLines.Count : x;
+
+            float positionX = x * _spacing;
+            _turnLines[i].SetXPosition(positionX, currentTurn + Mathf.FloorToInt(x) + Mathf.CeilToInt(currentTurnTime));
         }
 
         UpdateAllPositions();
-
-        _currentTurnText.text = currentTurn.ToString();
     }
 
     private void AddItem(UnitController unit, int turn)
     {
+        if(unit.State == UnitState.Waiting) return;
         if (!_items.ContainsKey(turn))
         {
             _items.Add(turn, new List<UITurnItem>());
@@ -76,15 +79,11 @@ public class UITurnLine : MonoBehaviour
         GameObject obj = Instantiate(_itemPrefab, _container);
         UITurnItem item = obj.GetComponent<UITurnItem>();
 
-        item.Init(unit, turn);
+        item.Init(unit, turn, _items[turn].IndexOf(item));
 
         _items[turn].Add(item);
-
-        float yPosition = unit.Owner == UnitOwner.PlayerTeam ? -1 : +1;
-
-        yPosition *= _items[turn].Count * _ySpacing;
-
-        UpdateItemPosition(item, yPosition);
+        
+        UpdateItemPosition(item, turn);
     }
 
     private void RemoveItemsTurn(int turn)
@@ -103,12 +102,12 @@ public class UITurnLine : MonoBehaviour
         {
             foreach (var value in kvp.Value)
             {
-                UpdateItemPosition(value, value.GetComponent<RectTransform>().anchoredPosition.y);
+                UpdateItemPosition(value, kvp.Key);
             }
         }
     }
 
-    private void UpdateItemPosition(UITurnItem item, float yPosition)
+    private void UpdateItemPosition(UITurnItem item, int turn)
     {
         float deltaTurn = item.Turn - TurnManager.CurrentTurn;
         float turnTime = TurnManager.CurrentTurnTime / TurnManager.TurnTime;
@@ -123,7 +122,6 @@ public class UITurnLine : MonoBehaviour
 
         item.gameObject.SetActive(true);
 
-        RectTransform rect = item.RectTransform;
-        rect.anchoredPosition = new Vector2(positionX, yPosition);
+        item.UpdatePosition(positionX, _items[turn].IndexOf(item));
     }
 }

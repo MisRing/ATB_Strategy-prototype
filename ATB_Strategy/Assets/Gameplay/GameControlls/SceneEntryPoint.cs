@@ -51,20 +51,22 @@ public class SceneEntryPoint : MonoBehaviour
         Quaternion startDirection = Quaternion.LookRotation(_unitsStartDirection);
         for (int i = 0; i < _playerUnits.Count; i++)
         {
-            _playerUnits[i].Init(GridParameters.LevelGrid.GetTile(_playerPositionPreset[i].x, _playerPositionPreset[i].z, _playerPositionPreset[i].y));
+            _playerUnits[i].Init(GridParameters.LevelGrid.GetTile(_playerPositionPreset[i].x, _playerPositionPreset[i].z, _playerPositionPreset[i].y), i);
             _playerUnits[i].gameObject.transform.rotation = startDirection;
         }
 
+        int enemyID = 0;
         foreach (TeamControls team in _enemyTeams)
         {
             team.AIs = new UnitAIController[team.Units.Count];
             for (int i = 0; i < team.Units.Count; i++)
             {
-                team.Units[i].Init(GridParameters.LevelGrid.GetTile(team.StartPositions[i].x, team.StartPositions[i].z, team.StartPositions[i].y));
+                team.Units[i].Init(GridParameters.LevelGrid.GetTile(team.StartPositions[i].x, team.StartPositions[i].z, team.StartPositions[i].y), enemyID);
                 team.Units[i].Owner = team.Owner;
                 team.Units[i].gameObject.transform.rotation = startDirection;
                 team.AIs[i] = team.Units[i].gameObject.AddComponent<UnitAIController>();
                 team.AIs[i].Init();
+                enemyID++;
             }
         }
     }

@@ -68,12 +68,12 @@ public class BasicSkill : MonoBehaviour
         _skillData = abilityData;
     }
 
-    public virtual bool Execute(out int cost)
+    public virtual bool Execute(out int cost, ref UnitState state)
     {
         cost = _skillCost;
 
         if (!CanExecute()) return false;
-
+        state = UnitState.Other;
         _skillCooldownTimer = _skillCooldown;
         return true;
     }

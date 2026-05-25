@@ -95,7 +95,7 @@ public class TurnManager : MonoBehaviour
 
             SetTimeSlowdown();
 
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
     }
 

@@ -6,18 +6,18 @@ public class SprintSkill : BasicSkill
     public override void Init(UnitSkillController skillController)
     {
         base.Init(skillController);
-        SkillName = "Sprint";
-        SkillDescription = "Buff next move to x1.5 speed";
+        // SkillName = "Sprint";
+        // SkillDescription = "Buff next move to x1.5 speed";
         _skillCost = 0;
         _skillCooldown = 20;
     }
 
-    public override bool Execute(out int cost)
+    public override bool Execute(out int cost, ref UnitState state)
     {
         cost = _skillCost;
 
         if (!CanExecute()) return false;
-
+        state = UnitState.WaitingForOrder;
         _skillCooldownTimer = _skillCooldown;
 
         _skillController.Unit.Stats.Speed.RemoveBuff(SpeedBuff);

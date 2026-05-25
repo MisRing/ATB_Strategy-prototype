@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,8 +7,8 @@ public class UIAbilityPreparePanel : MonoBehaviour
     [SerializeField] private GameObject _cantExecutePanel;
     [SerializeField] private Button _executeButton;
     [SerializeField] private Button _cancelButton;
-    [SerializeField] private Text _abilityNameText;
-    [SerializeField] private Text _abilityDescriptionText;
+    [SerializeField] private TextMeshProUGUI _abilityNameText;
+    [SerializeField] private TextMeshProUGUI _abilityDescriptionText;
     
     private PlayerController _playerController;
     private TargetAimUI _targetAimUI;

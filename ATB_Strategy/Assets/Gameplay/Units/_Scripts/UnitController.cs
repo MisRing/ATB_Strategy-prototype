@@ -25,7 +25,7 @@ public class UnitController : MonoBehaviour
     public UnitState State;
     public UnitOwner Owner;
 
-    public void Init(GridTile tile)
+    public void Init(GridTile tile, int unitID)
     {        
         Stats = GetComponent<UnitStats>();
         SkillController = GetComponent<UnitSkillController>();
@@ -33,6 +33,8 @@ public class UnitController : MonoBehaviour
         Animator = GetComponent<UnitAnimator>();
         PreviewAnimator = GetComponent<UnitPreviewAnimator>();
         Agent = GetComponent<UnitAgent>();
+
+        Stats.ID = unitID;
 
         SkillController.Init(this);
         Combat.Init(this);
@@ -85,7 +87,10 @@ public class UnitController : MonoBehaviour
 public enum UnitState
 {
     WaitingForOrder,
-    Engaged,
+    Moving,
+    Shooting,
+    Waiting,
+    Other,
     Dead
 }
 

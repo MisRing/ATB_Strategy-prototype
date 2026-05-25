@@ -6,7 +6,7 @@ public class BasicMovementSkill : BasicSkill
     public override void Init(UnitSkillController skillController)
     {
         base.Init(skillController);
-        SkillName = "Basic movement";
+        //SkillName = "Basic movement";
         RequiredDataType = typeof(PointData);
         _agent = _skillController.Unit.Agent;
         _skillCooldown = 0;
@@ -32,12 +32,12 @@ public class BasicMovementSkill : BasicSkill
         _agent.CalculatePath((_skillData as PointData).Position);
     }
 
-    public override bool Execute(out int cost)
+    public override bool Execute(out int cost, ref UnitState state)
     {
         cost = 0;
         if (!CanExecute()) return false;
         if (!_agent.StartMove(out cost)) return false;
-        
+        state = UnitState.Moving;
         return true;
     }
 }

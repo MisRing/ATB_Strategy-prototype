@@ -1,10 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CursorCostDisplay : MonoBehaviour
 {
     [Header("Main settings")]
-    [SerializeField] private Text _text;
+    [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private Vector2 _offset = new Vector2(20, 20);
 
     private RectTransform _rectTransform;

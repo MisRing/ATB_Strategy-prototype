@@ -18,7 +18,7 @@ public class UISquadPanel : MonoBehaviour
         for(int i = 0; i < _selectionManager.Units.Count; i++)
         {
             UIUnitPanel panel = Instantiate(_unitPanelPrefab, _rectTransform).GetComponent<UIUnitPanel>();
-            panel.Init(_selectionManager.Units[i], i + 1, this);
+            panel.Init(_selectionManager.Units[i], _selectionManager.Units[i].Stats.ID, this);
             _unitPanels.Add(panel);
         }
 
